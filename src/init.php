@@ -13,6 +13,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+function get_scripts_array() {
+	return array(
+		[
+			'block_id' => 'kili/section',
+			'editor_script_key' => 'kili/kili-section-editor-script',
+			'name' => __( 'Section', 'kili-builder' ),
+		],
+	);
+}
+
 /**
  * Enqueue Gutenberg block assets for both frontend + backend.
  *
@@ -30,60 +40,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 function kili_builder_cgb_block_assets() { // phpcs:ignore
 	// Register block styles for both frontend + backend.
 	wp_register_style(
-		'kili_builder-cgb-style-css', // Handle.
-		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
-		array( 'wp-editor' ), // Dependency to include the CSS after it.
-		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
+		'kili-blocks-style',
+		plugins_url( 'dist/main.css', dirname( __FILE__ ) ),
+		array( 'wp-edit-blocks' )
 	);
 
-	// Register block editor script for backend.
-	wp_register_script(
-		'kili_builder-cgb-block-js', // Handle.
-		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
-		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), // Dependencies, defined above.
-		null, // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
-		true // Enqueue the script in the footer.
-	);
-
-	// Register block editor styles for backend.
-	wp_register_style(
-		'kili_builder-cgb-block-editor-css', // Handle.
-		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
-		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
-		null // filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
-	);
-
-	// WP Localized globals. Use dynamic PHP stuff in JavaScript via `cgbGlobal` object.
-	wp_localize_script(
-		'kili_builder-cgb-block-js',
-		'cgbGlobal', // Array containing dynamic data for a JS Global.
-		[
-			'pluginDirPath' => plugin_dir_path( __DIR__ ),
-			'pluginDirUrl'  => plugin_dir_url( __DIR__ ),
-			// Add more data here that you want to access from `cgbGlobal` object.
-		]
-	);
-
-	/**
-	 * Register Gutenberg block on server-side.
-	 *
-	 * Register the block on server-side to ensure that the block
-	 * scripts and styles for both frontend and backend are
-	 * enqueued when the editor loads.
-	 *
-	 * @link https://wordpress.org/gutenberg/handbook/blocks/writing-your-first-block-type#enqueuing-block-scripts
-	 * @since 1.16.0
-	 */
-	register_block_type(
-		'cgb/block-kili-builder', array(
-			// Enqueue blocks.style.build.css on both frontend & backend.
-			'style'         => 'kili_builder-cgb-style-css',
-			// Enqueue blocks.build.js in the editor only.
-			'editor_script' => 'kili_builder-cgb-block-js',
-			// Enqueue blocks.editor.build.css in the editor only.
-			'editor_style'  => 'kili_builder-cgb-block-editor-css',
-		)
-	);
+	$scripts_array = get_scripts_array();
+	foreach ($scripts_array as $script) {
+		wp_register_script(
+			$script['editor_script_key'],
+			plugins_url( 'dist/blocks.js', dirname( __FILE__ ) ),
+			array(
+				'wp-blocks',
+				'wp-i18n',
+				'wp-element',
+				'wp-block-editor',
+				'wp-components',
+				'wp-compose',
+			)
+		);
+		register_block_type(
+			$script['block_id'],
+			array(
+				'editor_script' => $script['editor_script_key'],
+				'editor_style' => 'kili-blocks-style',
+			)
+		);
+	}
 }
 
 // Hook: Block assets.

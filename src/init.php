@@ -73,7 +73,6 @@ function kili_blocks_register() {
 
 	$scripts_array = get_scripts_array();
 	foreach ($scripts_array as $script) {
-		var_dump($script['block_id']);
 		kili_blocks_register_block_type( $script['block_id'] );
 	}
 }

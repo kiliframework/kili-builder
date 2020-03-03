@@ -24,13 +24,13 @@ import {
  * Internal dependencies
  */
 
-registerBlockType("kili-blocks/k-section", {
-  title: __("Kili-Row", "kili-blocks"),
+registerBlockType("kili/k-section", {
+  title: __("Kili-Row", "kili-builder"),
   description: __(
     "Add section where you can create diferents sections for the main page",
     "kili-blocks"
   ),
-  category: "kili-blocks",
+  category: "kili-builder",
   icon: "text",
   keywords: [__("Section", "kili-blocks")],
   supports: {

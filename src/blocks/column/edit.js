@@ -31,7 +31,7 @@ class ColumnEdit extends Component {
     const deskControls = (
       <>
         <PanelBody
-          title={__("Row Settings", "kili-blocks")}
+          title={__("Row Settings", "kili-builder")}
           initialOpen={false}
         >
           <PanelRow>

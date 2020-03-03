@@ -12,14 +12,23 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
 function get_scripts_array() {
 	return array(
 		[
 			'block_id' => 'container',
+
+		],
+		[
 			'block_id' => 'k-section',
+
+		],
+		[
 			'block_id' => 'row-section',
+
+		],
+		[
 			'block_id' => 'k-column',
+
 		],
 	);
 }
@@ -49,6 +58,7 @@ function kili_blocks_register_block_type( $block, $options=array() ){
       $options
     )
   );
+
 }
 
 function kili_blocks_register() {
@@ -63,6 +73,7 @@ function kili_blocks_register() {
 
 	$scripts_array = get_scripts_array();
 	foreach ($scripts_array as $script) {
+		var_dump($script['block_id']);
 		kili_blocks_register_block_type( $script['block_id'] );
 	}
 }

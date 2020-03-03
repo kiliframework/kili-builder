@@ -20,17 +20,17 @@ const attributes = {
   }
 };
 
-registerBlockType("kili-blocks/row-section", {
-  title: __("kili-Columns", "kili-bloks"),
-  parent: ["kili-blocks/k-section"],
-  category: "kili-blocks",
+registerBlockType("kili/row-section", {
+  title: __("kili-Columns", "kili-builder"),
+  parent: ["kili/k-section"],
+  category: "kili-builder",
   icon: "grid-view",
   supports: {
     html: false,
     reusable: false
   },
   attributes,
-  keywords: [__("Row", "kili-blocks"), __("Kili", "kili-blocks")],
+  keywords: [__("Row", "kili-builder"), __("Kili", "kili-builder")],
   edit,
   save: ({ attributes }) => {
     return (

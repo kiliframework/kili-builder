@@ -55,18 +55,18 @@ const attributes = {
   }
 };
 
-registerBlockType("kili-blocks/team-member", {
-  title: __("Team Member", "kili-core"),
-  description: __("Our block for Team member", "kili-core"),
-  category: "kili-blocks",
+registerBlockType("kili/team-member", {
+  title: __("Team Member", "kili-builder"),
+  description: __("Our block for Team member", "kili-builder"),
+  category: "kili-builder",
   icon: "admin-users",
-  parent: ["kili-blocks/team-members"],
+  parent: ["kili/team-members"],
   supports: {
     html: false,
     reusable: false
   },
   attributes,
-  keywords: [__("Team", "kili-core"), __("Member", "kili-core")],
+  keywords: [__("Team", "kili-builder"), __("Member", "kili-builder")],
   edit,
   save: ({ attributes }) => {
     const { title, info, url, alt, id, social } = attributes;

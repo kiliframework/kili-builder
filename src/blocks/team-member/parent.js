@@ -10,12 +10,12 @@ const attributes = {
   }
 };
 
-registerBlockType("kili-blocks/team-members", {
-  title: __("Team Members", "kili-core"),
-  description: __("Our block for wrap other components", "kili-core"),
+registerBlockType("kili/team-members", {
+  title: __("Team Members", "kili-builder"),
+  description: __("Our block for wrap other components", "kili-builder"),
   icon: "grid-view",
   category: "layout",
-  keywords: [__("kili3", "kili-core")],
+  keywords: [__("kili3", "kili-builder")],
   supports: {
     html: false,
     align: true,
@@ -29,7 +29,7 @@ registerBlockType("kili-blocks/team-members", {
         <InspectorControls>
           <PanelBody>
             <RangeControl
-              label={__("Columns", "kili-core")}
+              label={__("Columns", "kili-builder")}
               value={columns}
               onChange={columns => setAttributes({ columns })}
               min={1}
@@ -38,8 +38,8 @@ registerBlockType("kili-blocks/team-members", {
           </PanelBody>
         </InspectorControls>
         <InnerBlocks
-          allowedBlocks={["kili-blocks/team-member"]}
-          template={[["kili-blocks/team-member"], ["kili-blocks/team-member"]]}
+          allowedBlocks={["kili/team-member"]}
+          template={[["kili/team-member"], ["kili/team-member"]]}
         />
       </div>
     );

@@ -3,10 +3,10 @@ import { InnerBlocks } from "@wordpress/block-editor";
 import { __ } from "@wordpress/i18n";
 import edit from "./edit";
 
-registerBlockType("kili-blocks/k-column", {
-  title: __("Kili-Column", "kili-blocks"),
-  parent: ["kili-blocks/k-section"],
-  category: "kili-blocks",
+registerBlockType("kili/k-column", {
+  title: __("Kili-Column", "kili-builder"),
+  parent: ["kili/k-section"],
+  category: "kili-builder",
   attributes: {
     columns: {
       type: "string",
@@ -70,7 +70,7 @@ registerBlockType("kili-blocks/k-column", {
     align: ["left", "center", "right"]
   },
   icon: "columns",
-  keywords: [__("Column", "kili-blocks"), __("Kili", "kili-blocks")],
+  keywords: [__("Column", "kili-builder"), __("Kili", "kili-builder")],
   edit,
   save: ({ attributes }) => {
     const { columns } = attributes;

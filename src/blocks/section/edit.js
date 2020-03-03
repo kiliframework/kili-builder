@@ -48,7 +48,7 @@ const MySelectControl = ({ size, onChangeColumns }) => {
 const Grid = ({ settings, clientId }) => {
   const newTemplate = columns => {
     return columns.map((col, index) => {
-      return ["kili-blocks/k-column", { columns: `${col}` }];
+      return ["kili/k-column", { columns: `${col}` }];
     });
   };
   return (
@@ -76,7 +76,7 @@ const RowSectionEdit = ({ currentBlock, attributes, setAttributes, clientId, ...
         margin-left: 0;
         margin-right: 0;
       }`
-    });    
+    });
     setColumnsStyle(newColumnsStyle);
   }, [currentBlock])
 
@@ -129,7 +129,7 @@ const RowSectionEdit = ({ currentBlock, attributes, setAttributes, clientId, ...
         {columnsStyle}
       </style>
     </>
-  ); 
+  );
 }
 
 export default withSelect( (select, ownProps) => {

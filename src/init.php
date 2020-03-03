@@ -16,58 +16,55 @@ if ( ! defined( 'ABSPATH' ) ) {
 function get_scripts_array() {
 	return array(
 		[
-			'block_id' => 'kili/section',
-			'editor_script_key' => 'kili/kili-section-editor-script',
-			'name' => __( 'Section', 'kili-builder' ),
+			'block_id' => 'container',
+			'block_id' => 'k-section',
+			'block_id' => 'row-section',
+			'block_id' => 'k-column',
 		],
 	);
 }
 
-/**
- * Enqueue Gutenberg block assets for both frontend + backend.
- *
- * Assets enqueued:
- * 1. blocks.style.build.css - Frontend + Backend.
- * 2. blocks.build.js - Backend.
- * 3. blocks.editor.build.css - Backend.
- *
- * @uses {wp-blocks} for block type registration & related functions.
- * @uses {wp-element} for WP Element abstraction — structure of blocks.
- * @uses {wp-i18n} to internationalize the block's text.
- * @uses {wp-editor} for WP editor styles.
- * @since 1.0.0
- */
-function kili_builder_cgb_block_assets() { // phpcs:ignore
-	// Register block styles for both frontend + backend.
-	wp_register_style(
-		'kili-blocks-style',
-		plugins_url( 'dist/main.css', dirname( __FILE__ ) ),
-		array( 'wp-edit-blocks' )
+function kili_blocks_category( $categories, $post ){
+  return array_merge(
+    $categories,
+    array(
+      array(
+        'slug' => 'kili-builder',
+        'title'=> __('Kili Category', 'kili-builder'),
+        'icon'=>'wordpress'
+      )
+    )
+  );
+}
+
+add_filter( 'block_categories', 'kili_blocks_category', 10, 2 );
+
+function kili_blocks_register_block_type( $block, $options=array() ){
+  register_block_type( 'kili/' . $block,
+    array_merge(
+      array(
+        'editor_script' => 'kili-editor-script',
+        'editor_style' => 'kili-editor-style',
+      ),
+      $options
+    )
+  );
+}
+
+function kili_blocks_register() {
+	wp_register_script( 'kili-editor-script',
+		plugins_url( 'dist/blocks.js', dirname(__FILE__) ),
+		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-block-editor', 'wp-components', 'wp-editor', 'wp-blob', 'wp-data')
+	);
+
+  	wp_register_style( 'kili-style',
+  		plugins_url( 'dist/style.css', dirname( __FILE__ ) )
 	);
 
 	$scripts_array = get_scripts_array();
 	foreach ($scripts_array as $script) {
-		wp_register_script(
-			$script['editor_script_key'],
-			plugins_url( 'dist/blocks.js', dirname( __FILE__ ) ),
-			array(
-				'wp-blocks',
-				'wp-i18n',
-				'wp-element',
-				'wp-block-editor',
-				'wp-components',
-				'wp-compose',
-			)
-		);
-		register_block_type(
-			$script['block_id'],
-			array(
-				'editor_script' => $script['editor_script_key'],
-				'editor_style' => 'kili-blocks-style',
-			)
-		);
+		kili_blocks_register_block_type( $script['block_id'] );
 	}
 }
 
-// Hook: Block assets.
-add_action( 'init', 'kili_builder_cgb_block_assets' );
+add_action( 'init', 'kili_blocks_register' );

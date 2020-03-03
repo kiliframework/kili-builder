@@ -1,12 +1,12 @@
-const autoprefixer = require('autoprefixer');
-const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const CleanPlugin = require('clean-webpack-plugin');
+const autoprefixer = require("autoprefixer");
+const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const CleanPlugin = require("clean-webpack-plugin");
 
 module.exports = (env, argv) => {
   function isDevelopment() {
-    return argv.mode === 'development';
+    return argv.mode === "development";
   }
   var config = {
     entry: './src/blocks.js',
@@ -18,15 +18,14 @@ module.exports = (env, argv) => {
         new TerserPlugin({
           sourceMap: true
         }),
-        new OptimizeCSSAssetsPlugin(
-          {
-            cssProcessorOptions: {
-              map: {
-                inline: false,
-                annotation: true
-              }
+        new OptimizeCSSAssetsPlugin({
+          cssProcessorOptions: {
+            map: {
+              inline: false,
+              annotation: true
             }
-          })
+          }
+        })
       ]
     },
     plugins: [
@@ -34,9 +33,7 @@ module.exports = (env, argv) => {
       new MiniCSSExtractPlugin({
         chunkFilename: "[id].css",
         filename: chunkData => {
-          return chunkData.chunk.name === "script"
-            ? "blocks.css"
-            : "[name].css";
+          return chunkData.chunk.name === "script" ? "style.css" : "[name].css";
         }
       })
     ],
@@ -46,27 +43,22 @@ module.exports = (env, argv) => {
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          use: [
-            {
-              loader: "babel-loader",
-              options: {
-                plugins: [
-                  "@babel/plugin-proposal-class-properties"
-                ],
-                presets: [
-                  "@babel/preset-env",
-                  [
-                    "@babel/preset-react",
-                    {
-                      pragma: "wp.element.createElement",
-                      pragmaFrag: "wp.element.Fragment",
-                      development: isDevelopment()
-                    }
-                  ]
+          use: {
+            loader: "babel-loader",
+            options: {
+              presets: [
+                "@babel/preset-env",
+                [
+                  "@babel/preset-react",
+                  {
+                    pragma: "wp.element.createElement",
+                    pragmaFrag: "wp.element.Fragment",
+                    development: isDevelopment()
+                  }
                 ]
-              }
+              ]
             }
-          ]
+          }
         },
         {
           test: /\.(sa|sc|c)ss$/,
@@ -85,14 +77,16 @@ module.exports = (env, argv) => {
       ]
     },
     externals: {
-      jquery: "jQuery",
-      lodash: "lodash",
       "@wordpress/blocks": ["wp", "blocks"],
       "@wordpress/i18n": ["wp", "i18n"],
-      "@wordpress/editor": ["wp", "editor"],
       "@wordpress/components": ["wp", "components"],
-      "@wordpress/element": ["wp", "element"]
+      "@wordpress/editor": ["wp", "editor"],
+      "@wordpress/block-editor": ["wp", "blockEditor"],
+      "@wordpress/blob": ["wp", "blob"],
+      "@wordpress/data": ["wp", "data"],
+      "@wordpress/compose": ["wp", "compose"],
+
     }
   };
   return config;
-}
+};

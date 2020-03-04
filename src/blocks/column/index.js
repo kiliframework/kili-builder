@@ -4,6 +4,7 @@ import DimensionAttributes from '../../components/DimensionsControl/attributes';
 import { InnerBlocks } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import edit from './edit';
+import save from './save';
 
 registerBlockType( 'kili/k-column', {
 	title: __( 'Kili-Column', 'kili-builder' ),
@@ -44,65 +45,5 @@ registerBlockType( 'kili/k-column', {
 	icon: 'columns',
 	keywords: [ __( 'Column', 'kili-builder' ), __( 'Kili', 'kili-builder' ) ],
 	edit,
-	save: ( { attributes } ) => {
-		const { columns } = attributes;
-		const createClass = ( att ) => {
-			const {
-				align,
-				topPaddingD,
-				bottomPaddingD,
-				rightPaddingD,
-				leftPaddingD,
-			} = att;
-			let classes = '';
-
-			if ( topPaddingD ) {
-				classes += `padding-top__${ topPaddingD } `;
-			}
-			if ( bottomPaddingD ) {
-				classes += `padding-bottom__${ bottomPaddingD } `;
-			}
-			if ( leftPaddingD ) {
-				classes += `padding-left__${ leftPaddingD } `;
-			}
-			if ( rightPaddingD ) {
-				classes += `padding-right__${ rightPaddingD } `;
-			}
-			switch ( align ) {
-				case 'left':
-					classes += 'justify-content--left ';
-					break;
-				case 'center':
-					classes += 'justify-content--center ';
-					break;
-				case 'right':
-					classes += 'justify-content--right ';
-					break;
-				default:
-					'';
-					break;
-			}
-
-			return classes;
-		};
-
-		const createBasis = ( col ) => {
-			let value = '';
-			if ( col ) {
-				const fbasis = ( Number( col ) / 12 ) * 100;
-				value += `flex-basis__${ fbasis } `;
-			}
-			return value;
-		};
-
-		const className = createClass( attributes );
-		const basis = createBasis( columns );
-		return (
-			<div className={ `flexgrid__item ${ basis }` }>
-				<div className={ `kili-column-inner ${ className }` }>
-					<InnerBlocks.Content />
-				</div>
-			</div>
-		);
-	},
+	save,
 } );

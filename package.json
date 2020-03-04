@@ -23,6 +23,7 @@
     "@wordpress/blocks": "^6.10.0",
     "@wordpress/data": "^4.13.0",
     "@wordpress/i18n": "^3.8.0",
+    "classnames": "^2.2.6",
     "react-html-id": "^0.1.5",
     "react-sortable-hoc": "^1.11.0"
   },

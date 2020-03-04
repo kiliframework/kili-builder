@@ -9,7 +9,9 @@ import { Icon } from '@wordpress/components';
 import { InspectorControls, InnerBlocks } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
+import save from './save';
 import Inspector from './inspector';
+import './editor.scss';
 
 const { useState, useEffect } = wp.element;
 

@@ -7,27 +7,27 @@ import { SelectControl } from '@wordpress/components';
 
 const utilitySizes = [
 	{
-		name: __( 'None', 'coblocks' ),
+		name: __( 'None', 'kili-builder' ),
 		size: 0,
 		slug: 'no',
 	},
 	{
-		name: __( 'Small', 'coblocks' ),
+		name: __( 'Small', 'kili-builder' ),
 		size: 14,
 		slug: 'small',
 	},
 	{
-		name: __( 'Medium', 'coblocks' ),
+		name: __( 'Medium', 'kili-builder' ),
 		size: 24,
 		slug: 'medium',
 	},
 	{
-		name: __( 'Large', 'coblocks' ),
+		name: __( 'Large', 'kili-builder' ),
 		size: 34,
 		slug: 'large',
 	},
 	{
-		name: __( 'Huge', 'coblocks' ),
+		name: __( 'Huge', 'kili-builder' ),
 		size: 60,
 		slug: 'huge',
 	},

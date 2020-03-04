@@ -13,10 +13,8 @@ import DimensionsSelect from './DimensionsSelect';
  * WordPress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n';
-import { withInstanceId } from '@wordpress/compose';
-import { dispatch } from '@wordpress/data';
-import { Component, Fragment } from '@wordpress/element';
-import { ButtonGroup, BaseControl, Button, Tooltip, TabPanel } from '@wordpress/components';
+import { Component } from '@wordpress/element';
+import { BaseControl, Button, Tooltip } from '@wordpress/components';
 
 class DimensionsControl extends Component {
 	constructor( props ) {
@@ -26,10 +24,6 @@ class DimensionsControl extends Component {
 		this.onChangeBottom = this.onChangeBottom.bind( this );
 		this.onChangeLeft = this.onChangeLeft.bind( this );
 		this.onChangeSize = this.onChangeSize.bind( this );
-
-		if ( props.attributes.saveCoBlocksMeta ) {
-			dispatch( 'core/block-editor' ).updateBlockAttributes( props.attributes.clientId, { saveCoBlocksMeta: false } );
-		}
 	}
 
 	onChangeTop( value, device ) {
@@ -65,16 +59,6 @@ class DimensionsControl extends Component {
 	}
 
 	onChangeSize( value, size ) {
-		//fix reset for specific blocks
-		if ( [ 'coblocks/hero' ].includes( this.props.name ) && value === 'no' ) {
-			if ( size < 0 ) {
-				value = 'huge';
-				size = 60;
-			} else {
-				size = -1;
-			}
-		}
-
 		if ( this.props.type === 'padding' ) {
 			this.props.setAttributes( { paddingSyncUnits: true } );
 			this.props.setAttributes( { paddingSize: value } );
@@ -99,8 +83,7 @@ class DimensionsControl extends Component {
 		const {
 			device,
 			help,
-			instanceId,
-			label = __( 'Margin', 'coblocks' ),
+			label = __( 'Margin', 'kili-builder' ),
 			type = 'margin',
 			valueBottom,
 			valueLeft,
@@ -148,7 +131,7 @@ class DimensionsControl extends Component {
 								<div className="components-coblocks-dimensions-control__actions">
 									<Tooltip text={ sprintf(
 										/* translators: %s: values associated with CSS syntax, 'Pixel', 'Em', 'Percentage' */
-										__( '%s Units', 'coblocks' ),
+										__( '%s Units', 'kili-builder' ),
 
 									) }>
 										<Button
@@ -241,4 +224,4 @@ class DimensionsControl extends Component {
 	}
 }
 
-export default withInstanceId( DimensionsControl );
+export default DimensionsControl;

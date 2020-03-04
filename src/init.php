@@ -53,7 +53,7 @@ function kili_blocks_register_block_type( $block, $options=array() ){
     array_merge(
       array(
         'editor_script' => 'kili-editor-script',
-        'editor_style' => 'kili-editor-style',
+        'style' => 'kili-style',
       ),
       $options
     )
@@ -64,7 +64,7 @@ function kili_blocks_register_block_type( $block, $options=array() ){
 function kili_blocks_register() {
 	wp_register_script( 'kili-editor-script',
 		plugins_url( 'dist/blocks.js', dirname(__FILE__) ),
-		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-block-editor', 'wp-components', 'wp-editor', 'wp-blob', 'wp-data')
+		array( 'wp-blocks', 'wp-i18n', 'wp-block-editor', 'wp-components', 'wp-editor', 'wp-blob', 'wp-data')
 	);
 
   	wp_register_style( 'kili-style',

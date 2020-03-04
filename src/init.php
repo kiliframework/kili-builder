@@ -68,7 +68,7 @@ function kili_blocks_register() {
 	);
 
   	wp_register_style( 'kili-style',
-  		plugins_url( 'dist/style.css', dirname( __FILE__ ) )
+  		plugins_url( 'dist/main.css', dirname( __FILE__ ) )
 	);
 
 	$scripts_array = get_scripts_array();

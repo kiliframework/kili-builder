@@ -1,7 +1,9 @@
 import { InnerBlocks } from "@wordpress/block-editor";
-import { Component, useState, useEffect } from "@wordpress/element";
+import { Component } from "@wordpress/element";
 import { SelectControl, Button, TextControl } from "@wordpress/components";
 import { withSelect } from "@wordpress/data";
+
+const { useEffect, useState } = wp.element;
 
 const ColumnsSettings = props => {
   const { onChangeValue, settings } = props;
@@ -71,7 +73,7 @@ const RowSectionEdit = ({ currentBlock, attributes, setAttributes, clientId, ...
     let newColumnsStyle = '';
     currentBlock.innerBlocks.map((innerBlock, index) => {
       const numberOfColumns = innerBlock.attributes.columns;
-      newColumnsStyle += `.kili-columns > .kili-section__row-${clientId} > .editor-inner-blocks > .editor-block-list__layout > [data-type="kili-blocks/k-column"]:nth-child(${index + 1}) {
+      newColumnsStyle += `.kili-columns > .kili-section__row-${clientId} > .editor-inner-blocks > .editor-block-list__layout > [data-type="kili/k-column"]:nth-child(${index + 1}) {
         flex-basis: ${(numberOfColumns / 12)*100}%;
         margin-left: 0;
         margin-right: 0;

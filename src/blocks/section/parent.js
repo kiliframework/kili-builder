@@ -125,7 +125,6 @@ registerBlockType("kili/k-section", {
     );
   },
   save: ({ attributes, className }) => {
-    console.log("kili-section-save", attributes, className);
     const { fullWidth } = attributes;
     return (
       <section>

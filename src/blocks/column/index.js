@@ -1,4 +1,6 @@
 import { registerBlockType } from "@wordpress/blocks";
+import BackgroundAttributes from '../../components/Background/BackgroundAttributes';
+import DimensionAttributes from '../../components/DimensionsControl/attributes';
 import { InnerBlocks } from "@wordpress/block-editor";
 import { __ } from "@wordpress/i18n";
 import edit from "./edit";
@@ -63,7 +65,21 @@ registerBlockType("kili/k-column", {
     bottomPaddingM: {
       type: "number",
       default: 0
-    }
+    },
+    width: {
+			type: "string"
+		},
+		contentAlign: {
+			type: "string"
+		},
+		textColor: {
+			type: "string"
+		},
+		customTextColor: {
+			type: "string"
+    },
+    ...BackgroundAttributes,
+    ...DimensionAttributes,
   },
   supports: {
     align: true,

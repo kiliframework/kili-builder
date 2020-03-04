@@ -32,9 +32,11 @@ registerBlockType( 'kili/row-section', {
 	attributes,
 	keywords: [ __( 'Row', 'kili-builder' ), __( 'Kili', 'kili-builder' ) ],
 	edit,
-	save: ( { attributes } ) => (
-		<div className="flexgrid">
-			<InnerBlocks.Content />
-		</div>
-	),
+	save: ( { attributes } ) => {
+		return (
+			<div className={ `flexgrid` }>
+				<InnerBlocks.Content />
+			</div>
+		);
+	},
 } );

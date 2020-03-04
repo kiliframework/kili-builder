@@ -1,11 +1,10 @@
 import './style.editor.scss';
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
-import './parent';
-import { Dashicon } from '@wordpress/components';
-import edit from './edit';
-
 const { RichText } = wp.blockEditor;
+import './parent';
+import edit from './edit';
+import { Dashicon } from '@wordpress/components';
 
 const attributes = {
 	title: {
@@ -70,9 +69,7 @@ registerBlockType( 'kili/team-member', {
 	keywords: [ __( 'Team', 'kili-builder' ), __( 'Member', 'kili-builder' ) ],
 	edit,
 	save: ( { attributes } ) => {
-		const {
-			title, info, url, alt, id, social,
-		} = attributes;
+		const { title, info, url, alt, id, social } = attributes;
 		return (
 			<div>
 				{ url && (
@@ -82,30 +79,32 @@ registerBlockType( 'kili/team-member', {
 					<RichText.Content
 						className="wp-block-kili-blocks-team-member__title"
 						value={ title }
-						tagName="h4"
+						tagName={ 'h4' }
 					/>
 				) }
 				{ info && (
 					<RichText.Content
 						className="wp-block-kili-blocks-team-member__info"
 						value={ info }
-						tagName="p"
+						tagName={ 'p' }
 					/>
 				) }
 				{ social.length > 0 && (
 					<div className="wp-block-kili-blocks-team-member__social">
 						<ul>
-							{ social.map( ( item, index ) => (
-								<li key={ index } data-icon={ item.icon }>
-									<a
-										href={ item.link }
-										target="_blank"
-										rel="noopener noreferrer"
-									>
-										<Dashicon icon={ item.icon } size={ 16 } />
-									</a>
-								</li>
-							) ) }
+							{ social.map( ( item, index ) => {
+								return (
+									<li key={ index } data-icon={ item.icon }>
+										<a
+											href={ item.link }
+											target="_blank"
+											rel="noopener noreferrer"
+										>
+											<Dashicon icon={ item.icon } size={ 16 } />
+										</a>
+									</li>
+								);
+							} ) }
 						</ul>
 					</div>
 				) }

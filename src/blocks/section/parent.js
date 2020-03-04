@@ -28,7 +28,7 @@ registerBlockType( 'kili/k-section', {
 	title: __( 'Kili-Row', 'kili-builder' ),
 	description: __(
 		'Add section where you can create diferents sections for the main page',
-		'kili-builder',
+		'kili-builder'
 	),
 	category: 'kili-builder',
 	icon: 'text',
@@ -57,9 +57,7 @@ registerBlockType( 'kili/k-section', {
 		},
 	},
 	edit: ( { attributes, setAttributes } ) => {
-		const {
-			id, url, alt, fullWidth,
-		} = attributes;
+		const { id, url, alt, fullWidth } = attributes;
 		const onSelectImage = ( { id, url, alt } ) => {
 			setAttributes( { id, url, alt } );
 		};
@@ -76,9 +74,11 @@ registerBlockType( 'kili/k-section', {
 					<PanelBody title={ __( 'Row Settings', 'kili-builder' ) }>
 						<ToggleControl
 							label="Background Full-Width"
-							onChange={ ( value ) => setAttributes( {
-								fullWidth: value,
-							} ) }
+							onChange={ ( value ) =>
+								setAttributes( {
+									fullWidth: value,
+								} )
+							}
 							checked={ fullWidth }
 						/>
 					</PanelBody>
@@ -89,24 +89,26 @@ registerBlockType( 'kili/k-section', {
 									value={ id }
 									onSelect={ ( img ) => onSelectImage( img ) }
 									allowedTypes={ [ 'image' ] }
-									render={ ( { open } ) => (
-										<IconButton
-											className="button--add_edit"
-											label={ __(
-												`${ url ? 'Edit Image' : 'Add Image' }`,
-												'kili-core',
-											) }
-											onClick={ open }
-											icon="format-image"
-										/>
-									) }
+									render={ ( { open } ) => {
+										return (
+											<IconButton
+												className="button--add_edit"
+												label={ __(
+													`${ url ? 'Edit Image' : 'Add Image' }`,
+													'kili-core'
+												) }
+												onClick={ open }
+												icon="format-image"
+											/>
+										);
+									} }
 								/>
 							</MediaUploadCheck>
 							{ id && (
 								<>
 									<Tooltip text={ __( 'Remove Image', 'kili-builder' ) }>
 										<Button
-											className="button--close"
+											className={ 'button--close' }
 											onClick={ () => onRemoveImage() }
 										>
 											<Dashicon icon="no-alt" />

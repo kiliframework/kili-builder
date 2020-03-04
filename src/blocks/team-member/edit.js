@@ -49,7 +49,6 @@ class TeamMemberEdit extends Component {
 			} );
 		}
 	}
-
 	render() {
 		const {
 			className,
@@ -61,9 +60,7 @@ class TeamMemberEdit extends Component {
 			imageSizes,
 			isSelected,
 		} = this.props;
-		const {
-			title, info, url, alt, id, social,
-		} = attributes;
+		const { title, info, url, alt, id, social } = attributes;
 		const { createErrorNotice } = noticeOperations;
 		const onChangeTitle = ( title ) => {
 			setAttributes( { title } );
@@ -85,9 +82,11 @@ class TeamMemberEdit extends Component {
 			setAttributes( { alt } );
 		};
 		const getImageSizes = () => {
-			if ( ! image ) return [];
+			if ( ! image ) {
+				return [];
+			}
 			const options = [];
-			const { sizes } = image.media_details;
+			const sizes = image.media_details.sizes;
 			for ( const key in sizes ) {
 				const size = sizes[ key ];
 				const imageSize = imageSizes.find( ( size ) => size.slug === key );
@@ -141,7 +140,7 @@ class TeamMemberEdit extends Component {
 								onChange={ updateAlt }
 								help={ __(
 									'Here you can update the alt property of a image',
-									'kili-core',
+									'kili-core'
 								) }
 							/>
 						) }
@@ -164,14 +163,16 @@ class TeamMemberEdit extends Component {
 										value={ id }
 										onSelect={ onSelectImage }
 										allowedTypes={ [ 'image' ] }
-										render={ ( { open } ) => (
-											<IconButton
-												className="components-icon-button components-toolbar__control"
-												label={ __( 'Edit Image', 'kili-code' ) }
-												onClick={ open }
-												icon="edit"
-											/>
-										) }
+										render={ ( { open } ) => {
+											return (
+												<IconButton
+													className="components-icon-button components-toolbar__control"
+													label={ __( 'Edit Image', 'kili-code' ) }
+													onClick={ open }
+													icon="edit"
+												/>
+											);
+										} }
 									/>
 								</MediaUploadCheck>
 							) }
@@ -219,17 +220,19 @@ class TeamMemberEdit extends Component {
 					/>
 					<div className="wp-block-kili-blocks-team-member__social">
 						<ul>
-							{ social.map( ( s, i ) => (
-								<li
-									key={ i }
-									onClick={ () => this.setState( { selectedLink: i } ) }
-									className={
-										this.state.selectedLink === i ? 'is-selected' : null
-									}
-								>
-									<Dashicon icon={ s.icon } size={ 16 } />
-								</li>
-							) ) }
+							{ social.map( ( s, i ) => {
+								return (
+									<li
+										key={ i }
+										onClick={ () => this.setState( { selectedLink: i } ) }
+										className={
+											this.state.selectedLink === i ? 'is-selected' : null
+										}
+									>
+										<Dashicon icon={ s.icon } size={ 16 } />
+									</li>
+								);
+							} ) }
 							{ isSelected && (
 								<li className="wp-block-kili-blocks-team-member__addIconLI">
 									<Tooltip text={ __( 'Add Item', 'kili-core' ) }>
@@ -271,7 +274,7 @@ class TeamMemberEdit extends Component {
 }
 
 export default withSelect( ( select, props ) => {
-	const { id } = props.attributes;
+	const id = props.attributes.id;
 	return {
 		image: id ? select( 'core' ).getMedia( id ) : null,
 		imageSizes: select( 'core/block-editor' ).getSettings().imageSizes,

@@ -1,7 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 import { PanelBody, RangeControl } from '@wordpress/components';
-
 const { InnerBlocks, InspectorControls } = wp.blockEditor;
 
 const attributes = {

@@ -1,8 +1,8 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { InnerBlocks } from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
 import BackgroundAttributes from '../../components/Background/BackgroundAttributes';
 import DimensionAttributes from '../../components/DimensionsControl/attributes';
+import { InnerBlocks } from '@wordpress/block-editor';
+import { __ } from '@wordpress/i18n';
 import edit from './edit';
 
 registerBlockType( 'kili/k-column', {
@@ -14,57 +14,13 @@ registerBlockType( 'kili/k-column', {
 			type: 'string',
 			default: '',
 		},
-		align: {
+		currentTab: {
 			type: 'string',
 			default: '',
 		},
-		topPaddingD: {
-			type: 'number',
-			default: 0,
-		},
-		leftPaddingD: {
-			type: 'number',
-			default: 0,
-		},
-		rightPaddingD: {
-			type: 'number',
-			default: 0,
-		},
-		bottomPaddingD: {
-			type: 'number',
-			default: 0,
-		},
-		topPaddingT: {
-			type: 'number',
-			default: 0,
-		},
-		leftPaddingT: {
-			type: 'number',
-			default: 0,
-		},
-		rightPaddingT: {
-			type: 'number',
-			default: 0,
-		},
-		bottomPaddingT: {
-			type: 'number',
-			default: 0,
-		},
-		topPaddingM: {
-			type: 'number',
-			default: 0,
-		},
-		leftPaddingM: {
-			type: 'number',
-			default: 0,
-		},
-		rightPaddingM: {
-			type: 'number',
-			default: 0,
-		},
-		bottomPaddingM: {
-			type: 'number',
-			default: 0,
+		align: {
+			type: 'string',
+			default: '',
 		},
 		width: {
 			type: 'string',

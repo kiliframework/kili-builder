@@ -11,40 +11,48 @@ const ColumnsSettings = ( props ) => {
 	return (
 		<>
 			<div className="flexgrid">
-				{ settings.map( ( col, index ) => (
-					<div className="flexgrid__item" key={ index }>
-						<TextControl
-							label="Size (columns)"
-							value={ col }
-							onChange={ ( val ) => onChangeValue( val, index ) }
-						/>
-					</div>
-				) ) }
+				{ settings.map( ( col, index ) => {
+					return (
+						<div className="flexgrid__item" key={ index }>
+							<TextControl
+								label={ 'Size (columns)' }
+								value={ col }
+								onChange={ ( val ) => onChangeValue( val, index ) }
+							/>
+						</div>
+					);
+				} ) }
 			</div>
 		</>
 	);
 };
 
-const MySelectControl = ( { size, onChangeColumns } ) => (
-	<>
-		<SelectControl
-			label="Number of Columns: "
-			value={ size }
-			options={ [
-				{ label: '1 Column', value: 1 },
-				{ label: '2 Columns', value: 2 },
-				{ label: '3 Columns', value: 3 },
-				{ label: '4 Columns', value: 4 },
-				{ label: '6 Columns', value: 6 },
-				{ label: '12 Columns', value: 12 },
-			] }
-			onChange={ ( value ) => onChangeColumns( value ) }
-		/>
-	</>
-);
+const MySelectControl = ( { size, onChangeColumns } ) => {
+	return (
+		<>
+			<SelectControl
+				label="Number of Columns: "
+				value={ size }
+				options={ [
+					{ label: '1 Column', value: 1 },
+					{ label: '2 Columns', value: 2 },
+					{ label: '3 Columns', value: 3 },
+					{ label: '4 Columns', value: 4 },
+					{ label: '6 Columns', value: 6 },
+					{ label: '12 Columns', value: 12 },
+				] }
+				onChange={ ( value ) => onChangeColumns( value ) }
+			/>
+		</>
+	);
+};
 
 const Grid = ( { settings, clientId } ) => {
-	const newTemplate = ( columns ) => columns.map( ( col, index ) => [ 'kili/k-column', { columns: `${ col }` } ] );
+	const newTemplate = ( columns ) => {
+		return columns.map( ( col, index ) => {
+			return [ 'kili/k-column', { columns: `${ col }` } ];
+		} );
+	};
 	return (
 		<>
 			<div className={ `kili-section__row kili-section__row-${ clientId }` }>
@@ -54,9 +62,7 @@ const Grid = ( { settings, clientId } ) => {
 	);
 };
 
-const RowSectionEdit = ( {
-	currentBlock, attributes, setAttributes, clientId, ...rest
-} ) => {
+const RowSectionEdit = ( { currentBlock, attributes, setAttributes, clientId, ...rest } ) => {
 	const [ isCreated, setIsCreated ] = useState( attributes.isCreated );
 	const [ size, setSize ] = useState( 2 );
 	const [ settings, setSettings ] = useState( [ 6, 6 ] );
@@ -76,10 +82,16 @@ const RowSectionEdit = ( {
 	}, [ currentBlock ] );
 
 	const fillArray = ( value, len ) => {
-		if ( len == 0 ) return [];
+		if ( len === 0 ) {
+			return [];
+		}
 		let a = [ value ];
-		while ( a.length * 2 <= len ) a = a.concat( a );
-		if ( a.length < len ) a = a.concat( a.slice( 0, len - a.length ) );
+		while ( a.length * 2 <= len ) {
+			a = a.concat( a );
+		}
+		if ( a.length < len ) {
+			a = a.concat( a.slice( 0, len - a.length ) );
+		}
 		return a;
 	};
 
@@ -127,6 +139,8 @@ const RowSectionEdit = ( {
 	);
 };
 
-export default withSelect( ( select, ownProps ) => ( {
-	currentBlock: select( 'core/block-editor' ).getBlock( ownProps.clientId ),
-} ) )( RowSectionEdit );
+export default withSelect( ( select, ownProps ) => {
+	return ( {
+		currentBlock: select( 'core/block-editor' ).getBlock( ownProps.clientId ),
+	} );
+} )( RowSectionEdit );

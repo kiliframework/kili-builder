@@ -34,10 +34,12 @@ const utilitySizes = [
 ];
 
 export default class DimensionsSelect extends Component {
-	constructor( ) {
+	constructor() {
 		super( ...arguments );
 
-		this.getSelectValuesFromUtilitySizes = this.getSelectValuesFromUtilitySizes.bind( this );
+		this.getSelectValuesFromUtilitySizes = this.getSelectValuesFromUtilitySizes.bind(
+			this
+		);
 		this.getCurrentSelectValue = this.getCurrentSelectValue.bind( this );
 		this.setCurrentSelectValue = this.setCurrentSelectValue.bind( this );
 		this.onChangeValue = this.onChangeValue.bind( this );
@@ -99,9 +101,9 @@ export default class DimensionsSelect extends Component {
 		return (
 			<Fragment>
 				<SelectControl
-					className={ 'components-font-size-picker__select' }
+					className="components-font-size-picker__select"
 					label={ `Choose ${ type } preset` }
-					hideLabelFromVision={ true }
+					hideLabelFromVision
 					value={ this.getCurrentSelectValue( type ) }
 					onChange={ this.onChangeValue }
 					options={ this.getSelectOptions( utilitySizes ) }

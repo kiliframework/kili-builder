@@ -2,17 +2,14 @@
 	"root": true,
 	"parser": "babel-eslint",
 	"extends": [
-		"wordpress",
+    "plugin:@wordpress/eslint-plugin/recommended-with-formatting",
 		"plugin:react/recommended",
-		"plugin:jsx-a11y/recommended",
-		"plugin:jest/recommended"
-	],
+		"plugin:jsx-a11y/recommended"],
 	"env": {
 		"browser": false,
 		"es6": true,
 		"node": true,
-		"mocha": true,
-		"jest/globals": true
+		"mocha": true
 	},
 	"parserOptions": {
 		"sourceType": "module",
@@ -26,7 +23,7 @@
 		"window": true,
 		"document": true
 	},
-	"plugins": ["react", "jsx-a11y", "jest"],
+	"plugins": ["react", "jsx-a11y"],
 	"settings": {
 		"react": {
 			"pragma": "wp"

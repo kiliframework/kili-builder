@@ -1,13 +1,13 @@
-import { Component } from "@wordpress/element";
+import { Component } from '@wordpress/element';
 import {
   RangeControl,
   PanelBody,
   TabPanel,
-  PanelRow
-} from "@wordpress/components";
-import { Icon } from "@wordpress/components";
-import { InspectorControls, InnerBlocks } from "@wordpress/block-editor";
-import { __ } from "@wordpress/i18n";
+  PanelRow,
+, Icon } from "@wordpress/components";
+
+import { InspectorControls, InnerBlocks } from '@wordpress/block-editor';
+import { __ } from '@wordpress/i18n';
 
 import Inspector from './inspector';
 
@@ -28,9 +28,9 @@ export default function ColumnEdit(props) {
     paddingRight,
     paddingBottom,
     paddingLeft,
-    currentTab
+    currentTab,
   } = attributes;
-  const onTabSelect = tabName => {
+  const onTabSelect = (tabName) => {
     setAttributes({ currentTab: tabName });
   };
   const deskControls = (
@@ -40,15 +40,15 @@ export default function ColumnEdit(props) {
   );
 
   const mobileControls = (
-    <PanelBody title={__("Tablet Padding/Margin")} initialOpen={false}>
-      <h2>{__("Tablet Padding (px)")}</h2>
+    <PanelBody title={__('Tablet Padding/Margin')} initialOpen={false}>
+      <h2>{__('Tablet Padding (px)')}</h2>
       <RangeControl
         label={<Icon icon="arrow-up" />}
         value={topPaddingD}
         className=""
-        onChange={value => {
+        onChange={(value) => {
           setAttributes({
-            topPaddingD: value
+            topPaddingD: value,
           });
         }}
         min={0}
@@ -58,15 +58,15 @@ export default function ColumnEdit(props) {
   );
 
   const tabletControls = (
-    <PanelBody title={__("Mobile Padding/Margin")} initialOpen={false}>
-      <h2>{__("Mobile Padding (px)")}</h2>
+    <PanelBody title={__('Mobile Padding/Margin')} initialOpen={false}>
+      <h2>{__('Mobile Padding (px)')}</h2>
       <RangeControl
         label={<Icon icon="arrow-up" />}
         value={topPaddingD}
         className=""
-        onChange={value => {
+        onChange={(value) => {
           setAttributes({
-            topPaddingD: value
+            topPaddingD: value,
           });
         }}
         min={0}
@@ -84,28 +84,28 @@ export default function ColumnEdit(props) {
           onSelect={onTabSelect}
           tabs={[
             {
-              name: "desk",
+              name: 'desk',
               title: <Icon icon="desktop" />,
-              className: ""
+              className: ''
             },
             {
-              name: "tablet",
+              name: 'tablet',
               title: <Icon icon="tablet" />,
-              className: ""
+              className: ''
             },
             {
-              name: "mobile",
+              name: 'mobile',
               title: <Icon icon="smartphone" />,
-              className: ""
-            }
+              className: ''
+            },
           ]}
         >
-          {tab => {
+          {(tab) => {
             let tabout;
             if (tab.name) {
-              if ("mobile" === tab.name) {
+              if ('mobile' === tab.name) {
                 tabout = mobileControls;
-              } else if ("tablet" === tab.name) {
+              } else if ('tablet' === tab.name) {
                 tabout = tabletControls;
               } else {
                 tabout = deskControls;
@@ -122,7 +122,7 @@ export default function ColumnEdit(props) {
           paddingTop: `${paddingTop}px`,
           paddingBottom: `${paddingBottom}px`,
           paddingLeft: `${paddingLeft}px`,
-          paddingRight: `${paddingRight}px`
+          paddingRight: `${paddingRight}px`,
         }}
       >
         <InnerBlocks />

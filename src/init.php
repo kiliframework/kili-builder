@@ -33,42 +33,49 @@ function get_scripts_array() {
 	);
 }
 
-function kili_blocks_category( $categories, $post ){
-  return array_merge(
-    $categories,
-    array(
-      array(
-        'slug' => 'kili-builder',
-        'title'=> __('Kili Category', 'kili-builder'),
-        'icon'=>'wordpress'
-      )
-    )
-  );
+function kili_blocks_category( $categories, $post ) {
+	return array_merge(
+		$categories,
+		array(
+			array(
+				'slug' => 'kili-builder',
+				'title'=> __('Kili Category', 'kili-builder'),
+				'icon'=>'wordpress',
+			)
+		)
+	);
 }
 
 add_filter( 'block_categories', 'kili_blocks_category', 10, 2 );
 
-function kili_blocks_register_block_type( $block, $options=array() ){
-  register_block_type( 'kili/' . $block,
-    array_merge(
-      array(
-        'editor_script' => 'kili-editor-script',
-        'style' => 'kili-style',
-      ),
-      $options
-    )
-  );
-
+function kili_blocks_register_block_type( $block, $options = array() ) {
+	register_block_type( 'kili/' . $block,
+		array_merge(
+			array(
+				'editor_script' => 'kili-editor-script',
+				'style' => 'kili-style',
+			),
+			$options
+		)
+	);
 }
 
 function kili_blocks_register() {
 	wp_register_script( 'kili-editor-script',
-		plugins_url( 'dist/blocks.js', dirname(__FILE__) ),
-		array( 'wp-blocks', 'wp-i18n', 'wp-block-editor', 'wp-components', 'wp-editor', 'wp-blob', 'wp-data')
+		plugins_url( 'dist/blocks.js', dirname( __FILE__ ) ),
+		array(
+			'wp-blocks',
+			'wp-i18n',
+			'wp-block-editor',
+			'wp-components',
+			'wp-editor',
+			'wp-blob',
+			'wp-data',
+		)
 	);
 
-  	wp_register_style( 'kili-style',
-  		plugins_url( 'dist/main.css', dirname( __FILE__ ) )
+	wp_register_style( 'kili-style',
+		plugins_url( 'dist/main.css', dirname( __FILE__ ) )
 	);
 
 	$scripts_array = get_scripts_array();

@@ -166,28 +166,28 @@ class DimensionsControl extends Component {
 										className="components-coblocks-dimensions-control__number"
 										type="number"
 										onChange={ onChangeTopValue }
-										value={ valueTop }
+										value={ valueTop ? valueTop : 0 }
 										min={ type === 'padding' ? 0 : undefined }
 									/>
 									<input
 										className="components-coblocks-dimensions-control__number"
 										type="number"
 										onChange={ onChangeRightValue }
-										value={ valueRight }
+										value={ valueRight ? valueRight : 0 }
 										min={ type === 'padding' ? 0 : undefined }
 									/>
 									<input
 										className="components-coblocks-dimensions-control__number"
 										type="number"
 										onChange={ onChangeBottomValue }
-										value={ valueBottom }
+										value={ valueBottom ? valueBottom : 0 }
 										min={ type === 'padding' ? 0 : undefined }
 									/>
 									<input
 										className="components-coblocks-dimensions-control__number"
 										type="number"
 										onChange={ onChangeLeftValue }
-										value={ valueLeft !== '' ? valueLeft : '' }
+										value={ valueLeft ? valueLeft : 0 }
 										min={ type === 'padding' ? 0 : undefined }
 									/>
 									<Tooltip text={ __( 'Reset', 'kili-builder' ) } >

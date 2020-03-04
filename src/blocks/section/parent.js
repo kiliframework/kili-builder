@@ -28,11 +28,11 @@ registerBlockType("kili/k-section", {
   title: __("Kili-Row", "kili-builder"),
   description: __(
     "Add section where you can create diferents sections for the main page",
-    "kili-blocks"
+    "kili-builder"
   ),
   category: "kili-builder",
   icon: "text",
-  keywords: [__("Section", "kili-blocks")],
+  keywords: [__("Section", "kili-builder")],
   supports: {
     html: false,
     align: true,
@@ -71,7 +71,7 @@ registerBlockType("kili/k-section", {
     return (
       <>
         <InspectorControls>
-          <PanelBody title={__("Row Settings", "kili-blocks")}>
+          <PanelBody title={__("Row Settings", "kili-builder")}>
             <ToggleControl
               label="Background Full-Width"
               onChange={value =>
@@ -82,7 +82,7 @@ registerBlockType("kili/k-section", {
               checked={fullWidth}
             />
           </PanelBody>
-          <PanelBody title={__("Background Settings", "kili-blocks")}>
+          <PanelBody title={__("Background Settings", "kili-builder")}>
             <PanelRow>
               <MediaUploadCheck>
                 <MediaUpload
@@ -106,7 +106,7 @@ registerBlockType("kili/k-section", {
               </MediaUploadCheck>
               {id && (
                 <>
-                  <Tooltip text={__("Remove Image", "kili-core")}>
+                  <Tooltip text={__("Remove Image", "kili-builder")}>
                     <Button
                       className={"button--close"}
                       onClick={() => onRemoveImage()}
@@ -120,7 +120,7 @@ registerBlockType("kili/k-section", {
             <PanelRow>{url && <img src={url} alt={alt} />}</PanelRow>
           </PanelBody>
         </InspectorControls>
-        <InnerBlocks template={[["kili-blocks/row-section"]]} />
+        <InnerBlocks template={[["kili/row-section"]]} />
       </>
     );
   },

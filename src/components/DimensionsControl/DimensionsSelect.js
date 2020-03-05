@@ -30,18 +30,9 @@ const utilitySizes = [
   },
 ];
 
-export default class DimensionsSelect extends Component {
-  constructor( ) {
-    super( ...arguments );
+export default function DimensionsSelect({ paddingSize, marginSize, type,setAttributes }) {
 
-    this.getSelectValuesFromUtilitySizes = this.getSelectValuesFromUtilitySizes.bind( this );
-    this.getCurrentSelectValue = this.getCurrentSelectValue.bind( this );
-    this.setCurrentSelectValue = this.setCurrentSelectValue.bind( this );
-    this.onChangeValue = this.onChangeValue.bind( this );
-    this.getSelectOptions = this.getSelectOptions.bind( this );
-  }
-
-  getSelectValuesFromUtilitySizes( listOfSizes, value ) {
+  const getSelectValuesFromUtilitySizes = ( listOfSizes, value ) => {
     let selectedPreset;
     if ( typeof value === 'string' ) {
       selectedPreset = listOfSizes.find( ( choice ) => choice.slug === value );
@@ -49,8 +40,7 @@ export default class DimensionsSelect extends Component {
     }
   }
 
-  getCurrentSelectValue( type ) {
-    const { paddingSize, marginSize } = this.props;
+  const getCurrentSelectValue = ( type ) => {
     switch ( type ) {
       case 'margin':
         return marginSize;
@@ -60,8 +50,7 @@ export default class DimensionsSelect extends Component {
     }
   }
 
-  setCurrentSelectValue( newSetting ) {
-    const { type, setAttributes } = this.props;
+  const setCurrentSelectValue = ( newSetting ) => {
     switch ( type ) {
       case 'margin':
         setAttributes( { marginSize: newSetting } );
@@ -73,7 +62,7 @@ export default class DimensionsSelect extends Component {
     }
   }
 
-  onChangeValue( event ) {
+  const onChangeValue = ( event ) => {
     const selectedUtil = utilitySizes.find( ( util ) => util.slug === event );
     if ( selectedUtil ) {
       this.setCurrentSelectValue(
@@ -82,7 +71,7 @@ export default class DimensionsSelect extends Component {
     }
   }
 
-  getSelectOptions( optionsArray ) {
+  const getSelectOptions = ( optionsArray ) => {
     return [
       ...optionsArray.map( ( option ) => ( {
         value: option.slug,
@@ -91,19 +80,17 @@ export default class DimensionsSelect extends Component {
     ];
   }
 
-  render() {
-    const { type } = this.props;
-    return (
-      <Fragment>
-        <SelectControl
-          className={ 'components-font-size-picker__select' }
-          label={ `Choose ${ type } preset` }
-          hideLabelFromVision={ true }
-          value={ this.getCurrentSelectValue( type ) }
-          onChange={ this.onChangeValue }
-          options={ this.getSelectOptions( utilitySizes ) }
-        />
-      </Fragment>
-    );
-  }
+  return (
+    <>
+      <SelectControl
+        className={ 'components-font-size-picker__select' }
+        label={ `Choose ${ type } preset` }
+        hideLabelFromVision={ true }
+        value={ getCurrentSelectValue( type ) }
+        onChange={ onChangeValue }
+        options={ getSelectOptions( utilitySizes ) }
+      />
+    </>
+  );
 }
+

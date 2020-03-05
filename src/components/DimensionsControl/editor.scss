@@ -1,0 +1,39 @@
+.components-kili-dimensions-control {
+	&__header {
+		display: flex;
+		justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    & > p {
+      margin: 0;
+      padding: 0;
+    }
+	}
+	&__label {
+
+	}
+	&__inputs {
+    display: flex;
+    .components-kili-dimensions-control__sync {
+      border-radius: 0;
+      height: auto;
+    }
+    .components-kili-dimensions-control__number {
+      border-radius: 0;
+      box-shadow: none;
+      height: 30px;
+      margin: 0 -1px 0 0;
+      padding-right: 1px;
+      width: 25%;
+    }
+	}
+
+
+	&__input-labels {
+		display: flex;
+		align-items: center;
+	}
+	&__number-labels {
+		text-align: center;
+	}
+}

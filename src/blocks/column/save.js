@@ -10,48 +10,27 @@ import { InspectorControls, InnerBlocks } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
 export default function ColumnSave( { attributes } ) {
-	const { columns } = attributes;
+	const { columns, padding, margin } = attributes;
 	const createClass = ( ) => {
 		let classes = '';
-
-		//TO-DO: REFACTOR.
-		for ( const value of Object.keys( attributes ) ) {
-			let cssProperty = '.';
-			let device = '';
-
-			if ( value.includes( 'Mobile' ) ) {
-				cssProperty += 'sm--';
-				device = 'Mobile';
-			} else if ( value.includes( 'Tablet' ) ) {
-				cssProperty += 'md--';
-				device = 'Tablet';
-			} else {
-				cssProperty += 'lg--';
-				device = '';
-			}
-			if ( value.includes( 'paddingTop' ) ) {
-				cssProperty += `padding-top__${ attributes[ `paddingTop${ device }` ] }`;
-			} else if ( value.includes( 'paddingBottom' ) ) {
-				cssProperty += `padding-bottom__${ attributes[ `paddingBottom${ device }` ] }`;
-			} else if ( value.includes( 'paddingLeft' ) ) {
-				cssProperty += `padding-left__${ attributes[ `paddingLeft${ device }` ] }`;
-			} else if ( value.includes( 'paddingRight' ) ) {
-				cssProperty += `padding-right__${ attributes[ `paddingRight${ device }` ] }`;
-			}
-
-			if ( value.includes( 'marginTop' ) ) {
-				cssProperty += `margin-top__${ attributes[ `marginTop${ device }` ] }`;
-			} else if ( value.includes( 'marginBottom' ) ) {
-				cssProperty += `margin-bottom__${ attributes[ `marginBottom${ device }` ] }`;
-			} else if ( value.includes( 'marginLeft' ) ) {
-				cssProperty += `margin-left__${ attributes[ `marginLeft${ device }` ] }`;
-			} else if ( value.includes( 'marginRight' ) ) {
-				cssProperty += `margin-right__${ attributes[ `marginRight${ device }` ] }`;
-			}
-
+		for ( const device of Object.keys( padding ) ) {
+      let cssProperty = '';      
+			for (const direction of Object.keys(padding[device].directions)) {
+        if (padding[device].directions[direction]) {
+          cssProperty += ` ${padding[device].prefix}--padding-${direction}__${padding[device].directions[direction]}`;
+        }
+      }
 			classes += cssProperty;
 		}
-
+		for ( const device of Object.keys( margin ) ) {
+      let cssProperty = '';      
+			for (const direction of Object.keys(margin[device].directions)) {
+        if (margin[device].directions[direction]) {
+          cssProperty += ` ${margin[device].prefix}--margin-${direction}__${margin[device].directions[direction]}`;
+        }
+      }
+			classes += cssProperty;
+		}
 		return classes;
 	};
 

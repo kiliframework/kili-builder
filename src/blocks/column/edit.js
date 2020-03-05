@@ -19,24 +19,24 @@ export default function ColumnEdit( props ) {
 	const { setAttributes, attributes } = props;
 
 	const {
-		columns,
-		align,
-		paddingTop,
-		paddingRight,
-		paddingBottom,
-		paddingLeft,
+		padding,
+		margin
 	} = attributes;
-
+	
 	return (
 		<>
 			<Inspector { ...props } />
 			<div
 				id="column create"
 				style={ {
-					paddingTop: `${ paddingTop ? paddingTop : 0 }px`,
-					paddingBottom: `${ paddingBottom ? paddingBottom : 0 }px`,
-					paddingLeft: `${ paddingLeft ? paddingLeft : 0 }px`,
-					paddingRight: `${ paddingRight ? paddingRight : 0 }px`,
+					marginTop: `${ margin.desktop.directions.top ? margin.desktop.directions.top : 0 }px`,
+					marginBottom: `${ margin.desktop.directions.bottom ? margin.desktop.directions.bottom : 0 }px`,
+					marginLeft: `${ margin.desktop.directions.left ? margin.desktop.directions.left : 0 }px`,
+					marginRight: `${ margin.desktop.directions.right ? margin.desktop.directions.right : 0 }px`,
+					paddingTop: `${ padding.desktop.directions.top ? padding.desktop.directions.top : 0 }px`,
+					paddingBottom: `${ padding.desktop.directions.bottom ? padding.desktop.directions.bottom : 0 }px`,
+					paddingLeft: `${ padding.desktop.directions.left ? padding.desktop.directions.left : 0 }px`,
+					paddingRight: `${ padding.desktop.directions.right ? padding.desktop.directions.right : 0 }px`,
 				} }
 			>
 				<InnerBlocks />

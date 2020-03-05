@@ -1,17 +1,8 @@
-/**
- * External dependencies
- */
 import classnames from 'classnames';
 
-/**
- * Internal dependencies
- */
 import icons from './icons';
 import DimensionsSelect from './DimensionsSelect';
 
-/**
- * WordPress dependencies
- */
 import { __, sprintf } from '@wordpress/i18n';
 import { Component } from '@wordpress/element';
 import { BaseControl, Button, Tooltip } from '@wordpress/components';
@@ -19,63 +10,28 @@ import { BaseControl, Button, Tooltip } from '@wordpress/components';
 class DimensionsControl extends Component {
 	constructor( props ) {
 		super( ...arguments );
-		this.onChangeTop = this.onChangeTop.bind( this );
-		this.onChangeRight = this.onChangeRight.bind( this );
-		this.onChangeBottom = this.onChangeBottom.bind( this );
-		this.onChangeLeft = this.onChangeLeft.bind( this );
-		this.onChangeSize = this.onChangeSize.bind( this );
+		this.onChangeDirection = this.onChangeDirection.bind( this );
 	}
 
-	onChangeTop( value, device ) {
-		if ( this.props.type === 'padding' ) {
-			this.props.setAttributes( { [ 'paddingTop' + device ]: value } );
-		} else {
-			this.props.setAttributes( { [ 'marginTop' + device ]: value } );
-		}
-	}
-
-	onChangeRight( value, device ) {
-		if ( this.props.type === 'padding' ) {
-			this.props.setAttributes( { [ 'paddingRight' + device ]: value } );
-		} else {
-			this.props.setAttributes( { [ 'marginRight' + device ]: value } );
-		}
-	}
-
-	onChangeBottom( value, device ) {
-		if ( this.props.type === 'padding' ) {
-			this.props.setAttributes( { [ 'paddingBottom' + device ]: value } );
-		} else {
-			this.props.setAttributes( { [ 'marginBottom' + device ]: value } );
-		}
-	}
-
-	onChangeLeft( value, device ) {
-		if ( this.props.type === 'padding' ) {
-			this.props.setAttributes( { [ 'paddingLeft' + device ]: value } );
-		} else {
-			this.props.setAttributes( { [ 'marginLeft' + device ]: value } );
-		}
+	onChangeDirection( value, device, direction ) {
+		const { attributes } = this.props;
+			this.props.setAttributes( { [this.props.type]: {
+				...attributes[this.props.type],
+				[device]: {
+					...attributes[this.props.type][device],
+					directions: {
+						...attributes[this.props.type][device].directions,
+						[direction]: value,
+					}
+				}
+			} } );
 	}
 
 	onChangeSize( value, size ) {
 		if ( this.props.type === 'padding' ) {
-			this.props.setAttributes( { paddingSyncUnits: true } );
 			this.props.setAttributes( { paddingSize: value } );
-			if ( size ) {
-				if ( size < 0 ) {
-					size = '';
-				}
-				this.props.setAttributes( { paddingTop: size, paddingRight: size, paddingBottom: size, paddingLeft: size, paddingUnit: 'px' } );
-			}
 		} else {
 			this.props.setAttributes( { marginSize: value } );
-			if ( size ) {
-				if ( size < 0 ) {
-					size = '';
-				}
-				this.props.setAttributes( { marginTop: size, marginRight: 0, marginBottom: size, marginLeft: 0, marginUnit: 'px' } );
-			}
 		}
 	}
 
@@ -103,22 +59,22 @@ class DimensionsControl extends Component {
 
 		const onChangeTopValue = ( event ) => {
 			const newValue = ( event.target.value === '' ) ? undefined : Number( event.target.value );
-			this.onChangeTop( newValue, device );
+			this.onChangeDirection( newValue, device, 'top' );
 		};
 
 		const onChangeRightValue = ( event ) => {
 			const newValue = ( event.target.value === '' ) ? undefined : Number( event.target.value );
-			this.onChangeRight( newValue, device );
+			this.onChangeDirection( newValue, device, 'right' );
 		};
 
 		const onChangeBottomValue = ( event ) => {
 			const newValue = ( event.target.value === '' ) ? undefined : Number( event.target.value );
-			this.onChangeBottom( newValue, device );
+			this.onChangeDirection( newValue, device, 'bottom' );
 		};
 
 		const onChangeLeftValue = ( event ) => {
 			const newValue = ( event.target.value === '' ) ? undefined : Number( event.target.value );
-			this.onChangeLeft( newValue, device );
+			this.onChangeDirection( newValue, device, 'left' );
 		};
 
 		return (

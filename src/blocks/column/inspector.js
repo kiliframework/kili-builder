@@ -1,22 +1,13 @@
-
-/**
- * Internal dependencies
- */
 import applyWithColors from './colors';
 import DimensionsControl from '../../components/DimensionsControl';
 
-/**
- * WordPress dependencies
- */
 import { __ } from '@wordpress/i18n';
 import { Component, Fragment } from '@wordpress/element';
 import { compose } from '@wordpress/compose';
 import { InspectorControls, PanelColorSettings } from '@wordpress/block-editor';
 import { PanelBody, RangeControl, withFallbackStyles, TabPanel, Icon } from '@wordpress/components';
 
-/**
- * Fallback styles
- */
+
 const { getComputedStyle } = window;
 
 const FallbackStyles = withFallbackStyles( ( node, ownProps ) => {
@@ -24,7 +15,6 @@ const FallbackStyles = withFallbackStyles( ( node, ownProps ) => {
 
 	const editableNode = node.querySelector( '[contenteditable="true"]' );
 
-	//verify if editableNode is available, before using getComputedStyle.
 	const computedStyles = editableNode ? getComputedStyle( editableNode ) : null;
 
 	return {
@@ -32,9 +22,6 @@ const FallbackStyles = withFallbackStyles( ( node, ownProps ) => {
 	};
 } );
 
-/**
- * Inspector controls
- */
 class Inspector extends Component {
 	render() {
 		const {
@@ -51,8 +38,8 @@ class Inspector extends Component {
 			paddingSize,
 		} = attributes;
 
-		const onChangeWidth = ( newWidth ) => {
-			setAttributes( { columns: newWidth } );
+		const onChangeWidth = ( newWidth ) => {			
+			setAttributes( { columns: `${newWidth}` } );
 		};
 
 		const onTabSelect = ( tabName ) => {
@@ -60,15 +47,14 @@ class Inspector extends Component {
 		};
 
 		const getValuesByDevice = ( type ) => {
-			let values = {};
-
+			let values = {};			
 			values = {
-				valueTop: attributes[ `${ type }Top${ currentTab }` ],
-				valueBottom: attributes[ `${ type }Bottom${ currentTab }` ],
-				valueRight: attributes[ `${ type }Right${ currentTab }` ],
-				valueLeft: attributes[ `${ type }Left${ currentTab }` ],
+				valueTop: attributes[type][currentTab].directions.top,
+				valueBottom: attributes[type][currentTab].directions.bottom,
+				valueRight: attributes[type][currentTab].directions.right,
+				valueLeft: attributes[type][currentTab].directions.left,
 			};
-
+			
 			return values;
 		};
 
@@ -81,17 +67,17 @@ class Inspector extends Component {
 					onSelect={ onTabSelect }
 					tabs={ [
 						{
-							name: '',
+							name: 'desktop',
 							title: <Icon icon="desktop" />,
 							className: '',
 						},
 						{
-							name: 'Tablet',
+							name: 'tablet',
 							title: <Icon icon="tablet" />,
 							className: '',
 						},
 						{
-							name: 'Mobile',
+							name: 'mobile',
 							title: <Icon icon="smartphone" />,
 							className: '',
 						},
@@ -110,7 +96,9 @@ class Inspector extends Component {
 										{ ...getValuesByDevice( 'padding' ) }
 										dimensionSize={ paddingSize }
 									/>
-									<DimensionsControl { ...this.props }
+									<DimensionsControl 
+										{ ...this.props }
+										device={ tab.name }
 										type={ 'margin' }
 										label={ __( 'Margin', 'coblocks' ) }
 										help={ __( 'Space around the container.', 'coblocks' ) }
@@ -120,7 +108,7 @@ class Inspector extends Component {
 									{ ( lastId !== clientId )
 										? <RangeControl
 											label={ __( 'Width (number of columns)', 'coblocks' ) }
-											value={ columns }
+											value={ Number(columns) }
 											onChange={ ( newWidth ) => onChangeWidth( Number( newWidth ) ) }
 											min={ 1 }
 											max={ 12 }

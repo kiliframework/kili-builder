@@ -4,117 +4,73 @@
  * @type {Object}
  */
 const DimensionsAttributes = {
-	paddingTop: {
-		type: 'number',
+	padding: {
+		type: 'object',
+		default: {
+			mobile: {
+				prefix: 'sm',
+				directions: {
+					top: undefined,
+					bottom: undefined,
+					right: undefined,
+					left: undefined,
+				}
+			},
+			tablet: {
+				prefix: 'md',
+				directions: {
+					top: undefined,
+					bottom: undefined,
+					right: undefined,
+					left: undefined,
+				}
+			},
+			desktop: {
+				prefix: 'lg',
+				directions: {
+					top: undefined,
+					bottom: undefined,
+					right: undefined,
+					left: undefined,
+				}
+			},
+		}
 	},
-	paddingRight: {
-		type: 'number',
-	},
-	paddingBottom: {
-		type: 'number',
-	},
-	paddingLeft: {
-		type: 'number',
-	},
-	paddingTopTablet: {
-		type: 'number',
-	},
-	paddingRightTablet: {
-		type: 'number',
-	},
-	paddingBottomTablet: {
-		type: 'number',
-	},
-	paddingLeftTablet: {
-		type: 'number',
-	},
-	paddingTopMobile: {
-		type: 'number',
-	},
-	paddingRightMobile: {
-		type: 'number',
-	},
-	paddingBottomMobile: {
-		type: 'number',
-	},
-	paddingLeftMobile: {
-		type: 'number',
-	},
-	paddingUnit: {
-		type: 'string',
-		default: 'px',
-	},
-	paddingSize: {
-		type: 'string',
-		default: 'no',
-	},
-	paddingSyncUnits: {
-		type: 'boolean',
-		default: false,
-	},
-	paddingSyncUnitsTablet: {
-		type: 'boolean',
-		default: true,
-	},
-	paddingSyncUnitsMobile: {
-		type: 'boolean',
-		default: true,
-	},
-	marginTop: {
-		type: 'number',
-	},
-	marginRight: {
-		type: 'number',
-	},
-	marginBottom: {
-		type: 'number',
-	},
-	marginLeft: {
-		type: 'number',
-	},
-	marginTopTablet: {
-		type: 'number',
-	},
-	marginRightTablet: {
-		type: 'number',
-	},
-	marginBottomTablet: {
-		type: 'number',
-	},
-	marginLeftTablet: {
-		type: 'number',
-	},
-	marginTopMobile: {
-		type: 'number',
-	},
-	marginRightMobile: {
-		type: 'number',
-	},
-	marginBottomMobile: {
-		type: 'number',
-	},
-	marginLeftMobile: {
-		type: 'number',
-	},
-	marginUnit: {
-		type: 'string',
-		default: 'px',
+	margin: {
+		type: 'object',
+		default: {
+			mobile: {
+				prefix: 'sm',
+				directions: {
+					top: undefined,
+					bottom: undefined,
+					right: undefined,
+					left: undefined,
+				}
+			},
+			tablet: {
+				prefix: 'md',
+				directions: {
+					top: undefined,
+					bottom: undefined,
+					right: undefined,
+					left: undefined,
+				}
+			},
+			desktop: {
+				prefix: 'lg',
+				directions: {
+					top: undefined,
+					bottom: undefined,
+					right: undefined,
+					left: undefined,
+				}
+			},
+		}
 	},
 	marginSize: {
 		type: 'string',
 		default: 'no',
-	},
-	marginSyncUnits: {
-		type: 'boolean',
-		default: false,
-	},
-	marginSyncUnitsTablet: {
-		type: 'boolean',
-		default: false,
-	},
-	marginSyncUnitsMobile: {
-		type: 'boolean',
-		default: false,
 	},
 	hasMarginControl: {
 		type: 'boolean',

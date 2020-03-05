@@ -12,12 +12,12 @@ registerBlockType( 'kili/k-column', {
 	category: 'kili-builder',
 	attributes: {
 		columns: {
-			type: 'string',
-			default: '',
+			type: 'number',
+			default: 6,
 		},
 		currentTab: {
 			type: 'string',
-			default: '',
+			default: 'desktop',
 		},
 		align: {
 			type: 'string',

@@ -3,107 +3,107 @@ import { Component, Fragment } from '@wordpress/element';
 import { SelectControl } from '@wordpress/components';
 
 const utilitySizes = [
-	{
-		name: __( 'None', 'kili-builder' ),
-		size: 0,
-		slug: 'no',
-	},
-	{
-		name: __( 'Small', 'kili-builder' ),
-		size: 14,
-		slug: 'small',
-	},
-	{
-		name: __( 'Medium', 'kili-builder' ),
-		size: 24,
-		slug: 'medium',
-	},
-	{
-		name: __( 'Large', 'kili-builder' ),
-		size: 34,
-		slug: 'large',
-	},
-	{
-		name: __( 'Huge', 'kili-builder' ),
-		size: 60,
-		slug: 'huge',
-	},
+  {
+    name: __( 'None', 'kili-builder' ),
+    size: 0,
+    slug: 'no',
+  },
+  {
+    name: __( 'Small', 'kili-builder' ),
+    size: 14,
+    slug: 'small',
+  },
+  {
+    name: __( 'Medium', 'kili-builder' ),
+    size: 24,
+    slug: 'medium',
+  },
+  {
+    name: __( 'Large', 'kili-builder' ),
+    size: 34,
+    slug: 'large',
+  },
+  {
+    name: __( 'Huge', 'kili-builder' ),
+    size: 60,
+    slug: 'huge',
+  },
 ];
 
 export default class DimensionsSelect extends Component {
-	constructor( ) {
-		super( ...arguments );
+  constructor( ) {
+    super( ...arguments );
 
-		this.getSelectValuesFromUtilitySizes = this.getSelectValuesFromUtilitySizes.bind( this );
-		this.getCurrentSelectValue = this.getCurrentSelectValue.bind( this );
-		this.setCurrentSelectValue = this.setCurrentSelectValue.bind( this );
-		this.onChangeValue = this.onChangeValue.bind( this );
-		this.getSelectOptions = this.getSelectOptions.bind( this );
-	}
+    this.getSelectValuesFromUtilitySizes = this.getSelectValuesFromUtilitySizes.bind( this );
+    this.getCurrentSelectValue = this.getCurrentSelectValue.bind( this );
+    this.setCurrentSelectValue = this.setCurrentSelectValue.bind( this );
+    this.onChangeValue = this.onChangeValue.bind( this );
+    this.getSelectOptions = this.getSelectOptions.bind( this );
+  }
 
-	getSelectValuesFromUtilitySizes( listOfSizes, value ) {
-		let selectedPreset;
-		if ( typeof value === 'string' ) {
-			selectedPreset = listOfSizes.find( ( choice ) => choice.slug === value );
-			return selectedPreset ? selectedPreset.slug : 'custom';
-		}
-	}
+  getSelectValuesFromUtilitySizes( listOfSizes, value ) {
+    let selectedPreset;
+    if ( typeof value === 'string' ) {
+      selectedPreset = listOfSizes.find( ( choice ) => choice.slug === value );
+      return selectedPreset ? selectedPreset.slug : 'custom';
+    }
+  }
 
-	getCurrentSelectValue( type ) {
-		const { paddingSize, marginSize } = this.props;
-		switch ( type ) {
-			case 'margin':
-				return marginSize;
-			case 'padding':
-				return paddingSize;
-			default:
-		}
-	}
+  getCurrentSelectValue( type ) {
+    const { paddingSize, marginSize } = this.props;
+    switch ( type ) {
+      case 'margin':
+        return marginSize;
+      case 'padding':
+        return paddingSize;
+      default:
+    }
+  }
 
-	setCurrentSelectValue( newSetting ) {
-		const { type, setAttributes } = this.props;
-		switch ( type ) {
-			case 'margin':
-				setAttributes( { marginSize: newSetting } );
-				break;
-			case 'padding':
-				setAttributes( { paddingSize: newSetting } );
-				break;
-			default:
-		}
-	}
+  setCurrentSelectValue( newSetting ) {
+    const { type, setAttributes } = this.props;
+    switch ( type ) {
+      case 'margin':
+        setAttributes( { marginSize: newSetting } );
+        break;
+      case 'padding':
+        setAttributes( { paddingSize: newSetting } );
+        break;
+      default:
+    }
+  }
 
-	onChangeValue( event ) {
-		const selectedUtil = utilitySizes.find( ( util ) => util.slug === event );
-		if ( selectedUtil ) {
-			this.setCurrentSelectValue(
-				this.getSelectValuesFromUtilitySizes( utilitySizes, selectedUtil.slug )
-			);
-		}
-	}
+  onChangeValue( event ) {
+    const selectedUtil = utilitySizes.find( ( util ) => util.slug === event );
+    if ( selectedUtil ) {
+      this.setCurrentSelectValue(
+        this.getSelectValuesFromUtilitySizes( utilitySizes, selectedUtil.slug )
+      );
+    }
+  }
 
-	getSelectOptions( optionsArray ) {
-		return [
-			...optionsArray.map( ( option ) => ( {
-				value: option.slug,
-				label: option.name,
-			} ) ),
-		];
-	}
+  getSelectOptions( optionsArray ) {
+    return [
+      ...optionsArray.map( ( option ) => ( {
+        value: option.slug,
+        label: option.name,
+      } ) ),
+    ];
+  }
 
-	render() {
-		const { type } = this.props;
-		return (
-			<Fragment>
-				<SelectControl
-					className={ 'components-font-size-picker__select' }
-					label={ `Choose ${ type } preset` }
-					hideLabelFromVision={ true }
-					value={ this.getCurrentSelectValue( type ) }
-					onChange={ this.onChangeValue }
-					options={ this.getSelectOptions( utilitySizes ) }
-				/>
-			</Fragment>
-		);
-	}
+  render() {
+    const { type } = this.props;
+    return (
+      <Fragment>
+        <SelectControl
+          className={ 'components-font-size-picker__select' }
+          label={ `Choose ${ type } preset` }
+          hideLabelFromVision={ true }
+          value={ this.getCurrentSelectValue( type ) }
+          onChange={ this.onChangeValue }
+          options={ this.getSelectOptions( utilitySizes ) }
+        />
+      </Fragment>
+    );
+  }
 }

@@ -35,19 +35,19 @@ export default function ColumnSave( { attributes } ) {
       let cssProperty = '';
       const value = ( columns[device].value / 12 ) * 100;
       if (value) {
-        cssProperty += ` ${columns[device].prefix}--flex-basis__${value}`;
+        cssProperty += ` ${columns[device].prefix}--flex-basis__${value.toFixed(3)}`;
         classes += cssProperty;
+
       }
     }
     return classes;
   };
 
- 
+
 
   const className = createClass();
 
-  console.log(className);
-  
+
   return (
     <div className={ `kili-column-inner flexgrid__item ${ className }` }>
       <InnerBlocks.Content />

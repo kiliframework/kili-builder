@@ -3,7 +3,7 @@ import DimensionAttributes from '../../components/DimensionsControl/attributes';
 
 export default {
   columns: {
-    type: 'number',
+    type: 'object',
     default: {
       mobile: {
         prefix: 'sm',
@@ -14,7 +14,7 @@ export default {
         value: 12,
       },
       desktop: {
-        prefix: 'sm',
+        prefix: 'lg',
         value: 6,
       },
     }

@@ -42,12 +42,12 @@ class Inspector extends Component {
       setAttributes( { columns: {
 				...attributes.columns,
 				[currentTab]: {
-					...attributes[currentTab],
+					...attributes.columns[currentTab],
 					value: newWidth,
 				}
 			}} );
     };
-		
+
     const onTabSelect = ( tabName ) => {
       setAttributes( { currentTab: tabName } );
 		};

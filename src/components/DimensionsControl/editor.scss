@@ -33,7 +33,13 @@
 		display: flex;
 		align-items: center;
 	}
-	&__number-labels {
+	&__number-label {
+    font-size: 12px;
+    flex-basis: 20%;
+    flex-grow: 1;
 		text-align: center;
-	}
+  }
+  &__number-label-blank {
+    width: 40px;
+  }
 }

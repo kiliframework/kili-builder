@@ -39,12 +39,18 @@ class Inspector extends Component {
     } = attributes;
 
     const onChangeWidth = ( newWidth ) => {
-      setAttributes( { columns: `${newWidth}` } );
+      setAttributes( { columns: {
+				...attributes.columns,
+				[currentTab]: {
+					...attributes[currentTab],
+					value: newWidth,
+				}
+			}} );
     };
-
+		
     const onTabSelect = ( tabName ) => {
       setAttributes( { currentTab: tabName } );
-    };
+		};
 
     const getValuesByDevice = ( type ) => {
       let values = {};
@@ -108,7 +114,7 @@ class Inspector extends Component {
                   { ( lastId !== clientId )
                     ? <RangeControl
                       label={ __( 'Width (number of columns)', 'coblocks' ) }
-                      value={ Number(columns) }
+                      value={ Number(columns[currentTab].value) }
                       onChange={ ( newWidth ) => onChangeWidth( Number( newWidth ) ) }
                       min={ 1 }
                       max={ 12 }

@@ -50,7 +50,7 @@ const MySelectControl = ( { size, onChangeColumns } ) => {
 const Grid = ( { settings, clientId } ) => {
   const newTemplate = ( columns ) => {
     return columns.map( ( col, index ) => {
-      return [ 'kili/k-column', { columns: `${ col }` } ];
+      return [ 'kili/k-column' ];
     } );
   };
   return (
@@ -71,7 +71,7 @@ const RowSectionEdit = ( { currentBlock, attributes, setAttributes, clientId, ..
   useEffect( () => {
     let newColumnsStyle = '';
     currentBlock.innerBlocks.map( ( innerBlock, index ) => {
-      const numberOfColumns = innerBlock.attributes.columns;
+      const numberOfColumns = innerBlock.attributes.columns.desktop.value;
       newColumnsStyle += `.kili-columns > .kili-section__row-${ clientId } > .editor-inner-blocks > .editor-block-list__layout > [data-type="kili/k-column"]:nth-child(${ index + 1 }) {
         flex-basis: ${ ( numberOfColumns / 12 ) * 100 }%;
         margin-left: 0;

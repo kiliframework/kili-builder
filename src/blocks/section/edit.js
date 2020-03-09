@@ -65,7 +65,7 @@ const RowSectionEdit = ( { currentBlock, attributes, setAttributes, clientId, ..
     return a;
   };
 
-  const handleNumberOfColumns = ( value ) => {
+  const handleColumnsSelect = ( value ) => {
     setSettings( fillArray( 12 / Number( value ), Number( value ) ) );
     setIsCreated( ! isCreated );
     setAttributes( { isCreated: ! isCreated } );
@@ -86,7 +86,7 @@ const RowSectionEdit = ( { currentBlock, attributes, setAttributes, clientId, ..
                   key={ option.name }
                   className="components-kili-button-group__button"
                   isLarge
-                  onClick={ () => handleNumberOfColumns( option.columns ) }
+                  onClick={ () => handleColumnsSelect( option.columns ) }
                   >
                     { index + 1 }
                   </Button>

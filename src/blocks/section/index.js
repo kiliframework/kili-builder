@@ -10,13 +10,13 @@ const attributes = {
     type: 'number',
     default: 1,
   },
+  currentTab: {
+    type: 'string',
+    default: 'desktop',
+  },
   isCreated: {
     type: 'boolean',
     default: false,
-  },
-  currentTab: {
-    type: 'string',
-    default: 'desk',
   },
 };
 

@@ -41,7 +41,8 @@ const columnOptions = [
   { columns: 6, name: __( 'Six Columns', 'kili-builder' ) },
 ];
 
-const RowSectionEdit = ( { currentBlock, attributes, setAttributes, clientId, ...rest } ) => {
+const RowSectionEdit = ( props ) => {
+  const { currentBlock, attributes, setAttributes, clientId } = props;
   const [ isCreated, setIsCreated ] = useState( attributes.isCreated );
   const [ settings, setSettings ] = useState( [ 6, 6 ] );
   const [ columnsStyle, setColumnsStyle ] = useState( '' );
@@ -81,6 +82,7 @@ const RowSectionEdit = ( { currentBlock, attributes, setAttributes, clientId, ..
 
   return (
     <>
+      <Inspector {...props} />
       <div className="select-menu">
         { ! isCreated && (
           <>

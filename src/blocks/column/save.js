@@ -35,7 +35,7 @@ export default function ColumnSave( { attributes } ) {
       let cssProperty = '';
       const value = ( columns[device].value / 12 ) * 100;
       if (value) {
-        cssProperty += ` ${columns[device].prefix}--flex-basis__${value.toFixed(3)}`;
+        cssProperty += ` ${columns[device].prefix}--flex-basis__${Number(value.toFixed(3))}`;
         classes += cssProperty;
 
       }

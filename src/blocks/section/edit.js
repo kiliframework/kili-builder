@@ -1,24 +1,32 @@
-/* eslint-disable react/jsx-indent-props */
-/* eslint-disable react/jsx-indent */
-/* eslint-disable indent */
 import { InnerBlocks } from '@wordpress/block-editor';
 import { Component } from '@wordpress/element';
 import { SelectControl, Button, TextControl, Placeholder, ButtonGroup, Tooltip } from '@wordpress/components';
 import { withSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
+import ColumnDefaultAttributes from '../column/attributes';
+import Inspector from './inspector';
+
 const { useEffect, useState } = wp.element;
 
 const Grid = ( { settings, clientId } ) => {
   const newTemplate = ( columns ) => {
     return columns.map( ( col, index ) => {
-      return [ 'kili/k-column' ];
+      return [ 'kili/k-column', {
+        columns: {
+          ...ColumnDefaultAttributes.columns.default,
+          desktop: {
+            ...ColumnDefaultAttributes.columns.default.desktop,
+            value: col,
+          },
+        },
+      } ];
     } );
   };
   return (
     <>
       <div className={ `kili-section__row kili-section__row-${ clientId }` }>
-        <InnerBlocks template={ newTemplate( settings ) } renderAppender={false} />
+        <InnerBlocks template={ newTemplate( settings ) } renderAppender={ false } />
       </div>
     </>
   );
@@ -40,7 +48,7 @@ const RowSectionEdit = ( { currentBlock, attributes, setAttributes, clientId, ..
 
   useEffect( () => {
     let newColumnsStyle = '';
-    currentBlock.innerBlocks.map( ( innerBlock, index ) => {
+    currentBlock.innerBlocks.forEach( ( innerBlock, index ) => {
       const numberOfColumns = innerBlock.attributes.columns.desktop.value;
       newColumnsStyle += `.kili-columns > .kili-section__row-${ clientId } > .editor-inner-blocks > .editor-block-list__layout > [data-type="kili/k-column"]:nth-child(${ index + 1 }) {
         flex-basis: ${ ( numberOfColumns / 12 ) * 100 }%;
@@ -81,17 +89,17 @@ const RowSectionEdit = ( { currentBlock, attributes, setAttributes, clientId, ..
               instructions={ __( 'Select the number of columns for this row.', 'kili-builder' ) }
             >
               <ButtonGroup className="components-kili-button-group">
-								{ columnOptions.map( ( option, index ) => (
+                { columnOptions.map( ( option, index ) => (
                   <Button
-                  key={ option.name }
-                  className="components-kili-button-group__button"
-                  isLarge
-                  onClick={ () => handleColumnsSelect( option.columns ) }
+                    key={ option.name }
+                    className="components-kili-button-group__button"
+                    isLarge
+                    onClick={ () => handleColumnsSelect( option.columns ) }
                   >
                     { index + 1 }
                   </Button>
-								) ) }
-							</ButtonGroup>
+                ) ) }
+              </ButtonGroup>
             </Placeholder>
           </>
         ) }

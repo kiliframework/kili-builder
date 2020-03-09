@@ -1,6 +1,3 @@
-/* eslint-disable react/jsx-indent-props */
-/* eslint-disable react/jsx-indent */
-/* eslint-disable indent */
 
 import { Component } from '@wordpress/element';
 import {
@@ -26,117 +23,106 @@ const { useState, useEffect } = wp.element;
 
 function ColumnEdit( props ) {
   const { setAttributes, attributes, clientId, className, hasInnerBlocks,
-		parentId} = props;
-	const [ selectedWidth, setSelectedWidth ] = useState( 0 );
-	const [parentWidth, setParentWidth] = useState(0);
-  const [ maxWidth, setMaxWidth ] = useState( 99999 );
+    parentId } = props;
+  const [ selectedWidth, setSelectedWidth ] = useState( 0 );
+  const [ parentWidth, setParentWidth ] = useState( 0 );
   const [ resizing, setResizing ] = useState( false );
-	const {
+  const {
     padding,
     margin,
-	} = attributes;
+  } = attributes;
 
-	useEffect(() => {
-		const parentBlockWidth = document
-							.querySelector(( `.kili-columns > .kili-section__row-${parentId} > .editor-inner-blocks > .editor-block-list__layout` ))
-							.getBoundingClientRect().width;
-		setParentWidth(parentBlockWidth);
-	}, []);
+  useEffect( () => {
+    const parentBlockWidth = document
+      .querySelector( ( `.kili-columns > .kili-section__row-${ parentId } > .editor-inner-blocks > .editor-block-list__layout` ) )
+      .getBoundingClientRect().width;
+    setParentWidth( parentBlockWidth );
+  }, [] );
 
-	const getSnapTargets = () => {
-		const snapGap = parentWidth/12;
-		const initialSnapTarget = parentWidth/12 - 30;
-		const snapTargets = [initialSnapTarget];
-		for (let index = 1; index < 12; index++) {
-			snapTargets.push(snapTargets[index-1] + snapGap);
-		}
-		return snapTargets;
-	}
+  const getSnapTargets = () => {
+    const snapGap = parentWidth / 12;
+    const initialSnapTarget = parentWidth / 12 - 30;
+    const snapTargets = [ initialSnapTarget ];
+    for ( let index = 1; index < 12; index++ ) {
+      snapTargets.push( snapTargets[ index - 1 ] + snapGap );
+    }
+    return snapTargets;
+  };
 
-  return (
-    <>
-      <Inspector { ...props } />
-      <ResizableBox
-        className={className}
-				maxWidth={ maxWidth }
-				snap={{ x: getSnapTargets()}}
-				size={{ width: 'auto' }}
-        minHeight="20"
-        enable={ {
-          top: false,
-          right: true,
-          bottom: false,
-          left: false,
-          topRight: false,
-          bottomRight: false,
-          bottomLeft: false,
-          topLeft: false,
-        } }
-        onResizeStop={ ( _event, _direction, _elt, delta ) => {
-          setResizing( false );
-          const currentBlockWidth = selectedWidth + delta.width;
-          const currentBlockWidthPercent =
+  return ( <>
+    <Inspector { ...props } />
+    <ResizableBox
+      className={ className }
+      snap={ { x: getSnapTargets() } }
+      size={ { width: 'auto' } }
+      minHeight="20"
+      enable={ {
+        top: false,
+        right: true,
+        bottom: false,
+        left: false,
+        topRight: false,
+        bottomRight: false,
+        bottomLeft: false,
+        topLeft: false,
+      } }
+      onResizeStop={ ( _event, _direction, _elt, delta ) => {
+        setResizing( false );
+        const currentBlockWidth = selectedWidth + delta.width;
+        const currentBlockWidthPercent =
             ( currentBlockWidth / parentWidth ) * 100;
-          console.log(currentBlockWidthPercent);
-
-          setAttributes( { columns: {
-            ...attributes.columns,
-            desktop: {
-              ...attributes.columns.desktop,
-              value: Math.ceil((currentBlockWidthPercent*12)/100),
-            }
-          }} );
-        }}
-        onResize={ ( _event, _direction, _elt, delta ) => {
-
-
-
-
-        } }
-        onResizeStart={ ( _event, _direction, _elt, delta ) => {
-          const currentBlock = document.getElementById(
-            'block-' + clientId
-          );
-					const currentBlockClientRect = currentBlock.getBoundingClientRect();
-					setSelectedWidth( currentBlockClientRect.width );
-          setResizing( true );
-        } }
+        setAttributes( { columns: {
+          ...attributes.columns,
+          desktop: {
+            ...attributes.columns.desktop,
+            value: Math.round( ( currentBlockWidthPercent * 12 ) / 100 ),
+          },
+        } } );
+      } }
+      onResizeStart={ ( _event, _direction, _elt, delta ) => {
+        const currentBlock = document.getElementById(
+          'block-' + clientId
+        );
+        const currentBlockClientRect = currentBlock.getBoundingClientRect();
+        setSelectedWidth( currentBlockClientRect.width );
+        setResizing( true );
+      } }
+    >
+      <div
+        // className={ classes }
+        // style={ { color: textColor.color } }
       >
         <div
-          // className={ classes }
-          // style={ { color: textColor.color } }
+          id="column create"
+          style={ {
+            marginTop: `${ margin.desktop.directions.top ? margin.desktop.directions.top : 0 }px`,
+            marginBottom: `${ margin.desktop.directions.bottom ? margin.desktop.directions.bottom : 0 }px`,
+            marginLeft: `${ margin.desktop.directions.left ? margin.desktop.directions.left : 0 }px`,
+            marginRight: `${ margin.desktop.directions.right ? margin.desktop.directions.right : 0 }px`,
+            paddingTop: `${ padding.desktop.directions.top ? padding.desktop.directions.top : 0 }px`,
+            paddingBottom: `${ padding.desktop.directions.bottom ? padding.desktop.directions.bottom : 0 }px`,
+            paddingLeft: `${ padding.desktop.directions.left ? padding.desktop.directions.left : 0 }px`,
+            paddingRight: `${ padding.desktop.directions.right ? padding.desktop.directions.right : 0 }px`,
+          } }
         >
-          <div
-            id="column create"
-            style={ {
-              marginTop: `${ margin.desktop.directions.top ? margin.desktop.directions.top : 0 }px`,
-              marginBottom: `${ margin.desktop.directions.bottom ? margin.desktop.directions.bottom : 0 }px`,
-              marginLeft: `${ margin.desktop.directions.left ? margin.desktop.directions.left : 0 }px`,
-              marginRight: `${ margin.desktop.directions.right ? margin.desktop.directions.right : 0 }px`,
-              paddingTop: `${ padding.desktop.directions.top ? padding.desktop.directions.top : 0 }px`,
-              paddingBottom: `${ padding.desktop.directions.bottom ? padding.desktop.directions.bottom : 0 }px`,
-              paddingLeft: `${ padding.desktop.directions.left ? padding.desktop.directions.left : 0 }px`,
-              paddingRight: `${ padding.desktop.directions.right ? padding.desktop.directions.right : 0 }px`,
-            } }
-          >
-            <InnerBlocks templateLock={ false } renderAppender={!hasInnerBlocks && InnerBlocks.ButtonBlockAppender } />
-          </div>
+          <InnerBlocks templateLock={ false } renderAppender={ ! hasInnerBlocks && InnerBlocks.ButtonBlockAppender } />
         </div>
-      </ResizableBox>
+      </div>
+    </ResizableBox>
 
-    </>
+  </>
   );
 }
 
 const applyWithSelect = withSelect( ( select, { clientId } ) => {
-	const { getBlock, getBlockRootClientId } = select( 'core/block-editor' );
-	const parentId = getBlockRootClientId( clientId );
-	const columnBlocks = getBlock( clientId );
+  const { getBlock, getBlockRootClientId } = select( 'core/block-editor' );
+  const parentId = getBlockRootClientId( clientId );
+  const columnBlocks = getBlock( clientId );
 
-	return {
-		hasInnerBlocks: !! ( columnBlocks && columnBlocks.innerBlocks.length ),
-		parentId,
-	};
+  return {
+    hasInnerBlocks: !! ( columnBlocks && columnBlocks.innerBlocks.length ),
+    parentId,
+  };
 } );
 
-export default compose([ applyWithSelect ])(ColumnEdit)
+export default compose( [ applyWithSelect ] )( ColumnEdit );

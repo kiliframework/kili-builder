@@ -1,18 +1,18 @@
 .components-kili-dimensions-control {
-	&__header {
-		display: flex;
-		justify-content: space-between;
+  &__header {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 8px;
     & > p {
       margin: 0;
       padding: 0;
     }
-	}
-	&__label {
+  }
+  &__label {
 
-	}
-	&__inputs {
+  }
+  &__inputs {
     display: flex;
     .components-kili-dimensions-control__sync {
       border-radius: 0;
@@ -26,18 +26,18 @@
       padding-right: 1px;
       width: 25%;
     }
-	}
+  }
 
 
-	&__input-labels {
-		display: flex;
-		align-items: center;
-	}
-	&__number-label {
+  &__input-labels {
+    display: flex;
+    align-items: center;
+  }
+  &__number-label {
     font-size: 12px;
     flex-basis: 20%;
     flex-grow: 1;
-		text-align: center;
+    text-align: center;
   }
   &__number-label-blank {
     width: 40px;

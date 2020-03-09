@@ -11,10 +11,6 @@ registerBlockType( 'kili/k-column', {
   parent: [ 'kili/k-section' ],
   category: 'kili-builder',
   attributes,
-  supports: {
-    align: true,
-    align: [ 'left', 'center', 'right' ],
-  },
   icon: 'columns',
   keywords: [ __( 'Column', 'kili-builder' ), __( 'Kili', 'kili-builder' ) ],
   edit,

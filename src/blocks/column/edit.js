@@ -12,6 +12,7 @@ import {
 } from '@wordpress/components';
 import { Icon } from '@wordpress/components';
 import { InspectorControls, InnerBlocks } from '@wordpress/block-editor';
+import { withSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 import classnames from 'classnames';
@@ -19,28 +20,49 @@ import classnames from 'classnames';
 import save from './save';
 import Inspector from './inspector';
 import './editor.scss';
+import { compose } from '@wordpress/compose';
 
 const { useState, useEffect } = wp.element;
 
-export default function ColumnEdit( props ) {
-  const { setAttributes, attributes, clientId } = props;
-  const [ selectedWidth, setSelectedWidth ] = useState( 0 );
+function ColumnEdit( props ) {
+  const { setAttributes, attributes, clientId, className, hasInnerBlocks,
+		parentId,
+		nextBlockClient,
+		nextBlockClientId, } = props;
+	const [ selectedWidth, setSelectedWidth ] = useState( 0 );
+	const [parentWidth, setParentWidth] = useState(0);
   const [ maxWidth, setMaxWidth ] = useState( 99999 );
   const [ resizing, setResizing ] = useState( false );
-
-  const parentId = wp.data.select( 'core/block-editor' ).getBlockRootClientId( clientId );
-
-  const {
+	const {
     padding,
     margin,
-  } = attributes;
+	} = attributes;
 
+	useEffect(() => {
+		const parentBlockWidth = document
+							.querySelector(( `.kili-columns > .kili-section__row-${parentId} > .editor-inner-blocks > .editor-block-list__layout` ))
+							.getBoundingClientRect().width;		
+		setParentWidth(parentBlockWidth);
+	}, []);
+	
+	const getSnapTargets = () => {
+		const snapGap = parentWidth/12;
+		const initialSnapTarget = parentWidth/12 - 30;
+		const snapTargets = [initialSnapTarget];
+		for (let index = 1; index < 12; index++) {
+			snapTargets.push(snapTargets[index-1] + snapGap);
+		}
+		return snapGap;
+	}
+	
   return (
     <>
       <Inspector { ...props } />
       <ResizableBox
-        className={ classnames( 'is-selected-column', 'is-resizing') }
-        maxWidth={ maxWidth }
+        className={className}
+				maxWidth={ maxWidth }
+				snap={{ x: getSnapTargets()}}
+				defaultSize="50"
         minHeight="20"
         enable={ {
           top: false,
@@ -54,14 +76,28 @@ export default function ColumnEdit( props ) {
         } }
         onResizeStop={ () => setResizing( true ) }
         onResize={ ( _event, _direction, _elt, delta ) => {
-          console.log( delta );
+							
+							
+						const currentBlockWidth = selectedWidth + delta.width;						
+						const currentBlockWidthPercent =
+							( currentBlockWidth / parentWidth ) * 100;				
+						console.log(currentBlockWidthPercent);
+								
+						setAttributes( { columns: {
+							...attributes.columns,
+							desktop: {
+								...attributes.columns.desktop,
+								value: Math.ceil((currentBlockWidthPercent*12)/100),
+							}
+						}} );
+						
         } }
-        onResizeStart={ () => {
+        onResizeStart={ ( _event, _direction, _elt, delta ) => {
           const currentBlock = document.getElementById(
             'block-' + clientId
           );
-          const currentBlockClientRect = currentBlock.getBoundingClientRect();
-          setSelectedWidth( currentBlockClientRect );
+					const currentBlockClientRect = currentBlock.getBoundingClientRect();
+					setSelectedWidth( currentBlockClientRect.width );
           setResizing( true );
         } }
       >
@@ -90,3 +126,29 @@ export default function ColumnEdit( props ) {
     </>
   );
 }
+
+const applyWithSelect = withSelect( ( select, { clientId } ) => {
+	const { getBlock, getBlockRootClientId, getNextBlockClientId, getPreviousBlockClientId, getBlocksByClientId } = select( 'core/block-editor' );
+	const parentId = getBlockRootClientId( clientId );
+	const columnBlocks = getBlock( clientId );
+
+	const nextBlockClientId = getNextBlockClientId( clientId ) || getPreviousBlockClientId( clientId );
+	const nextBlockClient = getBlock( nextBlockClientId );
+	
+	const parentBlocks = getBlocksByClientId( parentId );
+	
+	const lastId = ( parentBlocks[ 0 ].innerBlocks !== 'undefined' ) ? parentBlocks[ 0 ].innerBlocks[ parentBlocks[ 0 ].innerBlocks.length - 1 ].clientId : clientId;
+
+	return {
+		hasInnerBlocks: !! ( columnBlocks && columnBlocks.innerBlocks.length ),
+		parentId,
+		nextBlockClient,
+		nextBlockClientId,
+
+		// Used in inspector
+		lastId,
+		parentBlocks,
+	};
+} );
+
+export default compose([ applyWithSelect ])(ColumnEdit)

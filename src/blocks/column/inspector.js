@@ -92,8 +92,7 @@ function Inspector(props) {
                   { ...getValuesByDevice( 'margin' ) }
                   dimensionSize={ marginSize }
                 />
-                { ( lastId !== clientId )
-                  ? <RangeControl
+                <RangeControl
                     label={ __( 'Width (number of columns)', 'kili-builder' ) }
                     value={ Number(columns[currentTab].value) }
                     onChange={ ( newWidth ) => onChangeWidth( Number( newWidth ) ) }
@@ -101,7 +100,6 @@ function Inspector(props) {
                     max={ 12 }
                     step={ 1 }
                   />
-                  : null }
               </PanelBody>
             </> );
         } }

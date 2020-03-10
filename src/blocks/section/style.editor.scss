@@ -39,15 +39,16 @@
   margin-bottom: 16px;
 }
 
-.kt-inspect-tabs .components-tab-panel__tabs button.active-tab {
-  border-bottom-color: #0085ba;
-  color: #0085ba;
-}
-
-.kt-inspect-tabs .components-tab-panel__tabs button {
-  border: 0;
-  border-bottom: 4px solid transparent;
-  padding: 6px 16px;
-  margin-bottom: -4px;
-  outline: 0;
+.kt-inspect-tabs .components-tab-panel__tabs {
+  button {
+    border: 0;
+    border-bottom: 4px solid transparent;
+    padding: 6px 16px;
+    margin-bottom: -4px;
+    outline: 0;
+  }
+  .active-tab {
+    border-bottom-color: #0085ba;
+    color: #0085ba;
+  }
 }

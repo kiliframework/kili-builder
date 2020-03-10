@@ -53,6 +53,7 @@ const RowSectionEdit = ( props ) => {
       display: flex;
       justify-content: ${ attributes.justifyContent.desktop.value };
       align-items: ${ attributes.alignItems.desktop.value };
+      flex-wrap: wrap;
     }`;
     setRowStyle( newRowStyle );
   }, [ attributes.justifyContent.desktop.value, attributes.alignItems.desktop.value ] );
@@ -64,6 +65,7 @@ const RowSectionEdit = ( props ) => {
       newColumnsStyle += `.kili-section__row-${ clientId } > .editor-inner-blocks > .editor-block-list__layout > [data-type="kili/k-column"]:nth-child(${ index + 1 }) {
         flex-basis: ${ ( numberOfColumns / 12 ) * 100 }%;
         max-width: ${ ( numberOfColumns / 12 ) * 100 }%;
+        flex-shrink: 0;
         margin-left: 0;
         margin-right: 0;
       }`;

@@ -41,16 +41,27 @@ const columnOptions = [
   { columns: 6, name: __( 'Six Columns', 'kili-builder' ) },
 ];
 
-const RowSectionEdit = ( { currentBlock, attributes, setAttributes, clientId, ...rest } ) => {
+const RowSectionEdit = ( props ) => {
+  const { currentBlock, attributes, setAttributes, clientId } = props;
   const [ isCreated, setIsCreated ] = useState( attributes.isCreated );
   const [ settings, setSettings ] = useState( [ 6, 6 ] );
   const [ columnsStyle, setColumnsStyle ] = useState( '' );
+  const [ rowStyle, setRowStyle ] = useState( '' );
+
+  useEffect( () => {
+    const newRowStyle = `.kili-section__row-${ clientId } > .editor-inner-blocks > .editor-block-list__layout {
+      display: flex;
+      justify-content: ${ attributes.justifyContent.desktop.value };
+      align-items: ${ attributes.alignItems.desktop.value };
+    }`;
+    setRowStyle( newRowStyle );
+  }, [ attributes.justifyContent.desktop.value, attributes.alignItems.desktop.value ] );
 
   useEffect( () => {
     let newColumnsStyle = '';
     currentBlock.innerBlocks.forEach( ( innerBlock, index ) => {
       const numberOfColumns = innerBlock.attributes.columns.desktop.value;
-      newColumnsStyle += `.kili-columns > .kili-section__row-${ clientId } > .editor-inner-blocks > .editor-block-list__layout > [data-type="kili/k-column"]:nth-child(${ index + 1 }) {
+      newColumnsStyle += `.kili-section__row-${ clientId } > .editor-inner-blocks > .editor-block-list__layout > [data-type="kili/k-column"]:nth-child(${ index + 1 }) {
         flex-basis: ${ ( numberOfColumns / 12 ) * 100 }%;
         margin-left: 0;
         margin-right: 0;
@@ -81,6 +92,7 @@ const RowSectionEdit = ( { currentBlock, attributes, setAttributes, clientId, ..
 
   return (
     <>
+      <Inspector { ...props } />
       <div className="select-menu">
         { ! isCreated && (
           <>
@@ -108,6 +120,7 @@ const RowSectionEdit = ( { currentBlock, attributes, setAttributes, clientId, ..
         { isCreated && <Grid settings={ settings } clientId={ clientId } /> }
       </div>
       <style>
+        { rowStyle }
         { columnsStyle }
       </style>
     </>

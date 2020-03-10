@@ -65,8 +65,8 @@ export default function DimensionsSelect({ paddingSize, marginSize, type,setAttr
   const onChangeValue = ( event ) => {
     const selectedUtil = utilitySizes.find( ( util ) => util.slug === event );
     if ( selectedUtil ) {
-      this.setCurrentSelectValue(
-        this.getSelectValuesFromUtilitySizes( utilitySizes, selectedUtil.slug )
+      setCurrentSelectValue(
+        getSelectValuesFromUtilitySizes( utilitySizes, selectedUtil.slug )
       );
     }
   }

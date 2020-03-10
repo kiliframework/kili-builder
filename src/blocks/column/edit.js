@@ -18,7 +18,7 @@ import Inspector from './inspector';
 import './editor.scss';
 import { compose } from '@wordpress/compose';
 
-const { useState, useEffect } = wp.element;
+const { useState, useEffect, useCallback } = wp.element;
 
 function ColumnEdit( props ) {
   const { setAttributes, attributes, clientId, className, hasInnerBlocks,
@@ -38,15 +38,18 @@ function ColumnEdit( props ) {
     setParentWidth( parentBlockWidth );
   }, [] );
 
-  const getSnapTargets = () => {
-    const snapGap = parentWidth / 12;
-    const initialSnapTarget = parentWidth / 12 - 30;
-    const snapTargets = [ initialSnapTarget ];
-    for ( let index = 1; index < 12; index++ ) {
-      snapTargets.push( snapTargets[ index - 1 ] + snapGap );
-    }
-    return snapTargets;
-  };
+  const getSnapTargets = useCallback(
+    () => {
+      const snapGap = parentWidth / 12;
+      const initialSnapTarget = parentWidth / 12 - 30;
+      const snapTargets = [ initialSnapTarget ];
+      for ( let index = 1; index < 12; index++ ) {
+        snapTargets.push( snapTargets[ index - 1 ] + snapGap );
+      }
+      return snapTargets;
+    },
+    [parentWidth],
+  );
 
   return ( <>
     <Inspector { ...props } />

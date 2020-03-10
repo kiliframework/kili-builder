@@ -15,38 +15,34 @@ export default function ColumnSave( { attributes } ) {
     let classes = '';
     for ( const device of Object.keys( padding ) ) {
       let cssProperty = '';
-      for (const direction of Object.keys(padding[device].directions)) {
-        if (padding[device].directions[direction]) {
-          cssProperty += ` ${padding[device].prefix}--padding-${direction}__${padding[device].directions[direction]}`;
+      for ( const direction of Object.keys( padding[ device ].directions ) ) {
+        if ( padding[ device ].directions[ direction ] ) {
+          cssProperty += ` ${ padding[ device ].prefix }--padding-${ direction }__${ padding[ device ].directions[ direction ] }`;
         }
       }
       classes += cssProperty;
     }
     for ( const device of Object.keys( margin ) ) {
       let cssProperty = '';
-      for (const direction of Object.keys(margin[device].directions)) {
-        if (margin[device].directions[direction]) {
-          cssProperty += ` ${margin[device].prefix}--margin-${direction}__${margin[device].directions[direction]}`;
+      for ( const direction of Object.keys( margin[ device ].directions ) ) {
+        if ( margin[ device ].directions[ direction ] ) {
+          cssProperty += ` ${ margin[ device ].prefix }--margin-${ direction }__${ margin[ device ].directions[ direction ] }`;
         }
       }
       classes += cssProperty;
     }
     for ( const device of Object.keys( columns ) ) {
       let cssProperty = '';
-      const value = ( columns[device].value / 12 ) * 100;
-      if (value) {
-        cssProperty += ` ${columns[device].prefix}--flex-basis__${Number(value.toFixed(3))}`;
+      const value = ( columns[ device ].value / 12 ) * 100;
+      if ( value ) {
+        cssProperty += ` ${ columns[ device ].prefix }--flex-basis__${ Number( value.toFixed( 3 ) ) }`;
         classes += cssProperty;
-
       }
     }
     return classes;
   };
 
-
-
   const className = createClass();
-
 
   return (
     <div className={ `kili-column-inner flexgrid__item ${ className }` }>

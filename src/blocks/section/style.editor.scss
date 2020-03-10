@@ -3,16 +3,6 @@
     width: 100%;
 
     >.editor-inner-blocks>.editor-block-list__layout {
-      // background-color: #aaa;
-      display:flex;
-      justify-content: space-between;
-
-      >[data-type="kili-blocks/k-column"] {
-        width: 100%;
-        margin-left: 0;
-        margin-right: 0;
-      }
-
       >.block-list-appender {
         display: none;
       }
@@ -36,4 +26,28 @@
 
 .components-kili-button-group {
   display: flex;
+}
+
+.kt-inspect-tabs {
+  margin-bottom: 16px;
+}
+
+.components-tab-panel__tabs {
+  align-items: center;
+  display: flex;
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.kt-inspect-tabs .components-tab-panel__tabs button.active-tab {
+  border-bottom-color: #0085ba;
+  color: #0085ba;
+}
+
+.kt-inspect-tabs .components-tab-panel__tabs button {
+  border: 0;
+  border-bottom: 4px solid transparent;
+  padding: 6px 16px;
+  margin-bottom: -4px;
+  outline: 0;
 }

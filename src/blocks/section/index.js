@@ -5,20 +5,7 @@ import './parent';
 import { InnerBlocks } from '@wordpress/block-editor';
 import './style.editor.scss';
 
-const attributes = {
-  columns: {
-    type: 'number',
-    default: 1,
-  },
-  currentTab: {
-    type: 'string',
-    default: 'desktop',
-  },
-  isCreated: {
-    type: 'boolean',
-    default: false,
-  },
-};
+import attributes from './attributes';
 
 registerBlockType( 'kili/row-section', {
   title: __( 'kili-Columns', 'kili-builder' ),

@@ -4,6 +4,8 @@ import { compose } from '@wordpress/compose';
 import { InspectorControls, PanelColorSettings } from '@wordpress/block-editor';
 import { PanelBody, RangeControl, withFallbackStyles, TabPanel, Icon } from '@wordpress/components';
 
+const { useCallback } = wp.element;
+
 import OptionSelectorControl from '../../components/OptionsControl';
 
 const justifyContentOptions = [
@@ -46,21 +48,31 @@ const alignItemsOptions = [
   },
 ];
 
-export default function Inspector(props) {
+export default function Inspector( props ) {
   const { clientId,
     attributes,
     setAttributes,
-    lastId, } = props;
+    lastId } = props;
   const {
     currentTab,
   } = attributes;
-  console.log(currentTab);
-
 
   const onTabSelect = ( tabName ) => {
     setAttributes( { currentTab: tabName } );
   };
 
+  const handleAttributeChange = useCallback(
+    ( value, attribute ) => {
+      setAttributes( { [ attribute ]: {
+        ...attributes[ attribute ],
+        [ currentTab ]: {
+          ...attributes[ attribute ][ currentTab ],
+          value,
+        },
+      } } );
+    },
+    [ attributes ],
+  );
 
   return (
     <InspectorControls>
@@ -87,20 +99,20 @@ export default function Inspector(props) {
           },
         ] }
       >
-        { ( tab ) => {
+        { () => {
           return (
             <>
               <OptionSelectorControl
                 label={ __( 'Justify Content', 'kili-builder' ) }
-                currentOption={ 'start' }
+                currentOption={ attributes.justifyContent[ currentTab ].value }
                 options={ justifyContentOptions }
-                onChange={ ( value ) => console.log(value)}
+                onChange={ ( value ) => handleAttributeChange( value, 'justifyContent' ) }
               />
               <OptionSelectorControl
                 label={ __( 'Align Items', 'kili-builder' ) }
-                currentOption={ 'start' }
+                currentOption={ attributes.alignItems[ currentTab ].value }
                 options={ alignItemsOptions }
-                onChange={ ( value ) => console.log(value)}
+                onChange={ ( value ) => handleAttributeChange( value, 'alignItems' ) }
               />
             </> );
         } }

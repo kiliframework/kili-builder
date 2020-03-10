@@ -46,6 +46,16 @@ const RowSectionEdit = ( props ) => {
   const [ isCreated, setIsCreated ] = useState( attributes.isCreated );
   const [ settings, setSettings ] = useState( [ 6, 6 ] );
   const [ columnsStyle, setColumnsStyle ] = useState( '' );
+  const [ rowStyle, setRowStyle ] = useState( '' );
+
+  useEffect( () => {
+    const newRowStyle = `.kili-columns > .kili-section__row-${ clientId } > .editor-inner-blocks > .editor-block-list__layout {
+      display: flex;
+      justify-content: ${ attributes.justifyContent.desktop.value };
+      align-items: ${ attributes.alignItems.desktop.value };
+    }`;
+    setRowStyle( newRowStyle );
+  }, [ attributes.justifyContent.desktop.value, attributes.alignItems.desktop.value ] );
 
   useEffect( () => {
     let newColumnsStyle = '';
@@ -82,7 +92,7 @@ const RowSectionEdit = ( props ) => {
 
   return (
     <>
-      <Inspector {...props} />
+      <Inspector { ...props } />
       <div className="select-menu">
         { ! isCreated && (
           <>
@@ -110,6 +120,7 @@ const RowSectionEdit = ( props ) => {
         { isCreated && <Grid settings={ settings } clientId={ clientId } /> }
       </div>
       <style>
+        { rowStyle }
         { columnsStyle }
       </style>
     </>

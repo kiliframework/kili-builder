@@ -63,6 +63,7 @@ const RowSectionEdit = ( props ) => {
       const numberOfColumns = innerBlock.attributes.columns.desktop.value;
       newColumnsStyle += `.kili-section__row-${ clientId } > .editor-inner-blocks > .editor-block-list__layout > [data-type="kili/k-column"]:nth-child(${ index + 1 }) {
         flex-basis: ${ ( numberOfColumns / 12 ) * 100 }%;
+        max-width: ${ ( numberOfColumns / 12 ) * 100 }%;
         margin-left: 0;
         margin-right: 0;
       }`;

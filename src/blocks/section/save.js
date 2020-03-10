@@ -19,7 +19,6 @@ export default function SectionSave( { attributes } ) {
     }
   }
 
-
   return (
     <div className={ `flexgrid ${classes}` }>
       <InnerBlocks.Content />

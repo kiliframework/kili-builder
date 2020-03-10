@@ -10,7 +10,7 @@ import OptionSelectorControl from '../../components/OptionsControl';
 
 const justifyContentOptions = [
   {
-    value: 'start',
+    value: 'flex-start',
     label: __( 'Start', 'kili-builder' ),
     tooltip: __( 'flex-start', 'kili-builder' ),
   },
@@ -20,7 +20,7 @@ const justifyContentOptions = [
     tooltip: __( 'center', 'kili-builder' ),
   },
   {
-    value: 'end',
+    value: 'flex-end',
     label: __( 'End', 'kili-builder' ),
     tooltip: __( 'flex-end', 'kili-builder' ),
   },
@@ -32,7 +32,7 @@ const justifyContentOptions = [
 ];
 const alignItemsOptions = [
   {
-    value: 'start',
+    value: 'flex-start',
     label: __( 'Start', 'kili-builder' ),
     tooltip: __( 'flex-start', 'kili-builder' ),
   },
@@ -42,9 +42,14 @@ const alignItemsOptions = [
     tooltip: __( 'center', 'kili-builder' ),
   },
   {
-    value: 'end',
+    value: 'flex-end',
     label: __( 'End', 'kili-builder' ),
     tooltip: __( 'flex-end', 'kili-builder' ),
+  },
+  {
+    value: 'stretch',
+    label: __( 'Stretch', 'kili-builder' ),
+    tooltip: __( 'stretch', 'kili-builder' ),
   },
 ];
 

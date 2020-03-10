@@ -31,26 +31,26 @@ export default function ColumnSave( { attributes } ) {
       }
       classes += cssProperty;
     }
+    for ( const device of Object.keys( columns ) ) {
+      let cssProperty = '';
+      const value = ( columns[device].value / 12 ) * 100;
+      if (value) {
+        cssProperty += ` ${columns[device].prefix}--flex-basis__${Number(value.toFixed(3))}`;
+        classes += cssProperty;
+
+      }
+    }
     return classes;
   };
 
-  const createBasis = ( col ) => {
-    let value = '';
-    if ( col ) {
-      const fbasis = ( Number( col ) / 12 ) * 100;
-      value += `flex-basis__${ fbasis } `;
-    }
-    return value;
-  };
+
 
   const className = createClass();
 
-  const basis = createBasis( columns );
+
   return (
-    <div className={ `flexgrid__item ${ basis }` }>
-      <div className={ `kili-column-inner ${ className }` }>
-        <InnerBlocks.Content />
-      </div>
+    <div className={ `kili-column-inner flexgrid__item ${ className }` }>
+      <InnerBlocks.Content />
     </div>
   );
 }

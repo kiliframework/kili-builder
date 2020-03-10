@@ -29,14 +29,15 @@ export default function DimensionsControl({ device,
     'components-kili-dimensions-control', {
     }
   );
-  const onChangeDirection = ( value, device, direction ) => {
+  const onChangeDirection = ( event, direction ) => {
+    const newValue = ( event.target.value === '' ) ? undefined : Number( event.target.value );
       setAttributes( { [type]: {
         ...attributes[type],
         [device]: {
           ...attributes[type][device],
           directions: {
             ...attributes[type][device].directions,
-            [direction]: value,
+            [direction]: newValue,
           }
         }
       } } );
@@ -49,12 +50,6 @@ export default function DimensionsControl({ device,
       setAttributes( { marginSize: value } );
     }
   }
-
-  const onChangeDirectionValue = ( event ) => {
-    const newValue = ( event.target.value === '' ) ? undefined : Number( event.target.value );
-    onChangeDirection( newValue, device, 'top' );
-  };
-
 
   return (
     <>
@@ -82,28 +77,28 @@ export default function DimensionsControl({ device,
                 <input
                   className="components-kili-dimensions-control__number"
                   type="number"
-                  onChange={ onChangeDirectionValue }
+                  onChange={ (e) => onChangeDirection(e, 'top') }
                   value={ valueTop ? valueTop : 0 }
                   min={ type === 'padding' ? 0 : undefined }
                 />
                 <input
                   className="components-kili-dimensions-control__number"
                   type="number"
-                  onChange={ onChangeDirectionValue }
+                  onChange={ (e) => onChangeDirection(e, 'right') }
                   value={ valueRight ? valueRight : 0 }
                   min={ type === 'padding' ? 0 : undefined }
                 />
                 <input
                   className="components-kili-dimensions-control__number"
                   type="number"
-                  onChange={ onChangeDirectionValue }
+                  onChange={ (e) => onChangeDirection(e, 'bottom') }
                   value={ valueBottom ? valueBottom : 0 }
                   min={ type === 'padding' ? 0 : undefined }
                 />
                 <input
                   className="components-kili-dimensions-control__number"
                   type="number"
-                  onChange={ onChangeDirectionValue }
+                  onChange={ (e) => onChangeDirection(e, 'left') }
                   value={ valueLeft ? valueLeft : 0 }
                   min={ type === 'padding' ? 0 : undefined }
                 />
@@ -111,7 +106,6 @@ export default function DimensionsControl({ device,
                   <Button
                     className="components-kili-dimensions-control__sync"
                     onClick={ () => onChangeSize( 'no', -1 ) }
-                    data-device-type=""
                     isSmall
                   >
                     { icons.sync }

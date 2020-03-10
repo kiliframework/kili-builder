@@ -49,7 +49,7 @@ const RowSectionEdit = ( props ) => {
   const [ rowStyle, setRowStyle ] = useState( '' );
 
   useEffect( () => {
-    const newRowStyle = `.kili-columns > .kili-section__row-${ clientId } > .editor-inner-blocks > .editor-block-list__layout {
+    const newRowStyle = `.kili-section__row-${ clientId } > .editor-inner-blocks > .editor-block-list__layout {
       display: flex;
       justify-content: ${ attributes.justifyContent.desktop.value };
       align-items: ${ attributes.alignItems.desktop.value };
@@ -61,7 +61,7 @@ const RowSectionEdit = ( props ) => {
     let newColumnsStyle = '';
     currentBlock.innerBlocks.forEach( ( innerBlock, index ) => {
       const numberOfColumns = innerBlock.attributes.columns.desktop.value;
-      newColumnsStyle += `.kili-columns > .kili-section__row-${ clientId } > .editor-inner-blocks > .editor-block-list__layout > [data-type="kili/k-column"]:nth-child(${ index + 1 }) {
+      newColumnsStyle += `.kili-section__row-${ clientId } > .editor-inner-blocks > .editor-block-list__layout > [data-type="kili/k-column"]:nth-child(${ index + 1 }) {
         flex-basis: ${ ( numberOfColumns / 12 ) * 100 }%;
         margin-left: 0;
         margin-right: 0;

@@ -35,6 +35,43 @@ export default {
       },
     },
   },
+  maxWidth: {
+    type: 'object',
+    default: {
+      mobile: {
+        ...devicesAttributes.mobile,
+        value: '1200',
+        unit: 'px',
+      },
+      tablet: {
+        ...devicesAttributes.tablet,
+        value: '100',
+        unit: '%',
+      },
+      desktop: {
+        ...devicesAttributes.desktop,
+        value: '100',
+        unit: '%',
+      }
+    }
+  },
+  flexDirection: {
+    type: 'object',
+    default: {
+      mobile: {
+        ...devicesAttributes.mobile,
+        value: 'row',
+      },
+      tablet: {
+        ...devicesAttributes.tablet,
+        value: 'row',
+      },
+      desktop: {
+        ...devicesAttributes.desktop,
+        value: 'row',
+      }
+    }
+  },
   columns: {
     type: 'number',
     default: 1,

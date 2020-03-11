@@ -2,7 +2,7 @@ import { __ } from '@wordpress/i18n';
 import { Component, Fragment } from '@wordpress/element';
 import { compose } from '@wordpress/compose';
 import { InspectorControls, PanelColorSettings } from '@wordpress/block-editor';
-import { PanelBody, RangeControl, withFallbackStyles, TabPanel, Icon } from '@wordpress/components';
+import { PanelBody, RangeControl, withFallbackStyles, TabPanel, Icon, SelectControl, BaseControl } from '@wordpress/components';
 
 const { useCallback } = wp.element;
 
@@ -52,6 +52,18 @@ const alignItemsOptions = [
     tooltip: __( 'stretch', 'kili-builder' ),
   },
 ];
+const flexDirectionOptions = [
+  {
+    value: 'row',
+    label: __( 'Left to Right', 'kili-builder' ),
+    tooltip: __( 'Left to Right', 'kili-builder' ),
+  },
+  {
+    value: 'row-reverse',
+    label: __( 'Right to Left', 'kili-builder' ),
+    tooltip: __( 'Right to Left', 'kili-builder' ),
+  },
+];
 
 export default function Inspector( props ) {
   const { clientId,
@@ -78,6 +90,13 @@ export default function Inspector( props ) {
     },
     [ attributes ],
   );
+
+  // const handleMaxWidth = useCallback(
+  //   () => {
+
+  //   },
+  //   [],
+  // )
 
   return (
     <InspectorControls>
@@ -107,18 +126,37 @@ export default function Inspector( props ) {
         { () => {
           return (
             <>
-              <OptionSelectorControl
-                label={ __( 'Justify Content', 'kili-builder' ) }
-                currentOption={ attributes.justifyContent[ currentTab ].value }
-                options={ justifyContentOptions }
-                onChange={ ( value ) => handleAttributeChange( value, 'justifyContent' ) }
-              />
-              <OptionSelectorControl
-                label={ __( 'Align Items', 'kili-builder' ) }
-                currentOption={ attributes.alignItems[ currentTab ].value }
-                options={ alignItemsOptions }
-                onChange={ ( value ) => handleAttributeChange( value, 'alignItems' ) }
-              />
+              { currentTab !== 'desktop' && (
+                <SelectControl
+                  className={ 'components-font-size-picker__select' }
+                  label={ __( 'Collapse Order', 'kili-builder' ) }
+                  value={ attributes.flexDirection[ currentTab ].value }
+                  onChange={ ( value ) => handleAttributeChange( value, 'flexDirection' ) }
+                  options={ flexDirectionOptions }
+                />
+              )}
+              <SelectControl
+                  className={ 'components-font-size-picker__select' }
+                  label={ __( 'Justify Content', 'kili-builder' ) }
+                  value={ attributes.justifyContent[ currentTab ].value }
+                  onChange={ ( value ) => handleAttributeChange( value, 'justifyContent' ) }
+                  options={ justifyContentOptions }
+                />
+              <SelectControl
+                  className={ 'components-font-size-picker__select' }
+                  label={ __( 'Align Items', 'kili-builder' ) }
+                  value={ attributes.alignItems[ currentTab ].value }
+                  onChange={ ( value ) => handleAttributeChange( value, 'alignItems' ) }
+                  options={ alignItemsOptions }
+                />
+              {/* <RangeControl
+                label={ __( 'Max Width', 'kili-builder' ) }
+                value={ Number(columns[currentTab].value) }
+                onChange={ ( newWidth ) => onChangeWidth( Number( newWidth ) ) }
+                min={ 1 }
+                max={ 12 }
+                step={ 1 }
+              /> */}
             </> );
         } }
       </TabPanel>

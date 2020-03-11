@@ -1,7 +1,6 @@
 /**
  * WordPress dependencies
  */
-import { Component } from '@wordpress/element';
 import {
   BaseControl,
   Button,

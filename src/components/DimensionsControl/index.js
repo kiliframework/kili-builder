@@ -4,12 +4,11 @@ import icons from './icons';
 import DimensionsSelect from './DimensionsSelect';
 
 import { __, sprintf } from '@wordpress/i18n';
-import { Component } from '@wordpress/element';
 import { BaseControl, Button, Tooltip } from '@wordpress/components';
 
 import './editor.scss';
 
-export default function DimensionsControl({ device,
+export default function DimensionsControl( { device,
   help,
   label = __( 'Margin', 'kili-builder' ),
   type = 'margin',
@@ -19,9 +18,8 @@ export default function DimensionsControl({ device,
   valueTop,
   dimensionSize,
   setAttributes,
-  attributes
-}) {
-
+  attributes,
+} ) {
   const { paddingSize, marginSize } = attributes;
 
   const classes = classnames(
@@ -31,25 +29,25 @@ export default function DimensionsControl({ device,
   );
   const onChangeDirection = ( event, direction ) => {
     const newValue = ( event.target.value === '' ) ? undefined : Number( event.target.value );
-      setAttributes( { [type]: {
-        ...attributes[type],
-        [device]: {
-          ...attributes[type][device],
-          directions: {
-            ...attributes[type][device].directions,
-            [direction]: newValue,
-          }
-        }
-      } } );
-  }
+    setAttributes( { [ type ]: {
+      ...attributes[ type ],
+      [ device ]: {
+        ...attributes[ type ][ device ],
+        directions: {
+          ...attributes[ type ][ device ].directions,
+          [ direction ]: newValue,
+        },
+      },
+    } } );
+  };
 
-  const onChangeSize = ( value, size ) => {
+  const onChangeSize = ( value ) => {
     if ( type === 'padding' ) {
       setAttributes( { paddingSize: value } );
     } else {
       setAttributes( { marginSize: value } );
     }
-  }
+  };
 
   return (
     <>
@@ -60,12 +58,10 @@ export default function DimensionsControl({ device,
               { label && <p className={ 'components-kili-dimensions-control__label' }>{ label }</p> }
               <div className="components-kili-dimensions-control__actions">
                 <Tooltip text={ sprintf(
-                  /* translators: %s: values associated with CSS syntax, 'Pixel', 'Em', 'Percentage' */
                   __( '%s Units', 'kili-builder' ),
 
                 ) }>
                   <Button
-                    className={ 'components-kili-dimensions-control__units--' + name }
                     isSmall
                   >
                     Px
@@ -73,45 +69,45 @@ export default function DimensionsControl({ device,
                 </Tooltip>
               </div>
             </div>
-              <div className="components-kili-dimensions-control__inputs">
-                <input
-                  className="components-kili-dimensions-control__number"
-                  type="number"
-                  onChange={ (e) => onChangeDirection(e, 'top') }
-                  value={ valueTop ? valueTop : 0 }
-                  min={ type === 'padding' ? 0 : undefined }
-                />
-                <input
-                  className="components-kili-dimensions-control__number"
-                  type="number"
-                  onChange={ (e) => onChangeDirection(e, 'right') }
-                  value={ valueRight ? valueRight : 0 }
-                  min={ type === 'padding' ? 0 : undefined }
-                />
-                <input
-                  className="components-kili-dimensions-control__number"
-                  type="number"
-                  onChange={ (e) => onChangeDirection(e, 'bottom') }
-                  value={ valueBottom ? valueBottom : 0 }
-                  min={ type === 'padding' ? 0 : undefined }
-                />
-                <input
-                  className="components-kili-dimensions-control__number"
-                  type="number"
-                  onChange={ (e) => onChangeDirection(e, 'left') }
-                  value={ valueLeft ? valueLeft : 0 }
-                  min={ type === 'padding' ? 0 : undefined }
-                />
-                <Tooltip text={ __( 'Reset', 'kili-builder' ) } >
-                  <Button
-                    className="components-kili-dimensions-control__sync"
-                    onClick={ () => onChangeSize( 'no', -1 ) }
-                    isSmall
-                  >
-                    { icons.sync }
-                  </Button>
-                </Tooltip>
-              </div>
+            <div className="components-kili-dimensions-control__inputs">
+              <input
+                className="components-kili-dimensions-control__number"
+                type="number"
+                onChange={ ( e ) => onChangeDirection( e, 'top' ) }
+                value={ valueTop ? valueTop : 0 }
+                min={ type === 'padding' ? 0 : undefined }
+              />
+              <input
+                className="components-kili-dimensions-control__number"
+                type="number"
+                onChange={ ( e ) => onChangeDirection( e, 'right' ) }
+                value={ valueRight ? valueRight : 0 }
+                min={ type === 'padding' ? 0 : undefined }
+              />
+              <input
+                className="components-kili-dimensions-control__number"
+                type="number"
+                onChange={ ( e ) => onChangeDirection( e, 'bottom' ) }
+                value={ valueBottom ? valueBottom : 0 }
+                min={ type === 'padding' ? 0 : undefined }
+              />
+              <input
+                className="components-kili-dimensions-control__number"
+                type="number"
+                onChange={ ( e ) => onChangeDirection( e, 'left' ) }
+                value={ valueLeft ? valueLeft : 0 }
+                min={ type === 'padding' ? 0 : undefined }
+              />
+              <Tooltip text={ __( 'Reset', 'kili-builder' ) } >
+                <Button
+                  className="components-kili-dimensions-control__sync"
+                  onClick={ () => onChangeSize( 'no', -1 ) }
+                  isSmall
+                >
+                  { icons.sync }
+                </Button>
+              </Tooltip>
+            </div>
             <div className="components-kili-dimensions-control__input-labels">
               <span className="components-kili-dimensions-control__number-label">{ __( 'Top', 'kili' ) }</span>
               <span className="components-kili-dimensions-control__number-label">{ __( 'Right', 'kili' ) }</span>
@@ -120,7 +116,7 @@ export default function DimensionsControl({ device,
               <span className="components-kili-dimensions-control__number-label-blank"></span>
             </div>
           </>
-          :            <BaseControl id="textarea-1" label={ label } help={ help }>
+          : <BaseControl id="textarea-1" label={ label } help={ help }>
             <div className="components-font-size-picker__controls">
               <DimensionsSelect
                 type={ type }

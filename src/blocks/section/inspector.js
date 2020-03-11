@@ -1,12 +1,8 @@
 import { __ } from '@wordpress/i18n';
-import { Component, Fragment } from '@wordpress/element';
-import { compose } from '@wordpress/compose';
-import { InspectorControls, PanelColorSettings } from '@wordpress/block-editor';
-import { PanelBody, RangeControl, withFallbackStyles, TabPanel, Icon, SelectControl, BaseControl } from '@wordpress/components';
+import { InspectorControls } from '@wordpress/block-editor';
+import { RangeControl, TabPanel, Icon, SelectControl } from '@wordpress/components';
 
 const { useCallback } = wp.element;
-
-import OptionSelectorControl from '../../components/OptionsControl';
 
 const justifyContentOptions = [
   {

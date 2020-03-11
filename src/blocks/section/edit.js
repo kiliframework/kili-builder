@@ -1,7 +1,6 @@
 import { InnerBlocks } from '@wordpress/block-editor';
-import { Component } from '@wordpress/element';
-import { SelectControl, Button, TextControl, Placeholder, ButtonGroup, Tooltip } from '@wordpress/components';
-import { useSelect, useDispatch, withDispatch } from '@wordpress/data';
+import { Button, Placeholder, ButtonGroup } from '@wordpress/components';
+import { useSelect, withDispatch } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { createBlock } from '@wordpress/blocks';
 
@@ -10,7 +9,7 @@ import { times, dropRight } from 'lodash';
 import ColumnDefaultAttributes from '../column/attributes';
 import Inspector from './inspector';
 
-const { useEffect, useState, useMemo } = wp.element;
+const { useEffect, useState } = wp.element;
 
 const Grid = ( { template, clientId } ) => {
   return (

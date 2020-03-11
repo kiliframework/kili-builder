@@ -1,12 +1,4 @@
-import { Component } from '@wordpress/element';
-import {
-  RangeControl,
-  PanelBody,
-  TabPanel,
-  PanelRow,
-} from '@wordpress/components';
-import { Icon } from '@wordpress/components';
-import { InspectorControls, InnerBlocks } from '@wordpress/block-editor';
+import { InnerBlocks } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
 export default function ColumnSave( { attributes } ) {

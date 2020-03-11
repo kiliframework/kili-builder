@@ -14,7 +14,7 @@ const DimensionsAttributes = {
           bottom: undefined,
           right: undefined,
           left: undefined,
-        }
+        },
       },
       tablet: {
         prefix: 'md',
@@ -23,7 +23,7 @@ const DimensionsAttributes = {
           bottom: undefined,
           right: undefined,
           left: undefined,
-        }
+        },
       },
       desktop: {
         prefix: 'lg',
@@ -32,9 +32,9 @@ const DimensionsAttributes = {
           bottom: undefined,
           right: undefined,
           left: undefined,
-        }
+        },
       },
-    }
+    },
   },
   margin: {
     type: 'object',
@@ -46,7 +46,7 @@ const DimensionsAttributes = {
           bottom: undefined,
           right: undefined,
           left: undefined,
-        }
+        },
       },
       tablet: {
         prefix: 'md',
@@ -55,7 +55,7 @@ const DimensionsAttributes = {
           bottom: undefined,
           right: undefined,
           left: undefined,
-        }
+        },
       },
       desktop: {
         prefix: 'lg',
@@ -64,9 +64,9 @@ const DimensionsAttributes = {
           bottom: undefined,
           right: undefined,
           left: undefined,
-        }
+        },
       },
-    }
+    },
   },
   marginSize: {
     type: 'string',

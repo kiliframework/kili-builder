@@ -1,5 +1,4 @@
 import { __ } from '@wordpress/i18n';
-import { Component, Fragment } from '@wordpress/element';
 import { SelectControl } from '@wordpress/components';
 
 const utilitySizes = [
@@ -30,17 +29,16 @@ const utilitySizes = [
   },
 ];
 
-export default function DimensionsSelect({ paddingSize, marginSize, type,setAttributes }) {
-
+export default function DimensionsSelect( { paddingSize, marginSize, type, setAttributes } ) {
   const getSelectValuesFromUtilitySizes = ( listOfSizes, value ) => {
     let selectedPreset;
     if ( typeof value === 'string' ) {
       selectedPreset = listOfSizes.find( ( choice ) => choice.slug === value );
       return selectedPreset ? selectedPreset.slug : 'custom';
     }
-  }
+  };
 
-  const getCurrentSelectValue = ( type ) => {
+  const getCurrentSelectValue = () => {
     switch ( type ) {
       case 'margin':
         return marginSize;
@@ -48,7 +46,7 @@ export default function DimensionsSelect({ paddingSize, marginSize, type,setAttr
         return paddingSize;
       default:
     }
-  }
+  };
 
   const setCurrentSelectValue = ( newSetting ) => {
     switch ( type ) {
@@ -60,7 +58,7 @@ export default function DimensionsSelect({ paddingSize, marginSize, type,setAttr
         break;
       default:
     }
-  }
+  };
 
   const onChangeValue = ( event ) => {
     const selectedUtil = utilitySizes.find( ( util ) => util.slug === event );
@@ -69,7 +67,7 @@ export default function DimensionsSelect({ paddingSize, marginSize, type,setAttr
         getSelectValuesFromUtilitySizes( utilitySizes, selectedUtil.slug )
       );
     }
-  }
+  };
 
   const getSelectOptions = ( optionsArray ) => {
     return [
@@ -78,7 +76,7 @@ export default function DimensionsSelect({ paddingSize, marginSize, type,setAttr
         label: option.name,
       } ) ),
     ];
-  }
+  };
 
   return (
     <>
@@ -86,7 +84,7 @@ export default function DimensionsSelect({ paddingSize, marginSize, type,setAttr
         className={ 'components-font-size-picker__select' }
         label={ `Choose ${ type } preset` }
         hideLabelFromVision={ true }
-        value={ getCurrentSelectValue( type ) }
+        value={ getCurrentSelectValue() }
         onChange={ onChangeValue }
         options={ getSelectOptions( utilitySizes ) }
       />

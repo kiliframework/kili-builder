@@ -66,12 +66,19 @@ const flexDirectionOptions = [
 ];
 
 export default function Inspector( props ) {
-  const { clientId,
+  const {
+    clientId,
     attributes,
     setAttributes,
-    lastId } = props;
+    updateColumns,
+    lastId,
+  } = props;
   const {
     currentTab,
+    columns,
+    flexDirection,
+    alignItems,
+    justifyContent,
   } = attributes;
 
   const onTabSelect = ( tabName ) => {
@@ -91,12 +98,13 @@ export default function Inspector( props ) {
     [ attributes ],
   );
 
-  // const handleMaxWidth = useCallback(
-  //   () => {
-
-  //   },
-  //   [],
-  // )
+  const handleNumberOfColumnsChange = useCallback(
+    ( newColumns ) => {
+      updateColumns( columns, newColumns );
+      setAttributes( { columns: Number( newColumns ) } );
+    },
+    [ columns ],
+  );
 
   return (
     <InspectorControls>
@@ -126,37 +134,40 @@ export default function Inspector( props ) {
         { () => {
           return (
             <>
+              { currentTab === 'desktop' && (
+                <RangeControl
+                  label={ __( 'Number of Columns', 'kili-builder' ) }
+                  value={ Number( columns ) }
+                  onChange={ handleNumberOfColumnsChange }
+                  min={ 1 }
+                  max={ 12 }
+                  step={ 1 }
+                />
+              ) }
               { currentTab !== 'desktop' && (
                 <SelectControl
                   className={ 'components-font-size-picker__select' }
                   label={ __( 'Collapse Order', 'kili-builder' ) }
-                  value={ attributes.flexDirection[ currentTab ].value }
+                  value={ flexDirection[ currentTab ].value }
                   onChange={ ( value ) => handleAttributeChange( value, 'flexDirection' ) }
                   options={ flexDirectionOptions }
                 />
-              )}
+              ) }
               <SelectControl
-                  className={ 'components-font-size-picker__select' }
-                  label={ __( 'Justify Content', 'kili-builder' ) }
-                  value={ attributes.justifyContent[ currentTab ].value }
-                  onChange={ ( value ) => handleAttributeChange( value, 'justifyContent' ) }
-                  options={ justifyContentOptions }
-                />
+                className={ 'components-font-size-picker__select' }
+                label={ __( 'Justify Content', 'kili-builder' ) }
+                value={ justifyContent[ currentTab ].value }
+                onChange={ ( value ) => handleAttributeChange( value, 'justifyContent' ) }
+                options={ justifyContentOptions }
+              />
               <SelectControl
-                  className={ 'components-font-size-picker__select' }
-                  label={ __( 'Align Items', 'kili-builder' ) }
-                  value={ attributes.alignItems[ currentTab ].value }
-                  onChange={ ( value ) => handleAttributeChange( value, 'alignItems' ) }
-                  options={ alignItemsOptions }
-                />
-              {/* <RangeControl
-                label={ __( 'Max Width', 'kili-builder' ) }
-                value={ Number(columns[currentTab].value) }
-                onChange={ ( newWidth ) => onChangeWidth( Number( newWidth ) ) }
-                min={ 1 }
-                max={ 12 }
-                step={ 1 }
-              /> */}
+                className={ 'components-font-size-picker__select' }
+                label={ __( 'Align Items', 'kili-builder' ) }
+                value={ alignItems[ currentTab ].value }
+                onChange={ ( value ) => handleAttributeChange( value, 'alignItems' ) }
+                options={ alignItemsOptions }
+              />
+
             </> );
         } }
       </TabPanel>

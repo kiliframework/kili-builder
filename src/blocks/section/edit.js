@@ -34,9 +34,35 @@ const columnOptions = [
 const RowSectionEdit = ( props ) => {
   const { attributes, setAttributes, clientId } = props;
   const currentBlock = useSelect( ( select ) => select( 'core/block-editor' ).getBlock( clientId ) );
-  const { columns, justifyContent, alignItems, isCreated } = attributes;
+  const { justifyContent, alignItems, isCreated } = attributes;
   const [ columnsStyle, setColumnsStyle ] = useState( '' );
   const [ rowStyle, setRowStyle ] = useState( '' );
+  const [ settings, setSettings ] = useState( [] );
+
+  useEffect( () => {
+    const newRowStyle = `.kili-section__row-${ clientId } > .editor-inner-blocks > .editor-block-list__layout {
+      display: flex;
+      justify-content: ${ justifyContent.desktop.value };
+      align-items: ${ alignItems.desktop.value };
+      flex-wrap: wrap;
+    }`;
+    setRowStyle( newRowStyle );
+  }, [ justifyContent.desktop.value, alignItems.desktop.value ] );
+
+  useEffect( () => {
+    let newColumnsStyle = '';
+    currentBlock.innerBlocks.forEach( ( innerBlock, index ) => {
+      const numberOfColumns = innerBlock.attributes.columns.desktop.value;
+      newColumnsStyle += `.kili-section__row-${ clientId } > .editor-inner-blocks > .editor-block-list__layout > [data-type="kili/k-column"]:nth-child(${ index + 1 }) {
+        flex-basis: ${ ( numberOfColumns / 12 ) * 100 }%;
+        max-width: ${ ( numberOfColumns / 12 ) * 100 }%;
+        flex-shrink: 0;
+        margin-left: 0;
+        margin-right: 0;
+      }`;
+    } );
+    setColumnsStyle( newColumnsStyle );
+  }, [ currentBlock ] );
 
   const newTemplate = ( columnsTemplate ) => {
     return columnsTemplate.map( ( col ) => {
@@ -66,38 +92,10 @@ const RowSectionEdit = ( props ) => {
     return a;
   };
 
-  const [ settings, setSettings ] = useState( fillArray( 12 / Number( columns ), Number( columns ) ) );
-
-  useEffect( () => {
-    const newRowStyle = `.kili-section__row-${ clientId } > .editor-inner-blocks > .editor-block-list__layout {
-      display: flex;
-      justify-content: ${ justifyContent.desktop.value };
-      align-items: ${ alignItems.desktop.value };
-      flex-wrap: wrap;
-    }`;
-    setRowStyle( newRowStyle );
-  }, [ justifyContent.desktop.value, alignItems.desktop.value ] );
-
-  useEffect( () => {
-    let newColumnsStyle = '';
-    currentBlock.innerBlocks.forEach( ( innerBlock, index ) => {
-      const numberOfColumns = innerBlock.attributes.columns.desktop.value;
-      newColumnsStyle += `.kili-section__row-${ clientId } > .editor-inner-blocks > .editor-block-list__layout > [data-type="kili/k-column"]:nth-child(${ index + 1 }) {
-        flex-basis: ${ ( numberOfColumns / 12 ) * 100 }%;
-        max-width: ${ ( numberOfColumns / 12 ) * 100 }%;
-        flex-shrink: 0;
-        margin-left: 0;
-        margin-right: 0;
-      }`;
-    } );
-    setColumnsStyle( newColumnsStyle );
-  }, [ currentBlock ] );
-
   const handleColumnsSelect = ( value ) => {
     setSettings( fillArray( 12 / Number( value ), Number( value ) ) );
     setAttributes( { isCreated: ! isCreated, columns: value } );
   };
-  console.log( attributes );
 
   return (
     <>
@@ -139,8 +137,6 @@ const RowSectionEdit = ( props ) => {
 export default withDispatch( ( dispatch, ownProps, registry ) => {
   return ( {
     updateColumns( previousColumns, newColumns ) {
-      console.log( previousColumns, newColumns );
-
       const { clientId } = ownProps;
       const { replaceInnerBlocks } = dispatch( 'core/block-editor' );
       const { getBlocks } = registry.select( 'core/block-editor' );
@@ -148,11 +144,8 @@ export default withDispatch( ( dispatch, ownProps, registry ) => {
       let innerBlocks = getBlocks( clientId );
 
       const isAddingColumn = newColumns > previousColumns;
-      console.log( 'innerBlocks before', innerBlocks );
 
       if ( isAddingColumn ) {
-        console.log( 'innerBlocks add' );
-
         innerBlocks = [
           ...innerBlocks,
           ...times( newColumns - previousColumns, () => {
@@ -168,13 +161,11 @@ export default withDispatch( ( dispatch, ownProps, registry ) => {
           } ),
         ];
       } else {
-        console.log( 'innerBlocks remove' );
         innerBlocks = dropRight(
           innerBlocks,
           previousColumns - newColumns
         );
       }
-      console.log( innerBlocks );
 
       replaceInnerBlocks( clientId, innerBlocks, false );
     },

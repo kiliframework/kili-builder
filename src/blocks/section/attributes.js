@@ -52,8 +52,8 @@ export default {
         ...devicesAttributes.desktop,
         value: '100',
         unit: '%',
-      }
-    }
+      },
+    },
   },
   flexDirection: {
     type: 'object',
@@ -66,11 +66,7 @@ export default {
         ...devicesAttributes.tablet,
         value: 'row',
       },
-      desktop: {
-        ...devicesAttributes.desktop,
-        value: 'row',
-      }
-    }
+    },
   },
   columns: {
     type: 'number',

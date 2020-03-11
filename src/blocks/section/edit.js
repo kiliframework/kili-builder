@@ -1,32 +1,21 @@
 import { InnerBlocks } from '@wordpress/block-editor';
-import { Component } from '@wordpress/element';
-import { SelectControl, Button, TextControl, Placeholder, ButtonGroup, Tooltip } from '@wordpress/components';
-import { withSelect } from '@wordpress/data';
+import { Button, Placeholder, ButtonGroup } from '@wordpress/components';
+import { useSelect, withDispatch } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
+import { createBlock } from '@wordpress/blocks';
+
+import { times, dropRight } from 'lodash';
 
 import ColumnDefaultAttributes from '../column/attributes';
 import Inspector from './inspector';
 
 const { useEffect, useState } = wp.element;
 
-const Grid = ( { settings, clientId } ) => {
-  const newTemplate = ( columns ) => {
-    return columns.map( ( col, index ) => {
-      return [ 'kili/k-column', {
-        columns: {
-          ...ColumnDefaultAttributes.columns.default,
-          desktop: {
-            ...ColumnDefaultAttributes.columns.default.desktop,
-            value: col,
-          },
-        },
-      } ];
-    } );
-  };
+const Grid = ( { template, clientId } ) => {
   return (
     <>
       <div className={ `kili-section__row kili-section__row-${ clientId }` }>
-        <InnerBlocks template={ newTemplate( settings ) } renderAppender={ false } />
+        <InnerBlocks template={ template } renderAppender={ false } />
       </div>
     </>
   );
@@ -42,20 +31,22 @@ const columnOptions = [
 ];
 
 const RowSectionEdit = ( props ) => {
-  const { currentBlock, attributes, setAttributes, clientId } = props;
-  const [ isCreated, setIsCreated ] = useState( attributes.isCreated );
-  const [ settings, setSettings ] = useState( [ 6, 6 ] );
+  const { attributes, setAttributes, clientId } = props;
+  const currentBlock = useSelect( ( select ) => select( 'core/block-editor' ).getBlock( clientId ) );
+  const { justifyContent, alignItems, isCreated } = attributes;
   const [ columnsStyle, setColumnsStyle ] = useState( '' );
   const [ rowStyle, setRowStyle ] = useState( '' );
+  const [ settings, setSettings ] = useState( [] );
 
   useEffect( () => {
     const newRowStyle = `.kili-section__row-${ clientId } > .editor-inner-blocks > .editor-block-list__layout {
       display: flex;
-      justify-content: ${ attributes.justifyContent.desktop.value };
-      align-items: ${ attributes.alignItems.desktop.value };
+      justify-content: ${ justifyContent.desktop.value };
+      align-items: ${ alignItems.desktop.value };
+      flex-wrap: wrap;
     }`;
     setRowStyle( newRowStyle );
-  }, [ attributes.justifyContent.desktop.value, attributes.alignItems.desktop.value ] );
+  }, [ justifyContent.desktop.value, alignItems.desktop.value ] );
 
   useEffect( () => {
     let newColumnsStyle = '';
@@ -63,12 +54,28 @@ const RowSectionEdit = ( props ) => {
       const numberOfColumns = innerBlock.attributes.columns.desktop.value;
       newColumnsStyle += `.kili-section__row-${ clientId } > .editor-inner-blocks > .editor-block-list__layout > [data-type="kili/k-column"]:nth-child(${ index + 1 }) {
         flex-basis: ${ ( numberOfColumns / 12 ) * 100 }%;
+        max-width: ${ ( numberOfColumns / 12 ) * 100 }%;
+        flex-shrink: 0;
         margin-left: 0;
         margin-right: 0;
       }`;
     } );
     setColumnsStyle( newColumnsStyle );
   }, [ currentBlock ] );
+
+  const newTemplate = ( columnsTemplate ) => {
+    return columnsTemplate.map( ( col ) => {
+      return [ 'kili/k-column', {
+        columns: {
+          ...ColumnDefaultAttributes.columns.default,
+          desktop: {
+            ...ColumnDefaultAttributes.columns.default.desktop,
+            value: col,
+          },
+        },
+      } ];
+    } );
+  };
 
   const fillArray = ( value, len ) => {
     if ( len === 0 ) {
@@ -86,8 +93,7 @@ const RowSectionEdit = ( props ) => {
 
   const handleColumnsSelect = ( value ) => {
     setSettings( fillArray( 12 / Number( value ), Number( value ) ) );
-    setIsCreated( ! isCreated );
-    setAttributes( { isCreated: ! isCreated } );
+    setAttributes( { isCreated: ! isCreated, columns: value } );
   };
 
   return (
@@ -117,7 +123,7 @@ const RowSectionEdit = ( props ) => {
         ) }
       </div>
       <div className="kili-columns">
-        { isCreated && <Grid settings={ settings } clientId={ clientId } /> }
+        { isCreated && <Grid template={ newTemplate( settings ) } clientId={ clientId } /> }
       </div>
       <style>
         { rowStyle }
@@ -127,8 +133,40 @@ const RowSectionEdit = ( props ) => {
   );
 };
 
-export default withSelect( ( select, ownProps ) => {
+export default withDispatch( ( dispatch, ownProps, registry ) => {
   return ( {
-    currentBlock: select( 'core/block-editor' ).getBlock( ownProps.clientId ),
+    updateColumns( previousColumns, newColumns ) {
+      const { clientId } = ownProps;
+      const { replaceInnerBlocks } = dispatch( 'core/block-editor' );
+      const { getBlocks } = registry.select( 'core/block-editor' );
+
+      let innerBlocks = getBlocks( clientId );
+
+      const isAddingColumn = newColumns > previousColumns;
+
+      if ( isAddingColumn ) {
+        innerBlocks = [
+          ...innerBlocks,
+          ...times( newColumns - previousColumns, () => {
+            return createBlock( 'kili/k-column', {
+              columns: {
+                ...ColumnDefaultAttributes.columns.default,
+                desktop: {
+                  ...ColumnDefaultAttributes.columns.default.desktop,
+                  value: 12 / newColumns,
+                },
+              },
+            } );
+          } ),
+        ];
+      } else {
+        innerBlocks = dropRight(
+          innerBlocks,
+          previousColumns - newColumns
+        );
+      }
+
+      replaceInnerBlocks( clientId, innerBlocks, false );
+    },
   } );
 } )( RowSectionEdit );

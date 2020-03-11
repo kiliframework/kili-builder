@@ -1,12 +1,4 @@
-import { Component } from '@wordpress/element';
-import {
-  RangeControl,
-  PanelBody,
-  TabPanel,
-  PanelRow,
-} from '@wordpress/components';
-import { Icon } from '@wordpress/components';
-import { InspectorControls, InnerBlocks } from '@wordpress/block-editor';
+import { InnerBlocks } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
 export default function ColumnSave( { attributes } ) {
@@ -35,7 +27,9 @@ export default function ColumnSave( { attributes } ) {
       let cssProperty = '';
       const value = ( columns[ device ].value / 12 ) * 100;
       if ( value ) {
-        cssProperty += ` ${ columns[ device ].prefix }--flex-basis__${ Number( value.toFixed( 3 ) ) }`;
+        cssProperty = ` ${ columns[ device ].prefix }--flex-basis__${ Number( value.toFixed( 3 ) ) }`;
+        classes += cssProperty;
+        cssProperty = ` ${ columns[ device ].prefix }--max-width__${ Number( value.toFixed( 3 ) ) }`;
         classes += cssProperty;
       }
     }

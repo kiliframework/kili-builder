@@ -1,7 +1,7 @@
 import { InnerBlocks } from '@wordpress/block-editor';
 
 export default function SectionSave( { attributes } ) {
-  const { justifyContent, alignItems } = attributes;
+  const { justifyContent, alignItems, flexDirection } = attributes;
 
   let classes = '';
   for ( const device of Object.keys( justifyContent ) ) {
@@ -18,10 +18,16 @@ export default function SectionSave( { attributes } ) {
       classes += cssProperty;
     }
   }
-
+  for ( const device of Object.keys( flexDirection ) ) {
+    let cssProperty = '';
+    if ( flexDirection[ device ].value ) {
+      cssProperty += ` ${ flexDirection[ device ].prefix }--flex-direction__${ flexDirection[ device ].value }`;
+      classes += cssProperty;
+    }
+  }
 
   return (
-    <div className={ `flexgrid ${classes}` }>
+    <div className={ `flexgrid ${ classes }` }>
       <InnerBlocks.Content />
     </div>
   );

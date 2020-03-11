@@ -1,16 +1,12 @@
 import { __ } from '@wordpress/i18n';
-import { Component, Fragment } from '@wordpress/element';
-import { compose } from '@wordpress/compose';
-import { InspectorControls, PanelColorSettings } from '@wordpress/block-editor';
-import { PanelBody, RangeControl, withFallbackStyles, TabPanel, Icon } from '@wordpress/components';
+import { InspectorControls } from '@wordpress/block-editor';
+import { RangeControl, TabPanel, Icon, SelectControl } from '@wordpress/components';
 
 const { useCallback } = wp.element;
 
-import OptionSelectorControl from '../../components/OptionsControl';
-
 const justifyContentOptions = [
   {
-    value: 'start',
+    value: 'flex-start',
     label: __( 'Start', 'kili-builder' ),
     tooltip: __( 'flex-start', 'kili-builder' ),
   },
@@ -20,7 +16,7 @@ const justifyContentOptions = [
     tooltip: __( 'center', 'kili-builder' ),
   },
   {
-    value: 'end',
+    value: 'flex-end',
     label: __( 'End', 'kili-builder' ),
     tooltip: __( 'flex-end', 'kili-builder' ),
   },
@@ -32,7 +28,7 @@ const justifyContentOptions = [
 ];
 const alignItemsOptions = [
   {
-    value: 'start',
+    value: 'flex-start',
     label: __( 'Start', 'kili-builder' ),
     tooltip: __( 'flex-start', 'kili-builder' ),
   },
@@ -42,19 +38,43 @@ const alignItemsOptions = [
     tooltip: __( 'center', 'kili-builder' ),
   },
   {
-    value: 'end',
+    value: 'flex-end',
     label: __( 'End', 'kili-builder' ),
     tooltip: __( 'flex-end', 'kili-builder' ),
+  },
+  {
+    value: 'stretch',
+    label: __( 'Stretch', 'kili-builder' ),
+    tooltip: __( 'stretch', 'kili-builder' ),
+  },
+];
+const flexDirectionOptions = [
+  {
+    value: 'row',
+    label: __( 'Left to Right', 'kili-builder' ),
+    tooltip: __( 'Left to Right', 'kili-builder' ),
+  },
+  {
+    value: 'row-reverse',
+    label: __( 'Right to Left', 'kili-builder' ),
+    tooltip: __( 'Right to Left', 'kili-builder' ),
   },
 ];
 
 export default function Inspector( props ) {
-  const { clientId,
+  const {
+    clientId,
     attributes,
     setAttributes,
-    lastId } = props;
+    updateColumns,
+    lastId,
+  } = props;
   const {
     currentTab,
+    columns,
+    flexDirection,
+    alignItems,
+    justifyContent,
   } = attributes;
 
   const onTabSelect = ( tabName ) => {
@@ -72,6 +92,14 @@ export default function Inspector( props ) {
       } } );
     },
     [ attributes ],
+  );
+
+  const handleNumberOfColumnsChange = useCallback(
+    ( newColumns ) => {
+      updateColumns( columns, newColumns );
+      setAttributes( { columns: Number( newColumns ) } );
+    },
+    [ columns ],
   );
 
   return (
@@ -102,18 +130,40 @@ export default function Inspector( props ) {
         { () => {
           return (
             <>
-              <OptionSelectorControl
+              { currentTab === 'desktop' && (
+                <RangeControl
+                  label={ __( 'Number of Columns', 'kili-builder' ) }
+                  value={ Number( columns ) }
+                  onChange={ handleNumberOfColumnsChange }
+                  min={ 1 }
+                  max={ 12 }
+                  step={ 1 }
+                />
+              ) }
+              { currentTab !== 'desktop' && (
+                <SelectControl
+                  className={ 'components-font-size-picker__select' }
+                  label={ __( 'Collapse Order', 'kili-builder' ) }
+                  value={ flexDirection[ currentTab ].value }
+                  onChange={ ( value ) => handleAttributeChange( value, 'flexDirection' ) }
+                  options={ flexDirectionOptions }
+                />
+              ) }
+              <SelectControl
+                className={ 'components-font-size-picker__select' }
                 label={ __( 'Justify Content', 'kili-builder' ) }
-                currentOption={ attributes.justifyContent[ currentTab ].value }
-                options={ justifyContentOptions }
+                value={ justifyContent[ currentTab ].value }
                 onChange={ ( value ) => handleAttributeChange( value, 'justifyContent' ) }
+                options={ justifyContentOptions }
               />
-              <OptionSelectorControl
+              <SelectControl
+                className={ 'components-font-size-picker__select' }
                 label={ __( 'Align Items', 'kili-builder' ) }
-                currentOption={ attributes.alignItems[ currentTab ].value }
-                options={ alignItemsOptions }
+                value={ alignItems[ currentTab ].value }
                 onChange={ ( value ) => handleAttributeChange( value, 'alignItems' ) }
+                options={ alignItemsOptions }
               />
+
             </> );
         } }
       </TabPanel>

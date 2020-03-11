@@ -2,16 +2,12 @@ import applyWithColors from './colors';
 import DimensionsControl from '../../components/DimensionsControl';
 
 import { __ } from '@wordpress/i18n';
-import { Component, Fragment } from '@wordpress/element';
-import { compose } from '@wordpress/compose';
-import { InspectorControls, PanelColorSettings } from '@wordpress/block-editor';
-import { PanelBody, RangeControl, withFallbackStyles, TabPanel, Icon } from '@wordpress/components';
+import { InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, RangeControl, TabPanel, Icon } from '@wordpress/components';
 
-function Inspector(props) {
-  const { clientId,
-    attributes,
-    setAttributes,
-    lastId, } = props;
+function Inspector( props ) {
+  const { attributes,
+    setAttributes } = props;
   const {
     columns,
     currentTab,
@@ -22,11 +18,11 @@ function Inspector(props) {
   const onChangeWidth = ( newWidth ) => {
     setAttributes( { columns: {
       ...attributes.columns,
-      [currentTab]: {
-        ...attributes.columns[currentTab],
+      [ currentTab ]: {
+        ...attributes.columns[ currentTab ],
         value: newWidth,
-      }
-    }} );
+      },
+    } } );
   };
 
   const onTabSelect = ( tabName ) => {
@@ -36,10 +32,10 @@ function Inspector(props) {
   const getValuesByDevice = ( type ) => {
     let values = {};
     values = {
-      valueTop: attributes[type][currentTab].directions.top,
-      valueBottom: attributes[type][currentTab].directions.bottom,
-      valueRight: attributes[type][currentTab].directions.right,
-      valueLeft: attributes[type][currentTab].directions.left,
+      valueTop: attributes[ type ][ currentTab ].directions.top,
+      valueBottom: attributes[ type ][ currentTab ].directions.bottom,
+      valueRight: attributes[ type ][ currentTab ].directions.right,
+      valueLeft: attributes[ type ][ currentTab ].directions.left,
     };
 
     return values;
@@ -93,13 +89,13 @@ function Inspector(props) {
                   dimensionSize={ marginSize }
                 />
                 <RangeControl
-                    label={ __( 'Width (number of columns)', 'kili-builder' ) }
-                    value={ Number(columns[currentTab].value) }
-                    onChange={ ( newWidth ) => onChangeWidth( Number( newWidth ) ) }
-                    min={ 1 }
-                    max={ 12 }
-                    step={ 1 }
-                  />
+                  label={ __( 'Width (number of columns)', 'kili-builder' ) }
+                  value={ Number( columns[ currentTab ].value ) }
+                  onChange={ ( newWidth ) => onChangeWidth( Number( newWidth ) ) }
+                  min={ 1 }
+                  max={ 12 }
+                  step={ 1 }
+                />
               </PanelBody>
             </> );
         } }

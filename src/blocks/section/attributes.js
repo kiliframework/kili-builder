@@ -35,6 +35,19 @@ export default {
       },
     },
   },
+  flexDirection: {
+    type: 'object',
+    default: {
+      mobile: {
+        ...devicesAttributes.mobile,
+        value: 'row',
+      },
+      tablet: {
+        ...devicesAttributes.tablet,
+        value: 'row',
+      },
+    },
+  },
   columns: {
     type: 'number',
     default: 1,

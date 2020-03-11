@@ -1,19 +1,11 @@
-import { Component } from '@wordpress/element';
 import {
-  RangeControl,
-  PanelBody,
-  TabPanel,
-  PanelRow,
   ResizableBox,
 } from '@wordpress/components';
-import { Icon } from '@wordpress/components';
-import { InspectorControls, InnerBlocks } from '@wordpress/block-editor';
+import { InnerBlocks } from '@wordpress/block-editor';
 import { withSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
-import classnames from 'classnames';
 
-import save from './save';
 import Inspector from './inspector';
 import './editor.scss';
 import { compose } from '@wordpress/compose';
@@ -25,7 +17,7 @@ function ColumnEdit( props ) {
     parentId } = props;
   const [ selectedWidth, setSelectedWidth ] = useState( 0 );
   const [ parentWidth, setParentWidth ] = useState( 0 );
-  const [ resizing, setResizing ] = useState( false );
+  const [, setResizing ] = useState( false );
   const {
     padding,
     margin,
@@ -81,7 +73,7 @@ function ColumnEdit( props ) {
           },
         } } );
       } }
-      onResizeStart={ ( _event, _direction, _elt, delta ) => {
+      onResizeStart={ ( _event, _direction, _elt ) => {
         const currentBlock = document.getElementById(
           'block-' + clientId
         );

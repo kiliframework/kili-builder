@@ -10,8 +10,6 @@ export default function Inspector( { attributes, setAttributes } ) {
 
   const handleWidthChange = useCallback(
     ( newWidth, type, tab ) => {
-      console.log( newWidth, type, tab );
-
       setAttributes( { [ type ]: {
         ...attributes[ type ],
         [ tab ]: {
@@ -31,7 +29,7 @@ export default function Inspector( { attributes, setAttributes } ) {
           <>
             <RangeControl
               label={ __( 'Max Width (pixels)', 'kili-builder' ) }
-              value={ maxWidth }
+              value={ maxWidth[ tab ].value }
               onChange={ ( newMaxWidth ) => handleWidthChange( Number( newMaxWidth ), 'maxWidth', tab ) }
               min={ 1 }
               max={ 2000 }
@@ -39,7 +37,7 @@ export default function Inspector( { attributes, setAttributes } ) {
             />
             <RangeControl
               label={ __( 'Minimum Height (pixels)', 'kili-builder' ) }
-              value={ minHeight }
+              value={ minHeight[ tab ].value }
               onChange={ ( newMinHeight ) => handleWidthChange( Number( newMinHeight ), 'minHeight', tab ) }
               min={ 1 }
               max={ 2000 }

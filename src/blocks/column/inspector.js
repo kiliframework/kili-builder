@@ -4,6 +4,7 @@ import DimensionsControl from '../../components/DimensionsControl';
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, RangeControl, TabPanel, Icon } from '@wordpress/components';
+import DevicesTabs from '../../components/DevicesTabs';
 
 function Inspector( props ) {
   const { attributes,
@@ -43,28 +44,9 @@ function Inspector( props ) {
 
   return (
     <InspectorControls>
-      <TabPanel
-        className="kt-inspect-tabs"
-        activeClass="active-tab"
+      <DevicesTabs
         initialTabName={ currentTab }
         onSelect={ onTabSelect }
-        tabs={ [
-          {
-            name: 'desktop',
-            title: <Icon icon="desktop" />,
-            className: '',
-          },
-          {
-            name: 'tablet',
-            title: <Icon icon="tablet" />,
-            className: '',
-          },
-          {
-            name: 'mobile',
-            title: <Icon icon="smartphone" />,
-            className: '',
-          },
-        ] }
       >
         { ( tab ) => {
           return (
@@ -99,7 +81,7 @@ function Inspector( props ) {
               </PanelBody>
             </> );
         } }
-      </TabPanel>
+      </DevicesTabs>
     </InspectorControls>
 
   );

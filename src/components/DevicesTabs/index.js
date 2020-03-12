@@ -6,7 +6,7 @@ export default function DevicesTabs( { currentTab, onTabSelect, children }, ) {
     <TabPanel
       className="kt-inspect-tabs"
       activeClass="active-tab"
-      initialTabName={ currentTab }
+      initialTabName="desktop"
       onSelect={ onTabSelect }
       tabs={ [
         {

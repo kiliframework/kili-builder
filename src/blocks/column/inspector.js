@@ -11,12 +11,11 @@ function Inspector( props ) {
     setAttributes } = props;
   const {
     columns,
-    currentTab,
     marginSize,
     paddingSize,
   } = attributes;
 
-  const onChangeWidth = ( newWidth ) => {
+  const onChangeWidth = ( newWidth, currentTab ) => {
     setAttributes( { columns: {
       ...attributes.columns,
       [ currentTab ]: {
@@ -30,7 +29,7 @@ function Inspector( props ) {
     setAttributes( { currentTab: tabName } );
   };
 
-  const getValuesByDevice = ( type ) => {
+  const getValuesByDevice = ( type, currentTab ) => {
     let values = {};
     values = {
       valueTop: attributes[ type ][ currentTab ].directions.top,
@@ -45,8 +44,6 @@ function Inspector( props ) {
   return (
     <InspectorControls>
       <DevicesTabs
-        initialTabName={ currentTab }
-        onSelect={ onTabSelect }
       >
         { ( tab ) => {
           return (
@@ -58,7 +55,7 @@ function Inspector( props ) {
                   type={ 'padding' }
                   label={ __( 'Padding', 'kili-builder' ) }
                   help={ __( 'Space inside of the container.', 'kili-builder' ) }
-                  { ...getValuesByDevice( 'padding' ) }
+                  { ...getValuesByDevice( 'padding', tab.name ) }
                   dimensionSize={ paddingSize }
                 />
                 <DimensionsControl
@@ -67,13 +64,13 @@ function Inspector( props ) {
                   type={ 'margin' }
                   label={ __( 'Margin', 'kili-builder' ) }
                   help={ __( 'Space around the container.', 'kili-builder' ) }
-                  { ...getValuesByDevice( 'margin' ) }
+                  { ...getValuesByDevice( 'margin', tab.name ) }
                   dimensionSize={ marginSize }
                 />
                 <RangeControl
                   label={ __( 'Width (number of columns)', 'kili-builder' ) }
-                  value={ Number( columns[ currentTab ].value ) }
-                  onChange={ ( newWidth ) => onChangeWidth( Number( newWidth ) ) }
+                  value={ Number( columns[ tab.name ].value ) }
+                  onChange={ ( newWidth ) => onChangeWidth( Number( newWidth ), tab.name ) }
                   min={ 1 }
                   max={ 12 }
                   step={ 1 }

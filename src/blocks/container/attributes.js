@@ -6,73 +6,8 @@ const getUUID = function() {
 };
 
 export default {
-  content: {
-    type: 'array',
-    source: 'children',
-    selector: 'p',
-  },
-  tagName: {
+  currentTab: {
     type: 'string',
-    default: 'grid',
-  },
-  backgroundColor: {
-    type: 'string',
-    default: '#FFFFFF',
-  },
-  backgroundImage: {
-    type: 'string',
-    default: '',
-  },
-  mobileBackgroundImage: {
-    type: 'string',
-    default: '',
-  },
-  backgroundImageId: {
-    type: 'integer',
-    default: 0,
-  },
-  mobileBackgroundImageId: {
-    type: 'integer',
-    default: 0,
-  },
-  useContainer: {
-    type: 'boolean',
-    default: true,
-  },
-  UUID: {
-    type: 'string',
-    default: getUUID(),
-  },
-  marginBottomMobile: {
-    type: 'integer',
-    default: 0,
-  },
-  marginTopMobile: {
-    type: 'integer',
-    default: 0,
-  },
-  marginBottomDesktop: {
-    type: 'integer',
-    default: 0,
-  },
-  marginTopDesktop: {
-    type: 'integer',
-    default: 0,
-  },
-  paddingBottomMobile: {
-    type: 'integer',
-    default: 0,
-  },
-  paddingTopMobile: {
-    type: 'integer',
-    default: 0,
-  },
-  paddingBottomDesktop: {
-    type: 'integer',
-    default: 0,
-  },
-  paddingTopDesktop: {
-    type: 'integer',
-    default: 0,
-  },
+    default: 'desktop'
+  }
 };

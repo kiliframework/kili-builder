@@ -5,7 +5,7 @@ export default function ContainerEdit( props ) {
   return (
     <>
       <Inspector { ...props } />
-      <InnerBlocks />
+      <InnerBlocks renderAppender={ InnerBlocks.ButtonBlockAppender } />
     </>
   );
 }

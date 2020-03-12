@@ -7,6 +7,7 @@ import { PanelBody, RangeControl, TabPanel, Icon } from '@wordpress/components';
 import DevicesTabs from '../../components/DevicesTabs';
 
 function Inspector( props ) {
+
   const { attributes,
     setAttributes } = props;
   const {
@@ -15,7 +16,7 @@ function Inspector( props ) {
     paddingSize,
   } = attributes;
 
-  const onChangeWidth = ( newWidth, currentTab ) => {
+  const handleWidthChange = ( newWidth, currentTab ) => {
     setAttributes( { columns: {
       ...attributes.columns,
       [ currentTab ]: {
@@ -23,10 +24,6 @@ function Inspector( props ) {
         value: newWidth,
       },
     } } );
-  };
-
-  const onTabSelect = ( tabName ) => {
-    setAttributes( { currentTab: tabName } );
   };
 
   const getValuesByDevice = ( type, currentTab ) => {
@@ -70,7 +67,7 @@ function Inspector( props ) {
                 <RangeControl
                   label={ __( 'Width (number of columns)', 'kili-builder' ) }
                   value={ Number( columns[ tab.name ].value ) }
-                  onChange={ ( newWidth ) => onChangeWidth( Number( newWidth ), tab.name ) }
+                  onChange={ ( newWidth ) => handleWidthChange( Number( newWidth ), tab.name ) }
                   min={ 1 }
                   max={ 12 }
                   step={ 1 }

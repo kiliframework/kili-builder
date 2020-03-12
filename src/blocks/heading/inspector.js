@@ -5,8 +5,7 @@ import { TabPanel } from '@wordpress/components';
 const { useCallback } = wp.element;
 
 import OptionSelectorControl from '../../components/OptionsControl';
-import { attrOptionsBuiler } from '../utils/attrOptionsBuiler';
-import { panelTabBuiler } from '../utils/panelTabBuilder';
+import { attrOptionsBuiler, panelTabBuiler } from '../utils';
 
 const justifyContentOptions = attrOptionsBuiler( [
   [ 'start', 'Start', 'flex-start' ],

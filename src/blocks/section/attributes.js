@@ -1,9 +1,9 @@
-import { defaultAttrBuiler } from '../utils/defaultAttrBuiler';
+import { defaultAttrBuiler } from '../utils';
 
 export default {
-  justifyContent: defaultAttrBuiler( 'space-between' ),
-  alignItems: defaultAttrBuiler( 'stretch' ),
-  flexDirection: defaultAttrBuiler( 'row' ),
+  justifyContent: defaultAttrBuiler( 'space-between', 'justify-content' ),
+  alignItems: defaultAttrBuiler( 'stretch', 'align-items' ),
+  flexDirection: defaultAttrBuiler( 'row', 'flex-direction' ),
   columns: {
     type: 'number',
     default: 1,

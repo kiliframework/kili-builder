@@ -7,5 +7,5 @@ export const devicesAttributes = {
   },
   desktop: {
     prefix: 'lg',
-  }
-}
+  },
+};

@@ -1,8 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
 import { RangeControl, TabPanel, SelectControl } from '@wordpress/components';
-import { attrOptionsBuiler } from '../utils/attrOptionsBuiler';
-import { panelTabBuiler } from '../utils/panelTabBuilder';
+import { attrOptionsBuiler, panelTabBuiler } from '../utils';
 
 const { useCallback } = wp.element;
 

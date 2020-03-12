@@ -1,4 +1,4 @@
-import { defaultAttrBuiler } from '../utils/defaultAttrBuiler';
+import { defaultAttrBuiler } from '../utils';
 
 export default {
   justifyContent: defaultAttrBuiler( 'space-between' ),

@@ -17,7 +17,7 @@ export default {
         prefix: 'lg',
         value: 6,
       },
-    }
+    },
   },
   currentTab: {
     type: 'string',
@@ -41,4 +41,4 @@ export default {
   },
   ...BackgroundAttributes,
   ...DimensionAttributes,
-}
+};

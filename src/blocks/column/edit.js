@@ -5,7 +5,6 @@ import { InnerBlocks } from '@wordpress/block-editor';
 import { withSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
-
 import Inspector from './inspector';
 import './editor.scss';
 import { compose } from '@wordpress/compose';
@@ -17,7 +16,7 @@ function ColumnEdit( props ) {
     parentId } = props;
   const [ selectedWidth, setSelectedWidth ] = useState( 0 );
   const [ parentWidth, setParentWidth ] = useState( 0 );
-  const [, setResizing ] = useState( false );
+  const [ , setResizing ] = useState( false );
   const {
     padding,
     margin,
@@ -40,7 +39,7 @@ function ColumnEdit( props ) {
       }
       return snapTargets;
     },
-    [parentWidth],
+    [ parentWidth ],
   );
 
   return ( <>

@@ -4,18 +4,19 @@ import DimensionsControl from '../../components/DimensionsControl';
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
 import { PanelBody, RangeControl, TabPanel, Icon } from '@wordpress/components';
+import DevicesTabs from '../../components/DevicesTabs';
 
 function Inspector( props ) {
+
   const { attributes,
     setAttributes } = props;
   const {
     columns,
-    currentTab,
     marginSize,
     paddingSize,
   } = attributes;
 
-  const onChangeWidth = ( newWidth ) => {
+  const handleWidthChange = ( newWidth, currentTab ) => {
     setAttributes( { columns: {
       ...attributes.columns,
       [ currentTab ]: {
@@ -25,11 +26,7 @@ function Inspector( props ) {
     } } );
   };
 
-  const onTabSelect = ( tabName ) => {
-    setAttributes( { currentTab: tabName } );
-  };
-
-  const getValuesByDevice = ( type ) => {
+  const getValuesByDevice = ( type, currentTab ) => {
     let values = {};
     values = {
       valueTop: attributes[ type ][ currentTab ].directions.top,
@@ -43,28 +40,7 @@ function Inspector( props ) {
 
   return (
     <InspectorControls>
-      <TabPanel
-        className="kt-inspect-tabs"
-        activeClass="active-tab"
-        initialTabName={ currentTab }
-        onSelect={ onTabSelect }
-        tabs={ [
-          {
-            name: 'desktop',
-            title: <Icon icon="desktop" />,
-            className: '',
-          },
-          {
-            name: 'tablet',
-            title: <Icon icon="tablet" />,
-            className: '',
-          },
-          {
-            name: 'mobile',
-            title: <Icon icon="smartphone" />,
-            className: '',
-          },
-        ] }
+      <DevicesTabs
       >
         { ( tab ) => {
           return (
@@ -76,7 +52,7 @@ function Inspector( props ) {
                   type={ 'padding' }
                   label={ __( 'Padding', 'kili-builder' ) }
                   help={ __( 'Space inside of the container.', 'kili-builder' ) }
-                  { ...getValuesByDevice( 'padding' ) }
+                  { ...getValuesByDevice( 'padding', tab.name ) }
                   dimensionSize={ paddingSize }
                 />
                 <DimensionsControl
@@ -85,13 +61,13 @@ function Inspector( props ) {
                   type={ 'margin' }
                   label={ __( 'Margin', 'kili-builder' ) }
                   help={ __( 'Space around the container.', 'kili-builder' ) }
-                  { ...getValuesByDevice( 'margin' ) }
+                  { ...getValuesByDevice( 'margin', tab.name ) }
                   dimensionSize={ marginSize }
                 />
                 <RangeControl
                   label={ __( 'Width (number of columns)', 'kili-builder' ) }
-                  value={ Number( columns[ currentTab ].value ) }
-                  onChange={ ( newWidth ) => onChangeWidth( Number( newWidth ) ) }
+                  value={ Number( columns[ tab.name ].value ) }
+                  onChange={ ( newWidth ) => handleWidthChange( Number( newWidth ), tab.name ) }
                   min={ 1 }
                   max={ 12 }
                   step={ 1 }
@@ -99,7 +75,7 @@ function Inspector( props ) {
               </PanelBody>
             </> );
         } }
-      </TabPanel>
+      </DevicesTabs>
     </InspectorControls>
 
   );

@@ -1,73 +1,34 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { RangeControl, TabPanel, Icon, SelectControl } from '@wordpress/components';
+import { RangeControl, TabPanel, SelectControl } from '@wordpress/components';
+import { attrOptionsBuiler } from '../utils/attrOptionsBuiler';
+import { panelTabBuiler } from '../utils/panelTabBuilder';
 
 const { useCallback } = wp.element;
 
-const justifyContentOptions = [
-  {
-    value: 'flex-start',
-    label: __( 'Start', 'kili-builder' ),
-    tooltip: __( 'flex-start', 'kili-builder' ),
-  },
-  {
-    value: 'center',
-    label: __( 'Center', 'kili-builder' ),
-    tooltip: __( 'center', 'kili-builder' ),
-  },
-  {
-    value: 'flex-end',
-    label: __( 'End', 'kili-builder' ),
-    tooltip: __( 'flex-end', 'kili-builder' ),
-  },
-  {
-    value: 'space-between',
-    label: __( 'Space between', 'kili-builder' ),
-    tooltip: __( 'space-between', 'kili-builder' ),
-  },
-];
-const alignItemsOptions = [
-  {
-    value: 'flex-start',
-    label: __( 'Start', 'kili-builder' ),
-    tooltip: __( 'flex-start', 'kili-builder' ),
-  },
-  {
-    value: 'center',
-    label: __( 'Center', 'kili-builder' ),
-    tooltip: __( 'center', 'kili-builder' ),
-  },
-  {
-    value: 'flex-end',
-    label: __( 'End', 'kili-builder' ),
-    tooltip: __( 'flex-end', 'kili-builder' ),
-  },
-  {
-    value: 'stretch',
-    label: __( 'Stretch', 'kili-builder' ),
-    tooltip: __( 'stretch', 'kili-builder' ),
-  },
-];
-const flexDirectionOptions = [
-  {
-    value: 'row',
-    label: __( 'Left to Right', 'kili-builder' ),
-    tooltip: __( 'Left to Right', 'kili-builder' ),
-  },
-  {
-    value: 'row-reverse',
-    label: __( 'Right to Left', 'kili-builder' ),
-    tooltip: __( 'Right to Left', 'kili-builder' ),
-  },
-];
+const justifyContentOptions = attrOptionsBuiler( [
+  [ 'start', 'Start', 'flex-start' ],
+  [ 'center', 'Center', 'center' ],
+  [ 'end', 'End', 'flex-end' ],
+  [ 'space-between', 'Space between', 'space-between' ],
+] );
+
+const alignItemsOptions = attrOptionsBuiler( [
+  [ 'start', 'Start', 'flex-start' ],
+  [ 'center', 'Center', 'center' ],
+  [ 'end', 'End', 'flex-end' ],
+] );
+
+const flexDirectionOptions = attrOptionsBuiler( [
+  [ 'row', 'Left to Right', 'Left to Right' ],
+  [ 'row-reverse', 'Right to Left', 'Right to Left' ],
+] );
 
 export default function Inspector( props ) {
   const {
-    clientId,
     attributes,
     setAttributes,
     updateColumns,
-    lastId,
   } = props;
   const {
     currentTab,
@@ -109,23 +70,7 @@ export default function Inspector( props ) {
         activeClass="active-tab"
         initialTabName={ currentTab }
         onSelect={ onTabSelect }
-        tabs={ [
-          {
-            name: 'desktop',
-            title: <Icon icon="desktop" />,
-            className: '',
-          },
-          {
-            name: 'tablet',
-            title: <Icon icon="tablet" />,
-            className: '',
-          },
-          {
-            name: 'mobile',
-            title: <Icon icon="smartphone" />,
-            className: '',
-          },
-        ] }
+        tabs={ panelTabBuiler }
       >
         { () => {
           return (

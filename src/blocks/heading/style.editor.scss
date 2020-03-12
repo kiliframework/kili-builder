@@ -1,0 +1,54 @@
+.kili-columns {
+  >.kili-section__row {
+    width: 100%;
+
+    >.editor-inner-blocks>.editor-block-list__layout {
+      >.block-list-appender {
+        display: none;
+      }
+
+      .block-list-appender {
+        margin: 10px
+      }
+    }
+  }
+}
+
+.column:nth-child(odd) {
+  background-color: red;
+}
+
+@for $i from 1 through 12 {
+  &.--col-#{$i} {
+    width: (100% / $i);
+  }
+}
+
+.components-kili-button-group {
+  display: flex;
+}
+
+.kt-inspect-tabs {
+  margin-bottom: 16px;
+}
+
+.components-tab-panel__tabs {
+  align-items: center;
+  display: flex;
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.kt-inspect-tabs .components-tab-panel__tabs {
+  button {
+    border: 0;
+    border-bottom: 4px solid transparent;
+    padding: 6px 16px;
+    margin-bottom: -4px;
+    outline: 0;
+  }
+  .active-tab {
+    border-bottom-color: #0085ba;
+    color: #0085ba;
+  }
+}

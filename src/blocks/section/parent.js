@@ -120,7 +120,7 @@ registerBlockType( 'kili/k-section', {
             <PanelRow>{ url && <img src={ url } alt={ alt } /> }</PanelRow>
           </PanelBody>
         </InspectorControls>
-        <InnerBlocks template={ [ [ 'kili/row-section' ] ] } renderAppender={false} />
+        <InnerBlocks template={ [ [ 'kili/row-section' ] ] } renderAppender={ false } />
       </>
     );
   },

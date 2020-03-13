@@ -13,5 +13,5 @@ export default {
     type: 'boolean',
     default: false,
   },
-  ...FontStylesAttributes
+  ...FontStylesAttributes,
 };

@@ -16,23 +16,24 @@ function get_scripts_array() {
   return array(
     [
       'block_id' => 'container',
-
     ],
     [
       'block_id' => 'k-section',
-
     ],
     [
       'block_id' => 'row-section',
-
     ],
     [
       'block_id' => 'k-column',
-
     ],
     [
       'block_id' => 'carousel',
-
+    ],
+    [
+      'block_id' => 'heading',
+    ],
+    [
+      'block_id' => 'paragraph',
     ],
   );
 }

@@ -6,3 +6,5 @@ export * from './defaultAttrBuiler';
 export * from './hasAnyProperty';
 export * from './pseudoClassAttrBuilder';
 export * from './panelTabBuilder';
+export * from './getDeviceValue';
+export * from './valueSetter';

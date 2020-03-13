@@ -1,18 +1,17 @@
-import { defaultAttrBuiler } from '../utils';
+import FontStylesAttributes from '../../components/FontStyles/attributes';
 
 export default {
-  justifyContent: defaultAttrBuiler( 'space-between' ),
-  alignItems: defaultAttrBuiler( 'stretch' ),
-  columns: {
-    type: 'number',
-    default: 1,
-  },
   currentTab: {
     type: 'string',
     default: 'desktop',
+  },
+  text: {
+    type: 'string',
+    default: '',
   },
   isCreated: {
     type: 'boolean',
     default: false,
   },
+  ...FontStylesAttributes
 };

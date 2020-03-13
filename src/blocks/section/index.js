@@ -2,7 +2,6 @@ import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 import edit from './edit';
 import save from './save';
-// import './parent';
 import './style.editor.scss';
 
 import attributes from './attributes';

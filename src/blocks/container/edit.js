@@ -8,7 +8,7 @@ export default function ContainerEdit( props ) {
   return (
     <>
       <Inspector { ...props } />
-      <div style={ editClassCreator( attributes ) }>
+      <div style={ editClassCreator( attributes ) } className="kili-builder-container" >
         <InnerBlocks renderAppender={ InnerBlocks.ButtonBlockAppender } />
       </div>
     </>

@@ -18,8 +18,14 @@ function ColumnEdit( props ) {
   const [ parentWidth, setParentWidth ] = useState( 0 );
   const [ , setResizing ] = useState( false );
   const {
-    padding,
-    margin,
+    paddingTop,
+    paddingBottom,
+    paddingLeft,
+    paddingRight,
+    marginTop,
+    marginBottom,
+    marginLeft,
+    marginRight,
   } = attributes;
 
   useEffect( () => {
@@ -88,14 +94,14 @@ function ColumnEdit( props ) {
         <div
           id="column create"
           style={ {
-            marginTop: `${ margin.desktop.directions.top ? margin.desktop.directions.top : 0 }px`,
-            marginBottom: `${ margin.desktop.directions.bottom ? margin.desktop.directions.bottom : 0 }px`,
-            marginLeft: `${ margin.desktop.directions.left ? margin.desktop.directions.left : 0 }px`,
-            marginRight: `${ margin.desktop.directions.right ? margin.desktop.directions.right : 0 }px`,
-            paddingTop: `${ padding.desktop.directions.top ? padding.desktop.directions.top : 0 }px`,
-            paddingBottom: `${ padding.desktop.directions.bottom ? padding.desktop.directions.bottom : 0 }px`,
-            paddingLeft: `${ padding.desktop.directions.left ? padding.desktop.directions.left : 0 }px`,
-            paddingRight: `${ padding.desktop.directions.right ? padding.desktop.directions.right : 0 }px`,
+            marginTop: `${ marginTop.desktop.value ? marginTop.desktop.value : 0 }px`,
+            marginBottom: `${ marginBottom.desktop.value ? marginBottom.desktop.value : 0 }px`,
+            marginLeft: `${ marginLeft.desktop.value ? marginLeft.desktop.value : 0 }px`,
+            marginRight: `${ marginRight.desktop.value ? marginRight.desktop.value : 0 }px`,
+            paddingTop: `${ paddingTop.desktop.value ? paddingTop.desktop.value : 0 }px`,
+            paddingBottom: `${ paddingBottom.desktop.value ? paddingBottom.desktop.value : 0 }px`,
+            paddingLeft: `${ paddingLeft.desktop.value ? paddingLeft.desktop.value : 0 }px`,
+            paddingRight: `${ paddingRight.desktop.value ? paddingRight.desktop.value : 0 }px`,
           } }
         >
           <InnerBlocks templateLock={ false } renderAppender={ ! hasInnerBlocks && InnerBlocks.ButtonBlockAppender } />

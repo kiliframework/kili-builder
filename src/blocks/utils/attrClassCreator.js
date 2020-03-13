@@ -2,6 +2,7 @@ import { attrsExtrartor } from './attrsExtrartor';
 
 export const attrClassCreator = ( attrObj ) => {
   const attributes = attrsExtrartor( attrObj );
+  
   let classes = '';
 
   for ( const attrKey in attributes ) {
@@ -12,6 +13,5 @@ export const attrClassCreator = ( attrObj ) => {
       }
     }
   }
-
   return classes;
 };

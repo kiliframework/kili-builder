@@ -3,17 +3,14 @@ import DimensionsControl from '../../components/DimensionsControl';
 
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, RangeControl, TabPanel, Icon } from '@wordpress/components';
+import { PanelBody, RangeControl } from '@wordpress/components';
 import DevicesTabs from '../../components/DevicesTabs';
 
 function Inspector( props ) {
-
   const { attributes,
     setAttributes } = props;
   const {
     columns,
-    marginSize,
-    paddingSize,
   } = attributes;
 
   const handleWidthChange = ( newWidth, currentTab ) => {
@@ -29,10 +26,10 @@ function Inspector( props ) {
   const getValuesByDevice = ( type, currentTab ) => {
     let values = {};
     values = {
-      valueTop: attributes[ type ][ currentTab ].directions.top,
-      valueBottom: attributes[ type ][ currentTab ].directions.bottom,
-      valueRight: attributes[ type ][ currentTab ].directions.right,
-      valueLeft: attributes[ type ][ currentTab ].directions.left,
+      valueTop: attributes[ `${ type }Top` ][ currentTab ].value,
+      valueBottom: attributes[ `${ type }Bottom` ][ currentTab ].value,
+      valueRight: attributes[ `${ type }Right` ][ currentTab ].value,
+      valueLeft: attributes[ `${ type }Left` ][ currentTab ].value,
     };
 
     return values;
@@ -53,7 +50,6 @@ function Inspector( props ) {
                   label={ __( 'Padding', 'kili-builder' ) }
                   help={ __( 'Space inside of the container.', 'kili-builder' ) }
                   { ...getValuesByDevice( 'padding', tab.name ) }
-                  dimensionSize={ paddingSize }
                 />
                 <DimensionsControl
                   { ...props }
@@ -62,7 +58,6 @@ function Inspector( props ) {
                   label={ __( 'Margin', 'kili-builder' ) }
                   help={ __( 'Space around the container.', 'kili-builder' ) }
                   { ...getValuesByDevice( 'margin', tab.name ) }
-                  dimensionSize={ marginSize }
                 />
                 <RangeControl
                   label={ __( 'Width (number of columns)', 'kili-builder' ) }

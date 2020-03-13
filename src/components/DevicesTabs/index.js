@@ -1,7 +1,7 @@
 import { TabPanel, Icon } from '@wordpress/components';
 import './editor.scss';
 
-export default function DevicesTabs( { currentTab, onTabSelect, children }, ) {
+export default function DevicesTabs( { onTabSelect, children }, ) {
   return (
     <TabPanel
       className="kt-inspect-tabs"

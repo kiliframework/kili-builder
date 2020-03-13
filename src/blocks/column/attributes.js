@@ -1,4 +1,4 @@
-import BackgroundAttributes from '../../components/Background/BackgroundAttributes';
+import BackgroundAttributes from '../../components/Background/attributes';
 import DimensionAttributes from '../../components/DimensionsControl/attributes';
 import { defaultAttrBuiler } from '../utils';
 

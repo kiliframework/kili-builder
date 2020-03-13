@@ -3,6 +3,7 @@ import './editor.scss';
 import attributes from './attributes';
 import edit from './edit';
 import save from './save';
+import BackgroundAttributes from '../../components/Background/attributes';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;

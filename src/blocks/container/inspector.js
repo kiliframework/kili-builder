@@ -2,10 +2,12 @@ import { InspectorControls } from '@wordpress/block-editor';
 import DevicesTabs from '../../components/DevicesTabs';
 import { RangeControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+import BackgroundControl from '../../components/Background';
 
 const { useCallback } = wp.element;
 
-export default function Inspector( { attributes, setAttributes } ) {
+export default function Inspector( props ) {
+  const { attributes, setAttributes } = props;
   const { maxWidth, minHeight } = attributes;
 
   const handleWidthChange = useCallback(
@@ -43,6 +45,7 @@ export default function Inspector( { attributes, setAttributes } ) {
               max={ 2000 }
               step={ 1 }
             />
+            <BackgroundControl {...props} device={tab} />
           </>
         ) }
       </DevicesTabs>

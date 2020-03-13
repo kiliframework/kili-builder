@@ -8,6 +8,7 @@ import { __ } from '@wordpress/i18n';
 import Inspector from './inspector';
 import './editor.scss';
 import { compose } from '@wordpress/compose';
+import { editClassCreator } from '../utils/editClassCreator';
 
 const { useState, useEffect, useCallback } = wp.element;
 
@@ -93,16 +94,7 @@ function ColumnEdit( props ) {
       >
         <div
           id="column create"
-          style={ {
-            marginTop: `${ marginTop.desktop.value ? marginTop.desktop.value : 0 }px`,
-            marginBottom: `${ marginBottom.desktop.value ? marginBottom.desktop.value : 0 }px`,
-            marginLeft: `${ marginLeft.desktop.value ? marginLeft.desktop.value : 0 }px`,
-            marginRight: `${ marginRight.desktop.value ? marginRight.desktop.value : 0 }px`,
-            paddingTop: `${ paddingTop.desktop.value ? paddingTop.desktop.value : 0 }px`,
-            paddingBottom: `${ paddingBottom.desktop.value ? paddingBottom.desktop.value : 0 }px`,
-            paddingLeft: `${ paddingLeft.desktop.value ? paddingLeft.desktop.value : 0 }px`,
-            paddingRight: `${ paddingRight.desktop.value ? paddingRight.desktop.value : 0 }px`,
-          } }
+          style={ editClassCreator( attributes ) }
         >
           <InnerBlocks templateLock={ false } renderAppender={ ! hasInnerBlocks && InnerBlocks.ButtonBlockAppender } />
         </div>

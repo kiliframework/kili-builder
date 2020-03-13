@@ -10,6 +10,6 @@ export const editClassCreator = ( allAttributes ) => {
       style[ key ] = attribute.desktop.value;
     }
   }
-  
+
   return style;
 };

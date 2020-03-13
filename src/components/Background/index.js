@@ -31,13 +31,13 @@ export default function BackgroundControl( { attributes, setAttributes, device }
         [attrName]: {
           ...attributes[attrName],
           [device]: {
-            ...attributes[attrName],
+            ...attributes[attrName][device],
             value
           }
         }
       })
     },
-    [attributes],
+    [attributes, device],
   )
 
   return (

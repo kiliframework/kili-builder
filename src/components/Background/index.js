@@ -1,4 +1,4 @@
-import { SelectControl, PanelBody, PanelRow, IconButton, Tooltip, Button, Dashicon, BaseControl, ColorPalette } from '@wordpress/components';
+import { SelectControl, PanelBody, PanelRow, IconButton, Tooltip, Button, Dashicon, BaseControl, ColorPalette, RangeControl } from '@wordpress/components';
 import { attrOptionsBuiler } from '../../blocks/utils';
 import { MediaUploadCheck, MediaUpload, PanelColorSettings } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
@@ -15,7 +15,7 @@ const backgroundImageSizeOptions = attrOptionsBuiler( [
 ] );
 
 export default function BackgroundControl( { attributes, setAttributes, device } ) {
-  const { id, url, alt, fullWidth, backgroundColor,backgroundImage, backgroundSize } = attributes;
+  const { id, url, alt, fullWidth, backgroundColor,backgroundImage, backgroundSize, opacity } = attributes;
 
   const onRemoveImage = () => {
     setAttributes( {
@@ -43,6 +43,14 @@ export default function BackgroundControl( { attributes, setAttributes, device }
   return (
     <>
       <PanelBody title={ __( 'Background Settings', 'kili-builder' ) }>
+        <RangeControl
+          label={ __( 'Opacity', 'kili-builder' ) }
+          value={ Number(opacity[ device ].value) }
+          onChange={ ( newOpacity ) => handleBackgroundAttrChange( Number( newOpacity ), 'opacity' ) }
+          min={ 0 }
+          max={ 1 }
+          step={ 0.01 }
+        />
         <BaseControl label="Color">
           <ColorPalette
             colors={COLORS}

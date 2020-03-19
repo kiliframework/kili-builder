@@ -1,0 +1,146 @@
+
+a {
+  text-decoration: none;
+}
+
+@mixin rem($dest: 16, $prop: "font-size"){
+  @if not unitless($dest) {
+      $dest: strip-units($dest);
+  }
+  #{$prop}: #{$dest}px;
+  #{$prop}: to-rem($dest);
+}
+
+.reviews {
+  @include rem(112, "margin-bottom");
+  @include rem(1218, "max-width");
+
+  &-container > div {
+    outline: none;
+  }
+
+  .review {
+    display: flex;
+    flex-direction: column;
+    color: #00343D;
+    margin-left: 0;
+    outline: none;
+    position: relative;
+    text-align: center;
+    @include rem(42, "padding-top");
+    @include rem(10, "border-radius");
+    @include rem(374, "min-height");
+    @include rem(30, "padding-bottom");
+
+    &__avatar {
+      margin-bottom: 16px;
+      display: inline-block;
+      position: relative;
+      z-index: 1;
+
+      &:after {
+        background-repeat: no-repeat;
+        background: url('http://gutenbergtest.dev/wp-content/uploads/2020/03/Shape.svg') repeat;
+        background-size: contain;
+        bottom: 0;
+        content: "";
+        left: calc(50% - 63px);
+        overflow: visible;
+        position: absolute;
+        right: 0;
+        top: calc(50% - 64px);
+        @include rem(128, "width");
+        @include rem(128, "height");
+      }
+      .avatar  {
+        position: relative;
+        z-index: 1;
+        object-fit: cover;
+        border-radius: 50%;
+        margin: auto;
+        @include rem(82, "width");
+        @include rem(82, "height");
+      }
+    }
+    &__quote {
+      letter-spacing: 0;
+      padding: 0;
+      text-align: center;
+      @include rem(18, "font-size");
+      @include rem(24, "line-height");
+    }
+
+    &__signature {
+      margin-top: auto;
+      align-self: unset;
+      @include rem(15, "line-height");
+
+      &-author {
+        font-weight: bold;
+        text-align: center;
+        @include rem(-0.3, "letter-spacing");
+        @include rem(18, "font-size");
+        @include rem(28, "line-height");
+      }
+      &-title {
+        text-align: center;
+        @include rem(16, "font-size");
+        @include rem(-0.11, "letter-spacing");
+      }
+    }
+
+    &:hover {
+      background: #DAFFF5;
+      box-shadow: 0 to-rem(3) to-rem(8) to-rem(3) rgba(#26666B, 0.14);
+
+      &::after {
+        background-repeat: no-repeat;
+        background: url('http://gutenbergtest.dev/wp-content/uploads/2020/03/quotes.svg') repeat;
+        background-size: 100%;
+        content: "";
+        filter: grayscale(0) saturate(80) brightness(1) opacity(0.15) sepia(0.5);
+        opacity: 1;
+        overflow: visible;
+        position: absolute;
+        @include rem(167, "width");
+        @include rem(125, "height");
+        @include rem(15, "top");
+        @include rem(10, "left");
+      }
+    }
+  }
+  .slick-track {
+    display: flex;
+  }
+
+  .slick-list {
+    @include rem(10, "padding-bottom");
+  }
+  .slick-slider {
+    margin: 0;
+    @include rem(5, "padding-left");
+    @include rem(5, "padding-right");
+  }
+  .slick-slide {
+    max-width: 34%;
+    width: 34%;
+  }
+  .slick-dots { 
+    position: initial;
+    li {
+    button:before {
+      color: #7F999E;
+      opacity: 0.3;
+      @include rem(32, "font-size");
+    }
+    &.slick-active button:before {
+      color: #0BD8A2;
+      opacity: 1;
+      @include rem(48, "font-size");
+    }
+    &:only-child {
+      display: none;
+    }
+  }
+}
+}

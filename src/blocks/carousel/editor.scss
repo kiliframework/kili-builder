@@ -167,6 +167,14 @@ a {
           saturate(150%) contrast(0.7) opacity(0.4);
         @include rem(250, "height");
       }
+
+      .item-title {
+        color: #00343D;
+        font-weight: bold;
+        text-align: center;
+        @include rem(33, "padding-top");
+        @include rem(28, "padding-bottom");
+      }
     }
 
     &.slick-slider {
@@ -183,13 +191,7 @@ a {
       justify-content: space-between;
     }
 
-    .item-title {
-      color: #00343D;
-      font-weight: bold;
-      text-align: center;
-      @include rem(33, "padding-top");
-      @include rem(28, "padding-bottom");
-    }
+    
     .slick-list {
       overflow: visible;
     }

@@ -1,6 +1,6 @@
 import { Button, Spinner } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { withSelect, withDispatch } from '@wordpress/data';
+import { withSelect } from '@wordpress/data';
 import { RichText } from '@wordpress/block-editor';
 import { isBlobURL } from '@wordpress/blob';
 import { compose } from '@wordpress/compose';
@@ -16,7 +16,6 @@ function CarouselSlide( {
   title,
   setAttributes,
   image,
-  carouselType
 } ) {
   useEffect( () => {
     if ( image && ! url ) {
@@ -26,22 +25,10 @@ function CarouselSlide( {
       } );
     }
   }, [ image, url ] );
-  
+
   return (
     <>
-      {carouselType === 'Images' ? <div class="flexgrid__item xsmall--col-2 small--col-2 medium--col-2 last-col">
-          <div class="industries-carousel__item">
-            <img
-              className="icon"
-              src={ url }
-              alt={ alt }
-              data-id={ id }
-              tabIndex="0"
-            />
-            { isBlobURL( url ) && <Spinner /> }
-            <p class="item-title">MedTech</p>
-          </div>
-      </div> : (<div className="flexgrid__item xsmall--col-4 small--col-4 medium--col-4">
+      <div className="flexgrid__item xsmall--col-4 small--col-4 medium--col-4">
         <a href="#as">
           <div className="review flexgrid flexgrid--flex-column">
             <div className="review__avatar">
@@ -71,8 +58,8 @@ function CarouselSlide( {
                 className="review__signature-author"
                 placeholder="Insert author"
                 value={ author }
-                onChange={ ( newCaption ) =>
-                  setAttributes( { author: newCaption } )
+                onChange={ ( newAuthor ) =>
+                  setAttributes( { author: newAuthor } )
                 }
                 inlineToolbar
               />
@@ -81,15 +68,15 @@ function CarouselSlide( {
                 tagName="span"
                 placeholder="Insert title"
                 value={ title }
-                onChange={ ( newCaption ) =>
-                  setAttributes( { title: newCaption } )
+                onChange={ ( newTitle ) =>
+                  setAttributes( { title: newTitle } )
                 }
                 inlineToolbar
               />
             </div>
           </div>
         </a>
-      </div>)}
+      </div>
     </> );
 }
 
@@ -100,14 +87,6 @@ export default compose( [
 
     return {
       image: id ? getMedia( parseInt( id, 10 ) ) : null,
-    };
-  } ),
-  withDispatch( ( dispatch ) => {
-    const { __unstableMarkNextChangeAsNotPersistent } = dispatch(
-      'core/block-editor'
-    );
-    return {
-      __unstableMarkNextChangeAsNotPersistent,
     };
   } ),
 ] )( CarouselSlide );

@@ -7,8 +7,8 @@ import './style.scss';
 
 import { gallery } from '@wordpress/icons';
 
-import CarouselSlide from './carousel-slide';
-
+import CarouselSlideQuote from './carousel-types/carousel-quote';
+import CarouselSlideImages from './carousel-types/carousel-images';
 /**
  * Internal dependencies
  */
@@ -24,17 +24,48 @@ import { Placeholder, ButtonGroup, Button } from '@wordpress/components';
 const { useState, useCallback, useMemo } = wp.element;
 
 const carouselOptions = [
-  { name: __( 'Quote Cards', 'kili-builder' ) },
-  { name: __( 'Images', 'kili-builder' ) },
+  { 
+    name: __( 'Quote Cards', 'kili-builder' ),
+    Component: CarouselSlideQuote,
+    className: "reviews",
+    carouselSettings: {
+      dots: true,
+      arrows: false,
+      infinite: false,
+      slidesToShow: 3,
+      slidesToScroll: 3,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            infinite: true
+          }
+        }, {
+          breakpoint: 640,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: true
+          }
+        }
+      ]
+    }
+  },
+  { 
+    name: __( 'Images', 'kili-builder' ),
+    Component: CarouselSlideImages,
+    className: "industries",
+    carouselSettings: {
+      dots: false,
+      arrows: false,
+      infinite: false,
+      slidesToShow: 5,
+      slidesToScroll: 5,
+    }
+  },
 ];
-
-const carouselSettings = {
-  dots: false,
-  arrows: false,
-  infinite: false,
-  slidesToShow: 5,
-  slidesToScroll: 5,
-};
 
 export default function CarouselEdit( props ) {
   const [ carouselType, setCarouselType ] = useState( null );
@@ -118,18 +149,17 @@ export default function CarouselEdit( props ) {
     );
   }
 
+  const SelectedCarouselSlide = carouselOptions.find( option => option.name === carouselType)
+
   return (
     <>
-      <Slider className="industries" { ...carouselSettings }>
+      <Slider className={SelectedCarouselSlide.className} { ...SelectedCarouselSlide.carouselSettings }>
         { images.map( ( img, index ) => (
           <div className="kili-carousel__slide" key={ img.url }>
-            <CarouselSlide
-              carouselType={carouselType}
+            <SelectedCarouselSlide.Component
               url={ img.url }
               alt={ img.alt }
               id={ img.id }
-              isFirstItem={ index === 0 }
-              isLastItem={ index + 1 === images.length }
               setAttributes={ ( attrs ) =>
                 setImageAttributes( index, attrs )
               }

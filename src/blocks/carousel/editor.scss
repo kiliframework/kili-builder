@@ -144,3 +144,54 @@ a {
   }
 }
 }
+
+
+
+.industries {
+  &-carousel {
+    &__item {
+      outline: none;
+      &:hover {
+        border-radius: 5%;
+        box-shadow: 0 2px 4px 0 rgba(#00343D, 0.16);
+
+        .icon {
+          filter: unset;
+          cursor: pointer;
+        }
+      }
+
+      .icon {
+        width: 100%;
+        filter: grayscale(1) brightness(125%) sepia(0.84) hue-rotate(-270deg)
+          saturate(150%) contrast(0.7) opacity(0.4);
+        @include rem(250, "height");
+      }
+    }
+
+    &.slick-slider {
+      padding: 0 10px 0 70px;
+    }
+
+    .slick-slide {
+      padding: 0;
+      @include rem(16, "margin-right");
+    }
+
+    .slick-track {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .item-title {
+      color: #00343D;
+      font-weight: bold;
+      text-align: center;
+      @include rem(33, "padding-top");
+      @include rem(28, "padding-bottom");
+    }
+    .slick-list {
+      overflow: visible;
+    }
+  }
+}

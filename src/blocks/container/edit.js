@@ -10,9 +10,7 @@ export default function ContainerEdit( props ) {
     <>
       <Inspector { ...props } />
       <div style={ editClassCreator( { minHeight, maxWidth } ) } className="kili-container" >
-        <div style={ editClassCreator( rest ) } className="kili-container__overlay">
-
-        </div>
+        <div style={ editClassCreator( rest ) } className="kili-container__overlay" />
         <InnerBlocks renderAppender={ InnerBlocks.ButtonBlockAppender } />
       </div>
     </>

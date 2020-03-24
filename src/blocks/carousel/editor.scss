@@ -170,25 +170,20 @@ a {
         @include rem(16, "margin-right");
       }
     }
-    
-    .slick-list {
-      overflow: visible;
-    }
   
 }
 
 button.slick-arrow {
-  background: $white;
+  background: #FFFFFF;
   @include rem(-27, "right");
   @include rem(30, "width");
   @include rem(30, "height");
-  @include rem(24, "top");
   &:hover {
-    box-shadow: 0 to-rem(2) to-rem(4) 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
     @include rem(5, "border-radius");
   }
   &:after {
-    content: url("../images/arrow.svg");
+    content: url("http://gutenbergtest.dev/wp-content/uploads/2020/03/arrow.svg");
     position: absolute;
     @include rem(10, "left");
     @include rem(6, "top");

@@ -3,6 +3,9 @@ a {
   text-decoration: none;
 }
 
+// Mixins and selectors taken from mk-koombea. We haven't included the base starter styles, so that's why
+// the mixin is defined here
+
 @mixin rem($dest: 16, $prop: "font-size"){
   @if not unitless($dest) {
       $dest: strip-units($dest);
@@ -172,6 +175,29 @@ a {
       overflow: visible;
     }
   
+}
+
+button.slick-arrow {
+  background: $white;
+  @include rem(-27, "right");
+  @include rem(30, "width");
+  @include rem(30, "height");
+  @include rem(24, "top");
+  &:hover {
+    box-shadow: 0 to-rem(2) to-rem(4) 0 rgba(0, 0, 0, 0.5);
+    @include rem(5, "border-radius");
+  }
+  &:after {
+    content: url("../images/arrow.svg");
+    position: absolute;
+    @include rem(10, "left");
+    @include rem(6, "top");
+  }
+  &.slick-prev {
+    &:after {
+      transform: rotate(180deg);
+    }
+  }
 }
 
 .slick-dots { 

@@ -15,7 +15,7 @@ export default function Inspector( { attributes, setAttributes } ) {
     } } );
   };
 
-  const handleCardSettingsChange = (value) => setAttributes({ hasCaption: value })
+  const handleCardSettingsChange = ( value ) => setAttributes( { hasCaption: value } );
 
   return (
     <InspectorControls>
@@ -49,7 +49,7 @@ export default function Inspector( { attributes, setAttributes } ) {
         label={ __( 'Include caption', 'kili-builder' ) }
         checked={ hasCaption }
         onChange={ handleCardSettingsChange }
-      />  
+      />
     </InspectorControls>
   );
 }

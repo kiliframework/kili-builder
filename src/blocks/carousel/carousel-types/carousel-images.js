@@ -36,7 +36,7 @@ function Images( { url, alt, id, caption, image, setAttributes, hasCaption } ) {
             setAttributes( { caption: newCaption } )
           }
           inlineToolbar
-        />}
+        /> }
       </div>
     </div>
   );

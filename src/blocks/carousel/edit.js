@@ -179,7 +179,7 @@ export default function CarouselEdit( props ) {
                   setAttributes={ ( attrs ) =>
                     setImageAttributes( index, attrs )
                   }
-                  hasCaption={hasCaption}
+                  hasCaption={ hasCaption }
                   caption={ img.caption }
                   author={ img.author }
                   title={ img.title }

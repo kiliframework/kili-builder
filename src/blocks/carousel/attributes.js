@@ -66,5 +66,5 @@ export default {
   hasCaption: {
     type: 'boolean',
     default: true,
-  }
+  },
 };

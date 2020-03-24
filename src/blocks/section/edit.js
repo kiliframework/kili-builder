@@ -11,7 +11,7 @@ import Inspector from './inspector';
 
 const { useEffect, useState } = wp.element;
 
-const Grid = ( { template, clientId } ) => {  
+const Grid = ( { template, clientId } ) => {
   return (
     <>
       <div className={ `kili-section__row kili-section__row-${ clientId }` }>

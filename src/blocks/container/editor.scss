@@ -1,19 +1,12 @@
-.kili-section {
-  &__component-label {
-    display: block;
-    margin-bottom: 10px;
-    max-width: 100%;
-  }
-
-  &__component-item {
-    flex-direction: column;
-
-    .components-base-control {
-      flex-basis: 100%;
-    }
-  }
-
-  &__placeholder-image {
-    max-width: 100%;
+.kili-container {
+  position: relative;
+  margin: 0 auto;
+  &__overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    height: auto;
+    width: 100%;
   }
 }

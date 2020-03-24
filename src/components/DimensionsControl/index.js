@@ -34,14 +34,6 @@ export default function DimensionsControl( { device,
     } } );
   };
 
-  const onChangeSize = ( value ) => {
-    if ( type === 'padding' ) {
-      setAttributes( { paddingSize: value } );
-    } else {
-      setAttributes( { marginSize: value } );
-    }
-  };
-
   return (
     <>
       <div className={ classes }>
@@ -92,7 +84,6 @@ export default function DimensionsControl( { device,
             <Tooltip text={ __( 'Reset', 'kili-builder' ) } >
               <Button
                 className="components-kili-dimensions-control__sync"
-                onClick={ () => onChangeSize( 'no', -1 ) }
                 isSmall
               >
                 { icons.sync }

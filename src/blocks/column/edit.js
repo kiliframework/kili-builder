@@ -18,16 +18,6 @@ function ColumnEdit( props ) {
   const [ selectedWidth, setSelectedWidth ] = useState( 0 );
   const [ parentWidth, setParentWidth ] = useState( 0 );
   const [ , setResizing ] = useState( false );
-  const {
-    paddingTop,
-    paddingBottom,
-    paddingLeft,
-    paddingRight,
-    marginTop,
-    marginBottom,
-    marginLeft,
-    marginRight,
-  } = attributes;
 
   useEffect( () => {
     const parentBlockWidth = document

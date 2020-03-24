@@ -6,7 +6,7 @@ import { Spinner } from '@wordpress/components';
 
 const { useEffect } = wp.element;
 
-function Images( { url, alt, id, caption, image, setAttributes } ) {
+function Images( { url, alt, id, caption, image, setAttributes, hasCaption } ) {
   useEffect( () => {
     if ( image && ! url ) {
       setAttributes( {
@@ -27,7 +27,7 @@ function Images( { url, alt, id, caption, image, setAttributes } ) {
           tabIndex="0"
         />
         { isBlobURL( url ) && <Spinner /> }
-        <RichText
+        { hasCaption && <RichText
           tagName="p"
           className="item-title"
           placeholder="Insert caption"
@@ -36,7 +36,7 @@ function Images( { url, alt, id, caption, image, setAttributes } ) {
             setAttributes( { caption: newCaption } )
           }
           inlineToolbar
-        />
+        />}
       </div>
     </div>
   );

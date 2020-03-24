@@ -21,14 +21,14 @@ import { __ } from '@wordpress/i18n';
 import { MediaPlaceholder, BlockIcon } from '@wordpress/block-editor';
 import { Placeholder, ButtonGroup, Button } from '@wordpress/components';
 
-const { useState, useCallback, useMemo } = wp.element;
+const { useState, useCallback, useMemo, useEffect } = wp.element;
 
 const carouselOptions = [
-  { 
+  {
     name: __( 'Quote Cards', 'kili-builder' ),
     Component: CarouselSlideQuote,
-    className: "reviews",
-    carouselSettings: {
+    className: 'reviews',
+    slickSettings: {
       dots: true,
       arrows: false,
       infinite: false,
@@ -40,36 +40,34 @@ const carouselOptions = [
           settings: {
             slidesToShow: 2,
             slidesToScroll: 2,
-            infinite: true
-          }
+            infinite: true,
+          },
         }, {
           breakpoint: 640,
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1,
-            infinite: true
-          }
-        }
-      ]
-    }
+            infinite: true,
+          },
+        },
+      ],
+    },
   },
-  { 
+  {
     name: __( 'Images', 'kili-builder' ),
     Component: CarouselSlideImages,
-    className: "industries",
-    carouselSettings: {
+    className: 'industries',
+    slickSettings: {
       dots: false,
       arrows: false,
       infinite: false,
       slidesToShow: 5,
       slidesToScroll: 5,
-    }
+    },
   },
 ];
 
 export default function CarouselEdit( props ) {
-  const [ carouselType, setCarouselType ] = useState( null );
-
   const {
     attributes,
     className,
@@ -79,7 +77,19 @@ export default function CarouselEdit( props ) {
 
   const {
     images,
+    selectedCarouselSlideName,
+    slickSettings,
+    hasCaption,
   } = attributes;
+
+  const [ selectedCarouselSlide, setSelectedCarouselSlide ] = useState( null );
+
+  useEffect( () => {
+    if ( selectedCarouselSlideName ) {
+      const newSelectedCarouselSlide = carouselOptions.find( ( option ) => option.name === selectedCarouselSlideName );
+      setSelectedCarouselSlide( newSelectedCarouselSlide );
+    }
+  }, [] );
 
   const setImageAttributes = ( index, attributes ) => {
     if ( ! images[ index ] ) {
@@ -104,7 +114,12 @@ export default function CarouselEdit( props ) {
   };
 
   const handleLayoutSelect = ( value ) => {
-    setCarouselType( value );
+    const newSelectedCarouselSlide = carouselOptions.find( ( option ) => option.name === value );
+    setSelectedCarouselSlide( newSelectedCarouselSlide );
+    setAttributes( {
+      slickSettings: newSelectedCarouselSlide.slickSettings,
+      selectedCarouselSlideName: newSelectedCarouselSlide.name,
+    } );
   };
 
   const hasImages = useMemo( () => !! images.length, [ images.length ] );
@@ -112,7 +127,7 @@ export default function CarouselEdit( props ) {
   if ( ! hasImages ) {
     return (
       <>
-        { carouselType ? ( <MediaPlaceholder
+        { selectedCarouselSlide ? ( <MediaPlaceholder
           addToGallery={ hasImages }
           isAppender={ hasImages }
           className={ className }
@@ -149,27 +164,30 @@ export default function CarouselEdit( props ) {
     );
   }
 
-  const SelectedCarouselSlide = carouselOptions.find( option => option.name === carouselType)
-
   return (
     <>
-      <Slider className={SelectedCarouselSlide.className} { ...SelectedCarouselSlide.carouselSettings }>
-        { images.map( ( img, index ) => (
-          <div className="kili-carousel__slide" key={ img.url }>
-            <SelectedCarouselSlide.Component
-              url={ img.url }
-              alt={ img.alt }
-              id={ img.id }
-              setAttributes={ ( attrs ) =>
-                setImageAttributes( index, attrs )
-              }
-              caption={ img.caption }
-              author={ img.author }
-              title={ img.title }
-            />
-          </div>
-        ) ) }
-      </Slider>
+      { selectedCarouselSlide && (
+        <>
+          <Inspector { ...props } />
+          <Slider className={ selectedCarouselSlide.className } { ...slickSettings }>
+            { images.map( ( img, index ) => (
+              <div className="kili-carousel__slide" key={ img.url }>
+                <selectedCarouselSlide.Component
+                  url={ img.url }
+                  alt={ img.alt }
+                  id={ img.id }
+                  setAttributes={ ( attrs ) =>
+                    setImageAttributes( index, attrs )
+                  }
+                  hasCaption={hasCaption}
+                  caption={ img.caption }
+                  author={ img.author }
+                  title={ img.title }
+                />
+              </div>
+            ) ) }
+          </Slider>
+        </> ) }
     </>
   );
 }

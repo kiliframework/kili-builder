@@ -30,6 +30,10 @@ function get_scripts_array() {
       'block_id' => 'k-column',
 
     ],
+    [
+      'block_id' => 'carousel',
+
+    ],
   );
 }
 

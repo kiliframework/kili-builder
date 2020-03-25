@@ -72,6 +72,16 @@ module.exports = ( env, argv ) => {
             'sass-loader',
           ],
         },
+        {
+          test: /\.(jpg|png|woff|woff2|eot|ttf|gif|svg)$/,
+          use: {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+              esModule: false,
+            }
+          }
+        },
       ],
     },
     externals: {

@@ -30,6 +30,7 @@
     "react-slick": "^0.25.2",
     "react-sortable-hoc": "^1.11.0",
     "slick-carousel": "^1.8.1",
+    "svg-sprite-loader": "^4.2.1",
     "url-loader": "^4.0.0"
   },
   "devDependencies": {

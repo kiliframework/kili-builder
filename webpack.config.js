@@ -1,8 +1,10 @@
+const path = require('path');
 const autoprefixer = require( 'autoprefixer' );
 const MiniCSSExtractPlugin = require( 'mini-css-extract-plugin' );
 const OptimizeCSSAssetsPlugin = require( 'optimize-css-assets-webpack-plugin' );
 const TerserPlugin = require( 'terser-webpack-plugin' );
 const CleanPlugin = require( 'clean-webpack-plugin' );
+console.log(__dirname);
 
 module.exports = ( env, argv ) => {
   function isDevelopment() {
@@ -73,36 +75,15 @@ module.exports = ( env, argv ) => {
           ],
         },
         {
-          test: /\.(png|jpg|gif)$/i,
-          use: [
-              {
-                  loader: 'url-loader',
-                  options: {
-                      limit: 8192
-                  }
-              }
-          ]
-      },
-      {
-          test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-          use: [{
-              loader: 'file-loader',
-              options: {
-                  name: '[name].[ext]',
-                  outputPath: 'fonts/'
-              }
-          }]
-      },{
-        test: /\.(png|jp(e*)g|svg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
+          test: /\.(jpg|png|woff|woff2|eot|ttf|gif|svg)$/,
+          use: {
+            loader: "file-loader",
             options: {
-              name: 'images/[hash]-[name].[ext]',
-            },
-          },
-        ],
-      },
+              name: "[name].[ext]",
+              esModule: false,
+            }
+          }
+        },
       ],
     },
     externals: {

@@ -4,4 +4,5 @@ export * from './attrsExtrartor';
 export * from './commonAttributes';
 export * from './defaultAttrBuiler';
 export * from './hasAnyProperty';
+export * from './pseudoClassAttrBuilder';
 export * from './panelTabBuilder';

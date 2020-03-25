@@ -7,6 +7,7 @@ import './style.scss';
 
 import { gallery } from '@wordpress/icons';
 
+import { DESKTOP, MOBILE, TABLET } from '../../constants/devicesSizes';
 import CarouselSlideQuote from './carousel-types/carousel-quote';
 import CarouselSlideImages from './carousel-types/carousel-images';
 /**
@@ -28,42 +29,11 @@ const carouselOptions = [
     name: __( 'Quote Cards', 'kili-builder' ),
     Component: CarouselSlideQuote,
     className: 'reviews',
-    slickSettings: {
-      dots: true,
-      arrows: false,
-      infinite: false,
-      slidesToShow: 3,
-      slidesToScroll: 3,
-      responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 2,
-            infinite: true,
-          },
-        }, {
-          breakpoint: 640,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            infinite: true,
-          },
-        },
-      ],
-    },
   },
   {
     name: __( 'Images', 'kili-builder' ),
     Component: CarouselSlideImages,
     className: 'industries',
-    slickSettings: {
-      dots: false,
-      arrows: false,
-      infinite: false,
-      slidesToShow: 5,
-      slidesToScroll: 5,
-    },
   },
 ];
 
@@ -78,8 +48,11 @@ export default function CarouselEdit( props ) {
   const {
     images,
     selectedCarouselSlideName,
-    slickSettings,
     hasCaption,
+    slidesToScroll,
+    slidesToShow,
+    dots,
+    arrows,
   } = attributes;
 
   const [ selectedCarouselSlide, setSelectedCarouselSlide ] = useState( null );
@@ -90,6 +63,35 @@ export default function CarouselEdit( props ) {
       setSelectedCarouselSlide( newSelectedCarouselSlide );
     }
   }, [] );
+
+  const getSlickSettings = () => ({
+    dots: dots[DESKTOP].value,
+    arrows: arrows[DESKTOP].value,
+    infinite: false,
+    slidesToShow: slidesToShow[DESKTOP].value,
+    slidesToScroll: slidesToScroll[DESKTOP].value,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          dots: dots[TABLET].value,
+          arrows: arrows[TABLET].value,
+          slidesToShow: slidesToShow[TABLET].value,
+          slidesToScroll: slidesToScroll[TABLET].value,
+          infinite: true,
+        },
+      }, {
+        breakpoint: 640,
+        settings: {
+          dots: dots[MOBILE].value,
+          arrows: arrows[MOBILE].value,
+          slidesToShow: slidesToShow[MOBILE].value,
+          slidesToScroll: slidesToScroll[MOBILE].value,
+          infinite: true,
+        },
+      },
+    ],
+  })
 
   const setImageAttributes = ( index, attributes ) => {
     if ( ! images[ index ] ) {
@@ -117,7 +119,6 @@ export default function CarouselEdit( props ) {
     const newSelectedCarouselSlide = carouselOptions.find( ( option ) => option.name === value );
     setSelectedCarouselSlide( newSelectedCarouselSlide );
     setAttributes( {
-      slickSettings: newSelectedCarouselSlide.slickSettings,
       selectedCarouselSlideName: newSelectedCarouselSlide.name,
     } );
   };
@@ -162,14 +163,14 @@ export default function CarouselEdit( props ) {
       </>
 
     );
-  }
+  }  
 
   return (
     <>
       { selectedCarouselSlide && (
         <>
           <Inspector { ...props } />
-          <Slider className={ selectedCarouselSlide.className } { ...slickSettings }>
+          <Slider className={ selectedCarouselSlide.className } { ...getSlickSettings() }>
             { images.map( ( img, index ) => (
               <div className="kili-carousel__slide" key={ img.url }>
                 <selectedCarouselSlide.Component

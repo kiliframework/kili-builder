@@ -1,10 +1,8 @@
-const path = require('path');
 const autoprefixer = require( 'autoprefixer' );
 const MiniCSSExtractPlugin = require( 'mini-css-extract-plugin' );
 const OptimizeCSSAssetsPlugin = require( 'optimize-css-assets-webpack-plugin' );
 const TerserPlugin = require( 'terser-webpack-plugin' );
 const CleanPlugin = require( 'clean-webpack-plugin' );
-console.log(__dirname);
 
 module.exports = ( env, argv ) => {
   function isDevelopment() {

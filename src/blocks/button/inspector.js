@@ -16,32 +16,6 @@ import { HOVER, NORMAL } from '../../constants/pseudoClasses';
 
 const { useCallback } = wp.element;
 
-const MIN_BORDER_RADIUS_VALUE = 0;
-const MAX_BORDER_RADIUS_VALUE = 50;
-const INITIAL_BORDER_RADIUS_POSITION = 5;
-
-function BorderPanel( { borderRadius = '', setAttributes } ) {
-  const setBorderRadius = useCallback(
-    ( newBorderRadius ) => {
-      setAttributes( { borderRadius: newBorderRadius } );
-    },
-    [ setAttributes ]
-  );
-  return (
-    <PanelBody title={ __( 'Border settings' ) }>
-      <RangeControl
-        value={ borderRadius }
-        label={ __( 'Border radius' ) }
-        min={ MIN_BORDER_RADIUS_VALUE }
-        max={ MAX_BORDER_RADIUS_VALUE }
-        initialPosition={ INITIAL_BORDER_RADIUS_POSITION }
-        allowReset
-        onChange={ setBorderRadius }
-      />
-    </PanelBody>
-  );
-}
-
 export default function ButtonInspector( {
   attributes,
   setAttributes,
@@ -65,7 +39,7 @@ export default function ButtonInspector( {
         ...attributes[ attr ],
         [ tab ]: {
           ...attributes[ attr ][ tab ],
-          value
+          value,
         },
       } } );
     },
@@ -74,10 +48,16 @@ export default function ButtonInspector( {
 
   return (
     <InspectorControls>
-      <BorderPanel
-        borderRadius={ borderRadius }
-        setAttributes={ setAttributes }
-      />
+      <PanelBody title={ __( 'Border settings' ) }>
+        <RangeControl
+          value={ borderRadius }
+          label={ __( 'Border radius' ) }
+          min={ 0 }
+          max={ 50 }
+          allowReset
+          onChange={ ( value ) => handleAttrChange( 'borderRadius', value ) }
+        />
+      </PanelBody>
       <PanelBody title={ __( 'Text & Background Color Settings' ) }>
         <TabPanel
           className="kt-inspect-tabs kt-hover-tabs"
@@ -93,19 +73,19 @@ export default function ButtonInspector( {
             },
           ] }>
           {
-            ( { name: tab } ) => (
+            ( { name: tab, title } ) => (
               <>
-                <BaseControl label={ __( 'Text Color' ) }>
+                <BaseControl label={ __( `Text Color ${ title }` ) }>
                   <ColorPalette
                     colors={ COLORS }
-                    value={ textColor[tab].value }
+                    value={ textColor[ tab ].value }
                     onChange={ ( value ) => handlePseudoClassesAttrChange( tab, 'textColor', value ) }
                   />
                 </BaseControl>
-                <BaseControl label={ __( 'Background Color' ) }>
+                <BaseControl label={ __( `Background Color ${ title }` ) }>
                   <ColorPalette
                     colors={ COLORS }
-                    value={ backgroundColor[tab].value }
+                    value={ backgroundColor[ tab ].value }
                     onChange={ ( value ) => handlePseudoClassesAttrChange( tab, 'backgroundColor', value ) }
                   />
                 </BaseControl>

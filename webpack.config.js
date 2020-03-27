@@ -75,12 +75,12 @@ module.exports = ( env, argv ) => {
         {
           test: /\.(jpg|png|woff|woff2|eot|ttf|gif|svg)$/,
           use: {
-            loader: "file-loader",
+            loader: 'file-loader',
             options: {
-              name: "[name].[ext]",
+              name: '[name].[ext]',
               esModule: false,
-            }
-          }
+            },
+          },
         },
       ],
     },

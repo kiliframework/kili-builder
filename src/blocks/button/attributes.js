@@ -11,6 +11,7 @@ export default {
   textColor: pseudoClassAttrBuilder('color'),
   borderRadius: {
     type: 'number',
+    default: 0,
   },
   rel: {
     type: 'string',

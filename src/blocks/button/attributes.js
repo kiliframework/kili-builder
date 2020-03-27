@@ -1,4 +1,4 @@
-import { defaultAttrBuiler, pseudoClassAttrBuilder } from "../../blocks/utils";
+import { defaultAttrBuiler, pseudoClassAttrBuilder } from '../../blocks/utils';
 
 export default {
   text: {
@@ -7,8 +7,8 @@ export default {
   placeholder: {
     type: 'string',
   },
-  backgroundColor: pseudoClassAttrBuilder('background-color'),
-  textColor: pseudoClassAttrBuilder('color'),
+  backgroundColor: pseudoClassAttrBuilder( 'background-color' ),
+  textColor: pseudoClassAttrBuilder( 'color' ),
   borderRadius: {
     type: 'number',
     default: 0,

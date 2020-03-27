@@ -48,17 +48,17 @@ export default function ButtonInspector( {
 
   return (
     <InspectorControls>
-      <PanelBody title={ __( 'Border settings' ) }>
+      <PanelBody title={ __( 'Border settings', 'kili-builder' ) }>
         <RangeControl
           value={ borderRadius }
-          label={ __( 'Border radius' ) }
+          label={ __( 'Border radius', 'kili-builder' ) }
           min={ 0 }
           max={ 50 }
           allowReset
           onChange={ ( value ) => handleAttrChange( 'borderRadius', value ) }
         />
       </PanelBody>
-      <PanelBody title={ __( 'Text & Background Color Settings' ) }>
+      <PanelBody title={ __( 'Text & Background Color Settings', 'kili-builder' ) }>
         <TabPanel
           className="kt-inspect-tabs kt-hover-tabs"
           activeClass="active-tab"
@@ -75,14 +75,14 @@ export default function ButtonInspector( {
           {
             ( { name: tab, title } ) => (
               <>
-                <BaseControl label={ __( `Text Color ${ title }` ) }>
+                <BaseControl label={ __( `Text Color ${ title }`, 'kili-builder' ) }>
                   <ColorPalette
                     colors={ COLORS }
                     value={ textColor[ tab ].value }
                     onChange={ ( value ) => handlePseudoClassesAttrChange( tab, 'textColor', value ) }
                   />
                 </BaseControl>
-                <BaseControl label={ __( `Background Color ${ title }` ) }>
+                <BaseControl label={ __( `Background Color ${ title }`, 'kili-builder' ) }>
                   <ColorPalette
                     colors={ COLORS }
                     value={ backgroundColor[ tab ].value }
@@ -95,9 +95,9 @@ export default function ButtonInspector( {
         </TabPanel>
 
       </PanelBody>
-      <PanelBody title={ __( 'Link settings' ) }>
+      <PanelBody title={ __( 'Link settings', 'kili-builder' ) }>
         <TextControl
-          label={ __( 'Link rel' ) }
+          label={ __( 'Link rel', 'kili-builder' ) }
           value={ rel || '' }
           onChange={ ( value ) => handleAttrChange( 'rel', value ) }
         />

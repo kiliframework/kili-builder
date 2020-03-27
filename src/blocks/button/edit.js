@@ -24,13 +24,13 @@ function ButtonEdit( props ) {
     backgroundColor,
     textColor,
   } = attributes;
-  
+
   return (
     <>
       <Inspector { ...props } />
       <div className={ className }>
         <RichText
-          placeholder={ placeholder || __( 'Add text…' ) }
+          placeholder={ placeholder || __( 'Add text…', 'kili-builder' ) }
           value={ text }
           onChange={ ( value ) => setAttributes( { text: value } ) }
           withoutInteractiveFormatting

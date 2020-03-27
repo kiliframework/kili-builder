@@ -1,7 +1,12 @@
-export default function SaveButton() {
+import { RichText } from '@wordpress/block-editor';
+
+export default function SaveButton( { attributes } ) {
+  const { text } = attributes;
   return (
-    <div>
-      
-    </div>
-  )
+    <button>
+      <RichText.Content
+        value={ text }
+      />ƒ
+    </button>
+  );
 }

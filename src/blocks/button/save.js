@@ -6,7 +6,7 @@ export default function SaveButton( { attributes } ) {
     <button>
       <RichText.Content
         value={ text }
-      />ƒ
+      />
     </button>
   );
 }

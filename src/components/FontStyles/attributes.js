@@ -14,6 +14,7 @@ const FontStylesAttributes = {
   color: defaultAttrBuiler('color', 'black'),
   fontSize: defaultAttrBuiler('font-size', 24),
   lineHeight: defaultAttrBuiler('line-height', 'center'),
+  letterSpacing: defaultAttrBuiler('letter-spacing', 'normal'),
   sizeType: {
     type: 'string',
     default: 'px',

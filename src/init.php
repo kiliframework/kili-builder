@@ -32,6 +32,9 @@ function get_scripts_array() {
     [
       'block_id' => 'heading',
     ],
+    [
+      'block_id' => 'paragraph',
+    ],
   );
 }
 

@@ -6,13 +6,14 @@ import { getDeviceValue } from '../utils';
 
 const MaComp = ( props ) => {
   const { attributes, setAttributes } = props;
-  const { currentTab, color, level, fontSize, textAlign, lineHeight, letterSpacing, includeLines, linesColor } = attributes;
+  const { currentTab, color, level, fontSize, textAlign, lineHeight, letterSpacing, includeLines, linesColor, linesSize } = attributes;
 
   const onTextChange = ( text ) => setAttributes( { text } );
   const tagName = 'h' + level;
   const fontSizeValue = getDeviceValue(fontSize, currentTab);
   const colorValue = getDeviceValue(color, currentTab);
   const linesColorValue = getDeviceValue(linesColor, currentTab);
+  const linesSizeValue = getDeviceValue(linesSize, currentTab);
   const textAlignValue = getDeviceValue(textAlign, currentTab);
   const lineHeightValue = getDeviceValue( lineHeight, currentTab );
   const letterSpacingValue = getDeviceValue( letterSpacing, currentTab );
@@ -35,7 +36,7 @@ const MaComp = ( props ) => {
     .kili-heading::after {
       content: "";
       display: block;
-      height: 2px;
+      height: ${linesSizeValue}px;
       width: 50%;
       background-color: ${linesColorValue};
     }

@@ -1,13 +1,13 @@
 import range from 'lodash/range';
 import AdvancedColorControl from '../AdvancedColorControl';
-import { getDeviceValue } from '../../blocks/utils/getDeviceValue'
-import {valueSetter} from '../../blocks/utils/valueSetter'
+import { getDeviceValue } from '../../blocks/utils/getDeviceValue';
+import { valueSetter } from '../../blocks/utils/valueSetter';
 
 const { __ } = wp.i18n;
 const { PanelBody, Toolbar, RangeControl } = wp.components;
 const { AlignmentToolbar } = wp.blockEditor;
 
-export default function FontStyles(props) {
+export default function FontStyles( props ) {
   const { attributes, setAttributes } = props;
   const { currentTab, level, textAlign, color, fontSize, lineHeight, letterSpacing } = attributes;
 
@@ -38,14 +38,14 @@ export default function FontStyles(props) {
       <AlignmentToolbar
         value={ alignValue }
         onChange={ ( value ) => {
-          setAttributes( { textAlign: valueSetter(textAlign, currentTab, value) } );
+          setAttributes( { textAlign: valueSetter( textAlign, currentTab, value ) } );
         } }
       />
       <AdvancedColorControl
         label={ __( 'Heading Color' ) }
         colorValue={ ( colorValue ? colorValue : '' ) }
         colorDefault={ colorValue }
-        onColorChange={ value => setAttributes( { color: valueSetter(color, currentTab, value) } ) }
+        onColorChange={ ( value ) => setAttributes( { color: valueSetter( color, currentTab, value ) } ) }
       />
       <RangeControl
         label={ __( 'Font Size' ) }

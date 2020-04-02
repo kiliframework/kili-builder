@@ -3,8 +3,8 @@ import { Button, Placeholder, ButtonGroup } from '@wordpress/components';
 import { useSelect, withDispatch } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 import { createBlock } from '@wordpress/blocks';
-
-import { times, dropRight } from 'lodash';
+import times from 'lodash/times';
+import dropRight from 'lodash/dropRight';
 
 import ColumnDefaultAttributes from '../column/attributes';
 import Inspector from './inspector';
@@ -39,7 +39,7 @@ const RowSectionEdit = ( props ) => {
   const [ settings, setSettings ] = useState( [] );
 
   useEffect( () => {
-    const newRowStyle = `.kili-section__row-${ clientId } > .editor-inner-blocks > .editor-block-list__layout {
+    const newRowStyle = `.kili-section__row-${ clientId } > .block-editor-inner-blocks > .block-editor-block-list__layout {
       display: flex;
       justify-content: ${ justifyContent.desktop.value };
       align-items: ${ alignItems.desktop.value };
@@ -52,7 +52,7 @@ const RowSectionEdit = ( props ) => {
     let newColumnsStyle = '';
     currentBlock.innerBlocks.forEach( ( innerBlock, index ) => {
       const numberOfColumns = innerBlock.attributes.columns.desktop.value;
-      newColumnsStyle += `.kili-section__row-${ clientId } > .editor-inner-blocks > .editor-block-list__layout > [data-type="kili/k-column"]:nth-child(${ index + 1 }) {
+      newColumnsStyle += `.kili-section__row-${ clientId } > .block-editor-inner-blocks > .block-editor-block-list__layout > [data-type="kili/k-column"]:nth-child(${ index + 1 }) {
         flex-basis: ${ ( numberOfColumns / 12 ) * 100 }%;
         max-width: ${ ( numberOfColumns / 12 ) * 100 }%;
         flex-shrink: 0;

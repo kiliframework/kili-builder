@@ -5,7 +5,7 @@ export default function SectionSave( { attributes } ) {
   const classes = attrClassCreator( attributes );
 
   return (
-    <div className={ `flexgrid ${ classes }` }>
+    <div className={ `${ classes }` }>
       <RichText.Content />
     </div>
   );

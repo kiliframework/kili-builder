@@ -52,7 +52,7 @@ export default function Inspector( props ) {
                   </>
                 )}
               </PanelBody>
-              <FontStyles {...props} />
+              <FontStyles {...props} isHeading />
               
             </> 
           );

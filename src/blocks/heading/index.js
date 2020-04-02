@@ -1,16 +1,14 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
-import { InnerBlocks } from '@wordpress/block-editor';
+
 import edit from './edit';
 import save from './save';
-import './parent';
-import './style.editor.scss';
-
 import attributes from './attributes';
 
-registerBlockType( 'kili/row-section', {
-  title: __( 'kili-Columns', 'kili-builder' ), //MUST
-  parent: [ 'kili/k-section' ],
+import './style.editor.scss';
+
+registerBlockType( 'kili/heading', {
+  title: __( 'kili-Heading', 'kili-builder' ), //MUST
   category: 'kili-builder', //MUST
   icon: 'grid-view',
   supports: {

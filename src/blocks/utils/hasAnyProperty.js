@@ -1,4 +1,4 @@
-import { has } from 'lodash';
+import has from 'lodash/has';
 
 export const hasAnyProperty = ( obj, props ) => {
   for ( const prop of props ) {

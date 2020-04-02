@@ -21,7 +21,7 @@ function ColumnEdit( props ) {
 
   useEffect( () => {
     const parentBlockWidth = document
-      .querySelector( ( `.kili-columns > .kili-section__row-${ parentId } > .editor-inner-blocks > .editor-block-list__layout` ) )
+      .querySelector( ( `.kili-columns > .kili-section__row-${ parentId } > .block-editor-inner-blocks > .block-editor-block-list__layout` ) )
       .getBoundingClientRect().width;
     setParentWidth( parentBlockWidth );
   }, [] );

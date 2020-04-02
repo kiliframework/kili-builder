@@ -1,45 +1,19 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { TabPanel } from '@wordpress/components';
+import { TabPanel, ToggleControl, PanelBody, RangeControl } from '@wordpress/components';
 
-const { useCallback } = wp.element;
-
-import OptionSelectorControl from '../../components/OptionsControl';
-import { attrOptionsBuiler, panelTabBuiler } from '../utils';
-
-const justifyContentOptions = attrOptionsBuiler( [
-  [ 'start', 'Start', 'flex-start' ],
-  [ 'center', 'Center', 'center' ],
-  [ 'end', 'End', 'flex-end' ],
-  [ 'space-between', 'Space between', 'space-between' ],
-] );
-
-const alignItemsOptions = attrOptionsBuiler( [
-  [ 'start', 'Start', 'flex-start' ],
-  [ 'center', 'Center', 'center' ],
-  [ 'end', 'End', 'flex-end' ],
-] );
+import { attrOptionsBuiler, panelTabBuiler, valueSetter, getDeviceValue } from '../utils';
+import FontStyles from '../../components/FontStyles';
+import AdvancedColorControl from '../../components/AdvancedColorControl';
 
 export default function Inspector( props ) {
   const { attributes, setAttributes } = props;
-  const { currentTab } = attributes;
+  const { currentTab, includeLines, linesColor, linesSize } = attributes;
 
-  const onTabSelect = ( tabName ) => {
-    setAttributes( { currentTab: tabName } );
-  };
+  const handleAttributeChange = ( attribute, value ) => setAttributes( { [ attribute ]: value } );
 
-  const handleAttributeChange = useCallback(
-    ( value, attribute ) => {
-      setAttributes( { [ attribute ]: {
-        ...attributes[ attribute ],
-        [ currentTab ]: {
-          ...attributes[ attribute ][ currentTab ],
-          value,
-        },
-      } } );
-    },
-    [ attributes ],
-  );
+  const linesColorValue = getDeviceValue(linesColor, currentTab);  
+  const linesSizeValue = getDeviceValue(linesSize, currentTab);  
 
   return (
     <InspectorControls>
@@ -47,25 +21,41 @@ export default function Inspector( props ) {
         className="kt-inspect-tabs"
         activeClass="active-tab"
         initialTabName={ currentTab }
-        onSelect={ onTabSelect }
+        onSelect={ ( value ) => handleAttributeChange( 'currentTab', value ) }
         tabs={ panelTabBuiler }
       >
         { () => {
           return (
             <>
-              <OptionSelectorControl
-                label={ __( 'Justify Content', 'kili-builder' ) }
-                currentOption={ attributes.justifyContent[ currentTab ].value }
-                options={ justifyContentOptions }
-                onChange={ ( value ) => handleAttributeChange( value, 'justifyContent' ) }
-              />
-              <OptionSelectorControl
-                label={ __( 'Align Items', 'kili-builder' ) }
-                currentOption={ attributes.alignItems[ currentTab ].value }
-                options={ alignItemsOptions }
-                onChange={ ( value ) => handleAttributeChange( value, 'alignItems' ) }
-              />
-            </> );
+              <PanelBody title={ __( 'Lines Settings', 'kili-builder' ) }>
+                <ToggleControl
+                  label={ __( 'Include lines', 'kili-builder' ) }
+                  checked={ includeLines }
+                  onChange={ ( value ) => handleAttributeChange( 'includeLines', value ) }
+                />
+                {includeLines && (
+                  <>
+                    <AdvancedColorControl
+                      label={ __( 'Lines Color', 'kili-builder' ) }
+                      colorValue={ ( linesColorValue ? linesColorValue : '' ) }
+                      colorDefault={ linesColorValue }
+                      onColorChange={ ( value ) => setAttributes( { linesColor: valueSetter( linesColor, currentTab, value ) } ) }
+                    />
+                     <RangeControl
+                      label={ __( 'Lines Size', 'kili-builder' ) }
+                      value={ linesSizeValue }
+                      onChange={ ( value ) => setAttributes( { linesSize: valueSetter( linesSize, currentTab, value ) } ) }
+                      min={ 1 }
+                      max={ 50 }
+                      step={ 1 }
+                    />
+                  </>
+                )}
+              </PanelBody>
+              <FontStyles {...props} isHeading />
+              
+            </> 
+          );
         } }
       </TabPanel>
     </InspectorControls>

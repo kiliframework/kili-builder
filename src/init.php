@@ -107,45 +107,77 @@ function kili_search_gutblocks_styles( $post_id ) {
 		return;
 	}
 	$blocks = parse_blocks( $current_post->post_content );
-	$regex = '/class="\w[\w-_]+(\s+\w[\w-_#]+)*"/mi';
 	$blocks = array_filter( $blocks, function ( $block ) {
 		return stripos( $block['blockName'], 'kili') !== false;
 	} );
+	$styles = kili_get_blocks_styles( $blocks );
+	$post_content = $current_post->post_content;
+	if ( strcasecmp( '', $styles ) !== 0 ) {
+		$post_content = preg_replace("/<style id='kili-custom-style'>.*<\/style>/", '', $post_content);
+		$styles = "<style id='kili-custom-style'>{$styles}</style>";
+		wp_update_post( array( 'ID' => $post_id, 'post_content' => $styles . $post_content ) );
+	}
+	add_action( 'save_post', 'kili_search_gutblocks_styles' );
+}
+
+function kili_get_blocks_styles( $blocks ) {
 	$styles = '';
+	$regex = '/class="\w[\w-_]+(\s+\w[\w-_#]+)*"/mi';
 	foreach ( $blocks as $block ) {
 		$matches = [];
 		preg_match_all($regex, $block['innerHTML'], $matches, PREG_SET_ORDER, 0);
 		if ( count( $matches ) < 1 ) {
 			continue;
 		}
-		$classes = array_map(function ( $item ) {
-			$str = str_ireplace(['class="', '"'], '', $item[0]);
-			$str = explode( ' ', $str );
-			return $str;
-		}, $matches);
-		$classes = array_flatten( $classes );
-		$classes = array_unique( $classes );
-		$classes = array_filter( $classes, function ( $item ) {
-			return strcasecmp( '', $item ) !== 0 && ( strpos( $item, '__' ) !== false || strpos( $item, '--' ) !== false );
-		});
+		$classes = kili_get_item_classes_array( $matches );
 		if ( count( $classes ) < 1 ) {
 			continue;
 		}
-		$css = array_reduce( $classes, function ( $carry, $item ) {
-			$split1 = explode( '--', $item );
-			$split2 = explode( '__', $split1[1] );
-			return "{$split1[0]} {{$split2[0]}: {$split2[1]}}";
-		}, '' );
-		$styles .= $css;
+		$styles .= kili_get_classes_css( $classes );
 	}
-	$post_content = $current_post->post_content;
-	$post_content = preg_replace('/\w+--\w+__\w+/', '', $post_content);
-	$post_content = preg_replace('/<style>.*<\/style>/', '', $post_content);
-	if ( strcasecmp( '', $styles ) !== 0 ) {
-		$styles = "<style>{$styles}</style>";
+	return $styles;
+}
+
+function kili_get_item_classes_array( $matches ) {
+	$classes = array_map(function ( $item ) {
+		$str = str_ireplace(['class="', '"'], '', $item[0]);
+		$str = explode( ' ', $str );
+		return $str;
+	}, $matches);
+	$classes = array_flatten( $classes );
+	$classes = array_unique( $classes );
+	$classes = array_filter( $classes, function ( $item ) {
+		return strcasecmp( '', $item ) !== 0 && ( strpos( $item, '__' ) !== false || strpos( $item, '--' ) !== false );
+	});
+	return $classes;
+}
+
+function kili_get_classes_css( $classes ) {
+	return array_reduce( $classes, function ( $carry, $item ) {
+		$split1 = explode( '--', $item );
+		$split2 = explode( '__', isset( $split1[1] ) ? $split1[1] : $split1[0] );
+		$rule = '';
+		if ( isset( $split1[1] ) ) {
+			$rule = kili_get_rule_breakpoint( $split1[0] );
+		}
+		$rule .= ".{$item}{{$split2[0]}: {$split2[1]}}" . ( strcasecmp( '', $rule ) != 0 ? '}' : '' );
+		return $carry . $rule;
+	}, '' );
+}
+
+function kili_get_rule_breakpoint( $breakpoint_key ) {
+	if ( strcasecmp( '', $breakpoint_key ) == 0 ) {
+		return '';
 	}
-	wp_update_post( array( 'ID' => $post_id, 'post_content' => $post_content . $styles ) );
-	add_action( 'save_post', 'kili_search_gutblocks_styles' );
+	$breakpoints = [
+		'sm' => '320px',
+		'md' => '760px',
+		'lg' => '1024px'
+	];
+	if ( ! isset( $breakpoints[ $breakpoint_key ] ) ) {
+		return '';
+	}
+	return '@media all and (min-width: ' . $breakpoints[ $breakpoint_key ] . '){';
 }
 
 add_action( 'init', 'kili_blocks_register' );

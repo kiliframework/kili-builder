@@ -6,6 +6,8 @@ import { valueSetter } from '../../blocks/utils/valueSetter';
 import HeadingLevelIcon from './heading-level-icon';
 import { sprintf } from '@wordpress/i18n';
 
+import headingDefaultValues from './heading-default-values';
+
 const { __ } = wp.i18n;
 const { PanelBody, Toolbar, RangeControl, ToolbarGroup } = wp.components;
 const { AlignmentToolbar } = wp.blockEditor;
@@ -20,8 +22,14 @@ export default function FontStyles( props ) {
   const lineHeightValue = getDeviceValue( lineHeight, currentTab );
   const letterSpacingValue = getDeviceValue( letterSpacing, currentTab );
 
+  const getHeadingDefaultValuesFor = ( targetLevel, key, ) => ( {
+    ...headingDefaultValues[ targetLevel ][ key ].default,
+  } );
+
   const createLevelControl = ( targetLevel, selectedLevel ) => {
     const isActive = targetLevel === selectedLevel;
+    console.log( getHeadingDefaultValuesFor( targetLevel, 'fontSize' ) );
+
     return {
       icon: (
         <HeadingLevelIcon
@@ -32,7 +40,12 @@ export default function FontStyles( props ) {
       // translators: %s: heading level e.g: "1", "2", "3"
       title: sprintf( __( 'Heading %d' ), targetLevel ),
       isActive,
-      onClick: () => setAttributes( { level: targetLevel } ),
+      onClick: () => setAttributes( {
+        level: targetLevel,
+        fontSize: getHeadingDefaultValuesFor( targetLevel, 'fontSize' ),
+        lineHeight: getHeadingDefaultValuesFor( targetLevel, 'lineHeight' ),
+        letterSpacing: getHeadingDefaultValuesFor( targetLevel, 'letterSpacing' ),
+      } ),
     };
   };
 
@@ -76,8 +89,8 @@ export default function FontStyles( props ) {
         label={ __( 'Line Height', 'kili-builder' ) }
         value={ ( lineHeightValue ? lineHeightValue : '' ) }
         onChange={ ( value ) => setAttributes( { lineHeight: valueSetter( lineHeight, currentTab, value ) } ) }
-        min={ 5 }
-        max={ 200 }
+        min={ 0 }
+        max={ 100 }
         step={ 1 }
       />
       <RangeControl

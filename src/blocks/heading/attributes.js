@@ -19,7 +19,7 @@ export default {
     type: 'boolean',
     default: false,
   },
-  linesColor: defaultAttrBuiler( 'color', '#0bd8a2'),
-  linesSize: defaultAttrBuiler( null , 2),
-  ...FontStylesAttributes
+  linesColor: defaultAttrBuiler( 'color', '#0bd8a2' ),
+  linesSize: defaultAttrBuiler( null, 2 ),
+  ...FontStylesAttributes,
 };

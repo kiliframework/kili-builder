@@ -64,34 +64,34 @@ export default function CarouselEdit( props ) {
     }
   }, [] );
 
-  const getSlickSettings = () => ({
-    dots: dots[DESKTOP].value,
-    arrows: arrows[DESKTOP].value,
+  const getSlickSettings = () => ( {
+    dots: dots[ DESKTOP ].value,
+    arrows: arrows[ DESKTOP ].value,
     infinite: false,
-    slidesToShow: slidesToShow[DESKTOP].value,
-    slidesToScroll: slidesToScroll[DESKTOP].value,
+    slidesToShow: slidesToShow[ DESKTOP ].value,
+    slidesToScroll: slidesToScroll[ DESKTOP ].value,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          dots: dots[TABLET].value,
-          arrows: arrows[TABLET].value,
-          slidesToShow: slidesToShow[TABLET].value,
-          slidesToScroll: slidesToScroll[TABLET].value,
+          dots: dots[ TABLET ].value,
+          arrows: arrows[ TABLET ].value,
+          slidesToShow: slidesToShow[ TABLET ].value,
+          slidesToScroll: slidesToScroll[ TABLET ].value,
           infinite: true,
         },
       }, {
         breakpoint: 640,
         settings: {
-          dots: dots[MOBILE].value,
-          arrows: arrows[MOBILE].value,
-          slidesToShow: slidesToShow[MOBILE].value,
-          slidesToScroll: slidesToScroll[MOBILE].value,
+          dots: dots[ MOBILE ].value,
+          arrows: arrows[ MOBILE ].value,
+          slidesToShow: slidesToShow[ MOBILE ].value,
+          slidesToScroll: slidesToScroll[ MOBILE ].value,
           infinite: true,
         },
       },
     ],
-  })
+  } );
 
   const setImageAttributes = ( index, attributes ) => {
     if ( ! images[ index ] ) {
@@ -163,7 +163,7 @@ export default function CarouselEdit( props ) {
       </>
 
     );
-  }  
+  }
 
   return (
     <>

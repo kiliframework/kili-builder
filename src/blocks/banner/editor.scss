@@ -1,0 +1,215 @@
+$green: #0BD8A2 !default;
+$white: #FFFFFF !default;
+
+$xs-max: 40rem !default; // Set xs breakpoint's max width
+$sm-max: 68rem !default; // Set sm breakpoint's max width
+$md-max: 90rem !default; // Set md breakpoint's max width
+$lg-max: 120rem !default; // Set lg breakpoint's max width
+$bg-max: 160rem !default; // Set big breakpoint's max width
+
+$sm-start: ($xs-max + 1); // Generate sm breakpoint's min width
+$md-start: ($sm-max + 1); // Generate md breakpoint's min width
+$lg-start: ($md-max + 1); // Generate lg breakpoint's min width
+$xl-start: ($lg-max + 1); // Generate xl breakpoint's min width
+$bg-start: ($bg-max + 1); // Generate xl breakpoint's min width
+
+
+$small-max: "only screen and (max-width: #{$sm-max - 1})";
+$medium-up: "only screen and (min-width: #{$md-start})"; 
+
+
+.main-banner {
+  background-color: $green;
+  overflow: hidden;
+  padding-top: 144px;
+  position: relative;
+  @media only screen and (min-width: 69rem){ 
+    .medium--middle {
+      align-items: center;
+    }
+  }
+  
+  .button--default {
+    color: #00343d;
+    background-color: #fff;
+  }
+  .button {
+    padding: .77778rem 3.66667rem;
+    font-size: 1rem;
+    line-height: 1.44444rem;
+    border-radius: 1.94444rem;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  
+  .flexgrid {
+    box-sizing: border-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 0 1 auto;
+    list-style: none;
+    margin: 0 0 0 -.55555rem;
+    padding: 0;
+    width: 100%;
+  }
+  
+  .flexgrid--full>.flexgrid__item {
+    padding-left: 0;
+  }
+  
+  .alpha {
+    font-size: 58.14px;
+    letter-spacing: 1px;
+    letter-spacing: .05556rem;
+    line-height: 62px;
+    line-height: 3.44444rem;
+  }
+  
+  @media only screen and (min-width: 69rem) {
+    .medium--col-7 {
+      flex-basis: 58.33333%;
+      max-width: 58.33333%;
+    }
+  }
+
+  @media only screen and (min-width: 69rem) {
+    .medium--col-5, .medium--col-6 {
+      box-sizing: border-box;
+      padding-left: .55555rem;
+  }
+  }
+
+
+@media only screen and (min-width: 69rem) {
+  .medium--col-5 {
+    flex-basis: 41.66667%;
+    max-width: 41.66667%;
+}
+}
+
+  
+  .flexgrid__item {
+    flex-grow: 1;
+  }
+  
+  .container {
+    margin: 0 auto;
+    max-width: 66.66667rem;
+    padding: 0 .80556rem;
+    position: relative;
+  }
+  .headline {
+    margin-bottom: 41px;
+    margin-top: 0;
+    padding-top: 70px;
+    position: relative;
+    z-index: 1;
+    @media #{$small-max} {
+      text-align: center;
+    }
+    br {
+      @media #{$small-max} {
+        display: none;
+      }
+    }
+  }
+  &__content-wrapper {
+    @media #{$small-max} {
+      text-align: center;
+    }
+  }
+  &__image {
+    display: block;
+    margin-bottom: 50px;
+    margin-left: auto;
+    position: relative;
+    z-index: 1;
+    @media #{$small-max} {
+      bottom: 30px;
+      left: 0;
+      margin-bottom: 0;
+      margin: 0 auto;
+      max-width: 350px;
+      position: absolute;
+      right: 0;
+    }
+  }
+  &__image-wrapper {
+    @media #{$small-max} {
+      background-color: $white;
+      min-height: 200px;
+      position: relative;
+    }
+  }
+  .button__wrapper {
+    display: inline-block;
+    margin-bottom: 100px;
+    position: relative;
+    @media #{$small-max} {
+      margin-bottom: 180px;
+      text-align: center;
+    }
+  }
+  .button__wave {
+    bottom: 0;
+    left: 0;
+    max-width: initial;
+    opacity: 0.2;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(calc(-634px + 127px), calc(-634px + 26px));
+  }
+  &__button {
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+  }
+  &__wave-wrapper {
+    bottom: 0;
+    left: 0;
+    max-width: 100%;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: auto;
+    width: 100%;
+    z-index: 1;
+    @media #{$small-max} {
+      bottom: 180px;
+    }
+    @media #{"only screen and (min-width: 5121px)"} {
+       display: none;
+    }
+  }
+  &__wave {
+    display: block;
+    position: relative;
+    transform: translateX(-1600px);
+    transition: transform 0.3s;
+    width: 5120px;
+    @media #{$medium-up} {
+      transform: translateX(-1820px);
+    }
+    @media #{"only screen and (min-width: 3298px)"} {
+      transform: translateX(-850px);
+    }
+    @media #{"only screen and (min-width: 4271px)"} {
+      transform: translateX(-270px);
+    }
+    @media #{"only screen and (min-width: 4851px)"} {
+      transform: translateX(0);
+    }
+  }
+  .container {
+    @media #{$small-max} {
+      margin: 0;
+      padding: 0;
+      max-width: 100%;
+    }
+  }
+  
+}

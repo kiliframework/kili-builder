@@ -10,6 +10,7 @@ import { withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
 
 import Inspector from './inspector';
+import { editClassCreator } from '../utils/editClassCreator';
 
 const { useEffect } = wp.element;
 
@@ -55,7 +56,7 @@ function BannerEdit( props ) {
           <div className="flexgrid medium--middle flexgrid--full">
             <div className="flexgrid__item xsmall--col-12 small--col-12 medium--col-7">
               <div className="main-banner__content-wrapper">
-                <RichText as="h2" className="alpha headline" placeholder="Insert banner header" value={ headingText } onChange={ ( value ) => setAttributes( { text: value } ) } />
+                <RichText style={ editClassCreator( attributes ) } as="h2" className="alpha headline" placeholder="Insert banner header" value={ headingText } onChange={ ( value ) => setAttributes( { headingText: value } ) } />
                 <div className="button__wrapper">
                   <a href="/contact/" className="button button--default main-banner__button">Get in touch</a>
                   <img className="button__wave" src={ kili_images.waves } alt="waves background" />

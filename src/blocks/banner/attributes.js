@@ -32,10 +32,6 @@ export default {
     type: 'string',
     default: 'desktop',
   },
-  text: {
-    type: 'string',
-    default: '',
-  },
   isCreated: {
     type: 'boolean',
     default: false,

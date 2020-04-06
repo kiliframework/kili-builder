@@ -40,7 +40,7 @@ function BannerEdit( props ) {
 
   return (
     <>
-      <Inspector { ...props } />
+      <Inspector { ...props } onImageSelect={ handleImagesSelect } />
       <section className="main-banner" style={ { backgroundColor: '#0BD8A2' } }>
         <div className="main-banner__wave-wrapper">
           <svg role="img" className="main-banner__wave" width="100%" height="620px" fill="none" aria-labelledby="main-banner-wave-title">

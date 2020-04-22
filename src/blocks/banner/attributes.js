@@ -1,5 +1,6 @@
 import { defaultAttrBuiler } from '../utils';
 import FontStylesAttributes from '../../components/FontStyles/attributes';
+import { DESKTOP } from '../../constants/devicesSizes';
 
 export default {
   headingText: {
@@ -30,7 +31,7 @@ export default {
   },
   currentTab: {
     type: 'string',
-    default: 'desktop',
+    default: DESKTOP,
   },
   isCreated: {
     type: 'boolean',

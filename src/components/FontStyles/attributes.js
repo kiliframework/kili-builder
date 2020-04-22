@@ -1,4 +1,4 @@
-import { defaultAttrBuiler } from "../../blocks/utils";
+import { defaultAttrBuiler } from '../../blocks/utils';
 
 const FontStylesAttributes = {
   content: {
@@ -10,11 +10,11 @@ const FontStylesAttributes = {
     type: 'number',
     default: 2,
   },
-  textAlign: defaultAttrBuiler('text-align', 'center'),
-  color: defaultAttrBuiler('color', 'black'),
-  fontSize: defaultAttrBuiler('font-size', 24),
-  lineHeight: defaultAttrBuiler('line-height', 'center'),
-  letterSpacing: defaultAttrBuiler('letter-spacing', 'normal'),
+  textAlign: defaultAttrBuiler( 'text-align', 'center' ),
+  color: defaultAttrBuiler( 'color', 'black' ),
+  fontSize: defaultAttrBuiler( 'font-size', 24 ),
+  lineHeight: defaultAttrBuiler( 'line-height', 'center' ),
+  letterSpacing: defaultAttrBuiler( 'letter-spacing', 'normal' ),
   sizeType: {
     type: 'string',
     default: 'px',

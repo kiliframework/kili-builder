@@ -35,6 +35,9 @@ function get_scripts_array() {
     [
       'block_id' => 'paragraph',
     ],
+    [
+      'block_id' => 'banner',
+    ],
   );
 }
 
@@ -87,6 +90,15 @@ function kili_blocks_register() {
   foreach ($scripts_array as $script) {
     kili_blocks_register_block_type( $script['block_id'] );
   }
+
+  wp_localize_script(
+    'kili-editor-script',
+    'kili_images',
+    array(
+        'waves' => plugins_url( 'assets/images/waves.svg', __FILE__ ),
+        'koombea-banner-img' => plugins_url( 'assets/images/koombea-banner-img.svg', __FILE__ ),
+    )
+);
 }
 
 add_action( 'init', 'kili_blocks_register' );

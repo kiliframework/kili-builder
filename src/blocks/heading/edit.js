@@ -10,16 +10,16 @@ const MaComp = ( props ) => {
 
   const onTextChange = ( text ) => setAttributes( { text } );
   const tagName = 'h' + level;
-  const fontSizeValue = getDeviceValue(fontSize, currentTab);
-  const colorValue = getDeviceValue(color, currentTab);
-  const linesColorValue = getDeviceValue(linesColor, currentTab);
-  const linesSizeValue = getDeviceValue(linesSize, currentTab);
-  const textAlignValue = getDeviceValue(textAlign, currentTab);
+  const fontSizeValue = getDeviceValue( fontSize, currentTab );
+  const colorValue = getDeviceValue( color, currentTab );
+  const linesColorValue = getDeviceValue( linesColor, currentTab );
+  const linesSizeValue = getDeviceValue( linesSize, currentTab );
+  const textAlignValue = getDeviceValue( textAlign, currentTab );
   const lineHeightValue = getDeviceValue( lineHeight, currentTab );
   const letterSpacingValue = getDeviceValue( letterSpacing, currentTab );
 
   const getLineStyles = () => {
-    let styles = `
+    const styles = `
     .kili-heading {
       display: flex;
       justify-content: space-between;
@@ -36,20 +36,20 @@ const MaComp = ( props ) => {
     .kili-heading::after {
       content: "";
       display: block;
-      height: ${linesSizeValue}px;
+      height: ${ linesSizeValue }px;
       width: 50%;
-      background-color: ${linesColorValue};
+      background-color: ${ linesColorValue };
     }
-    `
+    `;
     return styles;
-  }
+  };
 
   return (
     <>
       <Inspector { ...props } />
       <RichText
         style={ {
-          fontSize: `${fontSizeValue}px`,
+          fontSize: `${ fontSizeValue }px`,
           fontFamily: 'Gt Walsheim',
           color: colorValue,
           letterSpacing: `${ letterSpacingValue }px`,
@@ -63,8 +63,8 @@ const MaComp = ( props ) => {
         value={ attributes.text }
       />
       { includeLines && <style>
-        {getLineStyles()}
-      </style>}
+        { getLineStyles() }
+      </style> }
     </>
   );
 };

@@ -6,3 +6,4 @@ import './blocks/carousel';
 import './blocks/button';
 import './blocks/heading';
 import './blocks/paragraph';
+import './blocks/banner';

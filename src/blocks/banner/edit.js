@@ -66,9 +66,9 @@ function BannerEdit( props ) {
                   style={
                     editClassCreator( attributes ),
                     {
-                      fontSize: `${ fontSizeValue }px`,
-                      letterSpacing: `${ letterSpacingValue }px`,
-                      lineHeight: `${ lineHeightValue }px`,
+                      fontSize: `${ fontSizeValue }`,
+                      letterSpacing: `${ letterSpacingValue }`,
+                      lineHeight: `${ lineHeightValue }`,
                     }
                   }
                   as="h2"

@@ -12,8 +12,8 @@ export default function Inspector( props ) {
 
   const handleAttributeChange = ( attribute, value ) => setAttributes( { [ attribute ]: value } );
 
-  const linesColorValue = getDeviceValue(linesColor, currentTab);  
-  const linesSizeValue = getDeviceValue(linesSize, currentTab);  
+  const linesColorValue = getDeviceValue( linesColor, currentTab );
+  const linesSizeValue = getDeviceValue( linesSize, currentTab );
 
   return (
     <InspectorControls>
@@ -33,7 +33,7 @@ export default function Inspector( props ) {
                   checked={ includeLines }
                   onChange={ ( value ) => handleAttributeChange( 'includeLines', value ) }
                 />
-                {includeLines && (
+                { includeLines && (
                   <>
                     <AdvancedColorControl
                       label={ __( 'Lines Color', 'kili-builder' ) }
@@ -41,7 +41,7 @@ export default function Inspector( props ) {
                       colorDefault={ linesColorValue }
                       onColorChange={ ( value ) => setAttributes( { linesColor: valueSetter( linesColor, currentTab, value ) } ) }
                     />
-                     <RangeControl
+                    <RangeControl
                       label={ __( 'Lines Size', 'kili-builder' ) }
                       value={ linesSizeValue }
                       onChange={ ( value ) => setAttributes( { linesSize: valueSetter( linesSize, currentTab, value ) } ) }
@@ -50,11 +50,11 @@ export default function Inspector( props ) {
                       step={ 1 }
                     />
                   </>
-                )}
+                ) }
               </PanelBody>
-              <FontStyles {...props} isHeading />
-              
-            </> 
+              <FontStyles { ...props } isHeading />
+
+            </>
           );
         } }
       </TabPanel>

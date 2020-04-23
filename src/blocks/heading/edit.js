@@ -6,11 +6,14 @@ import { getDeviceValue } from '../utils';
 
 const MaComp = ( props ) => {
   const { attributes, setAttributes } = props;
-  const { currentTab, color, level, fontSize, textAlign, lineHeight, letterSpacing, includeLines, linesColor, linesSize } = attributes;
+  const { currentTab, color, level, fontSize, textAlign, lineHeight, letterSpacing, includeLines, linesColor, linesSize, fontWeight } = attributes;
 
   const onTextChange = ( text ) => setAttributes( { text } );
   const tagName = 'h' + level;
   const fontSizeValue = getDeviceValue( fontSize, currentTab );
+  const fontWeightValue = getDeviceValue( fontWeight, currentTab );
+  console.log( fontWeight );
+
   const colorValue = getDeviceValue( color, currentTab );
   const linesColorValue = getDeviceValue( linesColor, currentTab );
   const linesSizeValue = getDeviceValue( linesSize, currentTab );
@@ -49,16 +52,17 @@ const MaComp = ( props ) => {
       <Inspector { ...props } />
       <RichText
         style={ {
-          fontSize: `${ fontSizeValue }px`,
+          fontSize: `${ fontSizeValue }`,
+          fontWeight: fontWeightValue,
           fontFamily: 'Gt Walsheim',
           color: colorValue,
-          letterSpacing: `${ letterSpacingValue }px`,
-          lineHeight: `${ lineHeightValue }px`,
+          letterSpacing: `${ letterSpacingValue }`,
+          lineHeight: `${ lineHeightValue }`,
           textAlign: textAlignValue,
           opacity: .8,
         } }
         className="kili-heading"
-        tagName={ tagName }
+        tagName={ level && tagName }
         onChange={ onTextChange }
         value={ attributes.text }
       />

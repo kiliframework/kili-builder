@@ -12,9 +12,9 @@ export default function ColumnSave( { attributes } ) {
       let cssProperty = '';
       const value = ( columns[ device ].value / 12 ) * 100;
       if ( value ) {
-        cssProperty = ` ${ columns[ device ].prefix }--flex-basis__${ Number( value.toFixed( 3 ) ) }`;
+        cssProperty = ` ${ columns[ device ].prefix }--flex-basis__${ Number( value.toFixed( 3 ) ) }%`;
         gridClasses += cssProperty;
-        cssProperty = ` ${ columns[ device ].prefix }--max-width__${ Number( value.toFixed( 3 ) ) }`;
+        cssProperty = ` ${ columns[ device ].prefix }--max-width__${ Number( value.toFixed( 3 ) ) }%`;
         gridClasses += cssProperty;
       }
     }

@@ -1,7 +1,7 @@
-export const valueSetter = (obj, device, value) => ({
+export const valueSetter = ( obj, device, value, dimension ) => ( {
   ...obj,
-  [device]: {
-    ...obj[device],
-    value,
-  }
-})
+  [ device ]: {
+    ...obj[ device ],
+    value: `${ value }${ dimension || '' }`,
+  },
+} );

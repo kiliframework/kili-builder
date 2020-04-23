@@ -6,7 +6,7 @@ export default function SectionSave( { attributes } ) {
 
   return (
     <div className={ `${ classes }` }>
-      <RichText.Content />
+      <RichText.Content value={ attributes.text } />
     </div>
   );
 }

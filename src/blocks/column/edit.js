@@ -14,7 +14,8 @@ const { useState, useEffect, useCallback } = wp.element;
 
 function ColumnEdit( props ) {
   const { setAttributes, attributes, clientId, className, hasInnerBlocks,
-    parentId } = props;
+    parentId, isSelected } = props;
+
   const [ selectedWidth, setSelectedWidth ] = useState( 0 );
   const [ parentWidth, setParentWidth ] = useState( 0 );
   const [ , setResizing ] = useState( false );
@@ -48,7 +49,7 @@ function ColumnEdit( props ) {
       minHeight="20"
       enable={ {
         top: false,
-        right: true,
+        right: isSelected,
         bottom: false,
         left: false,
         topRight: false,

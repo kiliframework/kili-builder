@@ -12,8 +12,6 @@ const MaComp = ( props ) => {
   const tagName = 'h' + level;
   const fontSizeValue = getDeviceValue( fontSize, currentTab );
   const fontWeightValue = getDeviceValue( fontWeight, currentTab );
-  console.log( fontWeight );
-
   const colorValue = getDeviceValue( color, currentTab );
   const linesColorValue = getDeviceValue( linesColor, currentTab );
   const linesSizeValue = getDeviceValue( linesSize, currentTab );

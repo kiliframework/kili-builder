@@ -10,7 +10,7 @@ export const defaultAttrBuiler = ( attrName, value ) => {
     const isGeneralAttr = typeof value !== 'object';
     deviceAttrs[ device ] = {
       ...devicesAttributes[ device ],
-      value: isGeneralAttr ? value : value[ device ],
+      value,
       ...( attrName && { attrName } ),
     };
   } );

@@ -11,7 +11,7 @@ import {
   InspectorControls,
 } from '@wordpress/block-editor';
 
-import { COLORS } from '../../constants';
+import { COLORS, DESKTOP } from '../../constants';
 import { HOVER, NORMAL } from '../../constants/pseudoClasses';
 
 const { useCallback } = wp.element;
@@ -37,9 +37,12 @@ export default function ButtonInspector( {
     ( tab, attr, value ) => {
       setAttributes( { [ attr ]: {
         ...attributes[ attr ],
-        [ tab ]: {
-          ...attributes[ attr ][ tab ],
-          value,
+        [ DESKTOP ]: {
+          ...attributes[ attr ][ DESKTOP ],
+          value: {
+            ...attributes[ attr ][ DESKTOP ].value,
+            [ tab ]: value,
+          },
         },
       } } );
     },
@@ -78,14 +81,14 @@ export default function ButtonInspector( {
                 <BaseControl label={ __( `Text Color ${ title }`, 'kili-builder' ) }>
                   <ColorPalette
                     colors={ COLORS }
-                    value={ textColor[ tab ].value }
+                    value={ textColor[ DESKTOP ].value[ tab ] }
                     onChange={ ( value ) => handlePseudoClassesAttrChange( tab, 'textColor', value ) }
                   />
                 </BaseControl>
                 <BaseControl label={ __( `Background Color ${ title }`, 'kili-builder' ) }>
                   <ColorPalette
                     colors={ COLORS }
-                    value={ backgroundColor[ tab ].value }
+                    value={ backgroundColor[ DESKTOP ].value[ tab ] }
                     onChange={ ( value ) => handlePseudoClassesAttrChange( tab, 'backgroundColor', value ) }
                   />
                 </BaseControl>

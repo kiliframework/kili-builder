@@ -10,6 +10,7 @@ import {
 } from '@wordpress/block-editor';
 
 import Inspector from './inspector';
+import { DESKTOP } from '../../constants';
 
 function ButtonEdit( props ) {
   const {
@@ -24,6 +25,7 @@ function ButtonEdit( props ) {
     backgroundColor,
     textColor,
   } = attributes;
+  console.log( attributes );
 
   return (
     <>
@@ -38,8 +40,8 @@ function ButtonEdit( props ) {
             'no-border-radius': borderRadius === 0,
           } ) }
           style={ {
-            backgroundColor: backgroundColor.normal.value,
-            color: textColor.normal.value,
+            backgroundColor: backgroundColor[ DESKTOP ].value.normal,
+            color: textColor[ DESKTOP ].value.normal,
             borderRadius: borderRadius
               ? borderRadius + 'px'
               : undefined,

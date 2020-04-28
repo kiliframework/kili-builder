@@ -7,8 +7,8 @@ export default {
   placeholder: {
     type: 'string',
   },
-  backgroundColor: pseudoClassAttrBuilder( 'background-color' ),
-  textColor: pseudoClassAttrBuilder( 'color' ),
+  backgroundColor: defaultAttrBuiler( 'background-color', pseudoClassAttrBuilder() ),
+  textColor: defaultAttrBuiler( 'color', pseudoClassAttrBuilder() ),
   borderRadius: {
     type: 'number',
     default: 0,

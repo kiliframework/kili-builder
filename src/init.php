@@ -177,7 +177,7 @@ function kili_get_classes_css( $classes ) {
 		if ( isset( $split1[1] ) ) {
 			$rule = kili_get_rule_breakpoint( $split1[0] );
 		}
-		$item = addcslashes($item, ".%");
+		$item = addcslashes($item, ".%#");
 		$rule .= ".{$item}{{$split2[0]}: {$split2[1]}}" . ( strcasecmp( '', $rule ) != 0 ? '}' : '' );
 		return $carry . $rule;
 	}, '' );

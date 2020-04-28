@@ -25,7 +25,6 @@ function ButtonEdit( props ) {
     backgroundColor,
     textColor,
   } = attributes;
-  console.log( attributes );
 
   return (
     <>

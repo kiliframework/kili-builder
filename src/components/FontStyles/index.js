@@ -7,14 +7,16 @@ import HeadingLevelIcon from './heading-level-icon';
 import { sprintf } from '@wordpress/i18n';
 
 import headingDefaultValues from './heading-default-values';
+import useAttributeSetter from '../../hooks/useAttributeSetter';
 
 const { __ } = wp.i18n;
 const { PanelBody, Toolbar, RangeControl, ToolbarGroup } = wp.components;
 const { AlignmentToolbar } = wp.blockEditor;
 
 export default function FontStyles( props ) {
-  const { attributes, setAttributes, isHeading } = props;
+  const { attributes, setAttributes, isHeading, clientId } = props;
   const { currentTab, level, textAlign, color, fontSize, lineHeight, letterSpacing, fontWeight } = attributes;
+  const { handleAttributesWithDeviceChange } = useAttributeSetter( clientId );
 
   const alignValue = getDeviceValue( textAlign, currentTab );
   const colorValue = getDeviceValue( color, currentTab );
@@ -88,7 +90,7 @@ export default function FontStyles( props ) {
       <RangeControl
         label={ __( 'Font Weight', 'kili-builder' ) }
         value={ ( parseFloat( fontWeightValue ) ? parseFloat( fontWeightValue ) : '' ) }
-        onChange={ ( value ) => setAttributes( { fontWeight: valueSetter( fontWeight, currentTab, value ) } ) }
+        onChange={ ( value ) => handleAttributesWithDeviceChange( 'fontWeight', currentTab, value ) }
         min={ 100 }
         max={ 800 }
         step={ 100 }

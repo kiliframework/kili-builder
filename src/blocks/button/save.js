@@ -6,6 +6,7 @@ export default function SaveButton( { attributes } ) {
   const { text } = attributes;
 
   const classes = attrClassCreator( attributes );
+
   return (
     <button className={ classnames( 'wp-block-button__link', `${ classes }` ) }>
       <RichText.Content

@@ -14,16 +14,6 @@
   }
 }
 
-.column:nth-child(odd) {
-  background-color: red;
-}
-
-@for $i from 1 through 12 {
-  &.--col-#{$i} {
-    width: (100% / $i);
-  }
-}
-
 .components-kili-button-group {
   display: flex;
 }

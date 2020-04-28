@@ -1,9 +1,12 @@
 import { RichText } from '@wordpress/block-editor';
+import classnames from 'classnames';
 
 import BannerData from './data';
+import { attrClassCreator } from '../utils';
 
 export default function BannerSave( { attributes } ) {
-  const { url, id, alt, headingText } = attributes;
+  const { url, id, alt, headingText, buttonText, buttonBackgroundColor, buttonTextColor } = attributes;
+  const buttonClasses = attrClassCreator( { buttonBackgroundColor, buttonTextColor } );
   return (
     <section className="main-banner" style={ { backgroundColor: '#0BD8A2' } }>
       <div className="main-banner__wave-wrapper">
@@ -23,7 +26,7 @@ export default function BannerSave( { attributes } ) {
                 <RichText.Content className="alpha headline" value={ headingText } />
               </h2>
               <div className="button__wrapper">
-                <a href="/contact/" className="button button--default main-banner__button">Get in touch</a>
+                <a href="/contact/" className={ classnames( buttonClasses, 'button', 'button--default', 'main-banner__button' ) }><RichText.Content value={ buttonText } /></a>
               </div>
             </div>
           </div>

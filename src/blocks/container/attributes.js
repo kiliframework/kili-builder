@@ -2,12 +2,9 @@ import backgroundAttributes from '../../components/Background/attributes';
 import { defaultAttrBuiler } from '../utils';
 
 export default {
+  width: defaultAttrBuiler( 'width', 'auto' ),
   maxWidth: defaultAttrBuiler( 'max-width', '1200px' ),
   minHeight: defaultAttrBuiler( 'minHeight' ),
-  fullWidth: {
-    type: 'boolean',
-    default: false,
-  },
   id: {
     type: 'string',
     default: '',

@@ -45,7 +45,7 @@ export default function Inspector( props ) {
               max={ 2000 }
               step={ 1 }
             />
-            <BackgroundControl {...props} device={tab} />
+            <BackgroundControl { ...props } device={ tab } />
           </>
         ) }
       </DevicesTabs>

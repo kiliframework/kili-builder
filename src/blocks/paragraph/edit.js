@@ -4,10 +4,11 @@ import { getDeviceValue } from '../utils';
 
 const MaComp = ( props ) => {
   const { attributes, setAttributes } = props;
-  const { currentTab, color, fontSize, textAlign, lineHeight, letterSpacing } = attributes;
+  const { currentTab, color, fontSize, textAlign, lineHeight, letterSpacing, fontWeight } = attributes;
 
   const onTextChange = ( text ) => setAttributes( { text } );
   const fontSizeValue = getDeviceValue( fontSize, currentTab );
+  const fontWeightValue = getDeviceValue( fontWeight, currentTab );
   const colorValue = getDeviceValue( color, currentTab );
   const textAlignValue = getDeviceValue( textAlign, currentTab );
   const lineHeightValue = getDeviceValue( lineHeight, currentTab );
@@ -18,11 +19,12 @@ const MaComp = ( props ) => {
       <Inspector { ...props } />
       <RichText
         style={ {
-          fontSize: `${ fontSizeValue }px`,
+          fontSize: `${ fontSizeValue }`,
+          fontWeightValue: `${ fontWeightValue }`,
           fontFamily: 'Gt Walsheim',
           color: colorValue,
-          letterSpacing: `${ letterSpacingValue }px`,
-          lineHeight: `${ lineHeightValue }px`,
+          letterSpacing: `${ letterSpacingValue }`,
+          lineHeight: `${ lineHeightValue }`,
           textAlign: textAlignValue,
           opacity: .8,
         } }

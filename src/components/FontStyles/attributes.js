@@ -8,13 +8,14 @@ const FontStylesAttributes = {
   },
   level: {
     type: 'number',
+    default: 2,
   },
   textAlign: defaultAttrBuiler( 'text-align', 'center' ),
   color: defaultAttrBuiler( 'color', 'black' ),
-  fontSize: defaultAttrBuiler( 'font-size', '24px' ),
-  fontWeight: defaultAttrBuiler( 'font-weight', 400 ),
-  lineHeight: defaultAttrBuiler( 'line-height', 'center' ),
-  letterSpacing: defaultAttrBuiler( 'letter-spacing', 'normal' ),
+  fontSize: defaultAttrBuiler( 'font-size', '32px' ),
+  fontWeight: defaultAttrBuiler( 'font-weight', 700 ),
+  lineHeight: defaultAttrBuiler( 'line-height', '34px' ),
+  letterSpacing: defaultAttrBuiler( 'letter-spacing', '-0.53px' ),
   sizeType: {
     type: 'string',
     default: 'px',

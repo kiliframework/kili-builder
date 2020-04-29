@@ -7,7 +7,8 @@ export default {
   },
   text: {
     type: 'string',
-    default: '',
+    source: 'html',
+    selector: 'p',
   },
   isCreated: {
     type: 'boolean',

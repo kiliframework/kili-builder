@@ -5,8 +5,10 @@ import BannerData from './data';
 import { attrClassCreator } from '../utils';
 
 export default function BannerSave( { attributes } ) {
-  const { url, id, alt, headingText, buttonText, buttonBackgroundColor, buttonTextColor } = attributes;
+  const { url, id, alt, headingText, buttonText, buttonBackgroundColor, buttonTextColor, level } = attributes;
+  const tagName = 'h' + level;
   const buttonClasses = attrClassCreator( { buttonBackgroundColor, buttonTextColor } );
+
   return (
     <section className="main-banner" style={ { backgroundColor: '#0BD8A2' } }>
       <div className="main-banner__wave-wrapper">
@@ -22,9 +24,7 @@ export default function BannerSave( { attributes } ) {
         <div className="flexgrid medium--middle flexgrid--full">
           <div className="flexgrid__item xsmall--col-12 small--col-12 medium--col-7">
             <div className="main-banner__content-wrapper">
-              <h2 className="alpha headline">
-                <RichText.Content className="alpha headline" value={ headingText } />
-              </h2>
+              <RichText.Content className="alpha headline" tagName={ level && tagName } value={ headingText } />
               <div className="button__wrapper">
                 <a href="/contact/" className={ classnames( buttonClasses, 'button', 'button--default', 'main-banner__button' ) }><RichText.Content value={ buttonText } /></a>
               </div>

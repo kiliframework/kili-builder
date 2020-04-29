@@ -26,13 +26,15 @@ const getAnimateValue = () => {
 };
 
 function BannerEdit( props ) {
-  const { attributes, setAttributes, isSelected, savedImage } = props;
+  const { attributes, setAttributes, savedImage } = props;
   const { url, alt, id, headingText, buttonText, fontSize, lineHeight, letterSpacing,
-    buttonBackgroundColor, buttonBorderRadius, buttonPlaceholder, buttonTextColor } = attributes;
+    buttonBackgroundColor, buttonBorderRadius, buttonPlaceholder, buttonTextColor, level } = attributes;
 
   const fontSizeValue = getDeviceValue( fontSize, DESKTOP );
   const lineHeightValue = getDeviceValue( lineHeight, DESKTOP );
   const letterSpacingValue = getDeviceValue( letterSpacing, DESKTOP );
+
+  const tagName = 'h' + level;
 
   useEffect( () => {
     if ( savedImage && ! url ) {
@@ -77,7 +79,7 @@ function BannerEdit( props ) {
                       lineHeight: `${ lineHeightValue }`,
                     }
                   }
-                  as="h2"
+                  tagName={ level && tagName }
                   className="alpha headline"
                   placeholder="Insert banner header"
                   value={ headingText }

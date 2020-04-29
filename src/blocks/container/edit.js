@@ -1,6 +1,7 @@
 import { InnerBlocks } from '@wordpress/block-editor';
 import Inspector from './inspector';
 import { editClassCreator } from '../utils/editClassCreator';
+import { DESKTOP } from '../../constants';
 
 export default function ContainerEdit( props ) {
   const { attributes, isSelected } = props;
@@ -8,12 +9,14 @@ export default function ContainerEdit( props ) {
     backgroundImage,
     backgroundSize,
     backgroundPosition,
-    backgroundColor, ...rest } = attributes;
+    backgroundColor, maxWidth, fullWidth, ...rest } = attributes;
+
+  const newMaxWidth = fullWidth[ DESKTOP ].value ? 'none' : maxWidth[ DESKTOP ].value;
 
   return (
     <>
       <Inspector { ...props } />
-      <div style={ editClassCreator( rest ) } className="kili-container" >
+      <div style={ { maxWidth: newMaxWidth } } className="kili-container" >
         <div
           style={
             editClassCreator( {

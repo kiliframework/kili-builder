@@ -16,7 +16,7 @@ export default function ContainerEdit( props ) {
   return (
     <>
       <Inspector { ...props } />
-      <div style={ { maxWidth: newMaxWidth } } className="kili-container" >
+      <div style={ { ...editClassCreator( { ...rest } ), maxWidth: newMaxWidth } } className="kili-container" >
         <div
           style={
             editClassCreator( {

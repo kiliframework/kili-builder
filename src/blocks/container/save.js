@@ -20,7 +20,6 @@ export default function ContainerSave( { attributes } ) {
     return maxWidthClass;
   };
   const maxWidthClass = getMaxWidthClass();
-  console.log( maxWidthClass );
 
   const classes = attrClassCreator( { ...rest } );
 

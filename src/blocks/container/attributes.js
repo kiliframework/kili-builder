@@ -1,4 +1,5 @@
 import backgroundAttributes from '../../components/Background/attributes';
+import dimensionAttributes from '../../components/DimensionsControl/attributes';
 import { defaultAttrBuiler } from '../utils';
 
 export default {
@@ -18,4 +19,5 @@ export default {
     default: '',
   },
   ...backgroundAttributes,
+  ...dimensionAttributes,
 };

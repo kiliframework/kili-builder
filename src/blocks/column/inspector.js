@@ -23,18 +23,6 @@ function Inspector( props ) {
     } } );
   };
 
-  const getValuesByDevice = ( type, currentTab ) => {
-    let values = {};
-    values = {
-      valueTop: attributes[ `${ type }Top` ][ currentTab ].value,
-      valueBottom: attributes[ `${ type }Bottom` ][ currentTab ].value,
-      valueRight: attributes[ `${ type }Right` ][ currentTab ].value,
-      valueLeft: attributes[ `${ type }Left` ][ currentTab ].value,
-    };
-
-    return values;
-  };
-
   return (
     <InspectorControls>
       <DevicesTabs
@@ -49,7 +37,6 @@ function Inspector( props ) {
                   type={ 'padding' }
                   label={ __( 'Padding', 'kili-builder' ) }
                   help={ __( 'Space inside of the container.', 'kili-builder' ) }
-                  { ...getValuesByDevice( 'padding', tab.name ) }
                 />
                 <DimensionsControl
                   { ...props }
@@ -57,7 +44,6 @@ function Inspector( props ) {
                   type={ 'margin' }
                   label={ __( 'Margin', 'kili-builder' ) }
                   help={ __( 'Space around the container.', 'kili-builder' ) }
-                  { ...getValuesByDevice( 'margin', tab.name ) }
                 />
                 <RangeControl
                   label={ __( 'Width (number of columns)', 'kili-builder' ) }

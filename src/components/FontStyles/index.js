@@ -75,13 +75,13 @@ export default function FontStyles( props ) {
       />
       <AdvancedColorControl
         label={ __( 'Heading Color', 'kili-builder' ) }
-        colorValue={ ( colorValue ? colorValue : '' ) }
+        colorValue={ ( colorValue || '' ) }
         colorDefault={ colorValue }
         onColorChange={ ( value ) => setAttributes( { color: valueSetter( color, currentTab, value ) } ) }
       />
       <RangeControl
         label={ __( 'Font Size', 'kili-builder' ) }
-        value={ ( parseFloat( fontSizeValue ) ? parseFloat( fontSizeValue ) : '' ) }
+        value={ ( parseFloat( fontSizeValue ) || '' ) }
         onChange={ ( value ) => setAttributes( { fontSize: valueSetter( fontSize, currentTab, value, 'px' ) } ) }
         min={ 5 }
         max={ 200 }
@@ -89,7 +89,7 @@ export default function FontStyles( props ) {
       />
       <RangeControl
         label={ __( 'Font Weight', 'kili-builder' ) }
-        value={ ( parseFloat( fontWeightValue ) ? parseFloat( fontWeightValue ) : '' ) }
+        value={ ( parseFloat( fontWeightValue ) || '' ) }
         onChange={ ( value ) => handleAttributesWithDeviceChange( 'fontWeight', currentTab, value ) }
         min={ 100 }
         max={ 800 }
@@ -97,7 +97,7 @@ export default function FontStyles( props ) {
       />
       <RangeControl
         label={ __( 'Line Height', 'kili-builder' ) }
-        value={ ( parseFloat( lineHeightValue ) ? parseFloat( lineHeightValue ) : '' ) }
+        value={ ( parseFloat( lineHeightValue ) || '' ) }
         onChange={ ( value ) => setAttributes( { lineHeight: valueSetter( lineHeight, currentTab, value, 'px' ) } ) }
         min={ 0 }
         max={ 100 }
@@ -105,7 +105,7 @@ export default function FontStyles( props ) {
       />
       <RangeControl
         label={ __( 'Letter Spacing', 'kili-builder' ) }
-        value={ ( parseFloat( letterSpacingValue ) ? parseFloat( letterSpacingValue ) : '' ) }
+        value={ ( parseFloat( letterSpacingValue ) || '' ) }
         onChange={ ( value ) => setAttributes( { letterSpacing: valueSetter( letterSpacing, currentTab, value, 'px' ) } ) }
         min={ -50 }
         max={ 50 }

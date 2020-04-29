@@ -1,22 +1,24 @@
 {
   "name": "kili-builder",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "webpack --mode=development --watch",
-    "build": "webpack --mode=production"
-  },
+  "description": "Advanced Page Building components for Gutenberg.",
+  "homepage": "https://github.com/kiliframework/kili-builder/blob/master/readme.md",
+  "bugs": "https://github.com/kiliframework/kili-builder/issues",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kiliframework/kili-builder.git"
   },
-  "author": "",
+  "author": "Kili Framework",
+  "contributors": [
+    { "name": "Fabian Altahona", "email": "fabian.altahona@koombea.com" }
+  ],
+  "repository": "github:kiliframework/kili-builder",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kiliframework/kili-builder/issues"
+  "private": "true",
+  "scripts": {
+    "start": "webpack --mode=development --watch",
+    "build": "webpack --mode=production"
   },
-  "homepage": "https://github.com/kiliframework/kili-builder#readme",
   "dependencies": {
     "@wordpress/blob": "^2.7.0",
     "@wordpress/block-editor": "^3.5.0",

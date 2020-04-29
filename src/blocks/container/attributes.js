@@ -3,7 +3,7 @@ import dimensionAttributes from '../../components/DimensionsControl/attributes';
 import { defaultAttrBuiler } from '../utils';
 
 export default {
-  width: defaultAttrBuiler( 'width', 'auto' ),
+  fullWidth: defaultAttrBuiler( null, false ),
   maxWidth: defaultAttrBuiler( 'max-width', '1200px' ),
   minHeight: defaultAttrBuiler( 'minHeight' ),
   id: {

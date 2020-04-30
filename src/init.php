@@ -112,6 +112,7 @@ function array_flatten( $array ) {
 }
 
 function kili_search_gutblocks_styles( $post_id ) {
+	
 	remove_action( 'save_post', 'kili_search_gutblocks_styles' );
 	$current_post = get_post( $post_id );
 	if ( ! has_blocks( $current_post->post_content ) ) {
@@ -126,6 +127,7 @@ function kili_search_gutblocks_styles( $post_id ) {
 	$post_content = $current_post->post_content;
 	if ( strcasecmp( '', $styles ) !== 0 ) {
 		$post_content = preg_replace("/<style id='kili-custom-style'>.*<\/style>/", '', $post_content);
+		$styles = str_ireplace('\\', '\\\\', $styles);
 		$styles = "<style id='kili-custom-style'>{$styles}</style>";
 		wp_update_post( array( 'ID' => $post_id, 'post_content' => $styles . $post_content ) );
 	}
@@ -134,9 +136,12 @@ function kili_search_gutblocks_styles( $post_id ) {
 
 function kili_get_blocks_styles( $blocks ) {
 	$styles = '';
-	$regex = '/class="\w[\w-_]+(\s+\w[\w-_#]+)*"/mi';
+	$regex = '/\s*\w+--\w[\w-]*__[\w.%()#-]*\s*/mi';
 	foreach ( $blocks as $block ) {
 		$matches = [];
+		if ( count($block['innerBlocks']) > 0 ) {
+			$styles .= kili_get_blocks_styles( $block['innerBlocks'] );
+		}
 		preg_match_all($regex, $block['innerHTML'], $matches, PREG_SET_ORDER, 0);
 		if ( count( $matches ) < 1 ) {
 			continue;
@@ -172,6 +177,7 @@ function kili_get_classes_css( $classes ) {
 		if ( isset( $split1[1] ) ) {
 			$rule = kili_get_rule_breakpoint( $split1[0] );
 		}
+		$item = addcslashes($item, ".%");
 		$rule .= ".{$item}{{$split2[0]}: {$split2[1]}}" . ( strcasecmp( '', $rule ) != 0 ? '}' : '' );
 		return $carry . $rule;
 	}, '' );
@@ -184,12 +190,11 @@ function kili_get_rule_breakpoint( $breakpoint_key ) {
 	$breakpoints = [
 		'sm' => '320px',
 		'md' => '760px',
-		'lg' => '1024px'
 	];
 	if ( ! isset( $breakpoints[ $breakpoint_key ] ) ) {
 		return '';
 	}
-	return '@media all and (min-width: ' . $breakpoints[ $breakpoint_key ] . '){';
+	return '@media all and (max-width: ' . $breakpoints[ $breakpoint_key ] . '){';
 }
 
 add_action( 'init', 'kili_blocks_register' );

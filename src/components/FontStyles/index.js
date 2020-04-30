@@ -14,10 +14,11 @@ const { AlignmentToolbar } = wp.blockEditor;
 
 export default function FontStyles( props ) {
   const { attributes, setAttributes, isHeading } = props;
-  const { currentTab, level, textAlign, color, fontSize, lineHeight, letterSpacing } = attributes;
+  const { currentTab, level, textAlign, color, fontSize, lineHeight, letterSpacing, fontWeight } = attributes;
 
   const alignValue = getDeviceValue( textAlign, currentTab );
   const colorValue = getDeviceValue( color, currentTab );
+  const fontWeightValue = getDeviceValue( fontWeight, currentTab );
   const fontSizeValue = getDeviceValue( fontSize, currentTab );
   const lineHeightValue = getDeviceValue( lineHeight, currentTab );
   const letterSpacingValue = getDeviceValue( letterSpacing, currentTab );
@@ -28,7 +29,6 @@ export default function FontStyles( props ) {
 
   const createLevelControl = ( targetLevel, selectedLevel ) => {
     const isActive = targetLevel === selectedLevel;
-    console.log( getHeadingDefaultValuesFor( targetLevel, 'fontSize' ) );
 
     return {
       icon: (
@@ -79,24 +79,32 @@ export default function FontStyles( props ) {
       />
       <RangeControl
         label={ __( 'Font Size', 'kili-builder' ) }
-        value={ ( fontSizeValue ? fontSizeValue : '' ) }
-        onChange={ ( value ) => setAttributes( { fontSize: valueSetter( fontSize, currentTab, value ) } ) }
+        value={ ( parseFloat( fontSizeValue ) ? parseFloat( fontSizeValue ) : '' ) }
+        onChange={ ( value ) => setAttributes( { fontSize: valueSetter( fontSize, currentTab, value, 'px' ) } ) }
         min={ 5 }
         max={ 200 }
         step={ 1 }
       />
       <RangeControl
+        label={ __( 'Font Weight', 'kili-builder' ) }
+        value={ ( parseFloat( fontWeightValue ) ? parseFloat( fontWeightValue ) : '' ) }
+        onChange={ ( value ) => setAttributes( { fontWeight: valueSetter( fontWeight, currentTab, value ) } ) }
+        min={ 100 }
+        max={ 800 }
+        step={ 100 }
+      />
+      <RangeControl
         label={ __( 'Line Height', 'kili-builder' ) }
-        value={ ( lineHeightValue ? lineHeightValue : '' ) }
-        onChange={ ( value ) => setAttributes( { lineHeight: valueSetter( lineHeight, currentTab, value ) } ) }
+        value={ ( parseFloat( lineHeightValue ) ? parseFloat( lineHeightValue ) : '' ) }
+        onChange={ ( value ) => setAttributes( { lineHeight: valueSetter( lineHeight, currentTab, value, 'px' ) } ) }
         min={ 0 }
         max={ 100 }
         step={ 1 }
       />
       <RangeControl
         label={ __( 'Letter Spacing', 'kili-builder' ) }
-        value={ ( letterSpacingValue ? letterSpacingValue : '' ) }
-        onChange={ ( value ) => setAttributes( { letterSpacing: valueSetter( letterSpacing, currentTab, value ) } ) }
+        value={ ( parseFloat( letterSpacingValue ) ? parseFloat( letterSpacingValue ) : '' ) }
+        onChange={ ( value ) => setAttributes( { letterSpacing: valueSetter( letterSpacing, currentTab, value, 'px' ) } ) }
         min={ -50 }
         max={ 50 }
         step={ 0.1 }

@@ -28,40 +28,21 @@ export default function save( { attributes } ) {
           data-scroll-mobile={ slidesToScroll[ MOBILE ].value }
         >
           { images.map( ( image, index ) => (
-            <div className="kb-slide-item kb-gallery-carousel-item" key={ index }>
-              <figure>
+            <div key={ image.url }>
+              <div className="industries-carousel__item">
                 <img
+                  className="icon"
                   src={ image.url }
                   alt={ image.alt }
                   data-id={ image.id }
-                  data-full-url={ image.fullUrl }
-                  data-link={ image.link }
-                  className={
-                    image.id ? `wp-image-${ image.id }` : null
-                  }
+                  tabIndex="0"
                 />
-                { ! RichText.isEmpty( image.caption ) && (
-                  <RichText.Content
-                    tagName="figcaption"
-                    className="kili-carousel-slide__caption"
-                    value={ image.caption }
-                  />
-                ) }
-                { ! RichText.isEmpty( image.author ) && (
-                  <RichText.Content
-                    tagName="figcaption"
-                    className="kili-carousel-slide__author"
-                    value={ image.author }
-                  />
-                ) }
-                { ! RichText.isEmpty( image.title ) && (
-                  <RichText.Content
-                    tagName="figcaption"
-                    className="kili-carousel-slide__title"
-                    value={ image.title }
-                  />
-                ) }
-              </figure>
+                { image.caption && <RichText.Content
+                  tagName="caption"
+                  className="item-title"
+                  value={ image.caption }
+                /> }
+              </div>
             </div>
           ) ) }
         </div>

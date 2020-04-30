@@ -17,6 +17,8 @@ jQuery( document ).ready( function( $ ) {
       slidesToShowDesktop = parseInt( container.attr( 'data-columns-desktop' ) ),
       slidesToShowTablet = parseInt( container.attr( 'data-columns-tablet' ) ),
       slidesToShowMobile = parseInt( container.attr( 'data-columns-mobile' ) );
+    console.log( slidesToScrollDesktop, slidesToShowDesktop );
+
     container.slick( {
       slidesToScroll: slidesToScrollDesktop,
       slidesToShow: slidesToShowDesktop,

@@ -9,9 +9,12 @@ module.exports = ( env, argv ) => {
     return argv.mode === 'development';
   }
   const config = {
-    entry: './src/blocks.js',
+    entry: {
+      blocks: './src/blocks.js',
+      script: './src/script.js',
+    },
     output: {
-      filename: 'blocks.js',
+      filename: '[name].js',
     },
     optimization: {
       minimizer: [

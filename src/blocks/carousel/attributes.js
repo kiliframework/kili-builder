@@ -36,7 +36,7 @@ export default {
       caption: {
         type: 'string',
         source: 'html',
-        selector: '.kili-carousel-slide__caption',
+        selector: 'p',
       },
       author: {
         type: 'string',

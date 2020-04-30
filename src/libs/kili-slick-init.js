@@ -8,96 +8,41 @@ jQuery( document ).ready( function( $ ) {
    *
    * @param {Object} container the slider container.
    */
-  function kbSlickSliderInit( container ) {
-    const sliderSpeed = parseInt( container.data( 'slider-speed' ) ),
-      sliderAnimationSpeed = parseInt( container.attr( 'data-slider-anim-speed' ) ),
-      sliderArrows = container.data( 'slider-arrows' ),
+  function kiliBlockCarouselInit( container ) {
+    const sliderArrows = container.data( 'slider-arrows' ),
       sliderDots = container.data( 'slider-dots' ),
-      sliderPause = container.data( 'slider-pause-hover' ),
-      sliderAuto = container.data( 'slider-auto' ),
-      xxl = parseInt( container.attr( 'data-columns-xxl' ) ),
-      xl = parseInt( container.attr( 'data-columns-xl' ) ),
-      md = parseInt( container.attr( 'data-columns-md' ) ),
-      sm = parseInt( container.attr( 'data-columns-sm' ) ),
-      xs = parseInt( container.attr( 'data-columns-xs' ) ),
-      ss = parseInt( container.attr( 'data-columns-ss' ) ),
-      scroll = parseInt( container.attr( 'data-slider-scroll' ) );
-    let slickRtl = false;
-    let scrollSxxl = xxl,
-      scrollSxl = xl,
-      scrollSmd = md,
-      scrollSsm = sm,
-      scrollSxs = xs,
-      scrollSss = ss;
-    if ( $( 'html[dir="rtl"]' ).length ) {
-      slickRtl = true;
-    }
-    if ( 1 === scroll ) {
-      scrollSxxl = 1;
-      scrollSxl = 1;
-      scrollSmd = 1;
-      scrollSsm = 1;
-      scrollSxs = 1;
-      scrollSss = 1;
-    }
-    container.on( 'init', function() {
-      container.removeClass( 'kt-post-carousel-loading' );
-    } );
+      slidesToScrollDesktop = parseInt( container.attr( 'data-scroll-desktop' ) ),
+      slidesToScrollTablet = parseInt( container.attr( 'data-scroll-tablet' ) ),
+      slidesToScrollMobile = parseInt( container.attr( 'data-scroll-mobile' ) ),
+      slidesToShowDesktop = parseInt( container.attr( 'data-columns-desktop' ) ),
+      slidesToShowTablet = parseInt( container.attr( 'data-columns-tablet' ) ),
+      slidesToShowMobile = parseInt( container.attr( 'data-columns-mobile' ) );
     container.slick( {
-      slidesToScroll: scrollSxxl,
-      slidesToShow: xxl,
-      arrows: sliderArrows,
-      speed: sliderAnimationSpeed,
-      autoplay: sliderAuto,
-      autoplaySpeed: sliderSpeed,
+      slidesToScroll: slidesToScrollDesktop,
+      slidesToShow: slidesToShowDesktop,
+      arrows: true,
       fade: false,
-      pauseOnHover: sliderPause,
-      dots: sliderDots,
-      rtl: slickRtl,
+      dots: true,
       responsive: [
         {
-          breakpoint: 1499,
+          breakpoint: 1024,
           settings: {
-            slidesToShow: xl,
-            slidesToScroll: scrollSxl,
+            slidesToShow: slidesToShowTablet,
+            slidesToScroll: slidesToScrollTablet,
           },
         },
         {
-          breakpoint: 1199,
+          breakpoint: 640,
           settings: {
-            slidesToShow: md,
-            slidesToScroll: scrollSmd,
-          },
-        },
-        {
-          breakpoint: 991,
-          settings: {
-            slidesToShow: sm,
-            slidesToScroll: scrollSsm,
-          },
-        },
-        {
-          breakpoint: 767,
-          settings: {
-            slidesToShow: xs,
-            slidesToScroll: scrollSxs,
-          },
-        },
-        {
-          breakpoint: 543,
-          settings: {
-            slidesToShow: ss,
-            slidesToScroll: scrollSss,
+            slidesToShow: slidesToShowMobile,
+            slidesToScroll: slidesToScrollMobile,
           },
         },
       ],
     } );
-    $( window ).on( 'kadence-tabs-open', function( e ) {
-      container.slick( 'refresh' );
-    } );
   }
-  $( '.kt-blocks-carousel-init' ).each( function() {
+  $( '.kili-blocks-carousel-init' ).each( function() {
     const container = $( this );
-    kbSlickSliderInit( container );
+    kiliBlockCarouselInit( container );
   } );
 } );

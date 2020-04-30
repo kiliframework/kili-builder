@@ -59,7 +59,7 @@ export default function CarouselEdit( props ) {
 
   useEffect( () => {
     if ( selectedCarouselSlideName ) {
-      const newSelectedCarouselSlide = carouselOptions.find( ( option ) => option.name === selectedCarouselSlideName );
+      const newSelectedCarouselSlide = carouselOptions.find( ( option ) => option.className === selectedCarouselSlideName );
       setSelectedCarouselSlide( newSelectedCarouselSlide );
     }
   }, [] );
@@ -116,10 +116,10 @@ export default function CarouselEdit( props ) {
   };
 
   const handleLayoutSelect = ( value ) => {
-    const newSelectedCarouselSlide = carouselOptions.find( ( option ) => option.name === value );
+    const newSelectedCarouselSlide = carouselOptions.find( ( option ) => option.className === value );
     setSelectedCarouselSlide( newSelectedCarouselSlide );
     setAttributes( {
-      selectedCarouselSlideName: newSelectedCarouselSlide.name,
+      selectedCarouselSlideName: newSelectedCarouselSlide.className,
     } );
   };
 
@@ -156,7 +156,7 @@ export default function CarouselEdit( props ) {
                     key={ option.name }
                     className="components-kili-button-group__button"
                     isLarge
-                    onClick={ () => handleLayoutSelect( option.name ) }
+                    onClick={ () => handleLayoutSelect( option.className ) }
                   >
                     { option.name }
                   </Button>

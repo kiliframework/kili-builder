@@ -1,8 +1,6 @@
-/**
- * WordPress dependencies
- */
-import { RichText } from '@wordpress/block-editor';
 import { DESKTOP, TABLET, MOBILE } from '../../constants';
+import CarouselImagesView from './carousel-images-view';
+import CarouselQuotesView from './carousel-quotes-view';
 
 export default function save( { attributes } ) {
   const {
@@ -12,11 +10,12 @@ export default function save( { attributes } ) {
     dots,
     arrows,
     infinite,
+    selectedCarouselSlideName,
   } = attributes;
 
   return (
     <div
-      className="kili-blocks-carousel-init"
+      className={ `kili-blocks-carousel-init ${ selectedCarouselSlideName }` }
       data-columns-desktop={ slidesToShow[ DESKTOP ].value }
       data-columns-tablet={ slidesToShow[ TABLET ].value }
       data-columns-mobile={ slidesToShow[ MOBILE ].value }
@@ -26,20 +25,8 @@ export default function save( { attributes } ) {
     >
       { images.map( ( image ) => (
         <div className="kili-carousel-slide" key={ image.url }>
-          <div className="industries-carousel__item">
-            <img
-              className="icon"
-              src={ image.url }
-              alt={ image.alt }
-              data-id={ image.id }
-              tabIndex="0"
-            />
-            { image.caption && <RichText.Content
-              tagName="p"
-              className="item-title"
-              value={ image.caption }
-            /> }
-          </div>
+          { selectedCarouselSlideName === 'industries' && <CarouselImagesView image={ image } /> }
+          { selectedCarouselSlideName === 'reviews' && <CarouselQuotesView image={ image } /> }
         </div>
       ) ) }
     </div>

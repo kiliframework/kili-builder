@@ -4,6 +4,7 @@ import { InspectorControls, MediaUploadCheck, MediaUpload } from '@wordpress/blo
 import { PanelBody, BaseControl, IconButton } from '@wordpress/components';
 
 import FontStyles from '../../components/FontStyles';
+import ButtonInspector from '../../components/ButtonInspector';
 
 export default function BannerInspector( props ) {
   const { attributes, onImageSelect } = props;
@@ -35,6 +36,9 @@ export default function BannerInspector( props ) {
         />
       </MediaUploadCheck>
       <FontStyles { ...props } isHeading />
+      <PanelBody title={ __( 'Image Settings', 'kili-builder' ) }>
+        <ButtonInspector { ...props } />
+      </PanelBody>
     </InspectorControls>
 
   );

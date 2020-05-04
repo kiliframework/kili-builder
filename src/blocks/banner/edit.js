@@ -1,4 +1,5 @@
 import { RichText, MediaPlaceholder, BlockIcon } from '@wordpress/block-editor';
+import classnames from 'classnames';
 
 import { gallery } from '@wordpress/icons';
 
@@ -26,11 +27,13 @@ const getAnimateValue = () => {
 
 function BannerEdit( props ) {
   const { attributes, setAttributes, isSelected, savedImage } = props;
-  const { url, alt, id, headingText, buttonText, fontSize, lineHeight, letterSpacing } = attributes;
+  const { url, alt, id, headingText, buttonText, fontSize, lineHeight, letterSpacing,
+    buttonBackgroundColor, buttonBorderRadius, buttonPlaceholder, buttonTextColor } = attributes;
 
   const fontSizeValue = getDeviceValue( fontSize, DESKTOP );
   const lineHeightValue = getDeviceValue( lineHeight, DESKTOP );
   const letterSpacingValue = getDeviceValue( letterSpacing, DESKTOP );
+  console.log( attributes );
 
   useEffect( () => {
     if ( savedImage && ! url ) {
@@ -43,6 +46,11 @@ function BannerEdit( props ) {
 
   const handleImagesSelect = ( image ) => {
     setAttributes( { url: image.url, id: image.id, alt: image.alt } );
+  };
+
+  const handleButtonChange = ( value ) => {
+    console.log( value );
+    setAttributes( { buttonText: value } );
   };
 
   return (
@@ -78,7 +86,23 @@ function BannerEdit( props ) {
                   onChange={ ( value ) => setAttributes( { headingText: value } ) }
                 />
                 <div className="button__wrapper">
-                  <a href="/contact/" className="button button--default main-banner__button">Get in touch</a>
+                  <RichText
+                    placeholder={ buttonPlaceholder || __( 'Add button text', 'kili-builder' ) }
+                    value={ buttonText }
+                    onChange={ handleButtonChange }
+                    className={ classnames( 'wp-block-button__link', {
+                      'no-border-radius': buttonBorderRadius === 0,
+                    } ) }
+                    style={ {
+                      backgroundColor: buttonBackgroundColor[ DESKTOP ].value.normal,
+                      color: buttonTextColor[ DESKTOP ].value.normal,
+                      zIndex: 1,
+                      position: 'relative',
+                      borderRadius: buttonBorderRadius
+                        ? buttonBorderRadius + 'px'
+                        : undefined,
+                    } }
+                  />
                   <img className="button__wave" src={ kili_images.waves } alt="waves background" />
                 </div>
               </div>

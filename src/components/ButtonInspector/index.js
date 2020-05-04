@@ -21,10 +21,10 @@ export default function ButtonInspector( {
   setAttributes,
 } ) {
   const {
-    borderRadius,
-    rel,
-    backgroundColor,
-    textColor,
+    buttonBorderRadius,
+    buttonRel,
+    buttonBackgroundColor,
+    buttonTextColor,
   } = attributes;
 
   const handleAttrChange = useCallback(
@@ -50,15 +50,15 @@ export default function ButtonInspector( {
   );
 
   return (
-    <InspectorControls>
+    <>
       <PanelBody title={ __( 'Border settings', 'kili-builder' ) }>
         <RangeControl
-          value={ borderRadius }
+          value={ buttonBorderRadius }
           label={ __( 'Border radius', 'kili-builder' ) }
           min={ 0 }
           max={ 50 }
           allowReset
-          onChange={ ( value ) => handleAttrChange( 'borderRadius', value ) }
+          onChange={ ( value ) => handleAttrChange( 'buttonBorderRadius', value ) }
         />
       </PanelBody>
       <PanelBody title={ __( 'Text & Background Color Settings', 'kili-builder' ) }>
@@ -81,15 +81,15 @@ export default function ButtonInspector( {
                 <BaseControl label={ __( `Text Color ${ title }`, 'kili-builder' ) }>
                   <ColorPalette
                     colors={ COLORS }
-                    value={ textColor[ DESKTOP ].value[ tab ] }
-                    onChange={ ( value ) => handlePseudoClassesAttrChange( tab, 'textColor', value ) }
+                    value={ buttonTextColor[ DESKTOP ].value[ tab ] }
+                    onChange={ ( value ) => handlePseudoClassesAttrChange( tab, 'buttonTextColor', value ) }
                   />
                 </BaseControl>
                 <BaseControl label={ __( `Background Color ${ title }`, 'kili-builder' ) }>
                   <ColorPalette
                     colors={ COLORS }
-                    value={ backgroundColor[ DESKTOP ].value[ tab ] }
-                    onChange={ ( value ) => handlePseudoClassesAttrChange( tab, 'backgroundColor', value ) }
+                    value={ buttonBackgroundColor[ DESKTOP ].value[ tab ] }
+                    onChange={ ( value ) => handlePseudoClassesAttrChange( tab, 'buttonBackgroundColor', value ) }
                   />
                 </BaseControl>
               </>
@@ -101,10 +101,10 @@ export default function ButtonInspector( {
       <PanelBody title={ __( 'Link settings', 'kili-builder' ) }>
         <TextControl
           label={ __( 'Link rel', 'kili-builder' ) }
-          value={ rel || '' }
-          onChange={ ( value ) => handleAttrChange( 'rel', value ) }
+          value={ buttonRel || '' }
+          onChange={ ( value ) => handleAttrChange( 'buttonRel', value ) }
         />
       </PanelBody>
-    </InspectorControls>
+    </>
   );
 }

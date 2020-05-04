@@ -33,7 +33,6 @@ function BannerEdit( props ) {
   const fontSizeValue = getDeviceValue( fontSize, DESKTOP );
   const lineHeightValue = getDeviceValue( lineHeight, DESKTOP );
   const letterSpacingValue = getDeviceValue( letterSpacing, DESKTOP );
-  console.log( attributes );
 
   useEffect( () => {
     if ( savedImage && ! url ) {
@@ -49,7 +48,6 @@ function BannerEdit( props ) {
   };
 
   const handleButtonChange = ( value ) => {
-    console.log( value );
     setAttributes( { buttonText: value } );
   };
 

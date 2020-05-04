@@ -13,7 +13,7 @@ export default function useAttributeSetter( clientId ) {
           ...attributes[ attribute ],
           [ device ]: {
             ...attributes[ attribute ][ device ],
-            value: `${ value }${ dimension || '' }`,
+            value: dimension ? `${ value }${ dimension }` : value,
           },
         } } );
     },

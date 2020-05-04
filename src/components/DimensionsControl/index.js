@@ -1,7 +1,6 @@
 import classnames from 'classnames';
 
 import icons from './icons';
-import DimensionsSelect from './DimensionsSelect';
 
 import { __, sprintf } from '@wordpress/i18n';
 import { Button, Tooltip } from '@wordpress/components';
@@ -11,10 +10,6 @@ import './editor.scss';
 export default function DimensionsControl( { device,
   label = __( 'Margin', 'kili-builder' ),
   type = 'margin',
-  valueBottom,
-  valueLeft,
-  valueRight,
-  valueTop,
   setAttributes,
   attributes,
 } ) {
@@ -29,7 +24,7 @@ export default function DimensionsControl( { device,
       ...attributes[ `${ type }${ direction }` ],
       [ device ]: {
         ...attributes[ `${ type }${ direction }` ][ device ],
-        value: newValue,
+        value: `${ newValue }px`,
       },
     } } );
   };
@@ -57,28 +52,28 @@ export default function DimensionsControl( { device,
               className="components-kili-dimensions-control__number"
               type="number"
               onChange={ ( e ) => onChangeDirection( e, 'Top' ) }
-              value={ valueTop ? valueTop : 0 }
+              value={ parseFloat( attributes[ `${ type }Top` ][ device ].value ) ? parseFloat( attributes[ `${ type }Top` ][ device ].value ) : 0 }
               min={ type === 'padding' ? 0 : undefined }
             />
             <input
               className="components-kili-dimensions-control__number"
               type="number"
               onChange={ ( e ) => onChangeDirection( e, 'Right' ) }
-              value={ valueRight ? valueRight : 0 }
+              value={ parseFloat( attributes[ `${ type }Right` ][ device ].value ) ? parseFloat( attributes[ `${ type }Right` ][ device ].value ) : 0 }
               min={ type === 'padding' ? 0 : undefined }
             />
             <input
               className="components-kili-dimensions-control__number"
               type="number"
               onChange={ ( e ) => onChangeDirection( e, 'Bottom' ) }
-              value={ valueBottom ? valueBottom : 0 }
+              value={ parseFloat( attributes[ `${ type }Bottom` ][ device ].value ) ? parseFloat( attributes[ `${ type }Bottom` ][ device ].value ) : 0 }
               min={ type === 'padding' ? 0 : undefined }
             />
             <input
               className="components-kili-dimensions-control__number"
               type="number"
               onChange={ ( e ) => onChangeDirection( e, 'Left' ) }
-              value={ valueLeft ? valueLeft : 0 }
+              value={ parseFloat( attributes[ `${ type }Left` ][ device ].value ) ? parseFloat( attributes[ `${ type }Left` ][ device ].value ) : 0 }
               min={ type === 'padding' ? 0 : undefined }
             />
             <Tooltip text={ __( 'Reset', 'kili-builder' ) } >

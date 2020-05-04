@@ -10,6 +10,7 @@ const justifyContentOptions = attrOptionsBuiler( [
   [ 'center', 'Center', 'center' ],
   [ 'end', 'End', 'flex-end' ],
   [ 'space-between', 'Space between', 'space-between' ],
+  [ 'space-evenly', 'Space evenly', 'space-evenly' ],
 ] );
 
 const alignItemsOptions = attrOptionsBuiler( [

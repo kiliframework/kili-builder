@@ -1,16 +1,32 @@
 import { InnerBlocks } from '@wordpress/block-editor';
 import Inspector from './inspector';
 import { editClassCreator } from '../utils/editClassCreator';
+import { DESKTOP } from '../../constants';
 
 export default function ContainerEdit( props ) {
   const { attributes, isSelected } = props;
-  const { minHeight, maxWidth, ...rest } = attributes;
+  const { opacity,
+    backgroundImage,
+    backgroundSize,
+    backgroundPosition,
+    backgroundColor, maxWidth, fullWidth, ...rest } = attributes;
+
+  const newMaxWidth = fullWidth[ DESKTOP ].value ? 'none' : maxWidth[ DESKTOP ].value;
 
   return (
     <>
       <Inspector { ...props } />
-      <div style={ editClassCreator( { minHeight, maxWidth } ) } className="kili-container" >
-        <div style={ editClassCreator( rest ) } className="kili-container__overlay" />
+      <div style={ { maxWidth: newMaxWidth } } className="kili-container" >
+        <div
+          style={
+            editClassCreator( {
+              opacity,
+              backgroundImage,
+              backgroundSize,
+              backgroundPosition,
+              backgroundColor,
+            } ) }
+          className="kili-container__overlay" />
         <InnerBlocks renderAppender={ isSelected && InnerBlocks.ButtonBlockAppender } />
       </div>
     </>

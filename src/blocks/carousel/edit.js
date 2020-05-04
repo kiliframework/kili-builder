@@ -59,7 +59,7 @@ export default function CarouselEdit( props ) {
 
   useEffect( () => {
     if ( selectedCarouselSlideName ) {
-      const newSelectedCarouselSlide = carouselOptions.find( ( option ) => option.name === selectedCarouselSlideName );
+      const newSelectedCarouselSlide = carouselOptions.find( ( option ) => option.className === selectedCarouselSlideName );
       setSelectedCarouselSlide( newSelectedCarouselSlide );
     }
   }, [] );
@@ -116,10 +116,10 @@ export default function CarouselEdit( props ) {
   };
 
   const handleLayoutSelect = ( value ) => {
-    const newSelectedCarouselSlide = carouselOptions.find( ( option ) => option.name === value );
+    const newSelectedCarouselSlide = carouselOptions.find( ( option ) => option.className === value );
     setSelectedCarouselSlide( newSelectedCarouselSlide );
     setAttributes( {
-      selectedCarouselSlideName: newSelectedCarouselSlide.name,
+      selectedCarouselSlideName: newSelectedCarouselSlide.className,
     } );
   };
 
@@ -128,38 +128,41 @@ export default function CarouselEdit( props ) {
   if ( ! hasImages ) {
     return (
       <>
-        { selectedCarouselSlide ? ( <MediaPlaceholder
-          addToGallery={ hasImages }
-          isAppender={ hasImages }
-          className={ className }
-          disableMediaButtons={ hasImages && ! isSelected }
-          icon={ ! hasImages && <BlockIcon icon={ gallery } /> }
-          labels={ {
-            title: ! hasImages && __( 'Carousel' ),
-            instructions: ! hasImages && 'Drag images, upload new ones or select files from your library.',
-          } }
-          onSelect={ handleImagesSelect }
-          accept="image/*"
-          multiple
-          value={ hasImages ? images : undefined }
-        /> ) : (
-          <Placeholder
-            label={ __( 'Carousel', 'kili-builder' ) }
-            instructions={ __( 'Select the type of layout for the carousel.', 'kili-builder' ) }
-          >
-            <ButtonGroup className="components-kili-button-group">
-              { carouselOptions.map( ( option, index ) => (
-                <Button
-                  key={ option.name }
-                  className="components-kili-button-group__button"
-                  isLarge
-                  onClick={ () => handleLayoutSelect( option.name ) }
-                >
-                  { option.name }
-                </Button>
-              ) ) }
-            </ButtonGroup>
-          </Placeholder> ) }
+        { selectedCarouselSlide
+          ? (
+            <MediaPlaceholder
+              addToGallery={ hasImages }
+              isAppender={ hasImages }
+              className={ className }
+              disableMediaButtons={ hasImages && ! isSelected }
+              icon={ ! hasImages && <BlockIcon icon={ gallery } /> }
+              labels={ {
+                title: ! hasImages && __( 'Carousel' ),
+                instructions: ! hasImages && 'Drag images, upload new ones or select files from your library.',
+              } }
+              onSelect={ handleImagesSelect }
+              accept="image/*"
+              multiple
+              value={ hasImages ? images : undefined }
+            />
+          ) : (
+            <Placeholder
+              label={ __( 'Carousel', 'kili-builder' ) }
+              instructions={ __( 'Select the type of layout for the carousel.', 'kili-builder' ) }
+            >
+              <ButtonGroup className="components-kili-button-group">
+                { carouselOptions.map( ( option, index ) => (
+                  <Button
+                    key={ option.name }
+                    className="components-kili-button-group__button"
+                    isLarge
+                    onClick={ () => handleLayoutSelect( option.className ) }
+                  >
+                    { option.name }
+                  </Button>
+                ) ) }
+              </ButtonGroup>
+            </Placeholder> ) }
       </>
 
     );

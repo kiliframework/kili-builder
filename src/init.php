@@ -61,6 +61,7 @@ function kili_blocks_register_block_type( $block, $options = array() ) {
 		array_merge(
 			array(
 				'editor_script' => 'kili-editor-script',
+				'script' => 'kili-script',
 				'style' => 'kili-style',
 			),
 			$options
@@ -81,9 +82,29 @@ function kili_blocks_register() {
 			'wp-data',
 		)
 	);
+	wp_register_script( 'slick-script',
+		'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js',
+		array(
+			'jquery',
+		)
+	);
+	wp_register_style( 'slick-style',
+		'https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css',
+	);
+
+	wp_register_script( 'kili-script',
+		plugins_url( 'dist/script.js', dirname( __FILE__ ) ),
+		array(
+			'jquery',
+			'slick-script',
+		)
+	);
 
 	wp_register_style( 'kili-style',
-		plugins_url( 'dist/main.css', dirname( __FILE__ ) )
+		plugins_url( 'dist/blocks.css', dirname( __FILE__ ) ),
+		array(
+			'slick-style',
+		)
 	);
 
 	$scripts_array = get_scripts_array();
@@ -98,7 +119,7 @@ function kili_blocks_register() {
         'waves' => plugins_url( 'assets/images/waves.svg', __FILE__ ),
         'koombea-banner-img' => plugins_url( 'assets/images/koombea-banner-img.svg', __FILE__ ),
     )
-  );
+	);
 }
 
 function array_flatten( $array ) {

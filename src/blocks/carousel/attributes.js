@@ -36,17 +36,17 @@ export default {
       caption: {
         type: 'string',
         source: 'html',
-        selector: '.kili-carousel-slide__caption',
+        selector: 'p,blockquote',
       },
       author: {
         type: 'string',
         source: 'html',
-        selector: '.kili-carousel-slide__author',
+        selector: '.kili-carousel-slide__author,.review__signature-author',
       },
       title: {
         type: 'string',
         source: 'html',
-        selector: '.kili-carousel-slide__title',
+        selector: '.kili-carousel-slide__title,.review__signature-title',
       },
     },
   },

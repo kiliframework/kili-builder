@@ -1,64 +1,35 @@
-/**
- * WordPress dependencies
- */
-import { RichText } from '@wordpress/block-editor';
+import { DESKTOP, TABLET, MOBILE } from '../../constants';
+import CarouselImagesView from './carousel-images-view';
+import CarouselQuotesView from './carousel-quotes-view';
 
 export default function save( { attributes } ) {
   const {
     images,
+    slidesToShow,
+    slidesToScroll,
+    dots,
+    arrows,
+    infinite,
+    selectedCarouselSlideName,
   } = attributes;
 
   return (
-    <figure
+    <div
+      className={ `kili-blocks-carousel-init ${ selectedCarouselSlideName }` }
+      data-columns-desktop={ slidesToShow[ DESKTOP ].value }
+      data-columns-tablet={ slidesToShow[ TABLET ].value }
+      data-columns-mobile={ slidesToShow[ MOBILE ].value }
+      data-scroll-desktop={ slidesToScroll[ DESKTOP ].value }
+      data-scroll-tablet={ slidesToScroll[ TABLET ].value }
+      data-scroll-mobile={ slidesToScroll[ MOBILE ].value }
     >
-      <ul className="blocks-gallery-grid">
-        { images.map( ( image ) => {
-          const img = (
-            <img
-              src={ image.url }
-              alt={ image.alt }
-              data-id={ image.id }
-              data-full-url={ image.fullUrl }
-              data-link={ image.link }
-              className={
-                image.id ? `wp-image-${ image.id }` : null
-              }
-            />
-          );
+      { images.map( ( image ) => (
+        <div className="kili-carousel-slide" key={ image.url }>
+          { selectedCarouselSlideName === 'industries' && <CarouselImagesView image={ image } /> }
+          { selectedCarouselSlideName === 'reviews' && <CarouselQuotesView image={ image } /> }
+        </div>
+      ) ) }
+    </div>
 
-          return (
-            <li
-              key={ image.id || image.url }
-              className="kili-carousel-slide"
-            >
-              <figure>
-                { img }
-                { ! RichText.isEmpty( image.caption ) && (
-                  <RichText.Content
-                    tagName="figcaption"
-                    className="kili-carousel-slide__caption"
-                    value={ image.caption }
-                  />
-                ) }
-                { ! RichText.isEmpty( image.author ) && (
-                  <RichText.Content
-                    tagName="figcaption"
-                    className="kili-carousel-slide__author"
-                    value={ image.author }
-                  />
-                ) }
-                { ! RichText.isEmpty( image.title ) && (
-                  <RichText.Content
-                    tagName="figcaption"
-                    className="kili-carousel-slide__title"
-                    value={ image.title }
-                  />
-                ) }
-              </figure>
-            </li>
-          );
-        } ) }
-      </ul>
-    </figure>
   );
 }

@@ -6,7 +6,7 @@ import { Spinner } from '@wordpress/components';
 
 const { useEffect } = wp.element;
 
-function Images( { url, alt, id, caption, image, setAttributes, hasCaption } ) {
+const CarouselImages = ( { url, alt, id, caption, image, setAttributes, hasCaption } ) => {
   useEffect( () => {
     if ( image && ! url ) {
       setAttributes( {
@@ -40,7 +40,7 @@ function Images( { url, alt, id, caption, image, setAttributes, hasCaption } ) {
       </div>
     </div>
   );
-}
+};
 
 export default compose( [
   withSelect( ( select, ownProps ) => {
@@ -51,4 +51,4 @@ export default compose( [
       image: id ? getMedia( parseInt( id, 10 ) ) : null,
     };
   } ),
-] )( Images );
+] )( CarouselImages );

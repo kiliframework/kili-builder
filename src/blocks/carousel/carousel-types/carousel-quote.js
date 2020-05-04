@@ -7,7 +7,7 @@ import { compose } from '@wordpress/compose';
 
 const { useState, useEffect } = wp.element;
 
-function CarouselSlide( {
+const CarouselSlide = ( {
   url,
   alt,
   id,
@@ -16,7 +16,7 @@ function CarouselSlide( {
   title,
   setAttributes,
   image,
-} ) {
+} ) => {
   useEffect( () => {
     if ( image && ! url ) {
       setAttributes( {
@@ -78,7 +78,7 @@ function CarouselSlide( {
         </a>
       </div>
     </> );
-}
+};
 
 export default compose( [
   withSelect( ( select, ownProps ) => {

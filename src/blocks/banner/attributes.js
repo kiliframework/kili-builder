@@ -6,6 +6,8 @@ import { DESKTOP } from '../../constants/devicesSizes';
 export default {
   headingText: {
     type: 'string',
+    source: 'html',
+    selector: '.headline',
   },
   url: {
     type: 'string',

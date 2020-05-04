@@ -2,11 +2,9 @@ import { RichText } from '@wordpress/block-editor';
 import { attrClassCreator } from '../utils';
 
 export default function SectionSave( { attributes } ) {
-  const classes = attrClassCreator( attributes );
+  const { level, ...rest } = attributes;
+  const classes = attrClassCreator( rest );
+  const tagName = 'h' + level;
 
-  return (
-    <div className={ `${ classes }` }>
-      <RichText.Content value={ attributes.text } />
-    </div>
-  );
+  return <RichText.Content className={ `${ classes }` } tagName={ level && tagName } value={ attributes.text } />;
 }

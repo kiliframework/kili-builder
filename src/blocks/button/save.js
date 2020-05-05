@@ -11,19 +11,11 @@ import BlockSave from '../../components/BlockSave/BlockSave';
 function SaveButton( { attributes } ) {
   const { text } = attributes;
 
-  const classes = attrClassCreator( attributes );
+  const styles = saveStyleCreator( attributes );
 
   return (
     <BlockSave>
-      <button css={ css`
-        color: blue;
-        &::after {
-          content: '';
-          height: 16px;
-          width: 16px;
-          background-color: lavender;
-        }
-      ` } className={ classnames( 'wp-block-button__link', `${ classes }` ) }>
+      <button css={ css`${ styles }` } className={ classnames( 'wp-block-button__link' ) }>
         <RichText.Content
           value={ text }
         />

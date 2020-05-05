@@ -15,7 +15,7 @@ function SaveButton( { attributes } ) {
 
   return (
     <BlockSave>
-      <button css={ css`${ styles }` } className={ classnames( 'wp-block-button__link' ) }>
+      <button css={ css`${ styles } font-weight: 700;` } className={ classnames( 'wp-block-button__link' ) }>
         <RichText.Content
           value={ text }
         />

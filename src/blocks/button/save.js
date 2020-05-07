@@ -4,7 +4,6 @@ import classnames from 'classnames';
 import { attrClassCreator } from '../utils';
 import { saveStyleCreator } from '../utils/saveStyleCreator';
 import { renderToStaticMarkup } from 'react-dom/server';
-import styled, { ServerStyleSheet, StyleSheetManager, css } from 'styled-components';
 import HtmlToReactParser from 'html-to-react';
 import BlockSave from '../../components/BlockSave/BlockSave';
 
@@ -15,7 +14,7 @@ function SaveButton( { attributes } ) {
 
   return (
     <BlockSave>
-      <button css={ css`${ styles } font-weight: 700;` } className={ classnames( 'wp-block-button__link' ) }>
+      <button className={ classnames( 'button' ) }>
         <RichText.Content
           value={ text }
         />

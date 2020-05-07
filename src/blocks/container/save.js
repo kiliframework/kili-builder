@@ -2,30 +2,25 @@ import { InnerBlocks } from '@wordpress/block-editor';
 import classnames from 'classnames';
 import './style.scss';
 import { attrClassCreator } from '../utils';
-import { DESKTOP } from '../../constants';
-
+import { DESKTOP, BREAKPOINTS_VALUES } from '../../constants';
+import BlockSave from '../../components/BlockSave/BlockSave';
+import { saveStyleCreator } from '../utils/saveStyleCreator';
+import { styled } from 'linaria/react';
+import { css } from 'linaria';
+const Container = styled.div`
+  max-width: ${ ( { attributes } ) => attributes.maxWidth.desktop.value };
+  @media only screen and (max-width: ${ BREAKPOINTS_VALUES.tablet }){ 
+    max-width: ${ ( { attributes } ) => attributes.maxWidth.tablet.value };
+  }
+`;
 export default function ContainerSave( { attributes } ) {
-  const { fullWidth, maxWidth, ...rest } = attributes;
-
-  const getMaxWidthClass = ( ) => {
-    let maxWidthClass = '';
-    for ( const device of Object.keys( maxWidth ) ) {
-      let cssProperty = '';
-      const value = fullWidth[ device ].value ? 'none' : `${ maxWidth[ device ].value }`;
-      if ( value ) {
-        cssProperty = ` ${ maxWidth[ device ].prefix }--max-width__${ value }`;
-        maxWidthClass += cssProperty;
-      }
-    }
-    return maxWidthClass;
-  };
-  const maxWidthClass = getMaxWidthClass();
-
-  const classes = attrClassCreator( { ...rest } );
-
+  const a = 50;
+  const lol = css`
+    ${ `max-width: ${ attributes.maxWidth.desktop.value } ` }
+  `;
   return (
-    <div className={ classnames( 'wp-block-kili-container', `${ classes } ${ maxWidthClass }` ) }>
+    <Container className={ lol } attributes={ attributes }>
       <InnerBlocks.Content />
-    </div>
+    </Container>
   );
 }

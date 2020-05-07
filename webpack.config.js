@@ -44,7 +44,7 @@ module.exports = ( env, argv ) => {
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          use: {
+          use: [ {
             loader: 'babel-loader',
             options: {
               presets: [
@@ -59,7 +59,13 @@ module.exports = ( env, argv ) => {
                 ],
               ],
             },
-          },
+          }, {
+            loader: 'linaria/loader',
+            options: {
+              sourceMap: isDevelopment(),
+              preprocessor: 'none',
+            },
+          } ],
         },
         {
           test: /\.(sa|sc|c)ss$/,

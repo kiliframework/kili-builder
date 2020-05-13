@@ -4,12 +4,9 @@ const { addFilter } = wp.hooks;
 
 function addUniqueID( settings, name ) {
   if ( name.startsWith( 'kili' ) && ! settings.attributes.uniqueID ) {
-    settings.attributes.uniqueID = {
+    settings.attributes.uniqueClassName = {
       type: 'string',
-      source: 'attribute',
-      selector: 'div',
-      attribute: 'data-unique-id',
-      default: uuid().substr( 0, 7 ),
+      default: '',
     };
   }
   return settings;

@@ -1,10 +1,12 @@
 import deepmerge from 'deepmerge';
 import { genericStylesCreator } from '../utils/styles/genericStylesCreator';
-import { stylesByDeviceAccumulator, setStyleByDevice, cssPropertyValueCreator } from '../utils/styles';
+import { stylesByDeviceAccumulator, setStyleByDevice, cssPropertyValueCreator, withUniqueClass } from '../utils/styles';
 
-const styles = ( { attributes } ) => {
-  const { fullWidth, maxWidth, ...genericAttributes } = attributes;
-  const genericStyles = genericStylesCreator( genericAttributes );
+const styles = ( { attributes }, ) => {
+  const { fullWidth, maxWidth, uniqueClassName, ...genericAttributes } = attributes;
+  const genericStyles = genericStylesCreator( genericAttributes, uniqueClassName );
+  const prependUniqueClass = withUniqueClass( uniqueClassName );
+  console.log( prependUniqueClass( '.lol' ) );
 
   const stylesByDevice = stylesByDeviceAccumulator();
 
@@ -12,7 +14,7 @@ const styles = ( { attributes } ) => {
     const value = fullWidth[ device ].value ? 'none' : `${ maxWidth[ device ].value }`;
     if ( value ) {
       const cssValue = cssPropertyValueCreator( 'max-width', value );
-      setStyleByDevice( stylesByDevice, device, '.lol', cssValue );
+      setStyleByDevice( stylesByDevice, device, uniqueClassName, cssValue );
     }
   }
 

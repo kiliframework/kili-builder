@@ -9,15 +9,11 @@ import { compose } from '@wordpress/compose';
 import withStyles from '../../hoc/withStyles';
 import styles from './style';
 
-function ContainerSave( { attributes } ) {
-  const styles = genericStylesCreator( attributes );
-
+function ContainerSave( { attributes, uniqueClassName } ) {
   return (
-    <>
-      <div data-unique-id={ attributes.uniqueID } className={ classnames( 'wp-block-kili-container', `kili-${ attributes.uniqueID }` ) }>
-        <InnerBlocks.Content />
-      </div>
-    </>
+    <div className={ classnames( 'wp-block-kili-container', `kili-${ attributes.uniqueID }` ) }>
+      <InnerBlocks.Content />
+    </div>
   );
 }
 

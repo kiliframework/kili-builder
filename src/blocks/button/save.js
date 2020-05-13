@@ -11,15 +11,14 @@ function SaveButton( { attributes } ) {
   const { text } = attributes;
 
   const styles = saveStyleCreator( attributes );
+  console.log( styles );
 
   return (
-    <BlockSave>
-      <button className={ classnames( 'button' ) }>
-        <RichText.Content
-          value={ text }
-        />
-      </button>
-    </BlockSave>
+    <button className={ classnames( 'button' ) }>
+      <RichText.Content
+        value={ text }
+      />
+    </button>
   );
 }
 

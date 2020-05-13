@@ -59,12 +59,6 @@ module.exports = ( env, argv ) => {
                 ],
               ],
             },
-          }, {
-            loader: 'linaria/loader',
-            options: {
-              sourceMap: isDevelopment(),
-              preprocessor: 'none',
-            },
           } ],
         },
         {

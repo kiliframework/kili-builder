@@ -5,8 +5,6 @@ import { stylesByDeviceAccumulator, setStyleByDevice, cssPropertyValueCreator, w
 const styles = ( { attributes }, ) => {
   const { fullWidth, maxWidth, uniqueClassName, ...genericAttributes } = attributes;
   const genericStyles = genericStylesCreator( genericAttributes, uniqueClassName );
-  const prependUniqueClass = withUniqueClass( uniqueClassName );
-  console.log( prependUniqueClass( '.lol' ) );
 
   const stylesByDevice = stylesByDeviceAccumulator();
 
@@ -19,6 +17,7 @@ const styles = ( { attributes }, ) => {
   }
 
   const stylesMerged = deepmerge.all( [ genericStyles, stylesByDevice ] );
+
   return stylesMerged;
 };
 

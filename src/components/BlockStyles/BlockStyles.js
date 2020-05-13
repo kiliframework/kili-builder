@@ -4,13 +4,17 @@ function BlockStyles( { styles } ) {
   const stylesWithMediaQuery = () => {
     let newStyles = '';
     for ( const device in styles ) {
-      let mediaQuery = '';
-      if ( device === DESKTOP ) {
-        mediaQuery = `@media screen and (max-width:${ BREAKPOINTS_VALUES[ device ] }){`;
-      }
+      const mediaQuery = '';
+      let deviceStyles = '';
       for ( const [ selector, value ] of Object.entries( styles[ device ] ) ) {
-        newStyles += `${ mediaQuery }${ selector }{ ${ value.join( '' ) } }`;
+        deviceStyles += `${ mediaQuery }${ selector }{ ${ value.join( '' ) } }`;
       }
+
+      if ( device !== DESKTOP ) {
+        deviceStyles = `@media screen and (max-width:${ BREAKPOINTS_VALUES[ device ] }){${ deviceStyles }}`;
+      }
+
+      newStyles += deviceStyles;
     }
     return newStyles;
   };

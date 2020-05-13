@@ -16,7 +16,7 @@ export const genericStylesCreator = ( attrObj, selector = '.lol' ) => {
   for ( const device of DEVICE_GROUP ) {
     for ( const pseudoClass of PSEUDO_CLASSES ) {
       for ( const attrKey in attributes ) {
-        let attributeClassSelector = selector;
+        let attributeClassSelector = `.${ selector }`;
         const attribute = attributes[ attrKey ];
         if ( attribute[ device ].value && ! attributesWithNoPseudoClass.has( `${ device }${ attribute[ device ].attrName }` ) ) {
           let attributeValue = attribute[ device ].value;
@@ -25,7 +25,7 @@ export const genericStylesCreator = ( attrObj, selector = '.lol' ) => {
             if ( attributeValue[ pseudoClass ] ) {
               attributeValue = `${ attributeValue[ pseudoClass ] }`;
               if ( pseudoClass !== NORMAL ) {
-                attributeClassSelector = `${ selector }:${ pseudoClass }`;
+                attributeClassSelector = `.${ selector }:${ pseudoClass }`;
               } // Add current attribute pseudo class style to the accumulator
             } else {
               continue;

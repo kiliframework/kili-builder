@@ -8,12 +8,13 @@ export const stylesByDeviceAccumulator = () => ( {
   mobile: {},
 } );
 
-export const setStyleByDevice = ( stylesByDevice, device, selector, value ) => {
+export const setStyleByDevice = ( stylesByDevice, device, className, value ) => {
+  const selector = `.${ className }`;
   stylesByDevice[ device ][ selector ] = stylesByDevice[ device ][ selector ]
     ? [ ...stylesByDevice[ device ][ selector ], value ]
     : [ value ];
 };
 
 export const withUniqueClass = ( uniqueClass ) => {
-  return ( selector ) => `${ uniqueClass }${ selector }`;
+  return ( selector ) => `.${ uniqueClass }${ selector }`;
 };

@@ -7,7 +7,6 @@ function SaveButton( { attributes } ) {
   const { text } = attributes;
 
   const styles = genericStylesCreator( attributes );
-  console.log( styles );
 
   return (
     <button className={ classnames( 'button' ) }>

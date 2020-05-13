@@ -9,9 +9,10 @@ import { compose } from '@wordpress/compose';
 import withStyles from '../../hoc/withStyles';
 import styles from './style';
 
-function ContainerSave( { attributes, uniqueClassName } ) {
+function ContainerSave( { attributes } ) {
+  const { uniqueClassName } = attributes;
   return (
-    <div className={ classnames( 'wp-block-kili-container', `kili-${ attributes.uniqueID }` ) }>
+    <div className={ classnames( 'wp-block-kili-container', `${ uniqueClassName }` ) }>
       <InnerBlocks.Content />
     </div>
   );

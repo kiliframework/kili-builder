@@ -33,14 +33,10 @@ export const saveStyleCreator = ( attrObj, selector = '.lol' ) => {
           } else {
             attributesWithNoPseudoClass.add( `${ device }${ attribute[ device ].attrName }` );
           }
-
           const cssPropertyValue = `${ attribute[ device ].attrName }:${ attributeValue };`;
-
           stylesByDevice[ device ][ attributeClassSelector ] = stylesByDevice[ device ][ attributeClassSelector ]
             ? stylesByDevice[ device ][ attributeClassSelector ].concat( cssPropertyValue )
             : cssPropertyValue;
-
-          // Add current attribute style to the device accumulator
         }
       }
     }

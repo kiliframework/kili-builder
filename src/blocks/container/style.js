@@ -2,9 +2,28 @@ import deepmerge from 'deepmerge';
 import { genericStylesCreator } from '../utils/styles/genericStylesCreator';
 import { stylesByDeviceAccumulator, setStyleByDevice, cssPropertyValueCreator, withUniqueClass } from '../utils/styles';
 
-const styles = ( { attributes }, ) => {
-  const { fullWidth, maxWidth, uniqueClassName, ...genericAttributes } = attributes;
+const styles = ( { attributes } ) => {
+  const {
+    fullWidth,
+    maxWidth,
+    opacity,
+    backgroundImage,
+    backgroundSize,
+    backgroundPosition,
+    backgroundColor,
+    uniqueClassName,
+    ...genericAttributes
+  } = attributes;
   const genericStyles = genericStylesCreator( genericAttributes, uniqueClassName );
+  const genericStylesOverlay = genericStylesCreator( {
+    opacity,
+    backgroundImage,
+    backgroundSize,
+    backgroundPosition,
+    backgroundColor,
+    uniqueClassName },
+  uniqueClassName );
+  console.log( genericStylesOverlay );
 
   const stylesByDevice = stylesByDeviceAccumulator();
 

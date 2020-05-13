@@ -9,27 +9,14 @@ import withStyles from '../../hoc/withStyles';
 import styles from './style';
 
 function ContainerEdit( props ) {
-  const { attributes, isSelected } = props;
-  const { opacity,
-    backgroundImage,
-    backgroundSize,
-    backgroundPosition,
-    backgroundColor, maxWidth, fullWidth, uniqueClassName, ...rest } = attributes;
+  const { attributes } = props;
+  const { uniqueClassName } = attributes;
 
   return (
     <>
       <Inspector { ...props } />
       <div className={ classnames( 'kili-container', uniqueClassName ) } >
-        <div
-          style={
-            editClassCreator( {
-              opacity,
-              backgroundImage,
-              backgroundSize,
-              backgroundPosition,
-              backgroundColor,
-            } ) }
-          className="kili-container__overlay" />
+        <div className="kili-container__overlay" />
         <InnerBlocks renderAppender={ InnerBlocks.ButtonBlockAppender } />
       </div>
     </>

@@ -1,16 +1,12 @@
 import { RichText } from '@wordpress/block-editor';
-import { v4 as uuidv4 } from 'uuid';
 import classnames from 'classnames';
 import { attrClassCreator } from '../utils';
-import { saveStyleCreator } from '../utils/saveStyleCreator';
-import { renderToStaticMarkup } from 'react-dom/server';
-import HtmlToReactParser from 'html-to-react';
-import BlockSave from '../../components/BlockSave/BlockSave';
+import { genericStylesCreator } from '../utils/styles/genericStylesCreator';
 
 function SaveButton( { attributes } ) {
   const { text } = attributes;
 
-  const styles = saveStyleCreator( attributes );
+  const styles = genericStylesCreator( attributes );
   console.log( styles );
 
   return (

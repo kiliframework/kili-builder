@@ -24,6 +24,7 @@
     "@wordpress/data": "^4.13.0",
     "@wordpress/i18n": "^3.8.0",
     "classnames": "^2.2.6",
+    "deepmerge": "^4.2.2",
     "file-loader": "^6.0.0",
     "lodash": "^4.17.15",
     "react-html-id": "^0.1.5",

@@ -1,8 +1,8 @@
-import { attrsExtrartor } from './attrsExtrartor';
-import { NORMAL, PSEUDO_CLASSES } from '../../constants/pseudoClasses';
-import { DEVICE_GROUP } from '../../constants';
+import { attrsExtrartor } from '../attrsExtrartor';
+import { NORMAL, PSEUDO_CLASSES } from '../../../constants/pseudoClasses';
+import { DEVICE_GROUP } from '../../../constants';
 
-export const saveStyleCreator = ( attrObj, selector = '.lol' ) => {
+export const genericStylesCreator = ( attrObj, selector = '.lol' ) => {
   const attributes = attrsExtrartor( attrObj ); //Extract styles only relevant CSS attributes;
 
   const stylesByDevice = {
@@ -35,8 +35,8 @@ export const saveStyleCreator = ( attrObj, selector = '.lol' ) => {
           }
           const cssPropertyValue = `${ attribute[ device ].attrName }:${ attributeValue };`;
           stylesByDevice[ device ][ attributeClassSelector ] = stylesByDevice[ device ][ attributeClassSelector ]
-            ? stylesByDevice[ device ][ attributeClassSelector ].concat( cssPropertyValue )
-            : cssPropertyValue;
+            ? [ ...stylesByDevice[ device ][ attributeClassSelector ], cssPropertyValue ]
+            : [ cssPropertyValue ];
         }
       }
     }

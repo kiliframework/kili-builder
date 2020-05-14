@@ -19,29 +19,48 @@ export default function Inspector( props ) {
     <InspectorControls>
       <DeviceTabProvider>
         { ( { name: tab } ) => (
-          <PanelBody initialOpen title="Dimensions Settings">
-            <AdvancedToggleControl
-              attributeName="fullWidth"
-              label={ __( 'Full Width (pixels)', 'kili-builder' ) }
-            />
-            <AdvancedRangeControl
-              disabled={ fullWidth[ tab ]?.value }
-              label={ __( 'Max Width (pixels)', 'kili-builder' ) }
-              attributeName="maxWidth"
-              dimension="px"
-              min={ 1 }
-              max={ 2000 }
-              step={ 1 }
-            />
-            <AdvancedRangeControl
-              label={ __( 'Min Height (pixels)', 'kili-builder' ) }
-              attributeName="minHeight"
-              dimension="px"
-              min={ 1 }
-              max={ 2000 }
-              step={ 1 }
-            />
-          </PanelBody>
+          <>
+            <PanelBody initialOpen title="Dimensions Settings">
+              <AdvancedToggleControl
+                attributeName="fullWidth"
+                label={ __( 'Full Width', 'kili-builder' ) }
+              />
+              <AdvancedRangeControl
+                disabled={ fullWidth[ tab ]?.value }
+                label={ __( 'Max Width (pixels)', 'kili-builder' ) }
+                attributeName="maxWidth"
+                dimension="px"
+                min={ 1 }
+                max={ 2000 }
+                step={ 1 }
+              />
+              <AdvancedRangeControl
+                label={ __( 'Min Height (pixels)', 'kili-builder' ) }
+                attributeName="minHeight"
+                dimension="px"
+                min={ 1 }
+                max={ 2000 }
+                step={ 1 }
+              />
+            </PanelBody>
+            <PanelBody initialOpen title="Spacing Settings">
+              <DimensionsControl
+                { ...props }
+                device={ tab }
+                type="padding"
+                label={ __( 'Padding', 'kili-builder' ) }
+                help={ __( 'Space inside block', 'kili-builder' ) }
+              />
+              <DimensionsControl
+                { ...props }
+                device={ tab }
+                type="margin"
+                label={ __( 'Margin', 'kili-builder' ) }
+                help={ __( 'Space outside block', 'kili-builder' ) }
+              />
+            </PanelBody>
+            <BackgroundControl { ...props } device={ tab } />
+          </>
         ) }
       </DeviceTabProvider>
     </InspectorControls>

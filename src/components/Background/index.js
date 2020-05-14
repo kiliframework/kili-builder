@@ -3,6 +3,9 @@ import { attrOptionsBuiler } from '../../blocks/utils';
 import { MediaUploadCheck, MediaUpload, PanelColorSettings } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import { COLORS } from '../../constants';
+import AdvancedRangeControl from '../AdvancedRangeControl';
+import AdvancedColorPalette from '../AdvancedColorPalette';
+import ImageControl from '../ImageControl';
 
 const { useCallback } = wp.element;
 
@@ -13,15 +16,7 @@ const backgroundImageSizeOptions = attrOptionsBuiler( [
 ] );
 
 export default function BackgroundControl( { attributes, setAttributes, device } ) {
-  const { id, url, alt, fullWidth, backgroundColor, backgroundImage, backgroundSize, opacity } = attributes;
-
-  const onRemoveImage = () => {
-    setAttributes( {
-      id: null,
-      url: null,
-      alt: null,
-    } );
-  };
+  const { id, url, alt, backgroundImage, backgroundSize } = attributes;
 
   const handleBackgroundAttrChange = useCallback(
     ( value, attrName ) => {
@@ -41,45 +36,29 @@ export default function BackgroundControl( { attributes, setAttributes, device }
   return (
     <>
       <PanelBody title={ __( 'Background Settings', 'kili-builder' ) }>
-        <RangeControl
+        <AdvancedRangeControl
           label={ __( 'Opacity', 'kili-builder' ) }
-          value={ Number( opacity[ device ]?.value ) }
-          onChange={ ( newOpacity ) => handleBackgroundAttrChange( Number( newOpacity ), 'opacity' ) }
+          attributeName="opacity"
           min={ 0 }
           max={ 1 }
           step={ 0.01 }
         />
-        <BaseControl label="Color">
-          <ColorPalette
-            colors={ COLORS }
-            value={ backgroundColor[ device ]?.value }
-            onChange={ ( value ) => handleBackgroundAttrChange( value, 'backgroundColor' ) }
-          />
-        </BaseControl>
+        <AdvancedColorPalette
+          attributeName="backgroundColor"
+          label="Color"
+          colors={ COLORS }
+        />
         <MediaUploadCheck>
-          <MediaUpload
-            value={ id }
+          <ImageControl
+            attributeName="backgroundImage"
+            label={ __( 'Background Image', 'kili-builder' ) }
+            id={ id }
             onSelect={ ( img ) => handleBackgroundAttrChange( `url(${ img.url })`, 'backgroundImage' ) }
             allowedTypes={ [ 'image' ] }
-            render={ ( { open } ) => {
-              return (
-                <BaseControl label="Add Image">
-                  <IconButton
-                    className="button--add_edit"
-                    label={ __(
-                      `${ url ? 'Edit Image' : 'Add Image' }`,
-                      'kili-builder'
-                    ) }
-                    onClick={ open }
-                    icon="format-image"
-                  />
-                </BaseControl>
-              );
-            } }
           />
         </MediaUploadCheck>
 
-        { backgroundImage[ device ]?.value && (
+        { backgroundImage[ device ]?.value?.url && (
           <>
             <SelectControl
               className={ 'components-font-size-picker__select' }

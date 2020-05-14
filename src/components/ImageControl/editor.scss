@@ -1,5 +1,5 @@
-.ugb-image-control {
-	.ugb-placeholder {
+.kili-image-control {
+	.kili-placeholder {
 		height: 150px;
 		display: flex;
 		justify-content: center;
@@ -12,8 +12,8 @@
 			fill: #ddd;
 		}
 	}
-	.ugb-placeholder,
-	.ugb-image-preview {
+	.kili-placeholder,
+	.kili-image-preview__image {
 		border-radius: 4px;
 		cursor: pointer;
 		transition: all 0.3s ease-in-out;
@@ -25,7 +25,7 @@
 			box-shadow: 0 0 0 2px rgba(30, 140, 190, 0.8);
 		}
 	}
-	.ugb-image-preview-wrapper {
+	.kili-image-preview {
 		position: relative;
 		z-index: 1; // Prevent this from going on top of the 3-tabs.
 		display: flex;
@@ -40,7 +40,7 @@
 			fill: #fff;
 		}
 	}
-	.ugb-image-preview {
+	.kili-image-preview__image {
 		min-width: 100px;
 		flex: 1 1 100px;
 		margin: 0;
@@ -50,7 +50,7 @@
 		width: auto;
 		height: auto;
 	}
-	.ugb-image-preview-remove {
+	.kili-image-preview__remove {
 		background: none !important;
 		color: #ddd;
 		border: none;

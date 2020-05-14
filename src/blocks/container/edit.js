@@ -7,6 +7,7 @@ import { editClassCreator } from '../utils/editClassCreator';
 import { DESKTOP } from '../../constants';
 import withStyles from '../../hoc/withStyles';
 import styles from './style';
+import withClientID from '../../hoc/withClientID';
 
 function ContainerEdit( props ) {
   const { attributes } = props;
@@ -24,5 +25,6 @@ function ContainerEdit( props ) {
 }
 
 export default compose(
+  withClientID,
   withStyles( styles ),
 )( ContainerEdit );

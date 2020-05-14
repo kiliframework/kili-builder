@@ -13,8 +13,6 @@ const { useCallback } = wp.element;
 export default function Inspector( props ) {
   const { attributes, setAttributes, clientId } = props;
   const { maxWidth, minHeight, fullWidth } = attributes;
-  const { handleAttributesWithDeviceChange } = useAttributeSetter( clientId );
-  console.log( attributes.maxWidth );
 
   return (
     <InspectorControls>
@@ -24,8 +22,7 @@ export default function Inspector( props ) {
             <AdvancedRangeControl
               disabled={ fullWidth[ tab ]?.value }
               label={ __( 'Max Width (pixels)', 'kili-builder' ) }
-              attribute={ maxWidth }
-              onChange={ handleAttributesWithDeviceChange }
+              attributeName={ 'maxWidth' }
               dimension="px"
               min={ 1 }
               max={ 2000 }

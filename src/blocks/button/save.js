@@ -1,17 +1,20 @@
 import { RichText } from '@wordpress/block-editor';
 import classnames from 'classnames';
 import { attrClassCreator } from '../utils';
+import { genericStylesCreator } from '../utils/styles/genericStylesCreator';
 
-export default function SaveButton( { attributes } ) {
+function SaveButton( { attributes } ) {
   const { text } = attributes;
 
-  const classes = attrClassCreator( attributes );
+  const styles = genericStylesCreator( attributes );
 
   return (
-    <button className={ classnames( 'wp-block-button__link', `${ classes }` ) }>
+    <button className={ classnames( 'button' ) }>
       <RichText.Content
         value={ text }
       />
     </button>
   );
 }
+
+export default SaveButton;

@@ -3,29 +3,21 @@ import classnames from 'classnames';
 import './style.scss';
 import { attrClassCreator } from '../utils';
 import { DESKTOP } from '../../constants';
+import { genericStylesCreator } from '../utils/styles/genericStylesCreator';
+import { v4 as uuid } from 'uuid';
+import { compose } from '@wordpress/compose';
+import withStyles from '../../hoc/withStyles';
+import styles from './style';
 
-export default function ContainerSave( { attributes } ) {
-  const { fullWidth, maxWidth, ...rest } = attributes;
-
-  const getMaxWidthClass = ( ) => {
-    let maxWidthClass = '';
-    for ( const device of Object.keys( maxWidth ) ) {
-      let cssProperty = '';
-      const value = fullWidth[ device ].value ? 'none' : `${ maxWidth[ device ].value }`;
-      if ( value ) {
-        cssProperty = ` ${ maxWidth[ device ].prefix }--max-width__${ value }`;
-        maxWidthClass += cssProperty;
-      }
-    }
-    return maxWidthClass;
-  };
-  const maxWidthClass = getMaxWidthClass();
-
-  const classes = attrClassCreator( { ...rest } );
-
+function ContainerSave( { attributes } ) {
+  const { uniqueClassName } = attributes;
   return (
-    <div className={ classnames( 'wp-block-kili-container', `${ classes } ${ maxWidthClass }` ) }>
+    <div className={ classnames( 'wp-block-kili-container', `${ uniqueClassName }` ) }>
       <InnerBlocks.Content />
     </div>
   );
 }
+
+export default compose(
+  withStyles( styles ),
+)( ContainerSave );

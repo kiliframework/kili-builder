@@ -76,6 +76,7 @@ function kili_blocks_register() {
 			'wp-blocks',
 			'wp-i18n',
 			'wp-block-editor',
+			'wp-compose',
 			'wp-components',
 			'wp-editor',
 			'wp-blob',

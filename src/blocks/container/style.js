@@ -11,7 +11,7 @@ const styles = ( { attributes } ) => {
   const getValue = initGetValue( attributes );
   const prependUniqueClass = withUniqueClass( uniqueClassName );
 
-  const containerAttributes = pick( attributes, [ ...marginKeys, ...paddingKeys ] );
+  const containerAttributes = pick( attributes, [ ...marginKeys, ...paddingKeys, 'minHeight' ] );
   const containerStyles = genericStylesCreator( containerAttributes, uniqueClassName );
 
   const containerOverlayAttributes = pick( attributes, [ ...backgroundKeys, 'opacity' ] );

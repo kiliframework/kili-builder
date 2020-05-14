@@ -4,8 +4,6 @@ const { useContext, createContext } = wp.element;
 const ClientIDContext = createContext();
 
 export function ClientIDProvider( { children, clientID } ) {
-  console.log( clientID );
-
   return (
     <ClientIDContext.Provider value={ clientID }>
       { children }

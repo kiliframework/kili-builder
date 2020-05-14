@@ -7,22 +7,35 @@ import DimensionsControl from '../../components/DimensionsControl';
 import useAttributeSetter from '../../hooks/useAttributeSetter';
 import { DeviceTabProvider } from '../../hooks/useDeviceTab';
 import AdvancedRangeControl from '../../components/AdvancedRangeControl';
+import AdvancedToggleControl from '../../components/AdvancedToggleControl/AdvancedToggleControl';
 
 const { useCallback } = wp.element;
 
 export default function Inspector( props ) {
-  const { attributes, setAttributes, clientId } = props;
-  const { maxWidth, minHeight, fullWidth } = attributes;
+  const { attributes } = props;
+  const { fullWidth } = attributes;
 
   return (
     <InspectorControls>
       <DeviceTabProvider>
-        { ( tab ) => (
+        { ( { name: tab } ) => (
           <PanelBody initialOpen title="Dimensions Settings">
+            <AdvancedToggleControl
+              attributeName="fullWidth"
+              label={ __( 'Full Width (pixels)', 'kili-builder' ) }
+            />
             <AdvancedRangeControl
               disabled={ fullWidth[ tab ]?.value }
               label={ __( 'Max Width (pixels)', 'kili-builder' ) }
-              attributeName={ 'maxWidth' }
+              attributeName="maxWidth"
+              dimension="px"
+              min={ 1 }
+              max={ 2000 }
+              step={ 1 }
+            />
+            <AdvancedRangeControl
+              label={ __( 'Min Height (pixels)', 'kili-builder' ) }
+              attributeName="minHeight"
               dimension="px"
               min={ 1 }
               max={ 2000 }
@@ -30,9 +43,7 @@ export default function Inspector( props ) {
             />
           </PanelBody>
         ) }
-
       </DeviceTabProvider>
-
     </InspectorControls>
   );
 }

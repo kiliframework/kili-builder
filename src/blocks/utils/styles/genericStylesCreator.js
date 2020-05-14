@@ -23,7 +23,7 @@ export const genericStylesCreator = ( attrObj, selector = '' ) => {
         let attributeClassSelector = `.${ selector }`;
         const attribute = attributes[ attrKey ];
         // Check if device is not undefined and is not at attribute with pseudo class and value already on stylesByDevice
-        if ( attribute[ device ].value && ! attributesWithNoPseudoClass.has( `${ device }${ attribute[ device ].attrName }` ) ) {
+        if ( attribute[ device ]?.value && ! attributesWithNoPseudoClass.has( `${ device }${ attribute.attrName || attribute[ device ].attrName }` ) ) {
           let attributeValue = attribute[ device ].value;
           // Check if device value is a pseudo class object
           if ( typeof attributeValue === 'object' ) {
@@ -39,9 +39,9 @@ export const genericStylesCreator = ( attrObj, selector = '' ) => {
             }
           } else {
             // Add current attribute to Set of attributesWithNoPseudoClass so it doesn't add duplicate styles.
-            attributesWithNoPseudoClass.add( `${ device }${ attribute[ device ].attrName }` );
+            attributesWithNoPseudoClass.add( `${ device }${ attribute.attrName || attribute[ device ].attrName }` );
           }
-          const cssPropertyValue = `${ attribute[ device ].attrName }:${ attributeValue };`;
+          const cssPropertyValue = `${ attribute.attrName || attribute[ device ].attrName }:${ attributeValue };`;
           // If the current selector exists, we append the current value with new one. Otherwise, initialize array.
           stylesByDevice[ device ][ attributeClassSelector ] = stylesByDevice[ device ][ attributeClassSelector ]
             ? [ ...stylesByDevice[ device ][ attributeClassSelector ], cssPropertyValue ]

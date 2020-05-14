@@ -35,13 +35,13 @@ export default function Inspector( props ) {
             <PanelBody initialOpen title="Dimensions Settings">
               <ToggleControl
                 label={ __( 'Full width', 'kili-builder' ) }
-                checked={ fullWidth[ tab ].value }
+                checked={ fullWidth[ tab ]?.value }
                 onChange={ ( checked ) => handleAttributesWithDeviceChange( 'fullWidth', tab, checked ) }
               />
               <RangeControl
-                disabled={ fullWidth[ tab ].value }
+                disabled={ fullWidth[ tab ]?.value }
                 label={ __( 'Max Width (pixels)', 'kili-builder' ) }
-                value={ parseFloat( maxWidth[ tab ].value ) || '' }
+                value={ parseFloat( maxWidth[ tab ]?.value ) || '' }
                 onChange={ ( newMaxWidth ) => handleWidthChange( Number( newMaxWidth ), 'maxWidth', tab ) }
                 min={ 1 }
                 max={ 2000 }
@@ -49,7 +49,7 @@ export default function Inspector( props ) {
               />
               <RangeControl
                 label={ __( 'Minimum Height (pixels)', 'kili-builder' ) }
-                value={ parseFloat( minHeight[ tab ].value ) || '' }
+                value={ parseFloat( minHeight[ tab ]?.value ) || '' }
                 onChange={ ( newMinHeight ) => handleWidthChange( Number( newMinHeight ), 'minHeight', tab ) }
                 min={ 1 }
                 max={ 2000 }

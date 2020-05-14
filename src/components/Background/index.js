@@ -4,8 +4,6 @@ import { MediaUploadCheck, MediaUpload, PanelColorSettings } from '@wordpress/bl
 import { __ } from '@wordpress/i18n';
 import { COLORS } from '../../constants';
 
-
-
 const { useCallback } = wp.element;
 
 const backgroundImageSizeOptions = attrOptionsBuiler( [
@@ -15,7 +13,7 @@ const backgroundImageSizeOptions = attrOptionsBuiler( [
 ] );
 
 export default function BackgroundControl( { attributes, setAttributes, device } ) {
-  const { id, url, alt, fullWidth, backgroundColor,backgroundImage, backgroundSize, opacity } = attributes;
+  const { id, url, alt, fullWidth, backgroundColor, backgroundImage, backgroundSize, opacity } = attributes;
 
   const onRemoveImage = () => {
     setAttributes( {
@@ -26,26 +24,26 @@ export default function BackgroundControl( { attributes, setAttributes, device }
   };
 
   const handleBackgroundAttrChange = useCallback(
-    (value, attrName) => {
-      setAttributes({
-        [attrName]: {
-          ...attributes[attrName],
-          [device]: {
-            ...attributes[attrName][device],
-            value
-          }
-        }
-      })
+    ( value, attrName ) => {
+      setAttributes( {
+        [ attrName ]: {
+          ...attributes[ attrName ],
+          [ device ]: {
+            ...attributes[ attrName ][ device ],
+            value,
+          },
+        },
+      } );
     },
-    [attributes, device],
-  )
+    [ attributes, device ],
+  );
 
   return (
     <>
       <PanelBody title={ __( 'Background Settings', 'kili-builder' ) }>
         <RangeControl
           label={ __( 'Opacity', 'kili-builder' ) }
-          value={ Number(opacity[ device ].value) }
+          value={ Number( opacity[ device ]?.value ) }
           onChange={ ( newOpacity ) => handleBackgroundAttrChange( Number( newOpacity ), 'opacity' ) }
           min={ 0 }
           max={ 1 }
@@ -53,15 +51,15 @@ export default function BackgroundControl( { attributes, setAttributes, device }
         />
         <BaseControl label="Color">
           <ColorPalette
-            colors={COLORS}
-            value={backgroundColor[device].value}
-            onChange={(value) => handleBackgroundAttrChange(value, 'backgroundColor')}
+            colors={ COLORS }
+            value={ backgroundColor[ device ]?.value }
+            onChange={ ( value ) => handleBackgroundAttrChange( value, 'backgroundColor' ) }
           />
         </BaseControl>
         <MediaUploadCheck>
           <MediaUpload
             value={ id }
-            onSelect={ ( img ) => handleBackgroundAttrChange( `url(${img.url})`, 'backgroundImage' ) }
+            onSelect={ ( img ) => handleBackgroundAttrChange( `url(${ img.url })`, 'backgroundImage' ) }
             allowedTypes={ [ 'image' ] }
             render={ ( { open } ) => {
               return (
@@ -78,27 +76,27 @@ export default function BackgroundControl( { attributes, setAttributes, device }
                 </BaseControl>
               );
             } }
-            />
-          </MediaUploadCheck>
+          />
+        </MediaUploadCheck>
 
-        { backgroundImage[device].value && (
+        { backgroundImage[ device ]?.value && (
           <>
             <SelectControl
               className={ 'components-font-size-picker__select' }
               label={ `Background Image Size` }
-              value={backgroundSize[device].value}
+              value={ backgroundSize[ device ]?.value }
               options={ backgroundImageSizeOptions }
-              onChange={(value) => handleBackgroundAttrChange(value, 'backgroundSize')}
+              onChange={ ( value ) => handleBackgroundAttrChange( value, 'backgroundSize' ) }
             />
             <SelectControl
               className={ 'components-font-size-picker__select' }
               label={ `Background Position` }
-              value={backgroundSize[device].value}
+              value={ backgroundSize[ device ]?.value }
               options={ backgroundImageSizeOptions }
-              onChange={(value) => handleBackgroundAttrChange(value, 'backgroundSize')}
+              onChange={ ( value ) => handleBackgroundAttrChange( value, 'backgroundSize' ) }
             />
           </>
-        )}
+        ) }
 
       </PanelBody>
     </>

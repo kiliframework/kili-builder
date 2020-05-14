@@ -10,7 +10,7 @@ function BlockStyles( { styles } ) {
         deviceStyles += `${ mediaQuery }${ selector }{ ${ value.join( '' ) } }`;
       }
 
-      if ( device !== DESKTOP ) {
+      if ( device !== DESKTOP && deviceStyles ) {
         deviceStyles = `@media screen and (max-width:${ BREAKPOINTS_VALUES[ device ] }){${ deviceStyles }}`;
       }
 

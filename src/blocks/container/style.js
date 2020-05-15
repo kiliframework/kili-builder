@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 import { genericStylesCreator } from '../utils/styles/genericStylesCreator';
-import { stylesByDeviceAccumulator, setStyleByDevice, cssPropertyValueCreator, withUniqueClass, initGetValue } from '../utils/styles';
+import { stylesByDeviceAccumulator, setStyleByDevice, cssPropertyValueCreator, initPrependUniqueClass, initGetValue } from '../utils/styles';
 import { pick } from '../utils/object';
 import { marginKeys, paddingKeys, backgroundKeys } from '../../constants/attributesKeys';
 import { DEVICE_GROUP } from '../../constants';
@@ -9,7 +9,7 @@ const styles = ( { attributes } ) => {
   const { uniqueClassName } = attributes;
 
   const getValue = initGetValue( attributes );
-  const prependUniqueClass = withUniqueClass( uniqueClassName );
+  const prependUniqueClass = initPrependUniqueClass( uniqueClassName );
 
   const containerAttributes = pick( attributes, [ ...marginKeys, ...paddingKeys, 'minHeight' ] );
   const containerStyles = genericStylesCreator( containerAttributes, uniqueClassName );

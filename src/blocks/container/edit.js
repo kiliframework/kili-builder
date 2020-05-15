@@ -3,11 +3,10 @@ import { compose } from '@wordpress/compose';
 import classnames from 'classnames';
 
 import Inspector from './inspector';
-import { editClassCreator } from '../utils/editClassCreator';
-import { DESKTOP } from '../../constants';
 import withStyles from '../../hoc/withStyles';
 import styles from './style';
 import withClientID from '../../hoc/withClientID';
+import withUniqueClassName from '../../hoc/withUniqueClassName';
 
 function ContainerEdit( props ) {
   const { attributes } = props;
@@ -26,5 +25,6 @@ function ContainerEdit( props ) {
 
 export default compose(
   withClientID,
+  withUniqueClassName,
   withStyles( styles ),
 )( ContainerEdit );

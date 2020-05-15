@@ -1,7 +1,7 @@
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { useDeviceTab } from '../hooks/useDeviceTab';
 import { useClientID } from '../hooks/useClientID';
-import useAttributeSetter from '../hooks/useAttributeSetter';
+import useBlockAttributes from '../hooks/useBlockAttributes';
 import { useSelect } from '@wordpress/data';
 /**
  *
@@ -11,7 +11,7 @@ const withAdvancedControls = createHigherOrderComponent(
   ( WrappedComponent ) => ( props ) => {
     const { name: tab } = useDeviceTab();
     const clientID = useClientID();
-    const { handleAttributesWithDeviceChange } = useAttributeSetter( clientID );
+    const { handleAttributesWithDeviceChange } = useBlockAttributes( clientID );
     const currentBlockAttributes = useSelect(
       ( select ) => select( 'core/block-editor' ).getBlockAttributes( clientID )
     );

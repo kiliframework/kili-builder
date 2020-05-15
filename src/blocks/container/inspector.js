@@ -4,7 +4,6 @@ import { RangeControl, PanelBody, ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import BackgroundControl from '../../components/Background';
 import DimensionsControl from '../../components/DimensionsControl';
-import useAttributeSetter from '../../hooks/useAttributeSetter';
 import { DeviceTabProvider } from '../../hooks/useDeviceTab';
 import AdvancedRangeControl from '../../components/AdvancedRangeControl';
 import AdvancedToggleControl from '../../components/AdvancedToggleControl/AdvancedToggleControl';

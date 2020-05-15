@@ -2,7 +2,7 @@ import deepmerge from 'deepmerge';
 import { genericStylesCreator } from '../utils/styles/genericStylesCreator';
 import { stylesByDeviceAccumulator, setStyleByDevice, cssPropertyValueCreator, initPrependUniqueClass, initGetValue } from '../utils/styles';
 import { pick } from '../utils/object';
-import { marginKeys, paddingKeys, backgroundKeys } from '../../constants/attributesKeys';
+import { MARGIN_KEYS, PADDING_KEYS, BACKGROUND_KEYS } from '../../constants/attributesKeys';
 import { DEVICE_GROUP } from '../../constants';
 
 const styles = ( { attributes } ) => {
@@ -11,10 +11,10 @@ const styles = ( { attributes } ) => {
   const getValue = initGetValue( attributes );
   const prependUniqueClass = initPrependUniqueClass( uniqueClassName );
 
-  const containerAttributes = pick( attributes, [ ...marginKeys, ...paddingKeys, 'minHeight' ] );
+  const containerAttributes = pick( attributes, [ ...MARGIN_KEYS, ...PADDING_KEYS, 'minHeight' ] );
   const containerStyles = genericStylesCreator( containerAttributes, uniqueClassName );
 
-  const containerOverlayAttributes = pick( attributes, [ ...backgroundKeys, 'opacity' ] );
+  const containerOverlayAttributes = pick( attributes, [ ...BACKGROUND_KEYS, 'opacity' ] );
   const containerOverlayStyles = genericStylesCreator( containerOverlayAttributes, prependUniqueClass( 'kili-container__overlay' ) );
 
   const stylesByDevice = stylesByDeviceAccumulator();

@@ -7,7 +7,7 @@ import HeadingLevelIcon from './heading-level-icon';
 import { sprintf } from '@wordpress/i18n';
 
 import headingDefaultValues from './heading-default-values';
-import useAttributeSetter from '../../hooks/useAttributeSetter';
+import useBlockAttributes from '../../hooks/useBlockAttributes';
 
 const { __ } = wp.i18n;
 const { PanelBody, Toolbar, RangeControl, ToolbarGroup } = wp.components;
@@ -16,7 +16,7 @@ const { AlignmentToolbar } = wp.blockEditor;
 export default function FontStyles( props ) {
   const { attributes, setAttributes, isHeading, clientId } = props;
   const { currentTab, level, textAlign, color, fontSize, lineHeight, letterSpacing, fontWeight } = attributes;
-  const { handleAttributesWithDeviceChange } = useAttributeSetter( clientId );
+  const { handleAttributesWithDeviceChange } = useBlockAttributes( clientId );
 
   const alignValue = getDeviceValue( textAlign, currentTab );
   const colorValue = getDeviceValue( color, currentTab );

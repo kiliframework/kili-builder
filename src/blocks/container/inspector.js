@@ -5,52 +5,39 @@ import { __ } from '@wordpress/i18n';
 import BackgroundControl from '../../components/Background';
 import DimensionsControl from '../../components/DimensionsControl';
 import useAttributeSetter from '../../hooks/useAttributeSetter';
+import { DeviceTabProvider } from '../../hooks/useDeviceTab';
+import AdvancedRangeControl from '../../components/AdvancedRangeControl';
+import AdvancedToggleControl from '../../components/AdvancedToggleControl/AdvancedToggleControl';
 
 const { useCallback } = wp.element;
 
 export default function Inspector( props ) {
-  const { attributes, setAttributes, clientId } = props;
-  const { maxWidth, minHeight, fullWidth } = attributes;
-  const { handleAttributesWithDeviceChange } = useAttributeSetter( clientId );
-
-  const handleWidthChange = useCallback(
-    ( newWidth, type, tab ) => {
-      setAttributes( { [ type ]: {
-        ...attributes[ type ],
-        [ tab ]: {
-          ...attributes[ type ][ tab ],
-          value: newWidth,
-        },
-      } } );
-    },
-    [],
-  );
+  const { attributes } = props;
+  const { fullWidth } = attributes;
 
   return (
     <InspectorControls>
-      <DevicesTabs
-      >
+      <DeviceTabProvider>
         { ( { name: tab } ) => (
           <>
             <PanelBody initialOpen title="Dimensions Settings">
-              <ToggleControl
-                label={ __( 'Full width', 'kili-builder' ) }
-                checked={ fullWidth[ tab ].value }
-                onChange={ ( checked ) => handleAttributesWithDeviceChange( 'fullWidth', tab, checked ) }
+              <AdvancedToggleControl
+                attributeName="fullWidth"
+                label={ __( 'Full Width', 'kili-builder' ) }
               />
-              <RangeControl
-                disabled={ fullWidth[ tab ].value }
+              <AdvancedRangeControl
+                disabled={ fullWidth[ tab ]?.value }
                 label={ __( 'Max Width (pixels)', 'kili-builder' ) }
-                value={ parseFloat( maxWidth[ tab ].value ) || '' }
-                onChange={ ( newMaxWidth ) => handleWidthChange( Number( newMaxWidth ), 'maxWidth', tab ) }
+                attributeName="maxWidth"
+                dimension="px"
                 min={ 1 }
                 max={ 2000 }
                 step={ 1 }
               />
-              <RangeControl
-                label={ __( 'Minimum Height (pixels)', 'kili-builder' ) }
-                value={ parseFloat( minHeight[ tab ].value ) || '' }
-                onChange={ ( newMinHeight ) => handleWidthChange( Number( newMinHeight ), 'minHeight', tab ) }
+              <AdvancedRangeControl
+                label={ __( 'Min Height (pixels)', 'kili-builder' ) }
+                attributeName="minHeight"
+                dimension="px"
                 min={ 1 }
                 max={ 2000 }
                 step={ 1 }
@@ -60,22 +47,22 @@ export default function Inspector( props ) {
               <DimensionsControl
                 { ...props }
                 device={ tab }
-                type={ 'padding' }
+                type="padding"
                 label={ __( 'Padding', 'kili-builder' ) }
-                help={ __( 'Space inside of the container.', 'kili-builder' ) }
+                help={ __( 'Space inside block', 'kili-builder' ) }
               />
               <DimensionsControl
                 { ...props }
                 device={ tab }
-                type={ 'margin' }
+                type="margin"
                 label={ __( 'Margin', 'kili-builder' ) }
-                help={ __( 'Space around the container.', 'kili-builder' ) }
+                help={ __( 'Space outside block', 'kili-builder' ) }
               />
             </PanelBody>
             <BackgroundControl { ...props } device={ tab } />
           </>
         ) }
-      </DevicesTabs>
+      </DeviceTabProvider>
     </InspectorControls>
   );
 }

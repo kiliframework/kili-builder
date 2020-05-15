@@ -27,6 +27,9 @@ export const stylesByDeviceAccumulator = () => ( {
  */
 export const setStyleByDevice = ( stylesByDevice, device, className, value ) => {
   const selector = `.${ className }`;
+  if ( ! stylesByDevice[ device ] ) {
+    return;
+  }
   stylesByDevice[ device ][ selector ] = stylesByDevice[ device ][ selector ]
     ? [ ...stylesByDevice[ device ][ selector ], value ]
     : [ value ];
@@ -38,5 +41,9 @@ export const setStyleByDevice = ( stylesByDevice, device, className, value ) => 
  *  return the selector passed with unique block class prepended.
  */
 export const withUniqueClass = ( uniqueClass ) => {
-  return ( selector ) => `.${ uniqueClass }${ selector }`;
+  return ( selector ) => `${ uniqueClass } .${ selector }`;
+};
+
+export const initGetValue = ( attributes ) => ( attributeName, device ) => {
+  return attributes[ attributeName ][ device ]?.value;
 };

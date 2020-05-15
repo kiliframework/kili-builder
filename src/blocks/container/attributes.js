@@ -5,7 +5,7 @@ import { defaultAttrBuiler } from '../utils';
 export default {
   fullWidth: defaultAttrBuiler( null, false ),
   maxWidth: defaultAttrBuiler( 'max-width', '1200px' ),
-  minHeight: defaultAttrBuiler( 'minHeight' ),
+  minHeight: defaultAttrBuiler( 'min-height' ),
   id: {
     type: 'string',
     default: '',

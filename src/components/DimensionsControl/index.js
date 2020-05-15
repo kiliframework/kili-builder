@@ -52,28 +52,28 @@ export default function DimensionsControl( { device,
               className="components-kili-dimensions-control__number"
               type="number"
               onChange={ ( e ) => onChangeDirection( e, 'Top' ) }
-              value={ parseFloat( attributes[ `${ type }Top` ][ device ].value ) ? parseFloat( attributes[ `${ type }Top` ][ device ].value ) : 0 }
+              value={ parseFloat( attributes[ `${ type }Top` ][ device ]?.value ) || 0 }
               min={ type === 'padding' ? 0 : undefined }
             />
             <input
               className="components-kili-dimensions-control__number"
               type="number"
               onChange={ ( e ) => onChangeDirection( e, 'Right' ) }
-              value={ parseFloat( attributes[ `${ type }Right` ][ device ].value ) ? parseFloat( attributes[ `${ type }Right` ][ device ].value ) : 0 }
+              value={ parseFloat( attributes[ `${ type }Right` ][ device ]?.value ) ? parseFloat( attributes[ `${ type }Right` ][ device ].value ) : 0 }
               min={ type === 'padding' ? 0 : undefined }
             />
             <input
               className="components-kili-dimensions-control__number"
               type="number"
               onChange={ ( e ) => onChangeDirection( e, 'Bottom' ) }
-              value={ parseFloat( attributes[ `${ type }Bottom` ][ device ].value ) ? parseFloat( attributes[ `${ type }Bottom` ][ device ].value ) : 0 }
+              value={ parseFloat( attributes[ `${ type }Bottom` ][ device ]?.value ) ? parseFloat( attributes[ `${ type }Bottom` ][ device ].value ) : 0 }
               min={ type === 'padding' ? 0 : undefined }
             />
             <input
               className="components-kili-dimensions-control__number"
               type="number"
               onChange={ ( e ) => onChangeDirection( e, 'Left' ) }
-              value={ parseFloat( attributes[ `${ type }Left` ][ device ].value ) ? parseFloat( attributes[ `${ type }Left` ][ device ].value ) : 0 }
+              value={ parseFloat( attributes[ `${ type }Left` ][ device ]?.value ) ? parseFloat( attributes[ `${ type }Left` ][ device ].value ) : 0 }
               min={ type === 'padding' ? 0 : undefined }
             />
             <Tooltip text={ __( 'Reset', 'kili-builder' ) } >

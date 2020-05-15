@@ -1,37 +1,39 @@
-import { SelectControl, PanelBody, PanelRow, IconButton, Tooltip, Button, Dashicon, BaseControl, ColorPalette, RangeControl } from '@wordpress/components';
+import { SelectControl, PanelBody } from '@wordpress/components';
 import { attrOptionsBuiler } from '../../blocks/utils';
-import { MediaUploadCheck, MediaUpload, PanelColorSettings } from '@wordpress/block-editor';
+import { MediaUploadCheck } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import { COLORS } from '../../constants';
 import AdvancedRangeControl from '../AdvancedRangeControl';
 import AdvancedColorPalette from '../AdvancedColorPalette';
 import ImageControl from '../ImageControl';
+import AdvancedSelectControl from '../AdvancedSelectControl';
+import { useDeviceTab } from '../../hooks/useDeviceTab';
+import { useClientID } from '../../hooks/useClientID';
+import { useSelect } from '@wordpress/data';
 
-const { useCallback } = wp.element;
+const { useMemo } = wp.element;
 
 const backgroundImageSizeOptions = attrOptionsBuiler( [
   [ 'cover', 'Cover', 'Cover' ],
   [ 'contain', 'Contain', 'Contain' ],
   [ 'auto', 'Auto', 'Auto' ],
 ] );
+const backgroundPositionOptions = attrOptionsBuiler( [
+  [ 'top', 'Top', 'Top' ],
+  [ 'bottom', 'Bottom', 'Bottom' ],
+  [ 'left', 'Left', 'Left' ],
+  [ 'right', 'Right', 'Right' ],
+  [ 'center', 'Center', 'Center' ],
+  [ 'unset', 'Unset', 'Unset' ],
+] );
 
-export default function BackgroundControl( { attributes, setAttributes, device } ) {
-  const { id, url, alt, backgroundImage, backgroundSize } = attributes;
-
-  const handleBackgroundAttrChange = useCallback(
-    ( value, attrName ) => {
-      setAttributes( {
-        [ attrName ]: {
-          ...attributes[ attrName ],
-          [ device ]: {
-            ...attributes[ attrName ][ device ],
-            value,
-          },
-        },
-      } );
-    },
-    [ attributes, device ],
+export default function BackgroundControl() {
+  const { name: tab } = useDeviceTab();
+  const clientID = useClientID();
+  const currentBlockAttributes = useSelect(
+    ( select ) => select( 'core/block-editor' ).getBlockAttributes( clientID )
   );
+  const backgroundImage = useMemo( () => currentBlockAttributes.backgroundImage[ tab ]?.value, [ currentBlockAttributes ] );
 
   return (
     <>
@@ -52,26 +54,20 @@ export default function BackgroundControl( { attributes, setAttributes, device }
           <ImageControl
             attributeName="backgroundImage"
             label={ __( 'Background Image', 'kili-builder' ) }
-            id={ id }
-            allowedTypes={ [ 'image' ] }
           />
         </MediaUploadCheck>
 
-        { backgroundImage[ device ]?.value?.url && (
+        { backgroundImage?.url && (
           <>
-            <SelectControl
-              className={ 'components-font-size-picker__select' }
-              label={ `Background Image Size` }
-              value={ backgroundSize[ device ]?.value }
+            <AdvancedSelectControl
+              label="Background Image Size"
+              attributeName="backgroundSize"
               options={ backgroundImageSizeOptions }
-              onChange={ ( value ) => handleBackgroundAttrChange( value, 'backgroundSize' ) }
             />
-            <SelectControl
-              className={ 'components-font-size-picker__select' }
-              label={ `Background Position` }
-              value={ backgroundSize[ device ]?.value }
-              options={ backgroundImageSizeOptions }
-              onChange={ ( value ) => handleBackgroundAttrChange( value, 'backgroundSize' ) }
+            <AdvancedSelectControl
+              label="Background Position"
+              attributeName="backgroundPosition"
+              options={ backgroundPositionOptions }
             />
           </>
         ) }

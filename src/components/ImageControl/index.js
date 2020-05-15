@@ -59,10 +59,7 @@ const ImageControl = ( { value, onChange, ...props } ) => {
 
 ImageControl.defaultProps = {
   label: '',
-  id: '',
-  url: '',
   onChange: ( { url, id, width, height } ) => {},
-  allowedTypes: [ 'image' ],
   help: '',
 };
 

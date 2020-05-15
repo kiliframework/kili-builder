@@ -20,10 +20,15 @@ const styles = ( { attributes } ) => {
   const stylesByDevice = stylesByDeviceAccumulator();
 
   for ( const device of DEVICE_GROUP ) {
-    const value = getValue( 'fullWidth', device ) ? 'none' : `${ getValue( 'maxWidth', device ) }`;
-    if ( value ) {
-      const cssValue = cssPropertyValueCreator( 'max-width', value );
+    const newMaxWidth = getValue( 'fullWidth', device ) ? 'none' : `${ getValue( 'maxWidth', device ) }`;
+    if ( newMaxWidth ) {
+      const cssValue = cssPropertyValueCreator( 'max-width', newMaxWidth );
       setStyleByDevice( stylesByDevice, device, uniqueClassName, cssValue );
+    }
+    const backgroundImage = getValue( 'backgroundImage', device );
+    if ( backgroundImage?.url ) {
+      const cssValue = cssPropertyValueCreator( 'background-image', `url(${ backgroundImage.url })` );
+      setStyleByDevice( stylesByDevice, device, prependUniqueClass( 'kili-container__overlay' ), cssValue );
     }
   }
 

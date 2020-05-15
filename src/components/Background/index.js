@@ -53,7 +53,6 @@ export default function BackgroundControl( { attributes, setAttributes, device }
             attributeName="backgroundImage"
             label={ __( 'Background Image', 'kili-builder' ) }
             id={ id }
-            onSelect={ ( img ) => handleBackgroundAttrChange( `url(${ img.url })`, 'backgroundImage' ) }
             allowedTypes={ [ 'image' ] }
           />
         </MediaUploadCheck>

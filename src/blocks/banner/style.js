@@ -1,9 +1,8 @@
 import deepmerge from 'deepmerge';
 import { genericStylesCreator } from '../utils/styles/genericStylesCreator';
-import { stylesByDeviceAccumulator, setStyleByDevice, cssPropertyValueCreator, initPrependUniqueClass, initGetValue } from '../utils/styles';
+import { initPrependUniqueClass } from '../utils/styles';
 import { pick } from '../utils/object';
-import { MARGIN_KEYS, PADDING_KEYS, TEXT_KEYS } from '../../constants/attributesKeys';
-import { DEVICE_GROUP } from '../../constants';
+import { TEXT_KEYS } from '../../constants/attributesKeys';
 
 const bannerStyles = ( { attributes } ) => {
   const { uniqueClassName } = attributes;

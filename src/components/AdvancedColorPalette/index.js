@@ -4,9 +4,8 @@ import withAdvancedControls from '../../hoc/withAdvancedControls';
 
 function AdvancedColorPalette( { label, value, ...props } ) {
   return (
-    <BaseControl label={ label } id="colorPalette" >
+    <BaseControl label={ label }>
       <ColorPalette
-        value={ value }
         { ...props }
       />
     </BaseControl>

@@ -11,8 +11,12 @@ import {
   InspectorControls,
 } from '@wordpress/block-editor';
 
+import AdvancedRangeControl from '../../components/AdvancedRangeControl';
+
 import { COLORS, DESKTOP } from '../../constants';
 import { HOVER, NORMAL } from '../../constants/pseudoClasses';
+import { PseudoTabProvider } from '../../hooks/usePseudoTab';
+import AdvancedColorPalette from '../../components/AdvancedColorPalette';
 
 const { useCallback } = wp.element;
 
@@ -51,52 +55,24 @@ export default function ButtonInspector( {
 
   return (
     <InspectorControls>
-      <PanelBody title={ __( 'Border settings', 'kili-builder' ) }>
-        <RangeControl
-          value={ borderRadius }
-          label={ __( 'Border radius', 'kili-builder' ) }
-          min={ 0 }
-          max={ 50 }
-          allowReset
-          onChange={ ( value ) => handleAttrChange( 'borderRadius', value ) }
-        />
-      </PanelBody>
+
       <PanelBody title={ __( 'Text & Background Color Settings', 'kili-builder' ) }>
-        <TabPanel
-          className="kt-inspect-tabs kt-hover-tabs"
-          activeClass="active-tab"
-          tabs={ [
-            {
-              name: NORMAL,
-              title: __( 'Normal' ),
-            },
-            {
-              name: HOVER,
-              title: __( 'Hover' ),
-            },
-          ] }
-        >
+        <PseudoTabProvider>
           {
-            ( { name: tab, title } ) => (
+            ( { title } ) => (
               <>
-                <BaseControl label={ __( `Text Color ${ title }`, 'kili-builder' ) }>
-                  <ColorPalette
-                    colors={ COLORS }
-                    value={ textColor[ DESKTOP ].value[ tab ] }
-                    onChange={ ( value ) => handlePseudoClassesAttrChange( tab, 'textColor', value ) }
-                  />
-                </BaseControl>
-                <BaseControl label={ __( `Background Color ${ title }`, 'kili-builder' ) }>
-                  <ColorPalette
-                    colors={ COLORS }
-                    value={ backgroundColor[ DESKTOP ].value[ tab ] }
-                    onChange={ ( value ) => handlePseudoClassesAttrChange( tab, 'backgroundColor', value ) }
-                  />
-                </BaseControl>
+                <AdvancedColorPalette
+                  label={ __( `Text Color ${ title }`, 'kili-builder' ) }
+                  attributeName="textColor"
+                />
+                <AdvancedColorPalette
+                  label={ __( `Background Color ${ title }`, 'kili-builder' ) }
+                  attributeName="backgroundColor"
+                />
               </>
             )
           }
-        </TabPanel>
+        </PseudoTabProvider>
 
       </PanelBody>
       <PanelBody title={ __( 'Link settings', 'kili-builder' ) }>

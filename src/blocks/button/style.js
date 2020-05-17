@@ -8,10 +8,7 @@ const buttonStyles = ( { attributes } ) => {
   const { uniqueClassName } = attributes;
 
   const buttonAttributes = pick( attributes, BUTTON_KEYS );
-  console.log( buttonAttributes );
-
   const styles = genericStylesCreator( buttonAttributes, uniqueClassName );
-  console.log( styles );
 
   return styles;
 };

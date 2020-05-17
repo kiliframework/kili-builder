@@ -5,6 +5,14 @@ export default function useBlockAttributes( clientId ) {
   const { attributes } = useSelect( ( select ) => select( 'core/block-editor' ).getBlock( clientId ) );
   const { updateBlockAttributes } = useDispatch( 'core/block-editor' );
 
+  const handleSimpleAttributesChange = useCallback(
+    ( attribute, value ) => {
+      updateBlockAttributes( clientId, {
+        ...attributes,
+        [ attribute ]: value } );
+    },
+    [ clientId, attributes ],
+  );
   const handleAttributesWithDeviceChange = useCallback(
     ( attribute, device, value, dimension ) => {
       updateBlockAttributes( clientId, {
@@ -19,18 +27,29 @@ export default function useBlockAttributes( clientId ) {
     },
     [ clientId, attributes ],
   );
-  const handleSimpleAttributesChange = useCallback(
-    ( attribute, value ) => {
+  const handlePseudoClassesAttrChange = useCallback(
+    ( attribute, device, pseudo, value, dimension ) => {
       updateBlockAttributes( clientId, {
         ...attributes,
-        [ attribute ]: value } );
+        [ attribute ]: {
+          ...attributes[ attribute ],
+          [ device ]: {
+            ...attributes[ attribute ][ device ],
+            value: {
+              ...attributes[ attribute ][ device ].value,
+              [ pseudo ]: dimension ? `${ value }${ dimension }` : value,
+            },
+          },
+        },
+      } );
     },
     [ clientId, attributes ],
   );
 
   return {
-    handleAttributesWithDeviceChange,
     handleSimpleAttributesChange,
+    handleAttributesWithDeviceChange,
+    handlePseudoClassesAttrChange,
     attributes,
   };
 }

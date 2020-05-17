@@ -74,7 +74,8 @@ export default function ButtonInspector( {
               name: HOVER,
               title: __( 'Hover' ),
             },
-          ] }>
+          ] }
+        >
           {
             ( { name: tab, title } ) => (
               <>

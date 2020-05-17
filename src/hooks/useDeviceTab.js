@@ -1,9 +1,10 @@
 
 import { Icon, TabPanel } from '@wordpress/components';
+import { DESKTOP } from '../constants';
 
 const { useContext, createContext } = wp.element;
 
-const DeviceTabContext = createContext();
+const DeviceTabContext = createContext( DESKTOP );
 
 export function DeviceTabProvider( { children } ) {
   return (

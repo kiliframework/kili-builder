@@ -9,4 +9,9 @@ export const TEXT_KEYS = [
   'lineHeight',
   'letterSpacing',
 ];
+export const BUTTON_KEYS = [
+  'backgroundColor',
+  'textColor',
+  'borderRadius',
+];
 

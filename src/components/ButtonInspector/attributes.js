@@ -1,4 +1,4 @@
-import { defaultAttrBuiler, pseudoClassAttrBuilder } from '../../blocks/utils';
+import { defaultAttrBuilder, pseudoClassAttrBuilder } from '../../blocks/utils';
 
 export default {
   buttonText: {
@@ -9,8 +9,8 @@ export default {
     type: 'string',
     default: '',
   },
-  buttonBackgroundColor: defaultAttrBuiler( 'background-color', pseudoClassAttrBuilder() ),
-  buttonTextColor: defaultAttrBuiler( 'color', pseudoClassAttrBuilder() ),
+  buttonBackgroundColor: defaultAttrBuilder( 'background-color', pseudoClassAttrBuilder() ),
+  buttonTextColor: defaultAttrBuilder( 'color', pseudoClassAttrBuilder() ),
   buttonBorderRadius: {
     type: 'number',
     default: 0,

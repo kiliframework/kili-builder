@@ -2,7 +2,7 @@ export * from './attrClassCreator';
 export * from './attrOptionsBuiler';
 export * from './attrsExtrartor';
 export * from './commonAttributes';
-export * from './defaultAttrBuiler';
+export * from './defaultAttrBuilder';
 export * from './hasAnyProperty';
 export * from './pseudoClassAttrBuilder';
 export * from './panelTabBuilder';

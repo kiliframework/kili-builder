@@ -9,7 +9,7 @@ const bannerStyles = ( { attributes } ) => {
 
   const prependUniqueClass = initPrependUniqueClass( uniqueClassName );
 
-  const bannerHeadingAttributes = pick( attributes, [ ...TEXT_KEYS ] );
+  const bannerHeadingAttributes = pick( attributes, TEXT_KEYS );
   const bannerHeadingStyles = genericStylesCreator( bannerHeadingAttributes, prependUniqueClass( 'kili-banner__header' ) );
 
   const stylesMerged = deepmerge.all( [ bannerHeadingStyles ] );

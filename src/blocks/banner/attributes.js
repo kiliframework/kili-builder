@@ -1,4 +1,4 @@
-import { defaultAttrBuiler } from '../utils';
+import { defaultAttrBuilder } from '../utils';
 import FontStylesAttributes from '../../components/FontStyles/attributes';
 import ButtonAttributes from '../../components/ButtonInspector/attributes';
 import { DESKTOP } from '../../constants/devicesSizes';

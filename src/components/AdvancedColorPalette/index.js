@@ -3,7 +3,7 @@ import { compose } from '@wordpress/compose';
 import withAdvancedControls from '../../hoc/withAdvancedControls';
 import { COLORS } from '../../constants';
 
-function AdvancedColorPalette( { label, value, ...props } ) {
+function AdvancedColorPalette( { label, ...props } ) {
   return (
     <BaseControl label={ label }>
       <ColorPalette

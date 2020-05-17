@@ -27,6 +27,7 @@ export default function useBlockAttributes( clientId ) {
     },
     [ clientId, attributes ],
   );
+
   const handlePseudoClassesAttrChange = useCallback(
     ( attribute, device, pseudo, value, dimension ) => {
       updateBlockAttributes( clientId, {

@@ -27,7 +27,7 @@ const withAdvancedControls = createHigherOrderComponent(
         }
         return ( value ) => handleAttributesWithDeviceChange( props.attributeName, device, value, props.dimension );
       },
-      [ pseudoClass, device, props.attributeName, props.dimension ],
+      [ pseudoClass, device, props.attributeName, props.dimension, handlePseudoClassesAttrChange, handleAttributesWithDeviceChange ],
     );
 
     const value = pseudoClass

@@ -55,25 +55,31 @@ export default function ButtonInspector( {
 
   return (
     <InspectorControls>
-
+      <PanelBody title={ __( 'Border settings', 'kili-builder' ) }>
+        <AdvancedRangeControl
+          attributeName="borderRadius"
+          label={ __( 'Border radius', 'kili-builder' ) }
+          min={ 0 }
+          max={ 50 }
+          allowReset
+          dimension="px"
+        />
+      </PanelBody>
       <PanelBody title={ __( 'Text & Background Color Settings', 'kili-builder' ) }>
         <PseudoTabProvider>
-          {
-            ( { title } ) => (
-              <>
-                <AdvancedColorPalette
-                  label={ __( `Text Color ${ title }`, 'kili-builder' ) }
-                  attributeName="textColor"
-                />
-                <AdvancedColorPalette
-                  label={ __( `Background Color ${ title }`, 'kili-builder' ) }
-                  attributeName="backgroundColor"
-                />
-              </>
-            )
-          }
+          { ( { title } ) => (
+            <>
+              <AdvancedColorPalette
+                label={ __( `Text Color ${ title }`, 'kili-builder' ) }
+                attributeName="textColor"
+              />
+              <AdvancedColorPalette
+                label={ __( `Background Color ${ title }`, 'kili-builder' ) }
+                attributeName="backgroundColor"
+              />
+            </>
+          ) }
         </PseudoTabProvider>
-
       </PanelBody>
       <PanelBody title={ __( 'Link settings', 'kili-builder' ) }>
         <TextControl

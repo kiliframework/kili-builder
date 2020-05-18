@@ -2,7 +2,7 @@ import useBlockAttributes from './useBlockAttributes';
 import { useClientID } from './useClientID';
 import { DESKTOP } from '../constants';
 
-const { useCallback, useEffect } = wp.element;
+const { useCallback } = wp.element;
 
 export default function useAttribute( attributeName ) {
   const { attributes } = useBlockAttributes( );

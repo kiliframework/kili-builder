@@ -85,16 +85,10 @@ function BannerEdit( props ) {
                   <AdvancedRichText
                     attributeName="buttonText"
                     placeholder={ buttonPlaceholder || __( 'Add button text', 'kili-builder' ) }
-                    className={ classnames( 'wp-block-button__link', {
-                      'no-border-radius': buttonBorderRadius === 0,
-                    },
-                    'kili-banner__button'
-                    ) }
+                    className={ classnames( 'wp-block-button__link', 'kili-banner__button' ) }
                     style={ {
                       backgroundColor: buttonBackgroundColor[ DESKTOP ].value.normal,
                       color: buttonTextColor[ DESKTOP ].value.normal,
-                      zIndex: 1,
-                      position: 'relative',
                       borderRadius: buttonBorderRadius
                         ? buttonBorderRadius + 'px'
                         : undefined,

@@ -1,11 +1,11 @@
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { useDeviceTab } from '../hooks/useDeviceTab';
-import useBlockAttributes from '../hooks/useBlockAttributes';
 import { usePseudoTab } from '../hooks/usePseudoTab';
 import { isSimpleAttribute } from '../blocks/utils';
 import useAttribute from '../hooks/useAttribute';
 
-const { useMemo, useEffect } = wp.element;
+const { useMemo } = wp.element;
+
 /**
  *
  * @return {Function} Add editor and block attributes to base Gutenberg controls as props
@@ -20,11 +20,6 @@ const withAdvancedControls = createHigherOrderComponent(
       handleSimpleAttributesChange,
       handlePseudoClassesAttrChange,
     } = useAttribute( props.attributeName );
-
-    const {
-      attributes,
-
-    } = useBlockAttributes();
 
     const simpleAttribute = isSimpleAttribute( attribute );
 
@@ -42,20 +37,18 @@ const withAdvancedControls = createHigherOrderComponent(
 
     const getValue = () => {
       if ( simpleAttribute ) {
-        return attributes[ props.attributeName ];
+        return attribute;
       } else if ( pseudoClass ) {
-        return attributes[ props.attributeName ][ device ]?.value[pseudoClass];
+        return attribute[ device ]?.value[pseudoClass];
       }
-      return attributes[ props.attributeName ][ device ]?.value;
+      return attribute[ device ]?.value;
     };
-
-    useEffect( () => {
-      console.log( 'handleChange attribute changed', attributes[ props.attributeName ] );
-    }, [ handleAttributeWithDeviceChange ] );
 
     return (
       <WrappedComponent
         { ...props }
+        device={ device }
+        pseudoClass={ pseudoClass }
         value={ getValue() }
         onChange={ handleChange }
       />
@@ -63,5 +56,9 @@ const withAdvancedControls = createHigherOrderComponent(
   },
   'withAdvancedControls'
 );
+
+export function shouldControlRender( prevProps, nextProps ) {
+  return prevProps.value === nextProps.value && prevProps.device === nextProps.device && prevProps.pseudoClass === nextProps.pseudoClass;
+}
 
 export default withAdvancedControls;

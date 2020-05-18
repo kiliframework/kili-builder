@@ -8,8 +8,6 @@ import { DeviceTabProvider } from '../../hooks/useDeviceTab';
 import AdvancedRangeControl from '../../components/AdvancedRangeControl';
 import AdvancedToggleControl from '../../components/AdvancedToggleControl/AdvancedToggleControl';
 
-const { useCallback } = wp.element;
-
 export default function Inspector( props ) {
   const { attributes } = props;
   const { fullWidth } = attributes;

@@ -36,7 +36,7 @@ export default function BannerInspector( props ) {
         />
       </MediaUploadCheck>
       <FontStyles { ...props } isHeading />
-      <PanelBody title={ __( 'Image Settings', 'kili-builder' ) }>
+      <PanelBody title={ __( 'Button Settings', 'kili-builder' ) }>
         <ButtonInspector { ...props } />
       </PanelBody>
     </InspectorControls>

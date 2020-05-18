@@ -1,12 +1,11 @@
 import { SelectControl } from '@wordpress/components';
 import { compose } from '@wordpress/compose';
-import withAdvancedControls from '../../hoc/withAdvancedControls';
+import withAdvancedControls, { shouldControlRender } from '../../hoc/withAdvancedControls';
 
-function AdvancedSelectControl( { value, ...props } ) {
+function AdvancedSelectControl( { ...props } ) {
   return (
     <SelectControl
       className={ 'components-font-size-picker__select' }
-      value={ value }
       { ...props }
     />
   );
@@ -14,4 +13,4 @@ function AdvancedSelectControl( { value, ...props } ) {
 
 export default compose(
   withAdvancedControls
-)( AdvancedSelectControl );
+)( wp.element.memo( AdvancedSelectControl, shouldControlRender ) );

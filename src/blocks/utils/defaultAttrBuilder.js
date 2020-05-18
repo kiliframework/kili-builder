@@ -7,7 +7,7 @@ export const defaultAttrBuilder = ( attrName, value ) => {
   const defaultAttr = {
     ...( attrName && { attrName } ),
   };
-  const isGeneralAttr = typeof value !== 'object';
+
   defaultAttr[ DESKTOP ] = {
     ...devicesAttributes[ DESKTOP ],
     value,

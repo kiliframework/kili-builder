@@ -1,6 +1,6 @@
 import { ToggleControl } from '@wordpress/components';
 import { compose } from '@wordpress/compose';
-import withAdvancedControls from '../../hoc/withAdvancedControls';
+import withAdvancedControls, { shouldControlRender } from '../../hoc/withAdvancedControls';
 
 function AdvancedToggleControl( { value, ...props } ) {
   return (
@@ -13,4 +13,4 @@ function AdvancedToggleControl( { value, ...props } ) {
 
 export default compose(
   withAdvancedControls
-)( AdvancedToggleControl );
+)( wp.element.memo( AdvancedToggleControl, shouldControlRender ) );

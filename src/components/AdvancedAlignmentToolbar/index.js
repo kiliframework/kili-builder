@@ -1,4 +1,4 @@
-import withAdvancedControls from '../../hoc/withAdvancedControls';
+import withAdvancedControls, { shouldControlRender } from '../../hoc/withAdvancedControls';
 import { compose } from '@wordpress/compose';
 import { AlignmentToolbar } from '@wordpress/block-editor';
 import { BaseControl } from '@wordpress/components';
@@ -15,4 +15,4 @@ function AdvancedAlignmentToolbar( { label, ...props } ) {
 
 export default compose(
   withAdvancedControls
-)( AdvancedAlignmentToolbar );
+)( wp.element.memo( AdvancedAlignmentToolbar, shouldControlRender ) );

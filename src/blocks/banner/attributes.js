@@ -9,7 +9,25 @@ export default {
     source: 'html',
     selector: '.headline',
   },
-  image: defaultAttrBuilder(),
+  url: {
+    type: 'string',
+    source: 'attribute',
+    selector: 'img',
+    attribute: 'src',
+  },
+  alt: {
+    type: 'string',
+    source: 'attribute',
+    selector: 'img',
+    attribute: 'alt',
+    default: '',
+  },
+  id: {
+    type: 'string',
+    source: 'attribute',
+    selector: 'img',
+    attribute: 'data-id',
+  },
   currentTab: {
     type: 'string',
     default: DESKTOP,

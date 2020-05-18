@@ -1,4 +1,4 @@
-import { DEVICE_GROUP, DESKTOP } from '../../constants/devicesSizes';
+import { DESKTOP } from '../../constants/devicesSizes';
 import { devicesAttributes } from '.';
 
 // VALUE CAN BE EITHER A VALUE FOR ALL THE DEVICES || AN OBJ WITH STRUCTURE

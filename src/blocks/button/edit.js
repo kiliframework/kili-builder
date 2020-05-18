@@ -5,50 +5,39 @@ import classnames from 'classnames';
  */
 import { __ } from '@wordpress/i18n';
 import { compose } from '@wordpress/compose';
-import {
-  RichText,
-} from '@wordpress/block-editor';
+import AdvancedRichText from '../../components/AdvancedRichText';
 
 import Inspector from './inspector';
 import { DESKTOP } from '../../constants';
+import withStyles from '../../hoc/withStyles';
+import withUniqueClassName from '../../hoc/withUniqueClassName';
+import withClientID from '../../hoc/withClientID';
+import buttonStyles from './style';
 
 function ButtonEdit( props ) {
   const {
     attributes,
-    setAttributes,
-    className,
   } = props;
   const {
-    borderRadius,
     placeholder,
-    text,
-    backgroundColor,
-    textColor,
+    uniqueClassName,
   } = attributes;
 
   return (
     <>
       <Inspector { ...props } />
-      <div className={ className }>
-        <RichText
-          placeholder={ placeholder || __( 'Add text…', 'kili-builder' ) }
-          value={ text }
-          onChange={ ( value ) => setAttributes( { text: value } ) }
-          withoutInteractiveFormatting
-          className={ classnames( 'wp-block-button__link', {
-            'no-border-radius': borderRadius === 0,
-          } ) }
-          style={ {
-            backgroundColor: backgroundColor[ DESKTOP ].value.normal,
-            color: textColor[ DESKTOP ].value.normal,
-            borderRadius: borderRadius
-              ? borderRadius + 'px'
-              : undefined,
-          } }
-        />
-      </div>
+      <AdvancedRichText
+        placeholder={ placeholder || __( 'Add text…', 'kili-builder' ) }
+        attributeName="text"
+        withoutInteractiveFormatting
+        className={ classnames( 'wp-block-button__link', uniqueClassName ) }
+      />
     </>
   );
 }
 
-export default ButtonEdit;
+export default compose(
+  withClientID,
+  withUniqueClassName,
+  withStyles( buttonStyles ),
+)( ButtonEdit );

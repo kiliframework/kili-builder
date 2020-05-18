@@ -1,13 +1,13 @@
-import { DEVICE_GROUP, DESKTOP } from '../../constants/devicesSizes';
-import { devicesAttributes } from '../utils';
+import { DESKTOP } from '../../constants/devicesSizes';
+import { devicesAttributes } from '.';
 
 // VALUE CAN BE EITHER A VALUE FOR ALL THE DEVICES || AN OBJ WITH STRUCTURE
 // { mobile: value, tablet... }
-export const defaultAttrBuiler = ( attrName, value ) => {
+export const defaultAttrBuilder = ( attrName, value ) => {
   const defaultAttr = {
     ...( attrName && { attrName } ),
   };
-  const isGeneralAttr = typeof value !== 'object';
+
   defaultAttr[ DESKTOP ] = {
     ...devicesAttributes[ DESKTOP ],
     value,

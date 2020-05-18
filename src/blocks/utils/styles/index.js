@@ -40,7 +40,7 @@ export const setStyleByDevice = ( stylesByDevice, device, className, value ) => 
  * @return {Function} Closure with uniqueClass saved. Calling this function will
  *  return the selector passed with unique block class prepended.
  */
-export const withUniqueClass = ( uniqueClass ) => {
+export const initPrependUniqueClass = ( uniqueClass ) => {
   return ( selector ) => `${ uniqueClass } .${ selector }`;
 };
 

@@ -1,12 +1,13 @@
 import { ColorPalette, BaseControl } from '@wordpress/components';
 import { compose } from '@wordpress/compose';
-import withAdvancedControls from '../../hoc/withAdvancedControls';
+import withAdvancedControls, { shouldControlRender } from '../../hoc/withAdvancedControls';
+import { COLORS } from '../../constants';
 
-function AdvancedColorPalette( { label, value, ...props } ) {
+function AdvancedColorPalette( { label, ...props } ) {
   return (
-    <BaseControl label={ label } id="colorPalette" >
+    <BaseControl label={ label }>
       <ColorPalette
-        value={ value }
+        colors={ COLORS }
         { ...props }
       />
     </BaseControl>
@@ -15,4 +16,4 @@ function AdvancedColorPalette( { label, value, ...props } ) {
 
 export default compose(
   withAdvancedControls
-)( AdvancedColorPalette );
+)( wp.element.memo( AdvancedColorPalette, shouldControlRender ) );

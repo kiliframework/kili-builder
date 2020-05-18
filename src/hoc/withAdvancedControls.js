@@ -1,31 +1,64 @@
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { useDeviceTab } from '../hooks/useDeviceTab';
-import { useClientID } from '../hooks/useClientID';
-import useAttributeSetter from '../hooks/useAttributeSetter';
-import { useSelect } from '@wordpress/data';
+import { usePseudoTab } from '../hooks/usePseudoTab';
+import { isSimpleAttribute } from '../blocks/utils';
+import useAttribute from '../hooks/useAttribute';
+
+const { useMemo } = wp.element;
+
 /**
  *
  * @return {Function} Add editor and block attributes to base Gutenberg controls as props
  *  */
 const withAdvancedControls = createHigherOrderComponent(
   ( WrappedComponent ) => ( props ) => {
-    const { name: tab } = useDeviceTab();
-    const clientID = useClientID();
-    const { handleAttributesWithDeviceChange } = useAttributeSetter( clientID );
-    const currentBlockAttributes = useSelect(
-      ( select ) => select( 'core/block-editor' ).getBlockAttributes( clientID )
+    const { name: device } = useDeviceTab();
+    const { name: pseudoClass } = usePseudoTab();
+    const {
+      attribute,
+      handleAttributeWithDeviceChange,
+      handleSimpleAttributesChange,
+      handlePseudoClassesAttrChange,
+    } = useAttribute( props.attributeName );
+
+    const simpleAttribute = isSimpleAttribute( attribute );
+
+    const handleChange = useMemo(
+      () => {
+        if ( simpleAttribute ) {
+          return ( value ) => handleSimpleAttributesChange( value, props.dimension );
+        } else if ( pseudoClass ) {
+          return ( value ) => handlePseudoClassesAttrChange( device, pseudoClass, value, props.dimension );
+        }
+        return ( value ) => handleAttributeWithDeviceChange( device, value, props.dimension );
+      },
+      [ pseudoClass, device, props.dimension, handlePseudoClassesAttrChange, handleAttributeWithDeviceChange, handleSimpleAttributesChange ],
     );
+
+    const getValue = () => {
+      if ( simpleAttribute ) {
+        return attribute;
+      } else if ( pseudoClass ) {
+        return attribute[ device ]?.value[pseudoClass];
+      }
+      return attribute[ device ]?.value;
+    };
+
     return (
       <WrappedComponent
         { ...props }
-        tab={ tab }
-        value={ currentBlockAttributes[ props.attributeName ][ tab ]?.value }
-        onChange={ ( value ) => handleAttributesWithDeviceChange( props.attributeName, tab, value, props.dimension ) }
+        device={ device }
+        pseudoClass={ pseudoClass }
+        value={ getValue() }
+        onChange={ handleChange }
       />
     );
   },
   'withAdvancedControls'
 );
 
-export default withAdvancedControls
-;
+export function shouldControlRender( prevProps, nextProps ) {
+  return prevProps.value === nextProps.value && prevProps.device === nextProps.device && prevProps.pseudoClass === nextProps.pseudoClass;
+}
+
+export default withAdvancedControls;

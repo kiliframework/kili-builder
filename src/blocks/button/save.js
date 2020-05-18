@@ -1,15 +1,13 @@
 import { RichText } from '@wordpress/block-editor';
 import classnames from 'classnames';
-import { attrClassCreator } from '../utils';
-import { genericStylesCreator } from '../utils/styles/genericStylesCreator';
+import withStyles from '../../hoc/withStyles';
+import buttonStyles from './style';
+import { compose } from '@wordpress/compose';
 
 function SaveButton( { attributes } ) {
-  const { text } = attributes;
-
-  const styles = genericStylesCreator( attributes );
-
+  const { text, uniqueClassName } = attributes;
   return (
-    <button className={ classnames( 'button' ) }>
+    <button className={ classnames( 'wp-block-button__link button', uniqueClassName ) }>
       <RichText.Content
         value={ text }
       />
@@ -17,4 +15,6 @@ function SaveButton( { attributes } ) {
   );
 }
 
-export default SaveButton;
+export default compose(
+  withStyles( buttonStyles ),
+)( SaveButton );

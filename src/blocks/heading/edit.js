@@ -3,10 +3,29 @@ import { __ } from '@wordpress/i18n';
 import { useSelect } from '@wordpress/data';
 import Inspector from './inspector';
 import { getDeviceValue } from '../utils';
+import withStyles from '../../hoc/withStyles';
+import withUniqueClassName from '../../hoc/withUniqueClassName';
+import withClientID from '../../hoc/withClientID';
+import { compose } from '@wordpress/compose';
+import headingStyles from './style';
+import AdvancedRichText from '../../components/AdvancedRichText';
 
-const MaComp = ( props ) => {
+const HeadingEdit = ( props ) => {
   const { attributes, setAttributes } = props;
-  const { currentTab, color, level, fontSize, textAlign, lineHeight, letterSpacing, includeLines, linesColor, linesSize, fontWeight } = attributes;
+  const {
+    uniqueClassName,
+    currentTab,
+    color,
+    level,
+    fontSize,
+    textAlign,
+    lineHeight,
+    letterSpacing,
+    includeLines,
+    linesColor,
+    linesSize,
+    fontWeight,
+  } = attributes;
 
   const onTextChange = ( text ) => setAttributes( { text } );
   const tagName = 'h' + level;
@@ -48,21 +67,10 @@ const MaComp = ( props ) => {
   return (
     <>
       <Inspector { ...props } />
-      <RichText
-        style={ {
-          fontSize: `${ fontSizeValue }`,
-          fontWeight: fontWeightValue,
-          fontFamily: 'Gt Walsheim',
-          color: colorValue,
-          letterSpacing: `${ letterSpacingValue }`,
-          lineHeight: `${ lineHeightValue }`,
-          textAlign: textAlignValue,
-          opacity: .8,
-        } }
-        className="kili-heading"
+      <AdvancedRichText
+        className={ uniqueClassName }
         tagName={ level && tagName }
-        onChange={ onTextChange }
-        value={ attributes.text }
+        attributeName="text"
       />
       { includeLines && <style>
         { getLineStyles() }
@@ -71,4 +79,8 @@ const MaComp = ( props ) => {
   );
 };
 
-export default MaComp;
+export default compose( [
+  withClientID,
+  withUniqueClassName,
+  withStyles( headingStyles ),
+] )( HeadingEdit );

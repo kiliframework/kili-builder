@@ -1,11 +1,11 @@
 import backgroundAttributes from '../../components/Background/attributes';
 import dimensionAttributes from '../../components/DimensionsControl/attributes';
-import { defaultAttrBuiler } from '../utils';
+import { defaultAttrBuilder } from '../utils';
 
 export default {
-  fullWidth: defaultAttrBuiler( null, false ),
-  maxWidth: defaultAttrBuiler( 'max-width', '1200px' ),
-  minHeight: defaultAttrBuiler( 'min-height' ),
+  fullWidth: defaultAttrBuilder( null, false ),
+  maxWidth: defaultAttrBuilder( 'max-width', '1200px' ),
+  minHeight: defaultAttrBuilder( 'min-height' ),
   id: {
     type: 'string',
     default: '',

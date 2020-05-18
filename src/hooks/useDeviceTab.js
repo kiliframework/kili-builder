@@ -1,9 +1,10 @@
 
 import { Icon, TabPanel } from '@wordpress/components';
+import { DESKTOP } from '../constants';
 
 const { useContext, createContext } = wp.element;
 
-const DeviceTabContext = createContext();
+const DeviceTabContext = createContext( { name: DESKTOP } );
 
 export function DeviceTabProvider( { children } ) {
   return (
@@ -45,8 +46,5 @@ export function DeviceTabProvider( { children } ) {
 
 export function useDeviceTab() {
   const context = useContext( DeviceTabContext );
-  if ( ! context ) {
-    throw new Error( `useDeviceTab must be used within a DeviceTabProvider` );
-  }
   return context;
 }

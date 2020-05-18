@@ -1,5 +1,5 @@
 import FontStylesAttributes from '../../components/FontStyles/attributes';
-import { defaultAttrBuiler } from '../utils';
+import { defaultAttrBuilder } from '../utils';
 import { COLORS } from '../../constants/colors';
 
 export default {
@@ -20,7 +20,7 @@ export default {
     type: 'boolean',
     default: false,
   },
-  linesColor: defaultAttrBuiler( 'color', '#0bd8a2' ),
-  linesSize: defaultAttrBuiler( null, 2 ),
+  linesColor: defaultAttrBuilder( 'color', '#0bd8a2' ),
+  linesSize: defaultAttrBuilder( null, 2 ),
   ...FontStylesAttributes,
 };

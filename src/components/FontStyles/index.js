@@ -1,29 +1,19 @@
+import { sprintf } from '@wordpress/i18n';
 import range from 'lodash/range';
-import AdvancedColorControl from '../AdvancedColorControl';
-import { getDeviceValue } from '../../blocks/utils/getDeviceValue';
-import { valueSetter } from '../../blocks/utils/valueSetter';
 
 import HeadingLevelIcon from './heading-level-icon';
-import { sprintf } from '@wordpress/i18n';
-
 import headingDefaultValues from './heading-default-values';
-import useAttributeSetter from '../../hooks/useAttributeSetter';
+import AdvancedColorPalette from '../AdvancedColorPalette';
+import { COLORS } from '../../constants';
+import AdvancedRangeControl from '../AdvancedRangeControl';
+import AdvancedAlignmentToolbar from '../AdvancedAlignmentToolbar';
 
 const { __ } = wp.i18n;
-const { PanelBody, Toolbar, RangeControl, ToolbarGroup } = wp.components;
-const { AlignmentToolbar } = wp.blockEditor;
+const { PanelBody, ToolbarGroup } = wp.components;
 
 export default function FontStyles( props ) {
-  const { attributes, setAttributes, isHeading, clientId } = props;
-  const { currentTab, level, textAlign, color, fontSize, lineHeight, letterSpacing, fontWeight } = attributes;
-  const { handleAttributesWithDeviceChange } = useAttributeSetter( clientId );
-
-  const alignValue = getDeviceValue( textAlign, currentTab );
-  const colorValue = getDeviceValue( color, currentTab );
-  const fontWeightValue = getDeviceValue( fontWeight, currentTab );
-  const fontSizeValue = getDeviceValue( fontSize, currentTab );
-  const lineHeightValue = getDeviceValue( lineHeight, currentTab );
-  const letterSpacingValue = getDeviceValue( letterSpacing, currentTab );
+  const { attributes, setAttributes, isHeading } = props;
+  const { level } = attributes;
 
   const getHeadingDefaultValuesFor = ( targetLevel, key, ) => ( {
     ...headingDefaultValues[ targetLevel ][ key ].default,
@@ -66,50 +56,45 @@ export default function FontStyles( props ) {
         </div>
       ) }
       <br />
-      <p>{ __( 'Text Alignment', 'kili-builder' ) }</p>
-      <AlignmentToolbar
-        value={ alignValue }
-        onChange={ ( value ) => {
-          setAttributes( { textAlign: valueSetter( textAlign, currentTab, value ) } );
-        } }
+      <AdvancedAlignmentToolbar
+        attributeName="textAlign"
+        label={ __( 'Text Alignment', 'kili-builder' ) }
       />
-      <AdvancedColorControl
+      <AdvancedColorPalette
         label={ __( 'Heading Color', 'kili-builder' ) }
-        colorValue={ ( colorValue || '' ) }
-        colorDefault={ colorValue }
-        onColorChange={ ( value ) => setAttributes( { color: valueSetter( color, currentTab, value ) } ) }
+        attributeName="color"
+        colors={ COLORS }
       />
-      <RangeControl
+      <AdvancedRangeControl
         label={ __( 'Font Size', 'kili-builder' ) }
-        value={ ( parseFloat( fontSizeValue ) || '' ) }
-        onChange={ ( value ) => setAttributes( { fontSize: valueSetter( fontSize, currentTab, value, 'px' ) } ) }
+        attributeName="fontSize"
         min={ 5 }
         max={ 200 }
         step={ 1 }
+        dimension="px"
       />
-      <RangeControl
+      <AdvancedRangeControl
         label={ __( 'Font Weight', 'kili-builder' ) }
-        value={ ( parseFloat( fontWeightValue ) || '' ) }
-        onChange={ ( value ) => handleAttributesWithDeviceChange( 'fontWeight', currentTab, value ) }
+        attributeName="fontWeight"
         min={ 100 }
-        max={ 800 }
+        max={ 900 }
         step={ 100 }
       />
-      <RangeControl
+      <AdvancedRangeControl
         label={ __( 'Line Height', 'kili-builder' ) }
-        value={ ( parseFloat( lineHeightValue ) || '' ) }
-        onChange={ ( value ) => setAttributes( { lineHeight: valueSetter( lineHeight, currentTab, value, 'px' ) } ) }
+        attributeName="lineHeight"
         min={ 0 }
         max={ 100 }
         step={ 1 }
+        dimension="px"
       />
-      <RangeControl
+      <AdvancedRangeControl
         label={ __( 'Letter Spacing', 'kili-builder' ) }
-        value={ ( parseFloat( letterSpacingValue ) || '' ) }
-        onChange={ ( value ) => setAttributes( { letterSpacing: valueSetter( letterSpacing, currentTab, value, 'px' ) } ) }
+        attributeName="letterSpacing"
         min={ -50 }
         max={ 50 }
         step={ 0.1 }
+        dimension="px"
       />
     </PanelBody>
   );

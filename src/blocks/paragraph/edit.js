@@ -1,39 +1,30 @@
-import { RichText } from '@wordpress/block-editor';
+import { compose } from '@wordpress/compose';
+
 import Inspector from './inspector';
-import { getDeviceValue } from '../utils';
+import AdvancedRichText from '../../components/AdvancedRichText';
+import withClientID from '../../hoc/withClientID';
+import withUniqueClassName from '../../hoc/withUniqueClassName';
+import withStyles from '../../hoc/withStyles';
 
-const MaComp = ( props ) => {
-  const { attributes, setAttributes } = props;
-  const { currentTab, color, fontSize, textAlign, lineHeight, letterSpacing, fontWeight } = attributes;
+import paragraphStyles from './style';
 
-  const onTextChange = ( text ) => setAttributes( { text } );
-  const fontSizeValue = getDeviceValue( fontSize, currentTab );
-  const fontWeightValue = getDeviceValue( fontWeight, currentTab );
-  const colorValue = getDeviceValue( color, currentTab );
-  const textAlignValue = getDeviceValue( textAlign, currentTab );
-  const lineHeightValue = getDeviceValue( lineHeight, currentTab );
-  const letterSpacingValue = getDeviceValue( letterSpacing, currentTab );
+const ParagraphEdit = ( props ) => {
+  const { attributes } = props;
+  const { uniqueClassName } = attributes;
 
   return (
     <>
       <Inspector { ...props } />
-      <RichText
-        style={ {
-          fontSize: `${ fontSizeValue }`,
-          fontWeightValue: `${ fontWeightValue }`,
-          fontFamily: 'Gt Walsheim',
-          color: colorValue,
-          letterSpacing: `${ letterSpacingValue }`,
-          lineHeight: `${ lineHeightValue }`,
-          textAlign: textAlignValue,
-          opacity: .8,
-        } }
-        tagName={ 'p' }
-        onChange={ onTextChange }
-        value={ attributes.text }
+      <AdvancedRichText
+        className={ uniqueClassName }
+        tagName="p"
       />
     </>
   );
 };
 
-export default MaComp;
+export default compose( [
+  withClientID,
+  withUniqueClassName,
+  withStyles( paragraphStyles ),
+] )( ParagraphEdit );

@@ -12,3 +12,8 @@ export const attrsExtrartor = ( attrObj ) => {
 
   return attrs;
 };
+
+export const isCssProperty = ( attribute ) => !! attribute.attrName;
+export const isSimpleAttribute = ( attribute ) => typeof attribute !== 'object';
+export const isPseudoClassAttribute = ( attribute ) => !! typeof attribute !== 'object';
+export const isDeviceAttribute = ( attribute ) => hasAnyProperty( attribute, [ ...DEVICE_GROUP ] );

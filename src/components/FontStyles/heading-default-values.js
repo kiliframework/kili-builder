@@ -1,41 +1,41 @@
-import { defaultAttrBuiler } from '../../blocks/utils';
+import { defaultAttrBuilder } from '../../blocks/utils';
 
 export default {
   1: {
-    fontSize: defaultAttrBuiler( 'font-size', '48px' ),
-    lineHeight: defaultAttrBuiler( 'line-height', '50px' ),
-    letterSpacing: defaultAttrBuiler( 'letter-spacing', '-0.8px' ),
-    fontWeight: defaultAttrBuiler( 'font-weight', 700 ),
+    fontSize: defaultAttrBuilder( 'font-size', '48px' ),
+    lineHeight: defaultAttrBuilder( 'line-height', '50px' ),
+    letterSpacing: defaultAttrBuilder( 'letter-spacing', '-0.8px' ),
+    fontWeight: defaultAttrBuilder( 'font-weight', 700 ),
   },
   2: {
-    fontSize: defaultAttrBuiler( 'font-size', '32px' ),
-    lineHeight: defaultAttrBuiler( 'line-height', '34px' ),
-    letterSpacing: defaultAttrBuiler( 'letter-spacing', '-0.53px' ),
-    fontWeight: defaultAttrBuiler( 'font-weight', 700 ),
+    fontSize: defaultAttrBuilder( 'font-size', '32px' ),
+    lineHeight: defaultAttrBuilder( 'line-height', '34px' ),
+    letterSpacing: defaultAttrBuilder( 'letter-spacing', '-0.53px' ),
+    fontWeight: defaultAttrBuilder( 'font-weight', 700 ),
   },
   3: {
-    fontSize: defaultAttrBuiler( 'font-size', '24px' ),
-    lineHeight: defaultAttrBuiler( 'line-height', '26px' ),
-    letterSpacing: defaultAttrBuiler( 'letter-spacing', '-0.4px' ),
-    fontWeight: defaultAttrBuiler( 'font-weight', 700 ),
+    fontSize: defaultAttrBuilder( 'font-size', '24px' ),
+    lineHeight: defaultAttrBuilder( 'line-height', '26px' ),
+    letterSpacing: defaultAttrBuilder( 'letter-spacing', '-0.4px' ),
+    fontWeight: defaultAttrBuilder( 'font-weight', 700 ),
   },
   4: {
-    fontSize: defaultAttrBuiler( 'font-size', '24px' ),
-    lineHeight: defaultAttrBuiler( 'line-height', '26px' ),
-    letterSpacing: defaultAttrBuiler( 'letter-spacing', '-0.4px' ),
-    fontWeight: defaultAttrBuiler( 'font-weight', 700 ),
+    fontSize: defaultAttrBuilder( 'font-size', '24px' ),
+    lineHeight: defaultAttrBuilder( 'line-height', '26px' ),
+    letterSpacing: defaultAttrBuilder( 'letter-spacing', '-0.4px' ),
+    fontWeight: defaultAttrBuilder( 'font-weight', 700 ),
   },
   5: {
-    fontSize: defaultAttrBuiler( 'font-size', '24px' ),
-    lineHeight: defaultAttrBuiler( 'line-height', '26px' ),
-    letterSpacing: defaultAttrBuiler( 'letter-spacing', '-0.4px' ),
-    fontWeight: defaultAttrBuiler( 'font-weight', 700 ),
+    fontSize: defaultAttrBuilder( 'font-size', '24px' ),
+    lineHeight: defaultAttrBuilder( 'line-height', '26px' ),
+    letterSpacing: defaultAttrBuilder( 'letter-spacing', '-0.4px' ),
+    fontWeight: defaultAttrBuilder( 'font-weight', 700 ),
   },
   6: {
-    fontSize: defaultAttrBuiler( 'font-size', '24px' ),
-    lineHeight: defaultAttrBuiler( 'line-height', '26px' ),
-    letterSpacing: defaultAttrBuiler( 'letter-spacing', '-0.4px' ),
-    fontWeight: defaultAttrBuiler( 'font-weight', 700 ),
+    fontSize: defaultAttrBuilder( 'font-size', '24px' ),
+    lineHeight: defaultAttrBuilder( 'line-height', '26px' ),
+    letterSpacing: defaultAttrBuilder( 'letter-spacing', '-0.4px' ),
+    fontWeight: defaultAttrBuilder( 'font-weight', 700 ),
   },
 };
 

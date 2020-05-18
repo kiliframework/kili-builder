@@ -216,3 +216,8 @@ $medium-up: "only screen and (min-width: #{$md-start})";
   }
   
 }
+
+.kili-banner__button {
+  position: relative;
+  z-index: 1;
+}

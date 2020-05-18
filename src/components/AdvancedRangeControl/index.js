@@ -1,5 +1,5 @@
 import { RangeControl } from '@wordpress/components';
-import withAdvancedControls from '../../hoc/withAdvancedControls';
+import withAdvancedControls, { shouldControlRender } from '../../hoc/withAdvancedControls';
 import { compose } from '@wordpress/compose';
 
 function AdvancedRangeControl( { value, ...props } ) {
@@ -10,7 +10,6 @@ function AdvancedRangeControl( { value, ...props } ) {
     />
   );
 }
-
 export default compose(
   withAdvancedControls
-)( AdvancedRangeControl );
+)( wp.element.memo( AdvancedRangeControl, shouldControlRender ) );

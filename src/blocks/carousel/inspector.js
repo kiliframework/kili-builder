@@ -3,8 +3,6 @@ import DevicesTabs from '../../components/DevicesTabs';
 import { ToggleControl, RangeControl, PanelBody } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-const { useCallback } = wp.element;
-
 export default function Inspector( { attributes, setAttributes } ) {
   const {
     hasCaption,

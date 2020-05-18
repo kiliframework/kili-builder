@@ -1,4 +1,4 @@
-import { defaultAttrBuiler } from '../utils';
+import { defaultAttrBuilder } from '../utils';
 import { DESKTOP, MOBILE, TABLET } from '../../constants/devicesSizes';
 
 export default {
@@ -50,27 +50,27 @@ export default {
       },
     },
   },
-  slidesToShow: defaultAttrBuiler( null, {
+  slidesToShow: defaultAttrBuilder( null, {
     [ DESKTOP ]: 3,
     [ TABLET ]: 2,
     [ MOBILE ]: 1,
   } ),
-  slidesToScroll: defaultAttrBuiler( null, {
+  slidesToScroll: defaultAttrBuilder( null, {
     [ DESKTOP ]: 3,
     [ TABLET ]: 2,
     [ MOBILE ]: 1,
   } ),
-  dots: defaultAttrBuiler( null, {
+  dots: defaultAttrBuilder( null, {
     [ DESKTOP ]: true,
     [ TABLET ]: false,
     [ MOBILE ]: false,
   } ),
-  arrows: defaultAttrBuiler( null, {
+  arrows: defaultAttrBuilder( null, {
     [ DESKTOP ]: false,
     [ TABLET ]: false,
     [ MOBILE ]: false,
   } ),
-  infinite: defaultAttrBuiler( null, {
+  infinite: defaultAttrBuilder( null, {
     [ DESKTOP ]: false,
     [ TABLET ]: true,
     [ MOBILE ]: true,

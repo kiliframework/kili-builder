@@ -7,7 +7,7 @@ import { ClientIDProvider } from '../hooks/useClientID';
 const withClientID = createHigherOrderComponent(
   ( WrappedComponent ) => ( props ) => {
     return (
-      <ClientIDProvider clientID={ props.clientId }>
+      <ClientIDProvider clientID={ props.clientId } setAttributes={ props.setAttributes }>
         <WrappedComponent { ...props } />
       </ClientIDProvider>
     );

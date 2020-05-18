@@ -1,11 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import {
   PanelBody,
-  RangeControl,
   TextControl,
-  ColorPalette,
-  BaseControl,
-  TabPanel,
 } from '@wordpress/components';
 import {
   InspectorControls,
@@ -13,8 +9,6 @@ import {
 
 import AdvancedRangeControl from '../../components/AdvancedRangeControl';
 
-import { COLORS, DESKTOP } from '../../constants';
-import { HOVER, NORMAL } from '../../constants/pseudoClasses';
 import { PseudoTabProvider } from '../../hooks/usePseudoTab';
 import AdvancedColorPalette from '../../components/AdvancedColorPalette';
 
@@ -25,10 +19,7 @@ export default function ButtonInspector( {
   setAttributes,
 } ) {
   const {
-    borderRadius,
     rel,
-    backgroundColor,
-    textColor,
   } = attributes;
 
   const handleAttrChange = useCallback(
@@ -36,21 +27,6 @@ export default function ButtonInspector( {
       setAttributes( { [ attr ]: value } );
     },
     [],
-  );
-  const handlePseudoClassesAttrChange = useCallback(
-    ( tab, attr, value ) => {
-      setAttributes( { [ attr ]: {
-        ...attributes[ attr ],
-        [ DESKTOP ]: {
-          ...attributes[ attr ][ DESKTOP ],
-          value: {
-            ...attributes[ attr ][ DESKTOP ].value,
-            [ tab ]: value,
-          },
-        },
-      } } );
-    },
-    [ attributes ],
   );
 
   return (

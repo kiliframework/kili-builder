@@ -1,11 +1,13 @@
 
-const { useContext, createContext } = wp.element;
+const { useContext, useMemo, createContext } = wp.element;
 
 const ClientIDContext = createContext();
 
-export function ClientIDProvider( { children, clientID } ) {
+export function ClientIDProvider( { children, clientID, setAttributes } ) {
+  const value = useMemo( () => ( { clientID, setAttributes } ), [] );
+
   return (
-    <ClientIDContext.Provider value={ clientID }>
+    <ClientIDContext.Provider value={ value }>
       { children }
     </ClientIDContext.Provider>
 

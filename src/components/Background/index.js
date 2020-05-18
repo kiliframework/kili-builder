@@ -29,7 +29,7 @@ const backgroundPositionOptions = attrOptionsBuiler( [
 
 export default function BackgroundControl() {
   const { name: tab } = useDeviceTab();
-  const clientID = useClientID();
+  const { clientID } = useClientID();
   const currentBlockAttributes = useSelect(
     ( select ) => select( 'core/block-editor' ).getBlockAttributes( clientID )
   );

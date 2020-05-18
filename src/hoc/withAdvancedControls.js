@@ -1,9 +1,9 @@
-import { createHigherOrderComponent, compose } from '@wordpress/compose';
+import { createHigherOrderComponent } from '@wordpress/compose';
 import { useDeviceTab } from '../hooks/useDeviceTab';
-import { useClientID } from '../hooks/useClientID';
 import useBlockAttributes from '../hooks/useBlockAttributes';
-import { useSelect } from '@wordpress/data';
 import { usePseudoTab } from '../hooks/usePseudoTab';
+import { isSimpleAttribute } from '../blocks/utils';
+import useAttribute from '../hooks/useAttribute';
 
 const { useMemo, useEffect } = wp.element;
 /**
@@ -14,30 +14,49 @@ const withAdvancedControls = createHigherOrderComponent(
   ( WrappedComponent ) => ( props ) => {
     const { name: device } = useDeviceTab();
     const { name: pseudoClass } = usePseudoTab();
+    const {
+      attribute,
+      handleAttributeWithDeviceChange,
+      handleSimpleAttributesChange,
+      handlePseudoClassesAttrChange,
+    } = useAttribute( props.attributeName );
 
-    const clientID = useClientID();
-    const { handleAttributesWithDeviceChange, handlePseudoClassesAttrChange } = useBlockAttributes( clientID );
-    const currentBlockAttributes = useSelect(
-      ( select ) => select( 'core/block-editor' ).getBlockAttributes( clientID )
-    );
+    const {
+      attributes,
+
+    } = useBlockAttributes();
+
+    const simpleAttribute = isSimpleAttribute( attribute );
+
     const handleChange = useMemo(
       () => {
-        if ( pseudoClass ) {
-          return ( value ) => handlePseudoClassesAttrChange( props.attributeName, device, pseudoClass, value, props.dimension );
+        if ( simpleAttribute ) {
+          return ( value ) => handleSimpleAttributesChange( value, props.dimension );
+        } else if ( pseudoClass ) {
+          return ( value ) => handlePseudoClassesAttrChange( device, pseudoClass, value, props.dimension );
         }
-        return ( value ) => handleAttributesWithDeviceChange( props.attributeName, device, value, props.dimension );
+        return ( value ) => handleAttributeWithDeviceChange( device, value, props.dimension );
       },
-      [ pseudoClass, device, props.attributeName, props.dimension, handlePseudoClassesAttrChange, handleAttributesWithDeviceChange ],
+      [ pseudoClass, device, props.dimension, handlePseudoClassesAttrChange, handleAttributeWithDeviceChange, handleSimpleAttributesChange ],
     );
 
-    const value = pseudoClass
-      ? currentBlockAttributes[ props.attributeName ][ device ]?.value[pseudoClass]
-      : currentBlockAttributes[ props.attributeName ][ device ]?.value;
+    const getValue = () => {
+      if ( simpleAttribute ) {
+        return attributes[ props.attributeName ];
+      } else if ( pseudoClass ) {
+        return attributes[ props.attributeName ][ device ]?.value[pseudoClass];
+      }
+      return attributes[ props.attributeName ][ device ]?.value;
+    };
+
+    useEffect( () => {
+      console.log( 'handleChange attribute changed', attributes[ props.attributeName ] );
+    }, [ handleAttributeWithDeviceChange ] );
 
     return (
       <WrappedComponent
         { ...props }
-        value={ value }
+        value={ getValue() }
         onChange={ handleChange }
       />
     );

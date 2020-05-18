@@ -5,7 +5,7 @@ import { __ } from '@wordpress/i18n';
 
 const { useContext, createContext } = wp.element;
 
-const PseudoTabContext = createContext( { name: null } );
+const PseudoTabContext = createContext( { name: undefined } );
 
 export function PseudoTabProvider( { children } ) {
   return (

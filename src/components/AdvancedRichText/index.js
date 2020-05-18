@@ -1,10 +1,8 @@
-import { useClientID } from '../../hooks/useClientID';
-import useBlockAttributes from '../../hooks/useBlockAttributes';
 import { RichText } from '@wordpress/block-editor';
+import useBlockAttributes from '../../hooks/useBlockAttributes';
 
 function AdvancedRichText( { attributeName, ...props } ) {
-  const clientID = useClientID();
-  const { handleSimpleAttributesChange, attributes } = useBlockAttributes( clientID );
+  const { handleSimpleAttributesChange, attributes } = useBlockAttributes();
   return (
     <RichText
       value={ attributes[ attributeName ] }

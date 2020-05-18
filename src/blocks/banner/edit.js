@@ -80,7 +80,6 @@ function BannerEdit( props ) {
                   tagName={ level && tagName }
                   className={ classnames( 'alpha', 'headline', 'kili-banner__header' ) }
                   placeholder="Insert banner header"
-
                 />
                 <div className="button__wrapper">
                   <AdvancedRichText
